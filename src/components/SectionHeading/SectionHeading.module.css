@@ -1,0 +1,51 @@
+/* ==========================================================================
+   ULTRA-CLEAN GOOGLE SECTION HEADING STYLES
+   ========================================================================== */
+
+.wrapper {
+  margin-bottom: var(--space-10);
+}
+
+.centered {
+  text-align: center;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #1A73E8; /* M3 Google Blue */
+  margin-bottom: 0.5rem;
+}
+
+:global([data-theme='dark']) .eyebrow {
+  color: #8AB4F8;
+}
+
+/* Disable old glowing dot */
+.eyebrow::before {
+  display: none !important;
+}
+
+.title {
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.subtitle {
+  font-size: 0.975rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  line-height: 1.5;
+}
+
+.centered .subtitle {
+  margin: 0 auto;
+}

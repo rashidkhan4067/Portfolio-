@@ -1,0 +1,242 @@
+/* ==========================================================================
+   ULTRA-CLEAN GOOGLE OFFICIAL EXPERIENCE STYLES
+   ========================================================================== */
+
+.timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.timelineAxis {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: var(--border-default);
+  transform: translateX(-50%);
+}
+
+:global([data-theme='dark']) .timelineAxis {
+  background-color: #3C4043;
+}
+
+.expCard {
+  display: grid;
+  grid-template-columns: 1fr 24px 1fr;
+  gap: var(--space-6);
+  align-items: start;
+  position: relative;
+}
+
+.expLeft .expContent { grid-column: 1; }
+.expLeft .expNode    { grid-column: 2; }
+.expLeft .expContent + * { display: none; }
+
+.expRight .expContent {
+  grid-column: 3;
+}
+.expRight .expNode { grid-column: 2; }
+
+/* Shift left cards */
+.expLeft {
+  grid-template-areas: "content node empty";
+}
+.expRight {
+  grid-template-areas: "empty node content";
+}
+
+.expLeft  .expContent { grid-area: content; }
+.expLeft  .expNode    { grid-area: node; }
+.expRight .expContent { grid-area: content; }
+.expRight .expNode    { grid-area: node; }
+
+.expNode {
+  display: flex;
+  justify-content: center;
+  padding-top: var(--space-6);
+  z-index: 1;
+}
+
+.expDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--bg-primary) !important;
+  flex-shrink: 0;
+  box-shadow: none !important; /* Disable glowing bubbles */
+}
+
+/* ── Card Content ── */
+.expContent {
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-default);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all var(--transition-fast);
+}
+
+:global([data-theme='dark']) .expContent {
+  background-color: #1E1F20;
+  border-color: #3C4043;
+}
+
+.expContent:hover {
+  border-color: #1A73E8;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transform: none; /* Strip cyberpunk translate transitions */
+}
+
+:global([data-theme='dark']) .expContent:hover {
+  border-color: #8AB4F8;
+}
+
+.expHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.expRole {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.expCompany {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #1A73E8; /* Google Blue */
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+:global([data-theme='dark']) .expCompany {
+  color: #8AB4F8;
+}
+
+.expCompany:hover {
+  color: #1557B0;
+}
+
+:global([data-theme='dark']) .expCompany:hover {
+  color: #6ba0f7;
+}
+
+.expMeta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.35rem;
+}
+
+.expPeriod, .expLocation {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  font-weight: 500;
+}
+
+.expTypeBadge {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #1A73E8;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-default);
+  padding: 0.1rem 0.45rem;
+  border-radius: 6px; /* Material 3 standard card borders */
+}
+
+:global([data-theme='dark']) .expTypeBadge {
+  color: #8AB4F8;
+  background-color: #202124;
+  border-color: #3C4043;
+}
+
+.expDesc {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: var(--space-4);
+}
+
+.highlights {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: var(--space-4);
+  padding-left: 0;
+}
+
+.highlightItem {
+  display: flex;
+  align-items: baseline;
+  gap: 0.625rem;
+  font-size: 0.825rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.bulletDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 3px;
+  background-color: #1A73E8 !important; /* Google Blue dot indicators */
+}
+
+:global([data-theme='dark']) .bulletDot {
+  background-color: #8AB4F8 !important;
+}
+
+.expTech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+}
+
+.expTechTag {
+  padding: 0.2rem 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+  border: 1px solid var(--border-default);
+  background-color: var(--bg-secondary);
+  color: var(--text-secondary);
+  border-radius: 6px;
+  font-family: var(--font-sans);
+}
+
+:global([data-theme='dark']) .expTechTag {
+  background-color: #202124;
+  border-color: #3C4043;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .timelineAxis { left: 12px; }
+  .expCard {
+    grid-template-columns: 24px 1fr;
+    grid-template-areas: "node content" !important;
+  }
+  .expNode { padding-top: var(--space-4); }
+  .expContent { grid-column: 2 !important; grid-area: content !important; }
+  .expMeta { align-items: flex-start; }
+}

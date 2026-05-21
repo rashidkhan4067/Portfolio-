@@ -1,0 +1,596 @@
+/* ==========================================================================
+   ULTRA-CLEAN GOOGLE MATERIAL 3 / CLOUD CONSOLE PROJECTS SECTION
+   ========================================================================== */
+
+.section {
+  padding: var(--space-20) 0;
+  background-color: var(--bg-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Remove visual noise ambient glows */
+.ambientGlow {
+  display: none;
+}
+
+/* Flat Header Alignment Layout */
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 2.5rem;
+  position: relative;
+  z-index: 10;
+  width: 100%;
+}
+
+.headerText {
+  text-align: left;
+  max-width: 650px;
+}
+
+.carouselWrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* Premium Top Accent Color Stripe */
+.cardAccentBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background-color: var(--accent-color, #1A73E8);
+  border-radius: 12px 12px 0 0;
+  z-index: 2;
+}
+
+/* Centered Bottom M3 Pagination Controls */
+.carouselPagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1.5rem auto 0;
+  width: 100%;
+  position: relative;
+  z-index: 10;
+}
+
+.paginationArrow {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border-default);
+  background-color: var(--bg-tertiary);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  outline: none;
+}
+
+:global([data-theme='dark']) .paginationArrow {
+  background-color: #1E1F20;
+  border-color: #3C4043;
+}
+
+.paginationArrow:hover:not(:disabled) {
+  background-color: #E8F0FE;
+  border-color: #1A73E8;
+  color: #1A73E8;
+}
+
+:global([data-theme='dark']) .paginationArrow:hover:not(:disabled) {
+  background-color: rgba(26, 115, 232, 0.15);
+  border-color: #8AB4F8;
+  color: #8AB4F8;
+}
+
+.paginationArrow:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+  border-color: var(--border-subtle);
+  background-color: var(--bg-secondary);
+}
+
+.paginationDots {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.paginationDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--border-strong);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.activeDot {
+  width: 16px;
+  border-radius: var(--radius-full);
+  background-color: #1A73E8 !important; /* M3 official blue */
+}
+
+:global([data-theme='dark']) .activeDot {
+  background-color: #8AB4F8 !important;
+}
+
+/* Hide navigation entirely on static grid views (tablets & desktops) */
+@media (min-width: 769px) {
+  .carouselPagination {
+    display: none !important;
+  }
+}
+
+.eyebrow {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #1A73E8; /* M3 Google Blue */
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+:global([data-theme='dark']) .eyebrow {
+  color: #8AB4F8;
+}
+
+.title {
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.subtitle {
+  font-size: 0.975rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0.75rem 0 0;
+  line-height: 1.5;
+}
+
+/* Grid System matching Skills layout */
+.projectsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+  z-index: 10;
+  position: relative;
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .projectsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .headerContainer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .projectsGrid {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 1rem;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    margin-left: calc(-1 * var(--space-6));
+    margin-right: calc(-1 * var(--space-6));
+    padding-left: var(--space-6);
+    padding-right: var(--space-6);
+    width: calc(100% + (2 * var(--space-6)));
+  }
+
+  .projectsGrid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .projectCard {
+    flex: 0 0 85%; /* M3 card peek effect (shows 15% of the next card) */
+    scroll-snap-align: start; /* Aligns flush with the screen's left margin gutter */
+    min-height: 260px;
+    padding: 1.5rem;
+  }
+}
+
+/* Google Material 3 Surface Card - Flat & Rounded */
+.projectCard {
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-default);
+  border-radius: 12px; /* Material 3 standard card border rounding */
+  padding: 1.75rem 1.5rem 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 300px;
+  position: relative;
+  overflow: hidden;
+  animation: fadeInUp 400ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+:global([data-theme='dark']) .projectCard {
+  background-color: #1E1F20;
+  border-color: #3C4043;
+}
+
+.projectCard:hover {
+  border-color: var(--accent-color, #1A73E8);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Card Header */
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-subtle);
+  position: relative;
+}
+
+/* Monochromatic technical brand square icon box with accent tint */
+.iconContainer {
+  width: 38px;
+  height: 38px;
+  background-color: var(--accent-color-glow, var(--bg-secondary));
+  color: var(--accent-color);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+}
+
+:global([data-theme='dark']) .iconContainer {
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.projectCard:hover .iconContainer {
+  background-color: var(--accent-color);
+  color: var(--bg-tertiary);
+}
+
+:global([data-theme='dark']) .projectCard:hover .iconContainer {
+  background-color: var(--accent-color);
+  color: #1E1F20;
+}
+
+/* Outlined rectangular M3 badges */
+.categoryBadge {
+  font-size: 0.725rem;
+  font-weight: 500;
+  color: var(--accent-color, #1A73E8);
+  background-color: var(--accent-color-glow);
+  border: 1px solid var(--accent-color-glow);
+  padding: 0.2rem 0.625rem;
+  border-radius: 4px;
+}
+
+/* Link Actions inside card header */
+.headerLinks {
+  margin-left: auto;
+  display: flex;
+  gap: 0.375rem;
+  align-items: center;
+}
+
+.iconLink {
+  color: var(--text-tertiary);
+  width: 26px;
+  height: 26px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.iconLink:hover {
+  background-color: var(--bg-secondary);
+  color: var(--accent-color, #1A73E8);
+}
+
+/* Card Body containing titles and descriptions */
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  flex-grow: 1;
+  margin-bottom: 1.25rem;
+}
+
+.projectTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.projectTitleLink {
+  color: inherit;
+  text-decoration: none;
+  display: inline-block;
+  width: 100%;
+  transition: color var(--transition-fast);
+}
+
+.projectTitleLink:hover {
+  color: var(--accent-color, #1A73E8) !important;
+  text-decoration: underline !important;
+}
+
+.projectCard:hover .projectTitle {
+  color: var(--accent-color, #1A73E8);
+}
+
+.projectDesc {
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: var(--text-secondary);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Card Footer containing technology badges */
+.cardFooter {
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 0.875rem;
+}
+
+.techList {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.techItem {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 100px; /* Pill-shaped tags matching Google style guidelines */
+  padding: 0.2rem 0.625rem;
+}
+
+:global([data-theme='dark']) .techItem {
+  background-color: #202124;
+  border-color: #3C4043;
+}
+
+.techIcon {
+  color: var(--text-tertiary);
+}
+
+.techName {
+  font-size: 0.725rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.techMoreCount {
+  font-size: 0.725rem;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  margin-left: auto;
+}
+
+/* Outlined Pill Explore Trigger */
+.toggleWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
+  z-index: 10;
+  position: relative;
+}
+
+.exploreToggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.75rem;
+  border-radius: 8px; /* Google M3 outlined rounded rect */
+  background-color: var(--bg-tertiary);
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 1px solid var(--border-default);
+  transition: all var(--transition-fast);
+}
+
+.exploreToggle:hover {
+  background-color: #E8F0FE;
+  color: #1A73E8;
+  border-color: #1A73E8;
+}
+
+:global([data-theme='dark']) .exploreToggle:hover {
+  background-color: rgba(26, 115, 232, 0.15);
+  color: #8AB4F8;
+  border-color: #8AB4F8;
+}
+
+.exploreToggle:active {
+  transform: scale(0.98);
+}
+
+.toggleIcon {
+  transition: transform var(--transition-fast);
+  color: var(--text-tertiary);
+}
+
+.exploreToggle:hover .toggleIcon {
+  color: inherit;
+}
+
+/* Mobile-specific Google-clean UI */
+@media (max-width: 480px) {
+  .section {
+    padding: var(--space-8) 0;
+    background: var(--bg-primary);
+  }
+
+  .headerContainer {
+    margin-bottom: 1.25rem;
+    padding: 0;
+  }
+
+  .subtitle {
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    line-height: 1.45;
+  }
+
+  .projectsGrid {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 1rem;
+    scrollbar-width: none;
+    padding: 0.5rem var(--space-4);
+    margin: 0 calc(-1 * var(--space-4));
+    width: auto;
+  }
+
+  .projectCard {
+    flex: 0 0 85%;
+    scroll-snap-align: center;
+    border-radius: 16px;
+    padding: 1.25rem;
+    min-height: auto;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    background-color: var(--bg-tertiary);
+    border: 1px solid var(--border-default);
+  }
+
+  :global([data-theme='dark']) .projectCard {
+    background-color: #1E1F20;
+    border-color: #3C4043;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Make title Google Blue by default on mobile as in screenshot */
+  .projectTitle {
+    color: var(--accent-color, #1A73E8);
+    font-size: 1.05rem;
+  }
+
+  :global([data-theme='dark']) .projectTitle {
+    color: var(--accent-color, #8AB4F8);
+  }
+
+  .iconContainer {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background-color: var(--accent-color-glow, rgba(26, 115, 232, 0.08));
+    color: var(--accent-color, #1A73E8);
+  }
+
+  :global([data-theme='dark']) .iconContainer {
+    background-color: rgba(255, 255, 255, 0.04);
+    color: #8AB4F8;
+  }
+
+  .categoryBadge {
+    font-size: 0.7rem;
+    padding: 0.15rem 0.5rem;
+  }
+
+  .cardBody {
+    gap: 0.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .projectDesc {
+    font-size: 0.8125rem;
+    line-height: 1.4;
+  }
+
+  .cardFooter {
+    padding-top: 0.75rem;
+  }
+
+  .techItem {
+    padding: 0.15rem 0.5rem;
+  }
+
+  .techName {
+    font-size: 0.6875rem;
+  }
+
+  .techMoreCount {
+    font-size: 0.6875rem;
+  }
+
+  .carouselPagination {
+    display: flex !important;
+    margin-top: 1.25rem;
+    gap: 0.75rem;
+  }
+
+  .paginationArrow {
+    width: 32px;
+    height: 32px;
+  }
+
+  .paginationDot {
+    width: 6px;
+    height: 6px;
+  }
+
+  .activeDot {
+    width: 14px;
+  }
+
+  .toggleWrapper {
+    margin-top: 1.75rem;
+  }
+
+  .exploreToggle {
+    padding: 0.5rem 1.25rem;
+    font-size: 0.8125rem;
+  }
+}
+

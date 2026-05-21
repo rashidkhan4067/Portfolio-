@@ -1,0 +1,321 @@
+/* ==========================================================================
+   ULTRA-CLEAN GOOGLE OFFICIAL NAVIGATION BAR
+   ========================================================================== */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-sticky);
+  padding: 0.75rem 0;
+  transition: all var(--transition-fast);
+  background-color: var(--bg-tertiary);
+  border-bottom: 1px solid var(--border-default);
+}
+
+:global([data-theme='dark']) .nav {
+  background-color: #1E1F20; /* Google dark surface */
+  border-bottom-color: #3C4043; /* Google dark border */
+}
+
+.scrolled {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  padding: 0.625rem 0;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+}
+
+/* ── Logo ── */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.logoIcon {
+  width: 32px;
+  height: 32px;
+  background-color: var(--bg-secondary);
+  color: #1A73E8; /* Google Blue */
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--transition-fast);
+}
+
+:global([data-theme='dark']) .logoIcon {
+  background-color: #202124;
+  color: #8AB4F8;
+}
+
+.logoText {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.logoDot {
+  color: #1A73E8;
+}
+
+:global([data-theme='dark']) .logoDot {
+  color: #8AB4F8;
+}
+
+/* ── Desktop Links ── */
+.links {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  list-style: none;
+}
+
+.link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: 8px; /* Material 3 standard rounding */
+  transition: all var(--transition-fast);
+}
+
+.link:hover {
+  color: var(--text-primary);
+  background-color: var(--bg-secondary);
+}
+
+.link.active {
+  color: #1A73E8;
+  background-color: #E8F0FE; /* Google light blue tint */
+  font-weight: 600;
+}
+
+:global([data-theme='dark']) .link.active {
+  color: #8AB4F8;
+  background-color: rgba(26, 115, 232, 0.15);
+}
+
+/* Underline indicator is disabled for minimalist tab pills */
+.linkUnderline {
+  display: none;
+}
+
+/* ── Actions ── */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.themeBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-default);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.themeBtn:hover {
+  color: #1A73E8;
+  border-color: #1A73E8;
+  background-color: #E8F0FE;
+}
+
+:global([data-theme='dark']) .themeBtn:hover {
+  color: #8AB4F8;
+  border-color: #8AB4F8;
+  background-color: rgba(26, 115, 232, 0.15);
+}
+
+.resumeBtn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 1.15rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1A73E8;
+  border: 1px solid #1A73E8;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+:global([data-theme='dark']) .resumeBtn {
+  color: #8AB4F8;
+  border-color: #8AB4F8;
+}
+
+.resumeBtn:hover {
+  background-color: #E8F0FE;
+  box-shadow: none;
+}
+
+:global([data-theme='dark']) .resumeBtn:hover {
+  background-color: rgba(26, 115, 232, 0.15);
+}
+
+.menuBtn {
+  display: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-default);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.menuBtn:hover {
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+}
+
+/* ==========================================================================
+   GOOGLE MOBILE DRAWER COMPACT LAYOUT
+   ========================================================================== */
+
+.mobileMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: calc(var(--z-sticky) - 1);
+  background-color: var(--bg-tertiary);
+  border-bottom: 1px solid var(--border-default);
+  border-radius: 0 0 16px 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 1.25rem 1rem 1.5rem;
+  display: block;
+  overflow: hidden;
+}
+
+:global([data-theme='dark']) .mobileMenu {
+  background-color: #1E1F20;
+  border-bottom-color: #3C4043;
+}
+
+.mobileMenu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+/* Material 3 drawer links */
+.mobileLink {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all var(--transition-fast);
+}
+
+.mobileLinkIcon {
+  color: var(--text-tertiary);
+  transition: color var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.mobileLink:hover {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.mobileLinkActive {
+  background-color: #E8F0FE !important;
+  color: #1A73E8 !important;
+  font-weight: 600;
+}
+
+.mobileLinkActive .mobileLinkIcon {
+  color: #1A73E8 !important;
+}
+
+:global([data-theme='dark']) .mobileLinkActive {
+  background-color: rgba(26, 115, 232, 0.15) !important;
+  color: #8AB4F8 !important;
+}
+
+:global([data-theme='dark']) .mobileLinkActive .mobileLinkIcon {
+  color: #8AB4F8 !important;
+}
+
+/* Mobile Action Divider & CTA */
+.mobileActions {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+:global([data-theme='dark']) .mobileActions {
+  border-top-color: #3C4043;
+}
+
+.mobileResume {
+  display: block;
+  text-align: center;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  background-color: #1A73E8; /* Solid Google Blue */
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+:global([data-theme='dark']) .mobileResume {
+  background-color: #8AB4F8;
+  color: #09090b;
+}
+
+.mobileResume:hover {
+  background-color: #1557B0;
+}
+
+:global([data-theme='dark']) .mobileResume:hover {
+  background-color: #6ba0f7;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 1024px) {
+  .links { display: none !important; }
+  .resumeBtn { display: none !important; }
+  .menuBtn { display: flex !important; }
+}
+
+@media (min-width: 1025px) {
+  .mobileMenu {
+    display: none !important;
+  }
+}
