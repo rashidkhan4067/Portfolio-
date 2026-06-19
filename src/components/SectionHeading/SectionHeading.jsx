@@ -8,7 +8,10 @@ export default function SectionHeading({
   subtitle,
   centered = false,
   className = '',
+  level = 2,
 }) {
+  const HeadingTag = level === 1 ? 'h1' : 'h2';
+
   return (
     <motion.div
       className={[styles.wrapper, centered && styles.centered, className]
@@ -19,7 +22,7 @@ export default function SectionHeading({
       {eyebrow && (
         <span className={styles.eyebrow}>{eyebrow}</span>
       )}
-      <h2 className={styles.title}>{title}</h2>
+      <HeadingTag className={styles.title}>{title}</HeadingTag>
       {subtitle && (
         <p className={styles.subtitle}>{subtitle}</p>
       )}

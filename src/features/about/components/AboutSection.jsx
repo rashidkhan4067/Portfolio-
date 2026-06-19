@@ -54,6 +54,7 @@ export default function AboutSection() {
             eyebrow="About Me"
             title="Crafting Scalable Digital Experiences"
             subtitle={personalInfo.bio}
+            level={1}
           />
 
           <h4 className={styles.timelineTitle}>Career Timeline</h4>

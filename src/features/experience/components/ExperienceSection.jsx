@@ -74,6 +74,7 @@ export default function ExperienceSection() {
         title="Professional Experience"
         subtitle="3+ years engineering scalable systems, database optimization, and high-throughput data pipelines."
         centered
+        level={1}
       />
       <div className={styles.timeline}>
         <div className={styles.timelineAxis} />
