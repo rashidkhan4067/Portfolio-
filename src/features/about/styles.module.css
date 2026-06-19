@@ -12,41 +12,42 @@
 /* ── Avatar Card ── */
 .avatarCard {
   background-color: var(--bg-tertiary);
-  border: 1px solid var(--border-default);
-  border-radius: 12px;
+  border: 1px solid #E5E5E5;
+  border-radius: 8px;
   padding: 1.75rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.25rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   position: sticky;
   top: 90px;
   text-align: center;
 }
 
 :global([data-theme='dark']) .avatarCard {
-  background-color: #1E1F20;
-  border-color: #3C4043;
+  background-color: #121212;
+  border-color: #2A2A2A;
 }
 
 .avatar {
   width: 100px;
   height: 100px;
   background-color: var(--bg-secondary);
-  border-radius: 50%;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: none;
-  animation: none; /* Disable bouncing animations for standard Google UI */
+  animation: none;
+  /* Disable bouncing animations for standard Google UI */
   overflow: hidden;
-  border: 1px solid var(--border-default);
+  border: 1px solid #E5E5E5;
 }
 
 :global([data-theme='dark']) .avatar {
-  background-color: #202124;
-  border-color: #3C4043;
+  background-color: #161616;
+  border-color: #2A2A2A;
 }
 
 .avatarImg {
@@ -101,20 +102,20 @@
 .socialBtn {
   width: 32px;
   height: 32px;
-  border-radius: 8px;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--text-secondary);
   background-color: var(--bg-tertiary);
-  border: 1px solid var(--border-default);
+  border: 1px solid #E5E5E5;
   transition: all var(--transition-fast);
   text-decoration: none;
 }
 
 :global([data-theme='dark']) .socialBtn {
-  background-color: #1E1F20;
-  border-color: #3C4043;
+  background-color: #121212;
+  border-color: #2A2A2A;
 }
 
 .socialBtn:hover {
@@ -133,7 +134,7 @@
   background-color: #1A73E8 !important;
   border-color: #1A73E8 !important;
   color: #FFFFFF !important;
-  border-radius: 8px !important;
+  border-radius: 6px !important;
   box-shadow: none !important;
   font-weight: 500 !important;
   transition: all var(--transition-fast) !important;
@@ -144,7 +145,7 @@
 :global([data-theme='dark']) .resumeButton {
   background-color: #8AB4F8 !important;
   border-color: #8AB4F8 !important;
-  color: #1E1F20 !important;
+  color: #0A0A0A !important;
 }
 
 .resumeButton:hover {
@@ -189,18 +190,19 @@
   font-size: 0.75rem;
   font-weight: 600;
   font-family: var(--font-sans);
-  color: #1A73E8; /* Google Blue */
+  color: #1A73E8;
+  /* Google Blue */
   background-color: var(--bg-secondary);
-  border: 1px solid var(--border-default);
-  border-radius: 6px;
+  border: 1px solid #E5E5E5;
+  border-radius: 4px;
   padding: 0.1rem 0.35rem;
   display: inline-block;
 }
 
 :global([data-theme='dark']) .timelineYear {
   color: #8AB4F8;
-  background-color: #202124;
-  border-color: #3C4043;
+  background-color: #121212;
+  border-color: #2A2A2A;
 }
 
 .timelineLine {
@@ -231,12 +233,12 @@
   width: 1px;
   flex: 1;
   min-height: 44px;
-  background-color: var(--border-default);
+  background-color: #E5E5E5;
   margin-top: 4px;
 }
 
 :global([data-theme='dark']) .timelineConnector {
-  background-color: #3C4043;
+  background-color: #2A2A2A;
 }
 
 .timelineContent {
@@ -257,6 +259,7 @@
     grid-template-columns: 1fr;
     gap: var(--space-6);
   }
+
   .avatarCard {
     position: static;
     max-width: 400px;

@@ -3,8 +3,8 @@
    ========================================================================== */
 
 .footer {
-  background-color: var(--bg-tertiary);
-  border-top: 1px solid var(--border-default);
+  background-color: #FAFAFA;
+  border-top: 1px solid #E5E5E5;
   padding: var(--space-16) 0 var(--space-8);
   margin-top: auto;
   transition: all var(--transition-fast);
@@ -12,8 +12,8 @@
 }
 
 :global([data-theme='dark']) .footer {
-  background-color: #1E1F20; /* Google dark surface */
-  border-top-color: #3C4043; /* Google dark border */
+  background-color: #0A0A0A; /* Google dark surface */
+  border-top-color: #2A2A2A; /* Google dark border */
 }
 
 /* Structural Grid: Brand (3.5fr), Nav (2fr), Connect (2.5fr), Status (2fr) */
@@ -211,73 +211,82 @@
 
 /* ── Column 4: Flat Google Status Card ── */
 .availabilityCard {
-  background-color: var(--bg-tertiary);
-  border: 1px solid var(--border-default);
-  border-radius: 8px; /* Clean rectangular rounding */
-  padding: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-}
-
-:global([data-theme='dark']) .availabilityCard {
-  background-color: #1E1F20;
-  border-color: #3C4043;
 }
 
 .statusHeader {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-}
-
-.pulseDotContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 8px;
-  height: 8px;
-  flex-shrink: 0;
+  margin: 0 0 1.25rem 0; /* Align with .columnTitle */
+  height: 16px; /* Align text height with .columnTitle */
 }
 
 .pulseDot {
-  width: 6px;
-  height: 6px;
-  background-color: #34A853; /* Solid Google Green dot */
+  width: 8px;
+  height: 8px;
+  background-color: #0F9D58; /* Identical Google Green status dot */
   border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  flex-shrink: 0;
 }
 
-.pulseDotPulse {
-  display: none; /* Hide heavy dynamic pulse animations */
+.pulseDot::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #0F9D58;
+  animation: pulse-ring-footer 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 .statusText {
-  font-size: 0.7rem;
+  font-size: 0.75rem; /* Match .columnTitle */
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em; /* Match .columnTitle */
   color: var(--text-tertiary);
+  line-height: 1;
 }
 
 .availabilityMessage {
-  font-size: 0.8rem;
+  font-size: 0.875rem; /* Match navLink and connectLink size */
   color: var(--text-secondary);
-  line-height: 1.4;
+  line-height: 1.5;
   margin: 0;
-  font-weight: 500;
+}
+
+@keyframes pulse-ring-footer {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0;
+  }
 }
 
 /* ── Bottom Section ── */
 .divider {
   height: 1px;
-  background-color: var(--border-subtle);
+  background-color: #E5E5E5;
   border: none;
   margin: var(--space-12) 0 var(--space-6);
   width: 100%;
 }
 
 :global([data-theme='dark']) .divider {
-  background-color: #3C4043;
+  background-color: #2A2A2A;
 }
 
 .bottomRow {

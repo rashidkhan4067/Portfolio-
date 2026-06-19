@@ -3,10 +3,18 @@
    ========================================================================== */
 
 .section {
+  --skills-accent: #1A73E8;
+  --skills-accent-glow: rgba(26, 115, 232, 0.05);
+
   padding: var(--space-20) 0;
   position: relative;
   background-color: var(--bg-primary);
   overflow: hidden;
+}
+
+:global([data-theme='dark']) .section {
+  --skills-accent: #8AB4F8;
+  --skills-accent-glow: rgba(138, 180, 248, 0.12);
 }
 
 /* Remove decorative multi-colored background glows */
@@ -67,18 +75,28 @@
 
 @media (max-width: 768px) {
   .filterTabsContainer {
+    position: relative;
     display: block;
-    overflow-x: auto;
-    overflow-y: hidden;
     width: 100%;
-    max-width: 100%;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-    padding: 0.5rem 0;
-    margin: 0;
+    overflow: hidden;
+    margin-bottom: 2rem;
   }
-  .filterTabsContainer::-webkit-scrollbar {
-    display: none;
+
+  /* Fade out right-edge gradient signaling more scrollable content */
+  .filterTabsContainer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 64px;
+    background: linear-gradient(90deg, rgba(250, 250, 250, 0) 0%, rgba(250, 250, 250, 1) 90%);
+    pointer-events: none;
+    z-index: 12;
+  }
+
+  :global([data-theme='dark']) .filterTabsContainer::after {
+    background: linear-gradient(90deg, rgba(9, 9, 11, 0) 0%, rgba(9, 9, 11, 1) 90%);
   }
 }
 
@@ -96,10 +114,17 @@
     display: flex;
     flex-wrap: nowrap;
     justify-content: flex-start;
-    width: max-content;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
     gap: 0.5rem;
-    padding-left: 1rem;
-    padding-right: 2rem;
+    padding: 4px 48px 4px 1rem;
+    box-sizing: border-box;
+  }
+  .filterTabsScroller::-webkit-scrollbar {
+    display: none;
   }
 }
 
@@ -196,7 +221,7 @@
   border: 1px solid var(--border-default);
   border-radius: 12px;
   padding: 1.75rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
   display: flex;
   flex-direction: column;
   position: relative;
@@ -223,25 +248,16 @@
 }
 
 :global([data-theme='dark']) .skillGroup {
-  background-color: #1E1F20;
-  border-color: #3C4043;
+  background-color: var(--bg-card);
+  border-color: var(--border-default);
+  box-shadow: none;
 }
 
-/* Clean Accent Color Top Stripe */
-.cardAccentBar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background-color: var(--accent-color, #1A73E8);
-  border-radius: 12px 12px 0 0;
-  z-index: 2;
-}
+
 
 .skillGroup:hover {
-  border-color: var(--accent-color, #1A73E8);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-color: var(--skills-accent);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
 /* Card Header */
@@ -261,7 +277,7 @@
   width: 38px;
   height: 38px;
   background-color: var(--bg-secondary);
-  color: var(--accent-color);
+  color: var(--skills-accent);
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -271,7 +287,7 @@
 }
 
 :global([data-theme='dark']) .groupIcon {
-  background-color: #202124;
+  background-color: var(--bg-secondary);
 }
 
 .skillGroup:hover .groupIcon {
@@ -332,13 +348,13 @@
 }
 
 :global([data-theme='dark']) .skillItem {
-  background-color: #1E1F20;
-  border-color: #3C4043;
+  background-color: var(--bg-secondary);
+  border-color: var(--border-subtle);
 }
 
 .skillItem:hover {
   background-color: var(--bg-secondary);
-  border-color: var(--accent-color);
+  border-color: var(--skills-accent);
 }
 
 /* Material rounded colored icon container */
@@ -349,25 +365,25 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--accent-color-glow, rgba(26, 115, 232, 0.05));
-  color: var(--accent-color, #1A73E8);
+  background-color: var(--skills-accent-glow);
+  color: var(--skills-accent);
   flex-shrink: 0;
   transition: all var(--transition-fast);
 }
 
 :global([data-theme='dark']) .skillIconContainer {
-  background-color: rgba(255, 255, 255, 0.04);
+  background-color: var(--border-subtle);
   color: var(--text-secondary);
 }
 
 .skillItem:hover .skillIconContainer {
-  background-color: var(--accent-color);
+  background-color: var(--skills-accent);
   color: var(--bg-tertiary) !important;
 }
 
 :global([data-theme='dark']) .skillItem:hover .skillIconContainer {
-  background-color: var(--accent-color);
-  color: #1E1F20 !important;
+  background-color: var(--skills-accent);
+  color: var(--bg-primary) !important;
 }
 
 .skillMeta {
@@ -383,7 +399,7 @@
 }
 
 .skillItem:hover .skillName {
-  color: var(--accent-color, #1A73E8);
+  color: var(--skills-accent);
   font-weight: 600;
 }
 

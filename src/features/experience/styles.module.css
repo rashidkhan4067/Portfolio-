@@ -17,12 +17,12 @@
   top: 0;
   bottom: 0;
   width: 2px;
-  background-color: var(--border-default);
+  background-color: #E5E5E5;
   transform: translateX(-50%);
 }
 
 :global([data-theme='dark']) .timelineAxis {
-  background-color: #3C4043;
+  background-color: #2A2A2A;
 }
 
 .expCard {
@@ -33,27 +33,50 @@
   position: relative;
 }
 
-.expLeft .expContent { grid-column: 1; }
-.expLeft .expNode    { grid-column: 2; }
-.expLeft .expContent + * { display: none; }
+.expLeft .expContent {
+  grid-column: 1;
+}
+
+.expLeft .expNode {
+  grid-column: 2;
+}
+
+.expLeft .expContent+* {
+  display: none;
+}
 
 .expRight .expContent {
   grid-column: 3;
 }
-.expRight .expNode { grid-column: 2; }
+
+.expRight .expNode {
+  grid-column: 2;
+}
 
 /* Shift left cards */
 .expLeft {
   grid-template-areas: "content node empty";
 }
+
 .expRight {
   grid-template-areas: "empty node content";
 }
 
-.expLeft  .expContent { grid-area: content; }
-.expLeft  .expNode    { grid-area: node; }
-.expRight .expContent { grid-area: content; }
-.expRight .expNode    { grid-area: node; }
+.expLeft .expContent {
+  grid-area: content;
+}
+
+.expLeft .expNode {
+  grid-area: node;
+}
+
+.expRight .expContent {
+  grid-area: content;
+}
+
+.expRight .expNode {
+  grid-area: node;
+}
 
 .expNode {
   display: flex;
@@ -66,30 +89,35 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
+  background-color: #1A73E8;
   border: 2px solid var(--bg-primary) !important;
   flex-shrink: 0;
-  box-shadow: none !important; /* Disable glowing bubbles */
+  box-shadow: none !important;
+}
+
+:global([data-theme='dark']) .expDot {
+  background-color: #8AB4F8;
 }
 
 /* ── Card Content ── */
 .expContent {
   background-color: var(--bg-tertiary);
-  border: 1px solid var(--border-default);
-  border-radius: 12px;
+  border: 1px solid #E5E5E5;
+  border-radius: 8px;
   padding: 1.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   transition: all var(--transition-fast);
 }
 
 :global([data-theme='dark']) .expContent {
-  background-color: #1E1F20;
-  border-color: #3C4043;
+  background-color: #121212;
+  border-color: #2A2A2A;
 }
 
 .expContent:hover {
   border-color: #1A73E8;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  transform: none; /* Strip cyberpunk translate transitions */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transform: none;
 }
 
 :global([data-theme='dark']) .expContent:hover {
@@ -118,7 +146,8 @@
   gap: 0.25rem;
   font-size: 0.85rem;
   font-weight: 500;
-  color: #1A73E8; /* Google Blue */
+  color: #1A73E8;
+  /* Google Blue */
   text-decoration: none;
   transition: color var(--transition-fast);
 }
@@ -142,7 +171,8 @@
   gap: 0.35rem;
 }
 
-.expPeriod, .expLocation {
+.expPeriod,
+.expLocation {
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
@@ -158,15 +188,15 @@
   letter-spacing: 0.05em;
   color: #1A73E8;
   background-color: var(--bg-secondary);
-  border: 1px solid var(--border-default);
+  border: 1px solid #E5E5E5;
   padding: 0.1rem 0.45rem;
-  border-radius: 6px; /* Material 3 standard card borders */
+  border-radius: 4px;
 }
 
 :global([data-theme='dark']) .expTypeBadge {
   color: #8AB4F8;
-  background-color: #202124;
-  border-color: #3C4043;
+  background-color: #121212;
+  border-color: #2A2A2A;
 }
 
 .expDesc {
@@ -200,7 +230,8 @@
   border-radius: 50%;
   flex-shrink: 0;
   margin-top: 3px;
-  background-color: #1A73E8 !important; /* Google Blue dot indicators */
+  background-color: #1A73E8 !important;
+  /* Google Blue dot indicators */
 }
 
 :global([data-theme='dark']) .bulletDot {
@@ -217,26 +248,39 @@
   padding: 0.2rem 0.5rem;
   font-size: 0.7rem;
   font-weight: 500;
-  border: 1px solid var(--border-default);
+  border: 1px solid #E5E5E5;
   background-color: var(--bg-secondary);
   color: var(--text-secondary);
-  border-radius: 6px;
+  border-radius: 4px;
   font-family: var(--font-sans);
 }
 
 :global([data-theme='dark']) .expTechTag {
-  background-color: #202124;
-  border-color: #3C4043;
+  background-color: #121212;
+  border-color: #2A2A2A;
 }
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
-  .timelineAxis { left: 12px; }
+  .timelineAxis {
+    left: 12px;
+  }
+
   .expCard {
     grid-template-columns: 24px 1fr;
     grid-template-areas: "node content" !important;
   }
-  .expNode { padding-top: var(--space-4); }
-  .expContent { grid-column: 2 !important; grid-area: content !important; }
-  .expMeta { align-items: flex-start; }
+
+  .expNode {
+    padding-top: var(--space-4);
+  }
+
+  .expContent {
+    grid-column: 2 !important;
+    grid-area: content !important;
+  }
+
+  .expMeta {
+    align-items: flex-start;
+  }
 }

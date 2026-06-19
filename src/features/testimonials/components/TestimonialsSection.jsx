@@ -1,18 +1,11 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Star, Quote, ChevronLeft, ChevronRight, PenTool, Trash2 } from 'lucide-react';
 import { testimonials } from '../../../constants/portfolioData';
 import styles from '../styles.module.css';
 import SectionHeading from '../../../components/SectionHeading';
 
-// Aesthetic abstract gradient backgrounds for the author avatars
-const AVATAR_GRADIENTS = [
-  'linear-gradient(135deg, #1A73E8, #818CF8)', // M3 Blue to Indigo
-  'linear-gradient(135deg, #059669, #34D399)', // Emerald Green
-  'linear-gradient(135deg, #7C3AED, #A78BFA)', // Deep Violet
-  'linear-gradient(135deg, #EA4335, #FCA5A5)', // Google Red to Light Red
-];
 
-function TestimonialCard({ testimonial, index, isAdmin, onDelete }) {
+function TestimonialCard({ testimonial, isAdmin, onDelete }) {
   return (
     <article className={styles.card}>
       {/* Decorative Large Background Quote Watermark */}
@@ -55,7 +48,6 @@ function TestimonialCard({ testimonial, index, isAdmin, onDelete }) {
       <footer className={styles.author}>
         <div
           className={styles.authorAvatar}
-          style={{ background: AVATAR_GRADIENTS[index % AVATAR_GRADIENTS.length] }}
           aria-hidden="true"
         >
           {testimonial.name.charAt(0)}
@@ -79,7 +71,7 @@ export default function TestimonialsSection() {
         const parsed = JSON.parse(saved);
         const parsedWithCustom = parsed.map(p => ({ ...p, isCustom: true }));
         return [...testimonials, ...parsedWithCustom];
-      } catch (e) {
+      } catch {
         return testimonials;
       }
     }
@@ -88,8 +80,9 @@ export default function TestimonialsSection() {
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [showReviewForm, setShowReviewForm] = useState(false);
-  const [newReview, setNewReview] = useState({ name: '', role: '', company: '', content: '', rating: 5 });
+  const [newReview, setNewReview] = useState({ name: '', role: '', company: '', content: '', rating: 0 });
   const [formErrors, setFormErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const scrollContainerRef = useRef(null);
 
@@ -99,27 +92,54 @@ export default function TestimonialsSection() {
     localStorage.getItem('admin_moderator') === 'true'
   );
 
-  // Handle active slide index on native scroll swipes or arrow clicks
-  const handleScrollEvent = () => {
-    if (scrollContainerRef.current) {
-      const container = scrollContainerRef.current;
-      const scrollPosition = container.scrollLeft;
-      const cardWidth = container.clientWidth;
-      if (cardWidth > 0) {
-        const index = Math.round(scrollPosition / cardWidth);
-        setActiveIndex(Math.max(0, Math.min(index, testimonialList.length - 1)));
-      }
-    }
-  };
+  // Set active slide index using Intersection Observer
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    const handleObserver = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const cards = Array.from(container.children);
+          const index = cards.indexOf(entry.target);
+          if (index !== -1) {
+            setActiveIndex(index);
+          }
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(handleObserver, {
+      root: container,
+      threshold: 0.6,
+    });
+
+    const cards = Array.from(container.children);
+    cards.forEach((card) => observer.observe(card));
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [testimonialList]);
 
   const handleScroll = (direction) => {
     if (scrollContainerRef.current) {
       const container = scrollContainerRef.current;
-      const scrollAmount = container.clientWidth + 16;
-      container.scrollBy({
-        left: direction === 'left' ? -scrollAmount : scrollAmount,
-        behavior: 'smooth'
-      });
+      const cards = container.children;
+      const targetIndex = direction === 'left' ? activeIndex - 1 : activeIndex + 1;
+      
+      if (targetIndex >= 0 && targetIndex < cards.length) {
+        const targetCard = cards[targetIndex];
+        const firstCard = cards[0];
+        if (targetCard && firstCard) {
+          const scrollAmount = targetCard.offsetLeft - firstCard.offsetLeft;
+          container.scrollTo({
+            left: scrollAmount,
+            behavior: 'smooth'
+          });
+          setActiveIndex(targetIndex);
+        }
+      }
     }
   };
 
@@ -133,14 +153,16 @@ export default function TestimonialsSection() {
 
   const handleRatingChange = (ratingVal) => {
     setNewReview(prev => ({ ...prev, rating: ratingVal }));
+    if (formErrors.rating) {
+      setFormErrors(prev => ({ ...prev, rating: '' }));
+    }
   };
 
   const validateForm = () => {
     const errors = {};
     if (!newReview.name.trim()) errors.name = 'Full Name is required';
-    if (!newReview.role.trim()) errors.role = 'Role/Title is required';
-    if (!newReview.company.trim()) errors.company = 'Company is required';
-    if (!newReview.content.trim()) errors.content = 'Review content is required';
+    if (newReview.rating <= 0) errors.rating = 'Please select a Rating Score';
+    if (!newReview.content.trim()) errors.content = 'Recommendation Content is required';
     else if (newReview.content.trim().length < 15) errors.content = 'Review must be at least 15 characters';
     return errors;
   };
@@ -153,41 +175,51 @@ export default function TestimonialsSection() {
       return;
     }
 
-    const reviewObj = {
-      id: Date.now(), // Unique ID using timestamp
-      ...newReview,
-      rating: Number(newReview.rating),
-      isCustom: true // Explicit custom flag
-    };
+    setIsSubmitting(true);
 
-    const updatedList = [...testimonialList, reviewObj];
-    setTestimonialList(updatedList);
-
-    // Save custom reviews separately to localStorage
-    const saved = localStorage.getItem('user_testimonials');
-    const existingCustom = saved ? JSON.parse(saved) : [];
-    localStorage.setItem('user_testimonials', JSON.stringify([...existingCustom, reviewObj]));
-
-    // Reset Form
-    setNewReview({ name: '', role: '', company: '', content: '', rating: 5 });
-    setFormErrors({});
-    setSubmitSuccess(true);
-
-    // Hide success message after 2.5 seconds
+    // Simulate API request latency of 800ms
     setTimeout(() => {
-      setSubmitSuccess(false);
-      setShowReviewForm(false);
-    }, 2500);
+      const reviewObj = {
+        id: Date.now(),
+        ...newReview,
+        rating: Number(newReview.rating),
+        isCustom: true
+      };
 
-    // Automatically slide scroller to display the new review card
-    setTimeout(() => {
-      if (scrollContainerRef.current) {
-        const container = scrollContainerRef.current;
-        const scrollAmount = (container.clientWidth + 16) * (updatedList.length - 1);
-        container.scrollTo({ left: scrollAmount, behavior: 'smooth' });
-        setActiveIndex(updatedList.length - 1);
-      }
-    }, 300);
+      const updatedList = [...testimonialList, reviewObj];
+      setTestimonialList(updatedList);
+
+      // Save custom reviews separately to localStorage
+      const saved = localStorage.getItem('user_testimonials');
+      const existingCustom = saved ? JSON.parse(saved) : [];
+      localStorage.setItem('user_testimonials', JSON.stringify([...existingCustom, reviewObj]));
+
+      // Reset Form
+      setNewReview({ name: '', role: '', company: '', content: '', rating: 0 });
+      setFormErrors({});
+      setIsSubmitting(false);
+      setSubmitSuccess(true);
+
+      // Hide success message after 2.5 seconds
+      setTimeout(() => {
+        setSubmitSuccess(false);
+        setShowReviewForm(false);
+      }, 2500);
+
+      // Automatically slide scroller to display the new review card
+      setTimeout(() => {
+        if (scrollContainerRef.current) {
+          const container = scrollContainerRef.current;
+          const cards = container.children;
+          const lastIndex = updatedList.length - 1;
+          if (cards[lastIndex] && cards[0]) {
+            const scrollAmount = cards[lastIndex].offsetLeft - cards[0].offsetLeft;
+            container.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+            setActiveIndex(lastIndex);
+          }
+        }
+      }, 300);
+    }, 800);
   };
 
   const handleDeleteReview = (reviewId) => {
@@ -241,7 +273,9 @@ export default function TestimonialsSection() {
         <div 
           className={styles.grid} 
           ref={scrollContainerRef}
-          onScroll={handleScrollEvent}
+          aria-live="polite"
+          aria-atomic="false"
+          aria-label="Testimonials carousel"
         >
           {testimonialList.map((t, i) => (
             <TestimonialCard 
@@ -275,8 +309,12 @@ export default function TestimonialsSection() {
                 className={`${styles.paginationDot} ${activeIndex === index ? styles.activeDot : ''}`}
                 onClick={() => {
                   if (scrollContainerRef.current) {
-                    const scrollAmount = (scrollContainerRef.current.clientWidth + 16) * index;
-                    scrollContainerRef.current.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+                    const container = scrollContainerRef.current;
+                    const cards = container.children;
+                    if (cards[index] && cards[0]) {
+                      const scrollAmount = cards[index].offsetLeft - cards[0].offsetLeft;
+                      container.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+                    }
                   }
                 }}
                 aria-label={`Go to slide ${index + 1}`}
@@ -321,7 +359,9 @@ export default function TestimonialsSection() {
               <form onSubmit={handleReviewSubmit} className={styles.formGrid} noValidate>
                 <div className={styles.formRow}>
                   <div className={styles.formField}>
-                    <label htmlFor="rev-name" className={styles.formLabel}>Full Name</label>
+                    <label htmlFor="rev-name" className={styles.formLabel}>
+                      Full Name <span className={styles.requiredIndicator}>*</span>
+                    </label>
                     <input 
                       id="rev-name"
                       name="name"
@@ -345,7 +385,6 @@ export default function TestimonialsSection() {
                       onChange={handleInputChange}
                       className={styles.formInput}
                     />
-                    {formErrors.role && <span className={styles.validationError}>{formErrors.role}</span>}
                   </div>
                 </div>
 
@@ -361,11 +400,12 @@ export default function TestimonialsSection() {
                       onChange={handleInputChange}
                       className={styles.formInput}
                     />
-                    {formErrors.company && <span className={styles.validationError}>{formErrors.company}</span>}
                   </div>
 
                   <div className={styles.formField}>
-                    <label className={styles.formLabel}>Rating Score</label>
+                    <label className={styles.formLabel}>
+                      Rating Score <span className={styles.requiredIndicator}>*</span>
+                    </label>
                     <div className={styles.ratingSelector} aria-label="Select star rating count">
                       {[1, 2, 3, 4, 5].map((starVal) => (
                         <button
@@ -379,11 +419,14 @@ export default function TestimonialsSection() {
                         </button>
                       ))}
                     </div>
+                    {formErrors.rating && <span className={styles.validationError}>{formErrors.rating}</span>}
                   </div>
                 </div>
 
                 <div className={styles.formField}>
-                  <label htmlFor="rev-content" className={styles.formLabel}>Recommendation Content</label>
+                  <label htmlFor="rev-content" className={styles.formLabel}>
+                    Recommendation Content <span className={styles.requiredIndicator}>*</span>
+                  </label>
                   <textarea 
                     id="rev-content"
                     name="content"
@@ -401,19 +444,20 @@ export default function TestimonialsSection() {
                     type="button" 
                     onClick={() => {
                       setShowReviewForm(false);
-                      setNewReview({ name: '', role: '', company: '', content: '', rating: 5 });
+                      setNewReview({ name: '', role: '', company: '', content: '', rating: 0 });
                       setFormErrors({});
                     }}
                     className={styles.cancelBtn}
+                    disabled={isSubmitting}
                   >
                     Cancel
                   </button>
                   <button 
                     type="submit" 
                     className={styles.submitBtn}
-                    disabled={submitSuccess}
+                    disabled={isSubmitting || submitSuccess}
                   >
-                    Submit Recommendation
+                    {isSubmitting ? 'Submitting...' : 'Submit Recommendation'}
                   </button>
                 </div>
               </form>

@@ -1,21 +1,6 @@
 import { motion } from 'framer-motion';
 import styles from './SectionWrapper.module.css';
-
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.1, delayChildren: 0.1 },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 28 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
-  },
-};
+import { containerVariants } from './SectionWrapper.variants';
 
 export default function SectionWrapper({
   id,
@@ -46,5 +31,3 @@ export default function SectionWrapper({
     </motion.section>
   );
 }
-
-export { itemVariants, containerVariants };

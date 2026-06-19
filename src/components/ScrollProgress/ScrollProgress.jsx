@@ -1,10 +1,9 @@
-import { motion, useSpring } from 'framer-motion';
-import { useScrollProgress } from '../../hooks';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import styles from './ScrollProgress.module.css';
 
 export default function ScrollProgress() {
-  const rawProgress = useScrollProgress();
-  const progress = useSpring(rawProgress, {
+  const { scrollYProgress } = useScroll();
+  const progress = useSpring(scrollYProgress, {
     stiffness: 220,
     damping: 30,
     restDelta: 0.001,

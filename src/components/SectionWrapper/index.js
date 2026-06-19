@@ -1,1 +1,2 @@
-export { default, itemVariants, containerVariants } from './SectionWrapper.jsx';
+export { default } from './SectionWrapper.jsx';
+export { itemVariants, containerVariants } from './SectionWrapper.variants.js';

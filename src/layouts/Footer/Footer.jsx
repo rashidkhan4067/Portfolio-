@@ -9,8 +9,8 @@ import styles from './Footer.module.css';
  * concluding a Google Material 3 (Enterprise) light-mode design system.
  */
 export default function PortfolioFooter() {
-  // Navigation Directory Links matching Column 2 specifications (Home, About, Projects, Skills, Experience)
-  const sitemapLinks = navLinks.filter(link => link.label !== 'Contact');
+  // Navigation Directory Links matching Column 2 specifications (Home, About, Projects, Skills, Experience, Contact)
+  const sitemapLinks = navLinks;
 
   return (
     <footer className={styles.footer} id="portfolio-footer">
@@ -23,7 +23,7 @@ export default function PortfolioFooter() {
               <Code2 size={16} aria-hidden="true" />
             </span>
             <span className={styles.logoText}>
-              Muhammad<span className={styles.logoDot}>.</span>
+              Rashid<span className={styles.logoDot}>.dev</span>
             </span>
           </div>
           <p className={styles.closingStatement}>
@@ -91,10 +91,7 @@ export default function PortfolioFooter() {
         <div className={styles.statusCol}>
           <div className={styles.availabilityCard}>
             <div className={styles.statusHeader}>
-              <span className={styles.pulseDotContainer}>
-                <span className={styles.pulseDot} />
-                <span className={styles.pulseDotPulse} />
-              </span>
+              <span className={styles.pulseDot} />
               <span className={styles.statusText}>Status</span>
             </div>
             <p className={styles.availabilityMessage}>
@@ -113,7 +110,7 @@ export default function PortfolioFooter() {
       {/* Bottom Legal Row */}
       <div className={`container ${styles.bottomRow}`}>
         <p className={styles.copy}>
-          &copy; {new Date().getFullYear()} Muhammad Rashid Shafique. All rights reserved.
+          &copy; {new Date().getFullYear()} Rashid.dev — Muhammad Rashid Shafique. All rights reserved.
         </p>
       </div>
     </footer>

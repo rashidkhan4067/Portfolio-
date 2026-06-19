@@ -104,6 +104,16 @@
   gap: 0.5rem;
 }
 
+.paginationCounter {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  min-width: 48px;
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+
 .paginationDot {
   width: 6px;
   height: 6px;
@@ -200,6 +210,8 @@
     padding-left: var(--space-6);
     padding-right: var(--space-6);
     width: calc(100% + (2 * var(--space-6)));
+    -webkit-mask-image: linear-gradient(to right, black 80%, transparent 100%);
+    mask-image: linear-gradient(to right, black 80%, transparent 100%);
   }
 
   .projectsGrid::-webkit-scrollbar {
@@ -207,7 +219,9 @@
   }
 
   .projectCard {
-    flex: 0 0 85%; /* M3 card peek effect (shows 15% of the next card) */
+    flex: 0 0 calc(72% - 0.5rem);
+    width: calc(72% - 0.5rem);
+    min-width: calc(72% - 0.5rem);
     scroll-snap-align: start; /* Aligns flush with the screen's left margin gutter */
     min-height: 260px;
     padding: 1.5rem;
@@ -247,9 +261,11 @@
   border-color: #3C4043;
 }
 
-.projectCard:hover {
-  border-color: var(--accent-color, #1A73E8);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+@media (hover: hover) {
+  .projectCard:hover {
+    border-color: var(--projects-accent);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
 }
 
 /* Card Header */
@@ -281,14 +297,16 @@
   background-color: rgba(255, 255, 255, 0.04);
 }
 
-.projectCard:hover .iconContainer {
-  background-color: var(--accent-color);
-  color: var(--bg-tertiary);
-}
+@media (hover: hover) {
+  .projectCard:hover .iconContainer {
+    background-color: var(--projects-accent);
+    color: var(--bg-tertiary);
+  }
 
-:global([data-theme='dark']) .projectCard:hover .iconContainer {
-  background-color: var(--accent-color);
-  color: #1E1F20;
+  :global([data-theme='dark']) .projectCard:hover .iconContainer {
+    background-color: var(--projects-accent);
+    color: #1E1F20;
+  }
 }
 
 /* Outlined rectangular M3 badges */
@@ -494,12 +512,13 @@
   }
 
   .projectCard {
-    flex: 0 0 85%;
-    scroll-snap-align: center;
+    flex: 0 0 calc(72% - 0.5rem);
+    width: calc(72% - 0.5rem);
+    min-width: calc(72% - 0.5rem);
+    scroll-snap-align: start;
     border-radius: 16px;
     padding: 1.25rem;
     min-height: auto;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     background-color: var(--bg-tertiary);
     border: 1px solid var(--border-default);
   }
@@ -591,6 +610,100 @@
   .exploreToggle {
     padding: 0.5rem 1.25rem;
     font-size: 0.8125rem;
+  }
+}
+
+/* Skeleton Placeholders */
+.skeletonCard {
+  pointer-events: none;
+  border-color: var(--border-subtle) !important;
+}
+
+.skeletonIcon {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+}
+
+.skeletonBadge {
+  width: 70px;
+  height: 20px;
+  border-radius: 4px;
+}
+
+.skeletonTitle {
+  width: 60%;
+  height: 22px;
+  margin-top: 0.25rem;
+  margin-bottom: 0.75rem;
+  border-radius: 4px;
+}
+
+.skeletonDescLine1 {
+  width: 100%;
+  height: 14px;
+  margin-bottom: 0.5rem;
+  border-radius: 4px;
+}
+
+.skeletonDescLine2 {
+  width: 85%;
+  height: 14px;
+  border-radius: 4px;
+}
+
+.skeletonTech {
+  width: 55px;
+  height: 20px;
+  border-radius: 100px;
+}
+
+/* Image Integration Styles */
+.cardImageContainer {
+  margin: -1.75rem -1.5rem 1rem -1.5rem;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  border-radius: 12px 12px 0 0;
+  border-bottom: 1px solid var(--border-default);
+}
+
+:global([data-theme='dark']) .cardImageContainer {
+  border-bottom-color: #3C4043;
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-base);
+}
+
+.projectCard:hover .cardImage {
+  transform: scale(1.05);
+}
+
+.skeletonImage {
+  margin: -1.75rem -1.5rem 1rem -1.5rem;
+  aspect-ratio: 16/9;
+  border-radius: 12px 12px 0 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+@media (max-width: 768px) {
+  .cardImageContainer {
+    margin: -1.5rem -1.5rem 0.875rem -1.5rem;
+  }
+  .skeletonImage {
+    margin: -1.5rem -1.5rem 0.875rem -1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cardImageContainer {
+    margin: -1.25rem -1.25rem 0.875rem -1.25rem;
+  }
+  .skeletonImage {
+    margin: -1.25rem -1.25rem 0.875rem -1.25rem;
   }
 }
 

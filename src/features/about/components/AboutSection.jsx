@@ -6,7 +6,7 @@ import SectionWrapper, { itemVariants } from '../../../components/SectionWrapper
 import SectionHeading from '../../../components/SectionHeading';
 import Button from '../../../components/Button';
 import styles from '../styles.module.css';
-import profileImg from '../../../assets/profile.png';
+import profileImg from '../../../assets/profile.webp';
 
 export default function AboutSection() {
   return (

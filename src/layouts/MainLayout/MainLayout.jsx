@@ -3,7 +3,6 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
 import Footer from '../Footer/Footer';
-import ScrollProgress from '../../components/ScrollProgress';
 import PageLoader from '../../components/PageLoader';
 import styles from './MainLayout.module.css';
 
@@ -31,7 +30,6 @@ export default function MainLayout({ children }) {
 
   return (
     <div className={styles.layout}>
-      <ScrollProgress />
       <Navbar />
       <main className={styles.main} id="main-content">
         <Suspense fallback={<PageLoader />}>

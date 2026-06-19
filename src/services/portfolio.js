@@ -32,6 +32,7 @@ export const portfolioService = {
    * Contact form submission
    * Replace with real API endpoint in production
    */
+  // eslint-disable-next-line no-unused-vars
   submitContact: async (formData) => {
     await new Promise((resolve) => setTimeout(resolve, 1500));
     // Replace with: return fetch('/api/contact', { method: 'POST', body: JSON.stringify(formData) });

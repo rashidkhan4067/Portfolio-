@@ -15,11 +15,11 @@ function ExperienceCard({ job, index }) {
     >
       {/* Timeline node */}
       <div className={styles.expNode}>
-        <div className={styles.expDot} style={{ background: job.color, boxShadow: `0 0 16px ${job.color}60` }} />
+        <div className={styles.expDot} />
       </div>
 
       {/* Card */}
-      <div className={styles.expContent} style={{ '--exp-color': job.color }}>
+      <div className={styles.expContent}>
         <div className={styles.expHeader}>
           <div>
             <h3 className={styles.expRole}>{job.role}</h3>
@@ -48,7 +48,7 @@ function ExperienceCard({ job, index }) {
         <ul className={styles.highlights}>
           {job.highlights.map((h, i) => (
             <li key={i} className={styles.highlightItem}>
-              <span className={styles.bulletDot} style={{ background: job.color }} />
+              <span className={styles.bulletDot} />
               {h}
             </li>
           ))}
@@ -56,7 +56,7 @@ function ExperienceCard({ job, index }) {
 
         <div className={styles.expTech}>
           {job.techStack.map((tech) => (
-            <span key={tech} className={styles.expTechTag} style={{ borderColor: `${job.color}40`, color: job.color }}>
+            <span key={tech} className={styles.expTechTag}>
               {tech}
             </span>
           ))}

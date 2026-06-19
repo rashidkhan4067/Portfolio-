@@ -26,11 +26,13 @@ export function useScrollProgress() {
  */
 export function useActiveSection(sectionIds = []) {
   const [activeSection, setActiveSection] = useState(sectionIds[0] || '');
+  const sectionKey = sectionIds.join(',');
 
   useEffect(() => {
     const observers = [];
+    const ids = sectionKey.split(',').filter(Boolean);
 
-    sectionIds.forEach((id) => {
+    ids.forEach((id) => {
       const el = document.getElementById(id);
       if (!el) return;
       const observer = new IntersectionObserver(
@@ -44,7 +46,7 @@ export function useActiveSection(sectionIds = []) {
     });
 
     return () => observers.forEach((o) => o.disconnect());
-  }, [sectionIds.join(',')]);
+  }, [sectionKey]);
 
   return activeSection;
 }

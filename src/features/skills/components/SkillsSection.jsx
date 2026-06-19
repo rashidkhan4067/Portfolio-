@@ -5,7 +5,6 @@ import {
   Cloud, 
   Brain, 
   Code2, 
-  Settings, 
   Cpu, 
   Globe, 
   Layout, 
@@ -14,10 +13,7 @@ import {
   Database, 
   Server, 
   GitBranch, 
-  Eye, 
-  TrendingUp, 
-  BarChart2, 
-  Table,
+  BarChart2,
   Sparkles
 } from 'lucide-react';
 import styles from '../styles.module.css';
@@ -28,7 +24,6 @@ const skillCategories = [
   {
     id: "languages",
     category: "Languages & Systems",
-    accentColor: "#1A73E8", // Google Blue
     icon: Code2,
     skills: [
       { name: "Python", subLabel: "Object-oriented scripting & high-performance core", icon: Code2 },
@@ -40,7 +35,6 @@ const skillCategories = [
   {
     id: "backend",
     category: "Backend & APIs",
-    accentColor: "#EA4335", // Google Red
     icon: Terminal,
     skills: [
       { name: "Django", subLabel: "Secure, rapid full-stack Python framework", icon: Terminal },
@@ -52,7 +46,6 @@ const skillCategories = [
   {
     id: "frontend",
     category: "Frontend & Web UI",
-    accentColor: "#34A853", // Google Green
     icon: Layout,
     skills: [
       { name: "React JS", subLabel: "Component-based rich single page applications", icon: Layout },
@@ -64,7 +57,6 @@ const skillCategories = [
   {
     id: "desktop",
     category: "Desktop & GUI Apps",
-    accentColor: "#7C3AED", // Violet
     icon: Monitor,
     skills: [
       { name: "Tkinter", subLabel: "Lightweight native desktop Python GUIs", icon: Monitor },
@@ -76,10 +68,9 @@ const skillCategories = [
   {
     id: "cloud",
     category: "Cloud & Databases",
-    accentColor: "#0F9D58", // Dark Green
     icon: Cloud,
     skills: [
-      { name: "Firebase & Supabase", subLabel: "Realtime serverless databases & backend auth", icon: Cloud },
+      { name: "Firebase & Supabase", subLabel: "Relating database & serverless backend auth", icon: Cloud },
       { name: "SQL & SQLite", subLabel: "Relational schemas, indexing & query tuning", icon: Database },
       { name: "Git", subLabel: "Distributed code versioning & history tracking", icon: GitBranch },
       { name: "GitHub", subLabel: "Collaborative source control & CI/CD workflows", icon: Globe }
@@ -88,7 +79,6 @@ const skillCategories = [
   {
     id: "data",
     category: "Data Science & Big Data",
-    accentColor: "#FBBC05", // Google Yellow
     icon: Brain,
     skills: [
       { name: "PySpark", subLabel: "Distributed large-scale big data cluster analysis", icon: Cpu },
@@ -107,10 +97,6 @@ export default function SkillsSection() {
 
   return (
     <section className={styles.section} id="skills">
-      {/* Subtle background glow effect */}
-      <div className={styles.ambientGlow} aria-hidden="true" />
-      <div className={styles.ambientGlowRight} aria-hidden="true" />
-
       <div className="container">
         
         {/* Section Header */}
@@ -142,10 +128,6 @@ export default function SkillsSection() {
                   key={cat.id}
                   onClick={() => setActiveTab(cat.id)}
                   className={`${styles.filterChip} ${activeTab === cat.id ? styles.activeChip : ''}`}
-                  style={{
-                    '--chip-accent': cat.accentColor,
-                    '--chip-accent-glow': `${cat.accentColor}15`
-                  }}
                   aria-pressed={activeTab === cat.id ? "true" : "false"}
                 >
                   <TabIcon size={14} className={styles.chipIcon} />
@@ -165,14 +147,7 @@ export default function SkillsSection() {
               <article 
                 key={categoryGroup.id} 
                 className={styles.skillGroup}
-                style={{ 
-                  '--accent-color': categoryGroup.accentColor,
-                  '--accent-color-glow': `${categoryGroup.accentColor}12` // ~7% opacity
-                }}
               >
-                {/* Visual Accent Top Bar matching Projects & Testimonials */}
-                <div className={styles.cardAccentBar} />
-
                 {/* M3 Card Header */}
                 <header className={styles.groupHeader}>
                   <div className={styles.groupIcon}>

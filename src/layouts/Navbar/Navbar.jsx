@@ -50,8 +50,7 @@ export default function Navbar() {
             <Code2 size={20} aria-hidden="true" />
           </span>
           <span className={styles.logoText}>
-            {personalInfo.name.split(' ')[0]}
-            <span className={styles.logoDot}>.</span>
+            Rashid<span className={styles.logoDot}>.dev</span>
           </span>
         </NavLink>
 
@@ -67,7 +66,6 @@ export default function Navbar() {
                 end={link.href === '/'}
               >
                 {link.label}
-                <span className={styles.linkUnderline} />
               </NavLink>
             </li>
           ))}
@@ -127,25 +125,47 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu - Nesting inside fixed Nav for perfectly flush absolute bottom boundaries */}
+      {/* Overlay for mobile menu */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            className={styles.mobileOverlay}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={toggleMobileMenu}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Mobile Slide-In Panel */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
             className={styles.mobileMenu}
-            initial={{ opacity: 0, y: -12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
           >
-            <ul role="list">
+            <div className={styles.mobileMenuHeader}>
+              <button
+                className={styles.menuCloseBtn}
+                onClick={toggleMobileMenu}
+                aria-label="Close menu"
+              >
+                <X size={24} />
+              </button>
+            </div>
+            <ul role="list" className={styles.mobileNavList}>
               {navLinks.map((link, i) => {
                 const LinkIcon = iconMap[link.href] || Code2;
                 return (
                   <motion.li
                     key={link.href}
-                    initial={{ opacity: 0, x: -8 }}
+                    initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.03 }}
+                    transition={{ delay: 0.1 + i * 0.05 }}
                   >
                     <NavLink
                       to={link.href}
@@ -154,7 +174,7 @@ export default function Navbar() {
                       }
                       end={link.href === '/'}
                     >
-                      <LinkIcon size={18} className={styles.mobileLinkIcon} aria-hidden="true" />
+                      <LinkIcon size={20} className={styles.mobileLinkIcon} aria-hidden="true" />
                       <span>{link.label}</span>
                     </NavLink>
                   </motion.li>
@@ -168,7 +188,7 @@ export default function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Download Resume
+                Resume
               </a>
             </div>
           </motion.div>

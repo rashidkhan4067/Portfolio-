@@ -2,16 +2,27 @@
 // Optimized specifically to target Google Engineering specifications and recruiter screening parameters
 // Employs the official Google X-Y-Z achievement formula: "Accomplished [X], as measured by [Y], by doing [Z]"
 
+import salesPipelineImg from '../assets/sales_pipeline.webp';
+import aquasyncImg from '../assets/aquasync.webp';
+import medicareImg from '../assets/medicare.webp';
+import algovizImg from '../assets/algoviz.webp';
+import faceAttendanceImg from '../assets/face_attendance.webp';
+import taleemproImg from '../assets/taleempro.webp';
+import venturetwistImg from '../assets/venturetwist.webp';
+import rescueProjectImg from '../assets/rescue_project.webp';
+import foodyAppImg from '../assets/foody_app.webp';
+import aiHmsImg from '../assets/ai_hms.webp';
+
 export const personalInfo = {
   name: 'Muhammad Rashid Shafique',
   title: 'Systems Engineer & Full-Stack Developer',
   tagline: 'Designing high-throughput backend architectures, distributed data pipelines, and responsive human-centric interfaces with Google Material 3 precision.',
   bio: `I am a Software Engineer specializing in low-latency systems development, distributed big data pipelines, and high-concurrency automated scripts. Currently pursuing my BS in Computer Science (6th Semester) at the University of Agriculture Faisalabad (UAF), I apply core academic fundamentals—including advanced Data Structures, Algorithmic Analysis, and Database Optimization—to engineer production-grade enterprise software. I thrive on translating abstract computational complexities into highly scalable, performant systems.`,
   location: 'Faisalabad, Pakistan',
-  email: 'rashidkhang4067@gmail.com',
-  phone: '+92 300 0000000',
+  email: 'rashidshafique.dev@gmail.com',
+  phone: '+92 319 8696623',
   avatarUrl: 'https://avatars.githubusercontent.com/rashidkhan4067',
-  resumeUrl: 'mailto:rashidkhang4067@gmail.com?subject=Resume%20Request%20-%20Muhammad%20Rashid%20Shafique',
+  resumeUrl: '/resume.pdf',
   socials: {
     github: 'https://github.com/rashidkhan4067',
     linkedin: 'https://www.linkedin.com/in/rashid-shafique09',
@@ -47,6 +58,7 @@ export const projects = [
     liveUrl: 'https://github.com/rashidkhan4067/Sales-Data-Analysis-System',
     githubUrl: 'https://github.com/rashidkhan4067/Sales-Data-Analysis-System.git',
     accentColor: '#1A73E8', // Google Blue Brand colors
+    imageUrl: salesPipelineImg,
   },
   {
     id: 2,
@@ -58,6 +70,7 @@ export const projects = [
     liveUrl: 'https://github.com/rashidkhan4067/AquaSync',
     githubUrl: 'https://github.com/rashidkhan4067/AquaSync',
     accentColor: '#00C1D4', // Teal Accent
+    imageUrl: aquasyncImg,
   },
   {
     id: 3,
@@ -67,8 +80,9 @@ export const projects = [
     category: 'Full-Stack',
     featured: true,
     liveUrl: 'https://github.com/rashidkhan4067/MediCare',
-    githubUrl: 'https://github.com/rashidkhan4067/hospital-management-system',
+    githubUrl: 'https://github.com/rashidkhan4067/MediCare',
     accentColor: '#818CF8', // Slate Indigo
+    imageUrl: medicareImg,
   },
   {
     id: 4,
@@ -80,6 +94,7 @@ export const projects = [
     liveUrl: 'https://github.com/rashidkhan4067/Algoviz-pro',
     githubUrl: 'https://github.com/rashidkhan4067/Algoviz-pro',
     accentColor: '#7C3AED', // Deep Violet
+    imageUrl: algovizImg,
   },
   {
     id: 5,
@@ -91,6 +106,7 @@ export const projects = [
     liveUrl: 'https://github.com/rashidkhan4067/Face-Recognition-Attendance-System',
     githubUrl: 'https://github.com/rashidkhan4067/Face-Recognition-Attendance-System',
     accentColor: '#059669', // Emerald Green
+    imageUrl: faceAttendanceImg,
   },
   {
     id: 6,
@@ -102,6 +118,7 @@ export const projects = [
     liveUrl: 'https://github.com/rashidkhan4067/TaleemPro',
     githubUrl: 'https://github.com/rashidkhan4067/TaleemPro',
     accentColor: '#E91E63', // Google Rose pink
+    imageUrl: taleemproImg,
   },
   {
     id: 7,
@@ -113,6 +130,7 @@ export const projects = [
     liveUrl: 'https://github.com/rashidkhan4067/VentureTwist',
     githubUrl: 'https://github.com/rashidkhan4067/VentureTwist',
     accentColor: '#3F51B5', // Indigo
+    imageUrl: venturetwistImg,
   },
   {
     id: 8,
@@ -124,6 +142,31 @@ export const projects = [
     liveUrl: 'https://github.com/rashidkhan4067/Rescue_Project-',
     githubUrl: 'https://github.com/rashidkhan4067/Rescue_Project-',
     accentColor: '#EA4335', // Google Red
+    imageUrl: rescueProjectImg,
+  },
+  {
+    id: 9,
+    title: 'Foody-App',
+    description: 'Designed a responsive mobile-first food delivery application, streamlining food ordering workflows and optimizing menu caching to achieve a 25% faster page render speed.',
+    techStack: ['React', 'Vite', 'CSS Modules', 'State Management', 'Mobile-First'],
+    category: 'Full-Stack',
+    featured: false,
+    liveUrl: 'https://github.com/rashidkhan4067/Foody-App',
+    githubUrl: 'https://github.com/rashidkhan4067/Foody-App',
+    accentColor: '#F97316', // Google/Material orange
+    imageUrl: foodyAppImg,
+  },
+  {
+    id: 10,
+    title: 'AI-HMS',
+    description: 'Engineered an AI-driven hospital management system featuring automated patient check-in queues, staff shift allocation, and predictive diagnostics reporting to reduce check-in overhead by 30%.',
+    techStack: ['Python', 'Flask', 'AI', 'TensorFlow', 'React', 'MongoDB'],
+    category: 'AI / ML',
+    featured: false,
+    liveUrl: 'https://github.com/rashidkhan4067/AI-HMS',
+    githubUrl: 'https://github.com/rashidkhan4067/AI-HMS',
+    accentColor: '#10B981', // Google/Material green/emerald
+    imageUrl: aiHmsImg,
   },
 ];
 

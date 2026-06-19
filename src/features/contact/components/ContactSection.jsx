@@ -52,7 +52,7 @@ export default function ContactSection() {
 
     setStatus('loading');
     try {
-      const response = await fetch('https://formsubmit.co/ajax/rashidkhang4067@gmail.com', {
+      const response = await fetch('https://formsubmit.co/ajax/rashidshafique.dev@gmail.com', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

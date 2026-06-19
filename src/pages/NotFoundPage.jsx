@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { NavLink } from 'react-router-dom';
 import { Home, ArrowLeft } from 'lucide-react';
 import Button from '../components/Button';
 import styles from './NotFoundPage.module.css';
