@@ -211,7 +211,7 @@
 .techMoreCount {
   font-size: 0.725rem;
   font-weight: 600;
-  color: var(--text-tertiary);
+  color: var(--text-secondary);
   margin-left: auto;
 }
 

@@ -22,6 +22,8 @@ export default function PortfolioHero() {
                 alt="Muhammad Rashid Shafique — Backend-Focused Full-Stack Engineer"
                 className={styles.profileImageLarge}
                 loading="eager"
+                width="380"
+                height="475"
               />
             </div>
           </div>

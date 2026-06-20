@@ -349,6 +349,8 @@ export default function DetailedProjects() {
                           alt={`${project.title} Preview`}
                           className={styles.cardImage}
                           loading="lazy"
+                          width="420"
+                          height="236"
                         />
                       ) : (
                         <ProjectVisualPlaceholder project={project} />

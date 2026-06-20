@@ -16,7 +16,7 @@ export default function AboutSection() {
         <motion.div className={styles.aboutLeft} variants={itemVariants}>
           <div className={styles.avatarCard}>
             <div className={styles.avatar}>
-              <img src={profileImg} alt={personalInfo.name} className={styles.avatarImg} />
+              <img src={profileImg} alt={personalInfo.name} className={styles.avatarImg} width="100" height="100" />
             </div>
             <div className={styles.avatarInfo}>
               <h3 className={styles.avatarName}>{personalInfo.name}</h3>

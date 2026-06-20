@@ -39,6 +39,8 @@ export default function ProjectCard({ project, onClick }) {
             alt={`${project.title} Preview`} 
             className={styles.cardImage} 
             loading="lazy"
+            width="380"
+            height="214"
           />
         ) : (
           <div 
