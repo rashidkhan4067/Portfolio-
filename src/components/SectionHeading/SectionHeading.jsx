@@ -24,7 +24,11 @@ export default function SectionHeading({
       )}
       <HeadingTag className={styles.title}>{title}</HeadingTag>
       {subtitle && (
-        <p className={styles.subtitle}>{subtitle}</p>
+        typeof subtitle === 'string' ? (
+          <p className={styles.subtitle}>{subtitle}</p>
+        ) : (
+          <div className={styles.subtitle}>{subtitle}</div>
+        )
       )}
     </motion.div>
   );

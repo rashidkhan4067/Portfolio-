@@ -259,10 +259,168 @@ export const testimonials = [
 ];
 
 export const timeline = [
-  { year: '2023', event: 'Started BS Computer Science at the University of Agriculture Faisalabad (UAF)' },
-  { year: '2023', event: 'Mastered Python and started building commercial automation scripts & web crawlers' },
-  { year: '2024', event: 'Transitioned into Full-Stack Web Development, building React and Node.js products' },
-  { year: '2024', event: 'Engineered comprehensive Hospital Management System' },
-  { year: '2025', event: 'Built PySpark Sales Data Analytics System with predictive AI modeling' },
-  { year: '2026', event: 'Presenting a fully modern production-grade portfolio' },
+  { year: 'Oct 2023', event: 'Started BS Computer Science at the University of Agriculture Faisalabad (UAF)' },
+  { year: 'Dec 2023', event: 'Mastered Python and started building commercial automation scripts & web crawlers' },
+  { year: 'Jun 2024', event: 'Transitioned into Full-Stack Web Development, building React and Node.js products' },
+  { year: 'Nov 2024', event: 'Engineered comprehensive Hospital Management System' },
+  { year: 'Aug 2025', event: 'Built PySpark Sales Data Analytics System with predictive AI modeling' },
+  { year: 'Jun 2026', event: 'Presenting a fully modern production-grade portfolio' },
+];
+
+export const buildLogs = [
+  {
+    id: 1,
+    title: 'Utility Over Aesthetics: Design Lessons from GitHub, Stripe, and Linear',
+    date: 'June 20, 2026',
+    type: 'Design Philosophy',
+    metric: '100% Utility Focus',
+    excerpt: 'Analyzing why modern personal sites and SaaS products succeed by prioritizing functional typography and subtractive layouts over distracting visual styles.',
+    tags: ['UI/UX', 'Design Systems', 'Frontend'],
+    content: `When building user interfaces, developers often spend months chasing visual trends. Should we use glassmorphism or minimal borders? 3D cards or flat design? Complex animations or static layouts?
+
+To find the answer, we should look at the systems we trust most: GitHub, Stripe, and Linear. These systems do not try to impress users with visual noise. Instead, they focus entirely on utility—helping developers get their work done.
+
+The best UI design is the design you barely notice. It relies on clean typography scales, robust layouts, and clear information hierarchies. By prioritizing utility over styling trends, we create interfaces that minimize cognitive load and provide a premium, efficient user experience.`
+  },
+  {
+    id: 2,
+    title: 'Solving Real Problems: Shifting from Vanity Portfolios to Practical Products',
+    date: 'June 10, 2026',
+    type: 'Product Strategy',
+    metric: '10x User Value',
+    excerpt: 'Why building a single product that solves an actual user bottleneck is infinitely more valuable than creating ten dummy vanity applications.',
+    tags: ['Product', 'Backend', 'Software'],
+    content: `The biggest mistake beginner developers make is building dummy projects specifically for their portfolio. These are often generic clones of existing apps that solve zero real-world problems.
+
+Instead, engineers should focus on building products that address actual bottlenecks. A single utility script, web scraper, or telemetry dashboard that helps 10 active people is far more valuable than 10 perfect portfolio projects that help nobody.
+
+Building real software forces you to solve real challenges: edge cases, system crashes, rate limits, and user feedback. This shift in perspective transforms you from a code typewriter into a product engineer.`
+  },
+  {
+    id: 3,
+    title: 'The Art of Subtraction: What Senior Software Engineers Choose Not to Build',
+    date: 'June 02, 2026',
+    type: 'Systems Design',
+    metric: '-40% Tech Debt',
+    excerpt: 'Understanding senior engineering decision-making: the vital skill of identifying what not to build, optimize, or overcomplicate.',
+    tags: ['Systems Design', 'Backend', 'Architecture'],
+    content: `Early in my engineering journey, I thought senior developers knew how to build the most complex systems with every hot technology. Now I realize they know something far more important:
+
+- What NOT to build.
+- What NOT to optimize.
+- What NOT to overcomplicate.
+
+Experience in system design is primarily a process of subtraction, not addition. Deciding to cut a feature, defer an optimization, or stick to a simple relational schema is what prevents tech debt. The most resilient code is the code you never write, and the easiest system to maintain is the one with the fewest moving parts.`
+  },
+  {
+    id: 4,
+    title: 'Refactoring Visual Noise: Improving Page Load by Deleting 50% of the Frontend Clutter',
+    date: 'May 25, 2026',
+    type: 'Optimization',
+    metric: '-50% Load Time',
+    excerpt: 'A practical breakdown of how refactoring a developer site to remove excess animations, scripts, and visual noise optimized performance.',
+    tags: ['Performance', 'Clean Code', 'Vite'],
+    content: `My portfolio's performance and user engagement improved significantly when I started removing elements. I deleted heavy custom canvas loops, unnecessary scroll animations, and bloated layout wrappers.
+
+Sometimes, system improvement doesn't come from adding features. It comes from deleting them.
+
+By cutting out the visual noise, we reduced bundle size, eliminated layout shifts, and let the core content shine. This refactoring demonstrated that performance optimization is as much about cleaning up UX clutter as it is about database index tuning.`
+  },
+  {
+    id: 5,
+    title: 'Beyond the Keyboard: Software Engineering is Planning and Communication',
+    date: 'May 15, 2026',
+    type: 'Process Engineering',
+    metric: '80% Architecture',
+    excerpt: 'Why typing code is the easiest phase of software development, and why the real work lies in architectural design and team alignment.',
+    tags: ['Software Design', 'Agile'],
+    content: `When I started studying computer science, I believed that coding was simply the act of typing syntax. Now, with production experience, I view typing as a minor sub-step.
+
+The real core of software engineering lies in:
+1. **Thinking**: Analyzing problem boundaries and edge cases.
+2. **Planning**: Deciding on decoupled structures and database relations.
+3. **Debugging**: Isolating state variables and profiling runtimes.
+4. **Communicating**: Explaining technical tradeoffs clearly to stakeholders.
+
+If you jump straight to the keyboard, you will spend twice as much time rewriting poor architecture. Planning first ensures your code is robust from the start.`
+  },
+  {
+    id: 6,
+    title: 'AI in Software Engineering: Code Generation is Not System Architecture',
+    date: 'May 04, 2026',
+    type: 'Industry Insight',
+    metric: '2x Output Speed',
+    excerpt: 'Analyzing the role of generative AI in modern software building: why system architecture and product decisions remain the core developer skills.',
+    tags: ['AI', 'System Design', 'Backend'],
+    content: `Generative AI has fundamentally changed how we build software by accelerating boilerplate code generation. However, it has not removed the necessity of deep technical thinking.
+
+AI can output code rapidly, but it cannot decide:
+- What problems actually matter to the business.
+- What features to cut to maintain a simple codebase.
+- What users actually need from the system.
+
+System design, consistency checks, security models, and verification remain human-critical skills. The future belongs to developers who use AI as a leverage tool while focusing their energy on high-level architecture and system correctness.`
+  },
+  {
+    id: 7,
+    title: 'The Prototyping Loop: Why Your First Code Version is Never the Real Version',
+    date: 'April 20, 2026',
+    type: 'Agile Methodologies',
+    metric: '3x Ship Velocity',
+    excerpt: 'Overcoming code procrastination: why shipping a functional, raw prototype is the only real path to building robust systems.',
+    tags: ['DevOps', 'Agile', 'Vite'],
+    content: `Every engineering project teaches the same recurring lesson: your first version is never the final version. Waiting to ship until your code is "perfect" is simply procrastination disguised as quality assurance.
+
+The optimal approach is to:
+1. **Start**: Build the absolute simplest functional code path.
+2. **Ship**: Deploy the system to get telemetry or user data.
+3. **Learn**: Analyze real execution bottlenecks, errors, and flows.
+4. **Improve**: Refactor codebase segments based on concrete telemetry.
+
+By prioritizing rapid prototype iterations over long, isolated planning phases, we validate technical assumptions and deliver robust code faster.`
+  },
+  {
+    id: 8,
+    title: 'The Complexity Trap: Why Simple Architectures Require Deeper Understanding',
+    date: 'April 10, 2026',
+    type: 'System Design',
+    metric: '-60% Maintenance',
+    excerpt: 'Deconstructing the tendency to over-engineer: why simple system design is inherently harder but far more resilient under load.',
+    tags: ['Systems Design', 'Backend', 'Python'],
+    content: `I used to admire complex architectures—microservices, event-driven message brokers, and multi-layered database caches. Now, I admire simple systems.
+
+Simple is harder. Simple requires complete, deep understanding of the problem space.
+
+Anyone can add complexity, throw libraries at a project, or add servers. But identifying how to solve the same problem with a single query, a lightweight cache, or a synchronous script requires true mastery. Simple systems fail less, scale predictably, and reduce maintenance costs by 60%.`
+  },
+  {
+    id: 9,
+    title: 'Compounding Engineering Consistency: The Power of Daily Coding Habits',
+    date: 'March 25, 2026',
+    type: 'Personal Growth',
+    metric: '365 Days Commit',
+    excerpt: 'Why small, daily coding efforts compound into massive career advantages compared to isolated bursts of coding intensity.',
+    tags: ['Career', 'Productivity'],
+    content: `Most developers underestimate the compounding power of consistency. They try to learn systems engineering in a single weekend or write a massive application in a single burst.
+
+- One project won't change your life.
+- One blog post won't build a career.
+- One week of commits won't make you a systems expert.
+
+But showing up every day for a year? That is where engineering skill compounds. Daily consistency—refactoring code, reading RFCs, building small tools—is what builds deep technical competence and makes you a reliable developer.`
+  },
+  {
+    id: 10,
+    title: 'Becoming a Developer: Moving Beyond Vanity to Practical Engineering Execution',
+    date: 'March 10, 2026',
+    type: 'Career Development',
+    metric: '100% Execution',
+    excerpt: 'Decoupling professional growth from vanity: choosing a path defined by clean code, active commits, and shipped products.',
+    tags: ['Career', 'Mentorship', 'Clean Code'],
+    content: `My goal is no longer to look like a developer. My goal is to become one.
+
+This means spending less time talking, less time comparing tools on forums, and more time actually building software.
+
+A real software engineer is defined by the quality of their shipped code, the reliability of their systems, and their ability to solve user problems. By choosing execution over vanity, we dedicate our focus to what matters: writing clean, performant, and maintainable software.`
+  }
 ];

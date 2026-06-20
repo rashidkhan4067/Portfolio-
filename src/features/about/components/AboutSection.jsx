@@ -53,7 +53,16 @@ export default function AboutSection() {
           <SectionHeading
             eyebrow="About Me"
             title="Crafting Scalable Digital Experiences"
-            subtitle={personalInfo.bio}
+            subtitle={
+              <>
+                <p>
+                  I am a Software Engineer specializing in low-latency systems development, distributed big data pipelines, and high-concurrency automated scripts.
+                </p>
+                <p>
+                  Currently pursuing my BS in Computer Science (6th Semester) at the University of Agriculture Faisalabad (UAF), I apply core academic fundamentals—including advanced Data Structures, Algorithmic Analysis, and Database Optimization—to engineer production-grade enterprise software. I thrive on translating abstract computational complexities into highly scalable, performant systems.
+                </p>
+              </>
+            }
             level={1}
           />
 

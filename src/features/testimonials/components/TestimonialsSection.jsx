@@ -84,7 +84,55 @@ export default function TestimonialsSection() {
   const [formErrors, setFormErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
-  const scrollContainerRef = useRef(null);
+  
+  // Viewport tracking for responsive carousel sizing & index clamping
+  const [viewportWidth, setViewportWidth] = useState(() => typeof window !== 'undefined' ? window.innerWidth : 1200);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setViewportWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const isMobile = viewportWidth < 768;
+  const isTablet = viewportWidth >= 768 && viewportWidth <= 1024;
+  const isDesktop = viewportWidth > 1024;
+
+  const maxIndex = isMobile 
+    ? testimonialList.length - 1 
+    : (isTablet ? Math.max(0, testimonialList.length - 2) : 0);
+
+  useEffect(() => {
+    setActiveIndex(prev => Math.min(prev, maxIndex));
+  }, [viewportWidth, testimonialList, maxIndex]);
+
+  // Touch Swipe Handlers for mobile & tablet gesture support
+  const touchStart = useRef(0);
+  const touchDiff = useRef(0);
+
+  const handleTouchStart = (e) => {
+    if (isDesktop) return;
+    touchStart.current = e.targetTouches[0].clientX;
+    touchDiff.current = 0;
+  };
+
+  const handleTouchMove = (e) => {
+    if (isDesktop) return;
+    const currentX = e.targetTouches[0].clientX;
+    touchDiff.current = touchStart.current - currentX;
+  };
+
+  const handleTouchEnd = () => {
+    if (isDesktop) return;
+    const swipeThreshold = 50; // swipe threshold in px
+    if (touchDiff.current > swipeThreshold) {
+      handleNext();
+    } else if (touchDiff.current < -swipeThreshold) {
+      handlePrev();
+    }
+  };
 
   // Simple, secure admin checking (URL param: ?admin=true or localStorage flag)
   const isAdmin = typeof window !== 'undefined' && (
@@ -92,55 +140,16 @@ export default function TestimonialsSection() {
     localStorage.getItem('admin_moderator') === 'true'
   );
 
-  // Set active slide index using Intersection Observer
-  useEffect(() => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
+  const handlePrev = () => {
+    setActiveIndex(prev => Math.max(0, prev - 1));
+  };
 
-    const handleObserver = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const cards = Array.from(container.children);
-          const index = cards.indexOf(entry.target);
-          if (index !== -1) {
-            setActiveIndex(index);
-          }
-        }
-      });
-    };
+  const handleNext = () => {
+    setActiveIndex(prev => Math.min(maxIndex, prev + 1));
+  };
 
-    const observer = new IntersectionObserver(handleObserver, {
-      root: container,
-      threshold: 0.6,
-    });
-
-    const cards = Array.from(container.children);
-    cards.forEach((card) => observer.observe(card));
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [testimonialList]);
-
-  const handleScroll = (direction) => {
-    if (scrollContainerRef.current) {
-      const container = scrollContainerRef.current;
-      const cards = container.children;
-      const targetIndex = direction === 'left' ? activeIndex - 1 : activeIndex + 1;
-      
-      if (targetIndex >= 0 && targetIndex < cards.length) {
-        const targetCard = cards[targetIndex];
-        const firstCard = cards[0];
-        if (targetCard && firstCard) {
-          const scrollAmount = targetCard.offsetLeft - firstCard.offsetLeft;
-          container.scrollTo({
-            left: scrollAmount,
-            behavior: 'smooth'
-          });
-          setActiveIndex(targetIndex);
-        }
-      }
-    }
+  const goToSlide = (index) => {
+    setActiveIndex(Math.min(maxIndex, Math.max(0, index)));
   };
 
   const handleInputChange = (e) => {
@@ -206,18 +215,9 @@ export default function TestimonialsSection() {
         setShowReviewForm(false);
       }, 2500);
 
-      // Automatically slide scroller to display the new review card
+      // Automatically slide track to display the new review card
       setTimeout(() => {
-        if (scrollContainerRef.current) {
-          const container = scrollContainerRef.current;
-          const cards = container.children;
-          const lastIndex = updatedList.length - 1;
-          if (cards[lastIndex] && cards[0]) {
-            const scrollAmount = cards[lastIndex].offsetLeft - cards[0].offsetLeft;
-            container.scrollTo({ left: scrollAmount, behavior: 'smooth' });
-            setActiveIndex(lastIndex);
-          }
-        }
+        setActiveIndex(updatedList.length - 1);
       }, 300);
     }, 800);
   };
@@ -269,14 +269,20 @@ export default function TestimonialsSection() {
           </div>
         )}
 
-        {/* Modern Slider Component Grid with horizontal swipe and scroll Ref */}
+        {/* Swipe-friendly Testimonial Grid Track with CSS variables translation */}
         <div 
-          className={styles.grid} 
-          ref={scrollContainerRef}
-          aria-live="polite"
-          aria-atomic="false"
-          aria-label="Testimonials carousel"
+          className={styles.carouselWrapper}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
         >
+          <div 
+            className={styles.grid}
+            style={{ '--active-index': activeIndex }}
+            aria-live="polite"
+            aria-atomic="false"
+            aria-label="Testimonials carousel"
+          >
           {testimonialList.map((t, i) => (
             <TestimonialCard 
               key={t.id} 
@@ -286,14 +292,15 @@ export default function TestimonialsSection() {
               onDelete={handleDeleteReview}
             />
           ))}
+          </div>
         </div>
-
+ 
         {/* ── ULTIMATE M3 CAROUSEL PAGINATION & CONTROLS ── */}
         <div className={styles.carouselPagination} role="group" aria-label="Testimonial slider navigation">
           
           {/* Previous Button */}
           <button 
-            onClick={() => handleScroll('left')} 
+            onClick={handlePrev} 
             className={styles.paginationArrow}
             disabled={activeIndex === 0}
             aria-label="Scroll left to previous testimonial"
@@ -303,20 +310,11 @@ export default function TestimonialsSection() {
           
           {/* Interactive Slide Dots */}
           <div className={styles.paginationDots} aria-label="Slides active status">
-            {testimonialList.map((_, index) => (
+            {Array.from({ length: maxIndex + 1 }).map((_, index) => (
               <button 
                 key={index} 
                 className={`${styles.paginationDot} ${activeIndex === index ? styles.activeDot : ''}`}
-                onClick={() => {
-                  if (scrollContainerRef.current) {
-                    const container = scrollContainerRef.current;
-                    const cards = container.children;
-                    if (cards[index] && cards[0]) {
-                      const scrollAmount = cards[index].offsetLeft - cards[0].offsetLeft;
-                      container.scrollTo({ left: scrollAmount, behavior: 'smooth' });
-                    }
-                  }
-                }}
+                onClick={() => goToSlide(index)}
                 aria-label={`Go to slide ${index + 1}`}
                 aria-current={activeIndex === index ? 'true' : 'false'}
               />
@@ -325,9 +323,9 @@ export default function TestimonialsSection() {
 
           {/* Next Button */}
           <button 
-            onClick={() => handleScroll('right')} 
+            onClick={handleNext} 
             className={styles.paginationArrow}
-            disabled={activeIndex === testimonialList.length - 1}
+            disabled={activeIndex >= maxIndex}
             aria-label="Scroll right to next testimonial"
           >
             <ChevronRight size={18} aria-hidden="true" />

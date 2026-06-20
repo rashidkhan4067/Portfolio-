@@ -2,6 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import HeroSection from '../features/hero';
 import SkillsSection from '../features/skills';
 import ProjectsSection from '../features/projects';
+import BuildLogsTeaser from '../features/build-logs/components/BuildLogsTeaser';
 import TestimonialsSection from '../features/testimonials';
 
 export default function HomePage() {
@@ -20,6 +21,7 @@ export default function HomePage() {
       <HeroSection />
       <SkillsSection />
       <ProjectsSection />
+      <BuildLogsTeaser />
       <TestimonialsSection />
     </>
   );

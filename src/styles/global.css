@@ -72,6 +72,9 @@
   --accent-success: #10b981;
   --accent-warning: #f59e0b;
   --accent-danger: #ef4444;
+  
+  /* Unified Brand Accent Color (Hue 214, Sat 82, Light 51) */
+  --accent-brand: #1A73E8;
 
   --gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #06b6d4 100%);
   --gradient-card: linear-gradient(145deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.6) 100%);
@@ -87,17 +90,18 @@
 
 /* ── DARK THEME ── */
 [data-theme='dark'] {
-  --bg-primary: #09090b;
-  --bg-secondary: #111113;
-  --bg-tertiary: #18181b;
-  --bg-card: #1c1c1f;
-  --bg-glass: rgba(24, 24, 27, 0.80);
+  /* Softened dark mode background (Stripe/Vercel/Linear style) */
+  --bg-primary: #0d0d0f;
+  --bg-secondary: #151517;
+  --bg-tertiary: #1b1b1f;
+  --bg-card: #1c1c20;
+  --bg-glass: rgba(21, 21, 23, 0.80);
   --bg-glass-border: rgba(255, 255, 255, 0.06);
 
   --text-primary: #fafafa;
   --text-secondary: #a1a1aa;
   --text-tertiary: #52525b;
-  --text-inverse: #09090b;
+  --text-inverse: #0d0d0f;
 
   --accent-primary: #818cf8;
   --accent-secondary: #a78bfa;
@@ -106,6 +110,9 @@
   --accent-warning: #fbbf24;
   --accent-danger: #f87171;
 
+  /* Unified Brand Accent Color (Hue 214, Sat 82, Light 68) */
+  --accent-brand: #6aa1f1;
+
   --gradient-primary: linear-gradient(135deg, #818cf8 0%, #a78bfa 50%, #22d3ee 100%);
   --gradient-card: linear-gradient(145deg, rgba(28,28,31,0.9) 0%, rgba(24,24,27,0.7) 100%);
 
@@ -113,13 +120,13 @@
   --border-default: rgba(255, 255, 255, 0.08);
   --border-strong: rgba(255, 255, 255, 0.14);
 
-  --nav-bg: rgba(9, 9, 11, 0.85);
+  --nav-bg: rgba(13, 13, 15, 0.85);
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
   --shadow-md: 0 4px 16px rgba(0,0,0,0.4), 0 2px 8px rgba(0,0,0,0.3);
   --shadow-lg: 0 10px 40px rgba(0,0,0,0.5), 0 4px 16px rgba(0,0,0,0.3);
   --shadow-xl: 0 20px 60px rgba(0,0,0,0.6), 0 8px 24px rgba(0,0,0,0.4);
-  --shadow-glow: 0 0 40px rgba(129, 140, 248, 0.20);
-  --scrollbar-track: #18181b;
+  --shadow-glow: 0 0 40px rgba(106, 161, 241, 0.20);
+  --scrollbar-track: #1b1b1f;
   --scrollbar-thumb: #3f3f46;
 }
 
