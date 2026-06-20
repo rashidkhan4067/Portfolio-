@@ -1,17 +1,60 @@
 import { Helmet } from 'react-helmet-async';
 import ContactSection from '../features/contact';
 
+const BASE_URL = 'https://rashidkhan4067.github.io';
+
+const contactSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  'name': 'Contact Muhammad Rashid Shafique',
+  'url': `${BASE_URL}/contact`,
+  'description': 'Contact Muhammad Rashid Shafique for freelance projects, collaboration, or job opportunities.',
+  'mainEntity': {
+    '@type': 'Person',
+    'name': 'Muhammad Rashid Shafique',
+    'email': 'rashidshafique.dev@gmail.com',
+    'telephone': '+92-319-8696623',
+    'address': {
+      '@type': 'PostalAddress',
+      'addressLocality': 'Faisalabad',
+      'addressRegion': 'Punjab',
+      'addressCountry': 'PK',
+    },
+    'sameAs': [
+      'https://github.com/rashidkhan4067',
+      'https://www.linkedin.com/in/rashid-shafique09',
+    ],
+  },
+};
+
 export default function ContactPage() {
   return (
     <>
       <Helmet>
-        <title>Contact — Muhammad Rashid Shafique</title>
-        <meta name="description" content="Get in touch with Muhammad Rashid Shafique for freelance projects, collaboration, or job opportunities. Available for full-time and contract roles." />
-        <meta property="og:title" content="Contact — Muhammad Rashid Shafique" />
-        <meta property="og:description" content="Available for full-time, freelance, and contract opportunities. Reach out to discuss systems engineering, backend APIs, or full-stack projects." />
+        <title>Contact Muhammad Rashid Shafique | Hire Systems Engineer & Full-Stack Developer</title>
+        <meta name="description" content="Hire Muhammad Rashid Shafique — Systems Engineer & Full-Stack Developer from Faisalabad, Pakistan. Available for full-time roles, freelance contracts, and open-source collaboration. Expertise in Python, Django, FastAPI, React, and PySpark." />
+        <meta name="keywords" content="contact Muhammad Rashid Shafique, hire systems engineer Pakistan, hire full stack developer Pakistan, hire Python developer, hire React developer, freelance backend developer Pakistan, software engineer for hire" />
+        <link rel="canonical" href={`${BASE_URL}/contact`} />
+
+        {/* Open Graph */}
         <meta property="og:type" content="website" />
-        <meta name="twitter:title" content="Contact — Muhammad Rashid Shafique" />
-        <meta name="twitter:description" content="Hire Muhammad Rashid Shafique for your next engineering project." />
+        <meta property="og:url" content={`${BASE_URL}/contact`} />
+        <meta property="og:title" content="Contact Muhammad Rashid Shafique | Hire Systems Engineer" />
+        <meta property="og:description" content="Available for full-time, freelance, and contract opportunities. Reach out to discuss systems engineering, backend APIs, or full-stack projects." />
+        <meta property="og:image" content={`${BASE_URL}/og-preview.png`} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Contact Muhammad Rashid Shafique" />
+        <meta property="og:locale" content="en_US" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Contact | Muhammad Rashid Shafique" />
+        <meta name="twitter:description" content="Hire Muhammad Rashid Shafique for your next engineering project. Full-time, freelance, or contract." />
+        <meta name="twitter:image" content={`${BASE_URL}/og-preview.png`} />
+
+        {/* Structured Data */}
+        <script type="application/ld+json">{JSON.stringify(contactSchema)}</script>
       </Helmet>
       <ContactSection />
     </>

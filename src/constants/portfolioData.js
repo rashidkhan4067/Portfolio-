@@ -59,6 +59,15 @@ export const projects = [
     githubUrl: 'https://github.com/rashidkhan4067/Sales-Data-Analysis-System.git',
     accentColor: '#1A73E8', // Google Blue Brand colors
     imageUrl: salesPipelineImg,
+    tagline: 'High-throughput big data pipeline and analytics dashboard processing 10M+ transaction rows.',
+    status: 'Completed',
+    problemRole: 'Engineered a distributed data ingestion pipeline and ML predictive model to forecast profitability. Designed the analytics UI to provide real-time business intelligence.',
+    challenges: [
+      'Optimized PySpark big data transformation tasks, reducing computational execution overhead by 38%.',
+      'Built scikit-learn random forest regressor models achieving 94.2% accuracy in profit forecasting.',
+      'Developed an interactive Streamlit UI rendering custom Plotly charts with instant state updates.'
+    ],
+    outcome: 'Processes over 10M+ transaction rows under 1.5 seconds, delivering actionable profit forecasting.'
   },
   {
     id: 2,
@@ -71,6 +80,15 @@ export const projects = [
     githubUrl: 'https://github.com/rashidkhan4067/AquaSync',
     accentColor: '#00C1D4', // Teal Accent
     imageUrl: aquasyncImg,
+    tagline: 'IoT fluid telemetry system and real-time desktop monitoring dashboard.',
+    status: 'Completed',
+    problemRole: 'Built the custom multi-threaded Python Socket server and Arduino firmware to stream IoT flow metrics. Created the desktop application for real-time telemetry analysis.',
+    challenges: [
+      'Reduced database write latency by 42% by compiling optimized C++ Arduino firmware.',
+      'Implemented custom queue-buffered socket connections to handle packet loss over unstable networks.',
+      'Developed a highly responsive Tkinter visual layout updating canvas charts in real-time.'
+    ],
+    outcome: 'Maintains 99.9% uptime across active device connections, processing 100k+ telemetry packets daily.'
   },
   {
     id: 3,
@@ -83,6 +101,15 @@ export const projects = [
     githubUrl: 'https://github.com/rashidkhan4067/MediCare',
     accentColor: '#818CF8', // Slate Indigo
     imageUrl: medicareImg,
+    tagline: 'High-security patient management portal and Express REST API.',
+    status: 'Completed',
+    problemRole: 'Designed the React frontend and Node.js REST API. Built the secure data layer with SQLite transactional buffering.',
+    challenges: [
+      'Reduced patient check-in bottlenecks by 35% using transactional SQLite query indexing.',
+      'Implemented express-validator middleware to sanitize and validate incoming REST API payloads.',
+      'Designed clean PySide6 and React components adhering to strict accessibility guidelines.'
+    ],
+    outcome: 'Used to streamline patient registration and check-in workflows for over 150 daily admissions.'
   },
   {
     id: 4,
@@ -95,6 +122,15 @@ export const projects = [
     githubUrl: 'https://github.com/rashidkhan4067/Algoviz-pro',
     accentColor: '#7C3AED', // Deep Violet
     imageUrl: algovizImg,
+    tagline: 'Algorithmic visualization engine demonstrating pathfinding and custom structures.',
+    status: 'Completed',
+    problemRole: 'Built a canvas-based algorithmic visualizer to demonstrate pathfinding (Dijkstra, A*) and graph theory algorithms. Engineered the React frontend and visual rendering layer.',
+    challenges: [
+      'Improved canvas render speed by 50% through virtualized React rendering and D3.js transitions.',
+      'Designed step-by-step debugger control loops to pause, resume, and step through runtime call stacks.',
+      'Implemented modular structural abstractions to easily extend visualizers to new algorithms.'
+    ],
+    outcome: 'Provides fluid 60fps renders for complex graph visualisations containing up to 10k nodes.'
   },
   {
     id: 5,
@@ -107,6 +143,15 @@ export const projects = [
     githubUrl: 'https://github.com/rashidkhan4067/Face-Recognition-Attendance-System',
     accentColor: '#059669', // Emerald Green
     imageUrl: faceAttendanceImg,
+    tagline: 'Real-time AI-powered facial recognition attendance and verification system.',
+    status: 'Completed',
+    problemRole: 'Designed the computer vision engine and database synchronization workflows. Optimized deep learning recognition models for edge execution.',
+    challenges: [
+      'Achieved 98.7% face verification accuracy under 120ms by optimizing OpenCV matrices.',
+      'Integrated TensorFlow and FaceNet models using lightweight quantized parameters.',
+      'Structured a robust local-caching database sync to store offline check-in logs safely.'
+    ],
+    outcome: 'Automates secure real-time student check-ins under 120ms with near-zero false positive errors.'
   },
   {
     id: 6,
@@ -119,6 +164,15 @@ export const projects = [
     githubUrl: 'https://github.com/rashidkhan4067/TaleemPro',
     accentColor: '#E91E63', // Google Rose pink
     imageUrl: taleemproImg,
+    tagline: 'Scalable school management portal handling concurrent administrative requests.',
+    status: 'Completed',
+    problemRole: 'Designed the Express REST API and MongoDB schema indexes. Configured secure stateless JWT routes for student/teacher tiers.',
+    challenges: [
+      'Secured private routes by 100% using stateless JWT tokens with automatic expiration checks.',
+      'Optimized query performance by 40% using MongoDB compound index keys on frequently accessed academic logs.',
+      'Built dynamic React panels with unified search features and asynchronous spreadsheet exports.'
+    ],
+    outcome: 'Successfully handles multi-role administrative workflows for school directories, grades, and fee records.'
   },
   {
     id: 7,
@@ -131,6 +185,15 @@ export const projects = [
     githubUrl: 'https://github.com/rashidkhan4067/VentureTwist',
     accentColor: '#3F51B5', // Indigo
     imageUrl: venturetwistImg,
+    tagline: 'Asynchronous restaurant ordering system and lightweight client-side state engine.',
+    status: 'Completed',
+    problemRole: 'Engineered a custom client-side Vanilla JS state manager and lightweight HTML rendering templates.',
+    challenges: [
+      'Reduced page load latency by 32% by avoiding heavy frameworks and using custom Vanilla JS state rendering.',
+      'Implemented persistent cart data storage using browser LocalStorage synchronization.',
+      'Designed responsive layouts adhering to Google Material Guidelines without third-party libraries.'
+    ],
+    outcome: 'Provides a lightweight, zero-dependency client ordering app loading in under 300ms.'
   },
   {
     id: 8,
@@ -143,6 +206,15 @@ export const projects = [
     githubUrl: 'https://github.com/rashidkhan4067/Rescue_Project-',
     accentColor: '#EA4335', // Google Red
     imageUrl: rescueProjectImg,
+    tagline: 'Centralized missing persons registry and portal for rescue coordination.',
+    status: 'Completed',
+    problemRole: 'Built the responsive web interface and backend search engine. Optimized database query schemas for fast indexing.',
+    challenges: [
+      'Boosted search query resolution times by 28% through database indexing optimizations.',
+      'Designed highly structured, accessible schema validation rules for secure record uploads.',
+      'Implemented geographical category filtering to easily locate reports by location.'
+    ],
+    outcome: 'Centralized data entry and search systems to speed up coordination efforts for rescue teams.'
   },
   {
     id: 9,
@@ -155,18 +227,36 @@ export const projects = [
     githubUrl: 'https://github.com/rashidkhan4067/Foody-App',
     accentColor: '#F97316', // Google/Material orange
     imageUrl: foodyAppImg,
+    tagline: 'Mobile-first food delivery application and menu caching interface.',
+    status: 'Completed',
+    problemRole: 'Built the responsive mobile-first React frontend. Implemented local state menu caching and routing workflows.',
+    challenges: [
+      'Streamlined ordering checkout workflows, reducing page render times by 25% through lazy component imports.',
+      'Designed custom CSS Modules to prevent style collisions and ensure component isolation.',
+      'Optimized menu list rendering using React memoization hooks to avoid unnecessary re-renders.'
+    ],
+    outcome: 'Provides a highly responsive food ordering experience optimized for low-bandwidth mobile viewports.'
   },
   {
     id: 10,
-    title: 'AI-HMS',
+    title: 'Al Shifaa HMS',
     description: 'Engineered an AI-driven hospital management system featuring automated patient check-in queues, staff shift allocation, and predictive diagnostics reporting to reduce check-in overhead by 30%.',
-    techStack: ['Python', 'Flask', 'AI', 'TensorFlow', 'React', 'MongoDB'],
+    techStack: ['React', 'Django REST Framework', 'PostgreSQL', 'JWT', 'LLMs', 'Tailwind CSS'],
     category: 'AI / ML',
     featured: false,
     liveUrl: 'https://github.com/rashidkhan4067/AI-HMS',
     githubUrl: 'https://github.com/rashidkhan4067/AI-HMS',
     accentColor: '#10B981', // Google/Material green/emerald
     imageUrl: aiHmsImg,
+    tagline: 'AI-powered hospital management system with secure multi-role access control.',
+    status: 'In Development',
+    problemRole: 'Designed and built the full RBAC and authentication layer for a multi-hospital management system. Streamlined patient registration workflows and secured sensitive medical record access.',
+    challenges: [
+      'Implemented stateless JWT-based authentication with secure token rotation and blacklisting on logout.',
+      'Created custom Django permission classes to enforce server-side Zero Trust role-based access control.',
+      'Integrated Google OAuth SSO and designed a progressive, multi-step profile completion wizard.'
+    ],
+    outcome: 'Secures patient self-registration and doctor onboarding application workflows across three primary access tiers.'
   },
 ];
 

@@ -134,6 +134,21 @@ export default function ContactSection() {
             </div>
             <p>Open to Software Engineering, Systems Engineering, and AI/ML Engineering opportunities. Response within 24 hours.</p>
           </div>
+
+          <div className={styles.metaDetails}>
+            <div className={styles.metaItem}>
+              <span className={styles.metaLabel}>Preferred Mode</span>
+              <span className={styles.metaValue}>Email / GitHub</span>
+            </div>
+            <div className={styles.metaItem}>
+              <span className={styles.metaLabel}>Response Time</span>
+              <span className={styles.metaValue}>Under 24 Hours</span>
+            </div>
+            <div className={styles.metaItem}>
+              <span className={styles.metaLabel}>Working Hours</span>
+              <span className={styles.metaValue}>Mon – Fri (GMT+5)</span>
+            </div>
+          </div>
         </motion.div>
 
         {/* Form */}
@@ -224,6 +239,7 @@ export default function ContactSection() {
                   id="contact-message"
                   name="message"
                   rows={5}
+                  maxLength={500}
                   placeholder="Tell me about your project, role, or just say hi..."
                   value={form.message}
                   onChange={handleChange}
@@ -237,7 +253,7 @@ export default function ContactSection() {
                   </span>
                 )}
                 <span className={styles.charCount}>
-                  {form.message.length} chars
+                  {form.message.length} / 500 chars
                 </span>
               </div>
 

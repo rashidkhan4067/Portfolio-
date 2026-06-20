@@ -1,59 +1,169 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 
 <head>
   <meta charset="UTF-8" />
+  <!-- ── Favicon & Icons ── -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="index, follow" />
-  <meta name="theme-color" content="#1A73E8" media="(prefers-color-scheme: light)" />
-  <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" type="image/svg+xml" sizes="32x32"  href="/favicon.svg" />
+  <link rel="icon" type="image/svg+xml" sizes="16x16"  href="/favicon.svg" />
+  <link rel="apple-touch-icon"             href="/icon-192.svg" />
+  <link rel="apple-touch-icon" sizes="192x192" href="/icon-192.svg" />
+  <link rel="apple-touch-icon" sizes="512x512" href="/icon-512.svg" />
+  <!-- ── PWA ── -->
+  <link rel="manifest" href="/manifest.json" />
 
-  <!-- Primary Meta -->
-  <title>Muhammad Rashid Shafique — Systems Engineer & Full-Stack Developer</title>
-  <meta name="description" content="Portfolio of Muhammad Rashid Shafique — Systems Engineer & Full-Stack Developer. Specializing in Python backends (Django, FastAPI), React UIs, PySpark big data, and distributed systems." />
-  <meta name="keywords" content="Muhammad Rashid Shafique, Systems Engineer, Software Engineer, Python, React, Django, FastAPI, PySpark, Tkinter, Supabase, Node.js, Machine Learning" />
+  <!-- ── Viewport & Indexing ── -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large" />
+
+  <!-- ── Theme / PWA Chrome ── -->
+  <meta name="theme-color" content="#1A73E8" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0d0d0f" media="(prefers-color-scheme: dark)" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Rashid.dev" />
+  <meta name="msapplication-TileColor" content="#1A73E8" />
+  <meta name="msapplication-TileImage" content="/icon-192.svg" />
+  <meta name="application-name" content="Rashid.dev" />
+
+  <!-- ── Primary SEO ── -->
+  <title>Muhammad Rashid Shafique | Systems Engineer & Full-Stack Developer | Pakistan</title>
+  <meta name="description" content="Muhammad Rashid Shafique — Systems Engineer & Full-Stack Developer from Faisalabad, Pakistan. Expert in Python (Django, FastAPI), React, PySpark big-data pipelines, and distributed backend systems. BS Computer Science, UAF. Available for full-time & freelance roles." />
+  <meta name="keywords" content="Muhammad Rashid Shafique, Rashid Shafique portfolio, Systems Engineer Pakistan, Full Stack Developer Faisalabad, Python developer Pakistan, React developer, Django developer, FastAPI developer, PySpark engineer, backend developer Pakistan, software engineer UAF, hire software engineer Pakistan, rashidkhan4067" />
   <meta name="author" content="Muhammad Rashid Shafique" />
+  <meta name="copyright" content="Muhammad Rashid Shafique" />
+  <meta name="language" content="English" />
+  <meta name="revisit-after" content="7 days" />
+  <meta name="category" content="technology, portfolio, software engineering" />
   <link rel="canonical" href="https://rashidkhan4067.github.io/" />
 
-  <!-- Open Graph / Social -->
-  <meta property="og:site_name" content="Muhammad Rashid Shafique Portfolio" />
-  <meta property="og:type" content="website" />
+  <!-- ── Open Graph (Facebook, LinkedIn, WhatsApp) ── -->
+  <meta property="og:site_name" content="Muhammad Rashid Shafique — Portfolio" />
+  <meta property="og:type" content="profile" />
   <meta property="og:url" content="https://rashidkhan4067.github.io/" />
-  <meta property="og:title" content="Muhammad Rashid Shafique — Systems Engineer & Full-Stack Developer" />
-  <meta property="og:description" content="Systems Engineer & Full-Stack Developer. Building performant backend APIs, PySpark data pipelines, desktop GUIs, and responsive React web products." />
+  <meta property="og:title" content="Muhammad Rashid Shafique | Systems Engineer & Full-Stack Developer" />
+  <meta property="og:description" content="Systems Engineer & Full-Stack Developer from Pakistan. Python · Django · FastAPI · React · PySpark. Building scalable APIs, data pipelines, and modern web apps. Available for opportunities." />
+  <meta property="og:image" content="https://rashidkhan4067.github.io/og-preview.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Muhammad Rashid Shafique — Systems Engineer & Full-Stack Developer Portfolio" />
   <meta property="og:locale" content="en_US" />
+  <meta property="profile:first_name" content="Muhammad Rashid" />
+  <meta property="profile:last_name" content="Shafique" />
+  <meta property="profile:username" content="rashidkhan4067" />
 
-  <!-- Twitter Card -->
+  <!-- ── Twitter / X Card ── -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@rashidkhan4067" />
   <meta name="twitter:creator" content="@rashidkhan4067" />
-  <meta name="twitter:title" content="Muhammad Rashid Shafique — Systems Engineer & Full-Stack Developer" />
-  <meta name="twitter:description" content="Systems Engineer specializing in Python, React, PySpark, and distributed backend systems. Available for opportunities." />
+  <meta name="twitter:title" content="Muhammad Rashid Shafique | Systems Engineer & Full-Stack Developer" />
+  <meta name="twitter:description" content="Systems Engineer & Full-Stack Developer from Pakistan. Python · Django · FastAPI · React · PySpark. Available for full-time & freelance roles." />
+  <meta name="twitter:image" content="https://rashidkhan4067.github.io/og-preview.png" />
+  <meta name="twitter:image:alt" content="Muhammad Rashid Shafique Portfolio Preview" />
 
-  <!-- Structured Data (Schema.org Person) -->
+  <!-- ── Geo Targeting ── -->
+  <meta name="geo.region" content="PK-PB" />
+  <meta name="geo.placename" content="Faisalabad, Punjab, Pakistan" />
+  <meta name="geo.position" content="31.4504;73.1350" />
+  <meta name="ICBM" content="31.4504, 73.1350" />
+
+  <!-- ── Structured Data: Person + WebSite + BreadcrumbList ── -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Muhammad Rashid Shafique",
-    "url": "https://rashidkhan4067.github.io/",
-    "jobTitle": "Systems Engineer & Full-Stack Developer",
-    "alumniOf": {
-      "@type": "CollegeOrUniversity",
-      "name": "University of Agriculture Faisalabad"
-    },
-    "knowsAbout": ["Python", "React", "Django", "FastAPI", "PySpark", "Node.js", "TensorFlow", "C++"],
-    "sameAs": [
-      "https://github.com/rashidkhan4067",
-      "https://www.linkedin.com/in/rashid-shafique09"
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://rashidkhan4067.github.io/#person",
+        "name": "Muhammad Rashid Shafique",
+        "givenName": "Muhammad Rashid",
+        "familyName": "Shafique",
+        "url": "https://rashidkhan4067.github.io/",
+        "image": "https://avatars.githubusercontent.com/rashidkhan4067",
+        "jobTitle": "Systems Engineer & Full-Stack Developer",
+        "description": "Backend-focused Systems Engineer specialising in Python (Django, FastAPI), React, PySpark big data pipelines, and distributed low-latency systems. Currently pursuing BS Computer Science at the University of Agriculture Faisalabad.",
+        "email": "rashidshafique.dev@gmail.com",
+        "telephone": "+92-319-8696623",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Faisalabad",
+          "addressRegion": "Punjab",
+          "addressCountry": "PK"
+        },
+        "alumniOf": {
+          "@type": "CollegeOrUniversity",
+          "name": "University of Agriculture Faisalabad",
+          "url": "https://uaf.edu.pk"
+        },
+        "knowsAbout": [
+          "Python", "Django", "FastAPI", "React", "Node.js",
+          "PySpark", "Apache Spark", "TensorFlow", "C++",
+          "SQL", "PostgreSQL", "Supabase", "Firebase",
+          "Machine Learning", "Backend Development",
+          "Full-Stack Web Development", "Distributed Systems",
+          "Big Data Engineering", "REST APIs"
+        ],
+        "hasOccupation": {
+          "@type": "Occupation",
+          "name": "Systems Engineer",
+          "occupationLocation": {
+            "@type": "Country",
+            "name": "Pakistan"
+          },
+          "skills": "Python, Django, FastAPI, React, PySpark, Node.js, TensorFlow, SQL"
+        },
+        "sameAs": [
+          "https://github.com/rashidkhan4067",
+          "https://www.linkedin.com/in/rashid-shafique09"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://rashidkhan4067.github.io/#website",
+        "url": "https://rashidkhan4067.github.io/",
+        "name": "Muhammad Rashid Shafique — Portfolio",
+        "description": "Portfolio of Muhammad Rashid Shafique — Systems Engineer & Full-Stack Developer from Pakistan.",
+        "publisher": {
+          "@id": "https://rashidkhan4067.github.io/#person"
+        },
+        "inLanguage": "en-US",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://rashidkhan4067.github.io/projects?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://rashidkhan4067.github.io/#webpage",
+        "url": "https://rashidkhan4067.github.io/",
+        "name": "Muhammad Rashid Shafique | Systems Engineer & Full-Stack Developer | Pakistan",
+        "isPartOf": { "@id": "https://rashidkhan4067.github.io/#website" },
+        "about": { "@id": "https://rashidkhan4067.github.io/#person" },
+        "description": "Official portfolio of Muhammad Rashid Shafique — Systems Engineer & Full-Stack Developer from Faisalabad, Pakistan.",
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://rashidkhan4067.github.io/" }
+          ]
+        }
+      }
     ]
   }
   </script>
 
-  <!-- Google Fonts -->
+  <!-- ── Performance: Preconnect to external origins ── -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://api.github.com" />
+  <link rel="dns-prefetch" href="https://avatars.githubusercontent.com" />
+
+  <!-- ── Google Fonts ── -->
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap"
     rel="stylesheet" />

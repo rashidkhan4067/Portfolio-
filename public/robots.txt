@@ -1,4 +1,23 @@
+# robots.txt — Muhammad Rashid Shafique Portfolio
+# https://rashidkhan4067.github.io/
+
 User-agent: *
 Allow: /
 
+# Block dev/build artifacts from crawlers
+Disallow: /dist/
+Disallow: /.vite/
+Disallow: /node_modules/
+
+# Block common bot crawlers that add no value
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+User-agent: MJ12bot
+Disallow: /
+
+# Sitemap location
 Sitemap: https://rashidkhan4067.github.io/sitemap.xml

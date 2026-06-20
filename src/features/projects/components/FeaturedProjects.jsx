@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { 
   ExternalLink, 
   Brain, 
@@ -8,12 +8,24 @@ import {
   Code2, 
   Folder,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 import { GithubIcon as Github } from '../../../components/SocialIcons';
 import { projects } from '../../../constants/portfolioData';
 import styles from '../styles.module.css';
 import SectionHeading from '../../../components/SectionHeading';
+import { useNavigate, Link } from 'react-router-dom';
+
+const getProjectSlug = (project) => {
+  if (project.repoName) return project.repoName.toLowerCase();
+  if (project.githubUrl) {
+    const parts = project.githubUrl.split('/');
+    return parts[parts.length - 1].toLowerCase();
+  }
+  return project.title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+};
 
 // Map project categories to cohesive M3 monochromatic icons
 const categoryIconMap = {
@@ -64,7 +76,17 @@ const CACHE_TIME_KEY = 'github_repos_cache_time_v6';
 const ONE_HOUR = 60 * 60 * 1000;
 
 export default function FeaturedProjects() {
+  const navigate = useNavigate();
+  
+  const handleCardClick = (e, project) => {
+    if (e.target.closest('a') || e.target.closest('button')) {
+      return;
+    }
+    navigate(`/projects#${getProjectSlug(project)}`);
+  };
+
   const [showAll, setShowAll] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
   const [projectList, setProjectList] = useState(() => {
     try {
       const cachedData = sessionStorage.getItem(CACHE_KEY);
@@ -89,6 +111,7 @@ export default function FeaturedProjects() {
     }
     return true;
   });
+  const scrollContainerRef = useRef(null);
 
   useEffect(() => {
     async function fetchGithubRepos() {
@@ -194,6 +217,50 @@ export default function FeaturedProjects() {
   // By default, show the top 3 highly featured projects. Expand to show all.
   const displayedProjects = showAll ? projectList : projectList.slice(0, 3);
 
+  // Set active slide index using Intersection Observer
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container || loading) return;
+
+    const handleObserver = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const cards = Array.from(container.children);
+          const index = cards.indexOf(entry.target);
+          if (index !== -1) {
+            setActiveIndex(index);
+          }
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(handleObserver, {
+      root: container,
+      threshold: 0.6,
+    });
+
+    const cards = Array.from(container.children);
+    cards.forEach((card) => observer.observe(card));
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [displayedProjects, loading]);
+
+  const handleScroll = (direction) => {
+    if (scrollContainerRef.current) {
+      const container = scrollContainerRef.current;
+      const firstCard = container.firstElementChild;
+      if (firstCard) {
+        const scrollAmount = firstCard.getBoundingClientRect().width + 16;
+        container.scrollBy({
+          left: direction === 'left' ? -scrollAmount : scrollAmount,
+          behavior: 'smooth'
+        });
+      }
+    }
+  };
+
   const skeletonCards = Array.from({ length: 3 });
 
   return (
@@ -208,8 +275,11 @@ export default function FeaturedProjects() {
           centered={true}
         />
 
-        {/* Modern Grid Layout */}
-        <div className={styles.projectsGrid}>
+        {/* Modern Slider Component Grid with horizontal swipe and scroll Ref */}
+        <div 
+          className={styles.projectsGrid} 
+          ref={scrollContainerRef}
+        >
           {loading ? (
             skeletonCards.map((_, index) => (
               <article 
@@ -244,7 +314,8 @@ export default function FeaturedProjects() {
                 <article 
                   key={project.id} 
                   className={styles.projectCard}
-                  style={{ '--projects-accent': project.accentColor }}
+                  style={{ '--projects-accent': project.accentColor, cursor: 'pointer' }}
+                  onClick={(e) => handleCardClick(e, project)}
                 >
                   {project.imageUrl && (
                     <div className={styles.cardImageContainer}>
@@ -275,7 +346,7 @@ export default function FeaturedProjects() {
                         className={styles.iconLink}
                         aria-label={`${project.title} GitHub Source`}
                       >
-                        <Github size={20} aria-hidden="true" />
+                        <Github size={16} aria-hidden="true" />
                       </a>
                       <a 
                         href={project.liveUrl} 
@@ -284,7 +355,7 @@ export default function FeaturedProjects() {
                         className={styles.iconLink}
                         aria-label={`${project.title} Live Demo`}
                       >
-                        <ExternalLink size={20} aria-hidden="true" />
+                        <ExternalLink size={16} aria-hidden="true" />
                       </a>
                     </div>
                   </div>
@@ -292,14 +363,12 @@ export default function FeaturedProjects() {
                   {/* Card Title & Core Description */}
                   <div className={styles.cardBody}>
                     <h3 className={styles.projectTitle}>
-                      <a 
-                        href={project.githubUrl} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
+                      <Link 
+                        to={`/projects#${getProjectSlug(project)}`}
                         className={styles.projectTitleLink}
                       >
                         {project.title}
-                      </a>
+                      </Link>
                     </h3>
                     <p className={styles.projectDesc}>
                       {stripEmojis(project.description)}
@@ -329,7 +398,57 @@ export default function FeaturedProjects() {
           )}
         </div>
 
-        {/* Carousel pagination removed in favor of static grids */}
+        {/* ── ULTIMATE M3 CAROUSEL PAGINATION & CONTROLS (Ergonomic Footer Alignment) ── */}
+        <div className={styles.carouselPagination} role="group" aria-label="Project slider navigation">
+          
+          {/* Previous Button */}
+          <button 
+            onClick={() => handleScroll('left')} 
+            className={styles.paginationArrow}
+            disabled={activeIndex === 0}
+            aria-label="Scroll left to previous project"
+          >
+            <ChevronLeft size={18} aria-hidden="true" />
+          </button>
+          
+          {/* Interactive Slide Dots or Numeric Counter */}
+          {displayedProjects.length > 6 ? (
+            <div className={styles.paginationCounter} aria-live="polite">
+              {activeIndex + 1} / {displayedProjects.length}
+            </div>
+          ) : (
+            <div className={styles.paginationDots} aria-label="Slides active status">
+              {displayedProjects.map((_, index) => (
+                <button 
+                  key={index} 
+                  className={`${styles.paginationDot} ${activeIndex === index ? styles.activeDot : ''}`}
+                  onClick={() => {
+                    if (scrollContainerRef.current) {
+                      const container = scrollContainerRef.current;
+                      const firstCard = container.firstElementChild;
+                      if (firstCard) {
+                        const scrollAmount = (firstCard.getBoundingClientRect().width + 16) * index;
+                        container.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+                      }
+                    }
+                  }}
+                  aria-label={`Go to slide ${index + 1}`}
+                  aria-current={activeIndex === index ? 'true' : 'false'}
+                />
+              ))}
+            </div>
+          )}
+
+          {/* Next Button */}
+          <button 
+            onClick={() => handleScroll('right')} 
+            className={styles.paginationArrow}
+            disabled={activeIndex === displayedProjects.length - 1}
+            aria-label="Scroll right to next project"
+          >
+            <ChevronRight size={18} aria-hidden="true" />
+          </button>
+        </div>
 
         {/* Elegant Dynamic Explore Trigger */}
         <div className={styles.toggleWrapper}>

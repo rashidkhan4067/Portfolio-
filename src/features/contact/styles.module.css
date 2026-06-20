@@ -306,6 +306,36 @@ a.infoValue:hover {
   line-height: 1.5;
 }
 
+.metaDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-default);
+}
+
+:global([data-theme='dark']) .metaDetails {
+  border-top-color: #3C4043;
+}
+
+.metaItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+}
+
+.metaLabel {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.metaValue {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
 /* ── Responsive ── */
 @media (max-width: 1024px) {
   .contactGrid {
