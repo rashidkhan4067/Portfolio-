@@ -24,6 +24,7 @@ export default function PortfolioHero() {
                 loading="eager"
                 width="380"
                 height="475"
+                fetchpriority="high"
               />
             </div>
           </div>
