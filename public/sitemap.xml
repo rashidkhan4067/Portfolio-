@@ -7,7 +7,7 @@
 
   <!-- Home -->
   <url>
-    <loc>https://rashidkhan4067.github.io/</loc>
+    <loc>https://rashid-shafique-portfolio.vercel.app/</loc>
     <lastmod>2026-06-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -15,7 +15,7 @@
 
   <!-- About -->
   <url>
-    <loc>https://rashidkhan4067.github.io/about</loc>
+    <loc>https://rashid-shafique-portfolio.vercel.app/about</loc>
     <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -23,7 +23,7 @@
 
   <!-- Projects -->
   <url>
-    <loc>https://rashidkhan4067.github.io/projects</loc>
+    <loc>https://rashid-shafique-portfolio.vercel.app/projects</loc>
     <lastmod>2026-06-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
@@ -31,7 +31,7 @@
 
   <!-- Skills -->
   <url>
-    <loc>https://rashidkhan4067.github.io/skills</loc>
+    <loc>https://rashid-shafique-portfolio.vercel.app/skills</loc>
     <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -39,7 +39,7 @@
 
   <!-- Experience -->
   <url>
-    <loc>https://rashidkhan4067.github.io/experience</loc>
+    <loc>https://rashid-shafique-portfolio.vercel.app/experience</loc>
     <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
@@ -47,7 +47,7 @@
 
   <!-- Contact -->
   <url>
-    <loc>https://rashidkhan4067.github.io/contact</loc>
+    <loc>https://rashid-shafique-portfolio.vercel.app/contact</loc>
     <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>

@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { DetailedProjects } from '../features/projects';
 
-const BASE_URL = 'https://rashidkhan4067.github.io';
+const BASE_URL = 'https://rashid-shafique-portfolio.vercel.app';
 
 const projectsSchema = {
   '@context': 'https://schema.org',

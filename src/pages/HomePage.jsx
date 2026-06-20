@@ -5,7 +5,7 @@ import ProjectsSection from '../features/projects';
 import BuildLogsTeaser from '../features/build-logs/components/BuildLogsTeaser';
 import TestimonialsSection from '../features/testimonials';
 
-const BASE_URL = 'https://rashidkhan4067.github.io';
+const BASE_URL = 'https://rashid-shafique-portfolio.vercel.app';
 
 export default function HomePage() {
   return (
