@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react';
-import { 
-  ExternalLink, 
-  Brain, 
-  Layers, 
-  Globe, 
-  Terminal, 
-  Code2, 
-  Folder,
+import {
+  Brain,
+  Layers,
+  Globe,
+  Terminal,
+  Code2,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
+  ExternalLink
 } from 'lucide-react';
 import { GithubIcon as Github } from '../../../components/SocialIcons';
 import { projects } from '../../../constants/portfolioData';
@@ -22,14 +21,6 @@ const getProjectSlug = (project) => {
     return parts[parts.length - 1].toLowerCase();
   }
   return project.title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-};
-
-// Map project categories to cohesive M3 monochromatic icons
-const categoryIconMap = {
-  'AI / ML': Brain,
-  'Full-Stack': Layers,
-  'Open Source': Globe,
-  'Backend': Terminal
 };
 
 const stripEmojis = (text) => {
@@ -68,14 +59,14 @@ const formatProjectTitle = (name) => {
     .trim();
 };
 
-const CACHE_KEY = 'github_repos_cache_v6';
-const CACHE_TIME_KEY = 'github_repos_cache_time_v6';
+const CACHE_KEY = 'github_repos_cache_v8';
+const CACHE_TIME_KEY = 'github_repos_cache_time_v8';
 const ONE_HOUR = 60 * 60 * 1000;
 
 function ProjectVisualPlaceholder({ project }) {
   const isML = project.category === 'AI / ML';
   const isBackend = project.category === 'Backend';
-  
+
   return (
     <div className={styles.placeholderContainer}>
       <svg className={styles.placeholderSvg} viewBox="0 0 400 180" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -85,58 +76,58 @@ function ProjectVisualPlaceholder({ project }) {
           </pattern>
         </defs>
         <rect width="100%" height="100%" fill="url(#grid)" rx="6" />
-        
+
         {isML && (
           <>
             <rect x="30" y="65" width="90" height="50" rx="6" fill="var(--bg-tertiary)" stroke="var(--projects-accent)" strokeWidth="1.5" />
             <text x="75" y="95" fill="var(--text-secondary)" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">Data Ingest</text>
-            
+
             <path d="M 120 90 L 150 90" stroke="var(--projects-accent)" strokeWidth="1.5" markerEnd="url(#arrow)" />
-            
+
             <rect x="155" y="65" width="90" height="50" rx="6" fill="var(--bg-tertiary)" stroke="var(--projects-accent)" strokeWidth="1.5" />
             <text x="200" y="95" fill="var(--text-secondary)" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">ML Predictor</text>
-            
+
             <path d="M 245 90 L 275 90" stroke="var(--projects-accent)" strokeWidth="1.5" markerEnd="url(#arrow)" />
-            
+
             <rect x="280" y="65" width="90" height="50" rx="6" fill="var(--bg-tertiary)" stroke="var(--projects-accent)" strokeWidth="1.5" />
             <text x="325" y="95" fill="var(--text-secondary)" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">Plotly UI</text>
           </>
         )}
-        
+
         {isBackend && (
           <>
             <rect x="30" y="65" width="90" height="50" rx="6" fill="var(--bg-tertiary)" stroke="var(--projects-accent)" strokeWidth="1.5" />
             <text x="75" y="95" fill="var(--text-secondary)" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">Client API</text>
-            
+
             <path d="M 120 90 L 150 90" stroke="var(--projects-accent)" strokeWidth="1.5" markerEnd="url(#arrow)" />
-            
+
             <rect x="155" y="65" width="90" height="50" rx="6" fill="var(--bg-tertiary)" stroke="var(--projects-accent)" strokeWidth="1.5" />
             <text x="200" y="95" fill="var(--text-secondary)" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">Auth Token</text>
-            
+
             <path d="M 245 90 L 275 90" stroke="var(--projects-accent)" strokeWidth="1.5" markerEnd="url(#arrow)" />
-            
+
             <rect x="280" y="65" width="90" height="50" rx="6" fill="var(--bg-tertiary)" stroke="var(--projects-accent)" strokeWidth="1.5" />
             <text x="325" y="95" fill="var(--text-secondary)" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">Postgres DB</text>
           </>
         )}
-        
+
         {!isML && !isBackend && (
           <>
             <rect x="30" y="65" width="90" height="50" rx="6" fill="var(--bg-tertiary)" stroke="var(--projects-accent)" strokeWidth="1.5" />
             <text x="75" y="95" fill="var(--text-secondary)" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">React SPA</text>
-            
+
             <path d="M 120 90 L 150 90" stroke="var(--projects-accent)" strokeWidth="1.5" markerEnd="url(#arrow)" />
-            
+
             <rect x="155" y="65" width="90" height="50" rx="6" fill="var(--bg-tertiary)" stroke="var(--projects-accent)" strokeWidth="1.5" />
             <text x="200" y="95" fill="var(--text-secondary)" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">Node Server</text>
-            
+
             <path d="M 245 90 L 275 90" stroke="var(--projects-accent)" strokeWidth="1.5" markerEnd="url(#arrow)" />
-            
+
             <rect x="280" y="65" width="90" height="50" rx="6" fill="var(--bg-tertiary)" stroke="var(--projects-accent)" strokeWidth="1.5" />
             <text x="325" y="95" fill="var(--text-secondary)" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">Store Data</text>
           </>
         )}
-        
+
         <defs>
           <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
             <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--projects-accent)" />
@@ -190,16 +181,16 @@ export default function DetailedProjects() {
         const response = await fetch('https://api.github.com/users/rashidkhan4067/repos?sort=updated&per_page=30');
         if (!response.ok) throw new Error('API fetch failed');
         const repos = await response.json();
-        
+
         const mappedProjects = repos
           .filter(repo => !repo.fork && repo.name.toLowerCase() !== 'rashidkhan4067' && repo.name.toLowerCase() !== 'portfolio-')
           .map((repo, index) => {
             let category = 'Open Source';
             let accentColor = '#7C3AED';
-            
+
             const desc = (repo.description || '').toLowerCase();
             const topics = repo.topics || [];
-            
+
             if (topics.includes('machine-learning') || topics.includes('ai') || desc.includes('face') || desc.includes('opencv') || desc.includes('pyspark') || desc.includes('predictive') || desc.includes('ml')) {
               category = 'AI / ML';
               accentColor = '#1A73E8';
@@ -236,8 +227,8 @@ export default function DetailedProjects() {
 
         if (mappedProjects.length > 0) {
           const mergedProjects = mappedProjects.map(apiProj => {
-            const matchedStatic = projects.find(p => 
-              p.title.toLowerCase() === apiProj.repoName.toLowerCase() || 
+            const matchedStatic = projects.find(p =>
+              p.title.toLowerCase() === apiProj.repoName.toLowerCase() ||
               (p.githubUrl && p.githubUrl.toLowerCase().includes(apiProj.repoName.toLowerCase()))
             );
             if (matchedStatic) {
@@ -268,7 +259,7 @@ export default function DetailedProjects() {
     }
     fetchGithubRepos();
   }, []);
-  
+
   useEffect(() => {
     if (!loading && window.location.hash) {
       const targetId = window.location.hash.substring(1);
@@ -295,19 +286,19 @@ export default function DetailedProjects() {
   return (
     <section className={styles.section} id="featured-projects">
       <div className="container">
-        
+
         <SectionHeading
-          eyebrow="Technical Portfolio"
-          title="Featured Projects"
-          subtitle="A structured repository of systems, custom automations, and predictive algorithms."
+          eyebrow="Technical Archive"
+          title="Project Showcase"
+          subtitle="A detailed archive of systems engineering, full-stack applications, and technical case studies."
           centered={true}
         />
 
         <div className={styles.projectsGrid}>
           {loading ? (
             skeletonCards.map((_, index) => (
-              <article 
-                key={`project-skeleton-${index}`} 
+              <article
+                key={`project-skeleton-${index}`}
                 className={`${styles.projectCard} ${styles.skeletonCard}`}
                 style={{ pointerEvents: 'none' }}
               >
@@ -330,31 +321,39 @@ export default function DetailedProjects() {
               const hasImage = !!project.imageUrl;
               const taglineText = project.tagline || stripEmojis(project.description);
               const statusText = project.status || 'Completed';
-              const problemRoleText = project.problemRole || 'A highly performant open-source software repository engineered and deployed with standard software developer operations.';
+              const problemStatementText = project.problemStatement || 'TODO: 1-2 sentences on the actual problem this solves';
               const challengesList = project.challenges || [
-                'Configured clean directory architectures and modular source file structures.',
-                'Maintained robust version histories and standard git tags.'
+                'TODO: Technical challenge 1 and decision made',
+                'TODO: Technical challenge 2 and decision made'
               ];
               const outcomeText = project.outcome || 'Fully open-source code repository published on GitHub.';
-              
+
               return (
-                <article 
-                  key={project.id} 
+                <article
+                  key={project.id}
                   id={getProjectSlug(project)}
                   className={styles.projectCard}
-                  style={{ '--projects-accent': project.accentColor }}
+                  style={{ '--projects-accent': project.accentColor || '#1A73E8' }}
                 >
                   <div className={styles.visualSide}>
-                    {hasImage ? (
-                      <img 
-                        src={project.imageUrl} 
-                        alt={`${project.title} Preview`} 
-                        className={styles.cardImage} 
-                        loading="lazy"
-                      />
-                    ) : (
-                      <ProjectVisualPlaceholder project={project} />
-                    )}
+                    {/* Browser Chrome Header */}
+                    <div className={styles.browserHeader}>
+                      <span className={styles.browserDot} />
+                      <span className={styles.browserDot} />
+                      <span className={styles.browserDot} />
+                    </div>
+                    <div className={styles.browserBody}>
+                      {hasImage ? (
+                        <img
+                          src={project.imageUrl}
+                          alt={`${project.title} Preview`}
+                          className={styles.cardImage}
+                          loading="lazy"
+                        />
+                      ) : (
+                        <ProjectVisualPlaceholder project={project} />
+                      )}
+                    </div>
                   </div>
 
                   <div className={styles.textSide}>
@@ -363,9 +362,9 @@ export default function DetailedProjects() {
                         <h3 className={styles.projectTitle}>{project.title}</h3>
                         <span className={styles.categoryBadge}>{project.category}</span>
                         <span className={styles.statusBadge}>
-                          <span 
-                            className={styles.statusDot} 
-                            style={{ backgroundColor: statusText === 'In Development' ? '#FBBC05' : '#34A853' }} 
+                          <span
+                            className={styles.statusDot}
+                            style={{ backgroundColor: statusText === 'In Development' ? '#FBBC05' : '#34A853' }}
                           />
                           {statusText}
                         </span>
@@ -376,7 +375,7 @@ export default function DetailedProjects() {
 
                     <div className={styles.subSection}>
                       <span className={styles.subSectionTitle}>Problem & Role</span>
-                      <p className={styles.problemRole}>{problemRoleText}</p>
+                      <p className={styles.problemRole}>{problemStatementText}</p>
                     </div>
 
                     <div className={styles.subSection}>
@@ -408,22 +407,23 @@ export default function DetailedProjects() {
                     </div>
 
                     <div className={styles.actionsRow}>
-                      <a 
-                        href={project.liveUrl} 
-                        target="_blank" 
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
                         rel="noopener noreferrer"
                         className={styles.primaryAction}
                       >
-                        View Live
+                        <ExternalLink size={14} aria-hidden="true" />
+                        <span>Live Demo</span>
                       </a>
-                      <a 
-                        href={project.githubUrl} 
-                        target="_blank" 
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
                         rel="noopener noreferrer"
                         className={styles.secondaryAction}
                       >
                         <Github size={14} aria-hidden="true" />
-                        View Code
+                        <span>GitHub</span>
                       </a>
                     </div>
                   </div>
@@ -434,7 +434,7 @@ export default function DetailedProjects() {
         </div>
 
         <div className={styles.toggleWrapper}>
-          <button 
+          <button
             className={styles.exploreToggle}
             onClick={() => setShowAll(!showAll)}
             aria-expanded={showAll}

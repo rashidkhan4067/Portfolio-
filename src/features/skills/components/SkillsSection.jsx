@@ -87,7 +87,7 @@ const skillCategories = [
   }
 ];
 
-export default function SkillsSection() {
+export default function SkillsSection({ headingLevel = 2 }) {
   const [activeTab, setActiveTab] = useState("all");
 
   // Filter skills array based on active Tab ID
@@ -105,6 +105,7 @@ export default function SkillsSection() {
           title="Skills & Technologies"
           subtitle="A cohesive engineering toolkit built to design, deploy, and scale robust applications across the modern tech landscape."
           centered={true}
+          level={headingLevel}
         />
 
         {/* ── HIGH-END MATERIAL 3 HORIZONTAL FILTER CHIPS ── */}

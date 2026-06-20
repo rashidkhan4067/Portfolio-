@@ -19,15 +19,15 @@
 
 /* Detailed Project Card */
 .projectCard {
-  background-color: var(--bg-tertiary);
+  background-color: var(--bg-card);
   border: 1px solid var(--border-default);
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   padding: 1.75rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--shadow-sm);
   display: grid;
   grid-template-columns: 420px 1fr;
   gap: 2rem;
-  align-items: start;
+  align-items: stretch;
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
   animation: fadeInUp 400ms cubic-bezier(0.4, 0, 0.2, 1) both;
 }
@@ -35,12 +35,12 @@
 :global([data-theme='dark']) .projectCard {
   background-color: var(--bg-card);
   border-color: var(--border-default);
-  box-shadow: none;
+  box-shadow: var(--shadow-sm);
 }
 
 .projectCard:hover {
-  border-color: var(--border-strong);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  border-color: var(--accent-brand);
+  box-shadow: var(--shadow-md);
 }
 
 @keyframes fadeInUp {
@@ -62,14 +62,49 @@
   border: 1px solid var(--border-default);
   background-color: var(--bg-secondary);
   overflow: hidden;
-  aspect-ratio: 16/10;
+  height: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
 }
 
 :global([data-theme='dark']) .visualSide {
   border-color: var(--border-default);
+}
+
+/* Browser Chrome Frame */
+.browserHeader {
+  height: 24px;
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 12px;
+  flex-shrink: 0;
+}
+
+:global([data-theme='dark']) .browserHeader {
+  background-color: #171719;
+}
+
+.browserDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--border-strong);
+  display: inline-block;
+}
+
+.browserBody {
+  flex-grow: 1;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100% - 24px);
 }
 
 .cardImage {
@@ -148,14 +183,14 @@
 }
 
 .categoryBadge {
-  font-size: 0.6875rem;
+  font-size: 0.725rem;
   font-weight: 600;
-  text-transform: uppercase;
-  color: var(--accent-brand);
-  background-color: var(--bg-secondary);
-  border: 1px solid var(--border-default);
-  padding: 0.15rem 0.5rem;
-  border-radius: 4px;
+  color: var(--projects-accent, var(--accent-brand));
+  background-color: color-mix(in srgb, var(--projects-accent, var(--accent-brand)) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--projects-accent, var(--accent-brand)) 15%, transparent);
+  padding: 0.25rem 0.625rem;
+  border-radius: 6px;
+  display: inline-block;
 }
 
 .statusBadge {
@@ -220,13 +255,14 @@
   align-items: center;
   gap: 0.25rem;
   background-color: var(--bg-secondary);
-  border: 1px solid var(--border-default);
-  border-radius: 6px;
-  padding: 0.2rem 0.5rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  padding: 0.2rem 0.625rem;
 }
 
 :global([data-theme='dark']) .techItem {
-  background-color: #171719;
+  background-color: var(--bg-tertiary);
+  border-color: var(--border-subtle);
 }
 
 .techName {
@@ -294,23 +330,21 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.5rem 1.25rem;
+  padding: 0.625rem 1.5rem;
   background-color: var(--accent-brand);
-  color: #FFF !important;
-  font-size: 0.85rem;
+  color: var(--text-inverse) !important;
+  border: 1px solid var(--accent-brand);
+  border-radius: 8px;
+  font-size: 0.8125rem;
   font-weight: 600;
-  border-radius: 6px;
   text-decoration: none;
   min-height: 38px;
-  transition: opacity var(--transition-fast);
-}
-
-:global([data-theme='dark']) .primaryAction {
-  color: #0d0d0f !important;
+  transition: all var(--transition-fast);
 }
 
 .primaryAction:hover {
-  opacity: 0.9;
+  background-color: transparent;
+  color: var(--accent-brand) !important;
 }
 
 .secondaryAction {
@@ -318,19 +352,29 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.5rem 1.25rem;
-  background-color: transparent;
+  padding: 0.625rem 1.5rem;
+  background-color: var(--bg-secondary);
   color: var(--text-primary);
-  font-size: 0.85rem;
-  font-weight: 600;
   border: 1px solid var(--border-default);
-  border-radius: 6px;
+  border-radius: 8px;
+  font-size: 0.8125rem;
+  font-weight: 600;
   text-decoration: none;
   min-height: 38px;
-  transition: background-color var(--transition-fast), border-color var(--transition-fast);
+  transition: all var(--transition-fast);
+}
+
+:global([data-theme='dark']) .secondaryAction {
+  background-color: var(--bg-tertiary);
+  border-color: var(--border-default);
 }
 
 .secondaryAction:hover {
+  background-color: var(--bg-tertiary);
+  border-color: var(--border-strong);
+}
+
+:global([data-theme='dark']) .secondaryAction:hover {
   background-color: var(--bg-secondary);
   border-color: var(--border-strong);
 }
@@ -371,26 +415,28 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.625rem 1.75rem;
-  border-radius: 8px;
+  padding: 0.75rem 2rem;
+  border-radius: var(--radius-md);
   background-color: var(--bg-tertiary);
   color: var(--text-secondary);
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 600;
   border: 1px solid var(--border-default);
   transition: all var(--transition-fast);
 }
 
+:global([data-theme='dark']) .exploreToggle {
+  background-color: var(--bg-secondary);
+}
+
 .exploreToggle:hover {
-  background-color: #E8F0FE;
-  color: #1A73E8;
-  border-color: #1A73E8;
+  background-color: var(--bg-secondary);
+  color: var(--accent-brand);
+  border-color: var(--accent-brand);
 }
 
 :global([data-theme='dark']) .exploreToggle:hover {
-  background-color: rgba(26, 115, 232, 0.15);
-  color: #8AB4F8;
-  border-color: #8AB4F8;
+  background-color: var(--bg-tertiary);
 }
 
 .exploreToggle:active {
@@ -416,6 +462,7 @@
 
   .visualSide {
     aspect-ratio: 16/9;
+    height: auto;
   }
 }
 
