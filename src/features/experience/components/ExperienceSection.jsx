@@ -5,12 +5,10 @@ import SectionWrapper, { itemVariants } from '../../../components/SectionWrapper
 import SectionHeading from '../../../components/SectionHeading';
 import styles from '../styles.module.css';
 
-function ExperienceCard({ job, index }) {
-  const isEven = index % 2 === 0;
-
+function ExperienceCard({ job }) {
   return (
     <motion.div
-      className={`${styles.expCard} ${isEven ? styles.expLeft : styles.expRight}`}
+      className={styles.expCard}
       variants={itemVariants}
     >
       {/* Timeline node */}
@@ -78,8 +76,8 @@ export default function ExperienceSection() {
       />
       <div className={styles.timeline}>
         <div className={styles.timelineAxis} />
-        {experience.map((job, i) => (
-          <ExperienceCard key={job.id} job={job} index={i} />
+        {experience.map((job) => (
+          <ExperienceCard key={job.id} job={job} />
         ))}
       </div>
     </SectionWrapper>
