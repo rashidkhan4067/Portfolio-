@@ -9,7 +9,9 @@ import algovizImg from '../assets/algoviz.webp';
 import faceAttendanceImg from '../assets/face_attendance.webp';
 import taleemproImg from '../assets/taleempro.webp';
 import venturetwistImg from '../assets/venturetwist.png';
-import rescueProjectImg from '../assets/rescue_project.webp';
+import rescueDashboardImg from '../assets/rescue_dashboard.png';
+import rescueLandingImg from '../assets/rescue_landing.png';
+import rescueMapImg from '../assets/rescue_map.png';
 import foodyAppImg from '../assets/foody_app.webp';
 import aiHmsImg from '../assets/ai_hms.webp';
 
@@ -55,7 +57,7 @@ export const projects = [
     techStack: ['React', 'Django REST Framework', 'PostgreSQL', 'JWT', 'LLMs', 'Tailwind CSS'],
     category: 'AI / ML',
     featured: true,
-    liveUrl: 'https://ai-hms-drab.vercel.app',
+    liveUrl: 'https://al-shifaa-hms.vercel.app/',
     githubUrl: 'https://github.com/rashidkhan4067/AI-HMS',
     accentColor: '#10B981', // Google/Material green/emerald
     imageUrl: aiHmsImg,
@@ -202,6 +204,98 @@ export const projects = [
   },
   {
     id: 2,
+    title: 'Rescue Project',
+    description: 'Designed an AI-driven, decoupled search-and-rescue command console featuring difference hashing (dHash) facial matching, geofenced ground volunteer mobilization sweeps, and voice memo transcription (Groq Whisper) to accelerate missing person reports and operations.',
+    techStack: ['React', 'Vite', 'Flask', 'SQLAlchemy', 'Groq (Whisper / Llama 3)', 'Zustand', 'Pillow', 'SMTP'],
+    category: 'Full-Stack',
+    featured: true,
+    liveUrl: 'https://github.com/rashidkhan4067/Rescue_Project-',
+    githubUrl: 'https://github.com/rashidkhan4067/Rescue_Project-',
+    accentColor: '#EA4335', // Google Red
+    imageUrl: rescueDashboardImg,
+    screenshots: [
+      { label: 'Dashboard', url: rescueDashboardImg },
+      { label: 'Tactical Map', url: rescueMapImg },
+      { label: 'Landing Page', url: rescueLandingImg }
+    ],
+    tagline: 'AI-powered missing persons command registry and volunteer coordination platform.',
+    status: 'In Progress',
+    problemStatement: 'Traditional search-and-rescue operations are hindered by scattered case logs, slow dispatch workflows, and lack of automated photo assessment. Designed a unified full-stack system that employs local difference hashing for instant face matching and automated geofenced SMTP alerts for volunteer search teams.',
+    challenges: [
+      'Integrating heterogeneous LLM API pipelines (Llama 3 and Google Gemini) with fallback logic and strict JSON schema generation. Constructed a clean service wrapper with retry policies and regex cleaners to prevent template leaks.',
+      'Performing low-cost, server-side face similarity matching on SQLite database records. Formulated a difference hashing (dHash) workflow using Pillow image processing to compute 64-bit signatures and compare them using Hamming Distance calculations.'
+    ],
+    outcome: 'Completed Milestone 2, delivering secure authentication (Google OAuth & Magic Links), active case registrations with structured physical descriptors, geofenced SMTP mobilization broadcasts, and simulated weather/flight dispatch telemetry.',
+    milestones: [
+      {
+        title: 'Milestone 0: Design System & Layouts',
+        status: 'Completed',
+        details: [
+          'Scaffolded custom React layout, side drawer navigations, and global theme context supporting real-time Light/Dark mode.',
+          'Engineered Material Design 3 outlined input fields, responsive image drag-and-drop zones, and status badge allocations.'
+        ]
+      },
+      {
+        title: 'Milestone 1: Session Management & Authentication',
+        status: 'Completed',
+        details: [
+          'Integrated secure session management using Flask-Login and HTTP credentials with Axios interceptors.',
+          'Implemented credentials login, Google OAuth 2.0 single sign-on, and SMTP password-less magic link tokens.'
+        ]
+      },
+      {
+        title: 'Milestone 2: Case Registry & Mobilization Hub',
+        status: 'Completed',
+        details: [
+          'Engineered SQLAlchemy models for Users, Reports, and Volunteers with granular physical, location, and severity attributes.',
+          'Designed geofenced dispatch systems that automatically query active reports in a sector, identify standby responders, and send SMTP mobilization broadcasts.'
+        ]
+      },
+      {
+        title: 'Milestone 3: AI Telemetry & Diagnostics (Aegis-9)',
+        status: 'In Progress',
+        details: [
+          'Constructed Aegis-9 conversational coordinator utilizing Groq Cloud (Llama 3.3) with context injection of live database case/volunteer details.',
+          'Implemented voice-profiler transcribing audio reports using Groq Whisper, and Pillow-based image diagnostics evaluating contrast, brightness, and focus index.',
+          'Added dHash face matcher topological calculations and simulated weather corridors for drone flight approval.'
+        ]
+      },
+      {
+        title: 'Milestone 4: Interactive Maps & Staging',
+        status: 'Planned',
+        details: [
+          'Integrate interactive mapping controls to plot live GPS coordinates of missing subjects and active search teams.',
+          'Conduct comprehensive security audits and unit/integration testing.'
+        ]
+      }
+    ],
+    features: [
+      {
+        title: 'Aegis-9 AI Command Console (ai_assistant.py)',
+        details: [
+          'Conversational Analytics: Interrogates the SQLite database through natural language to analyze case grids and volunteer counts.',
+          'Programmatic Case Booking: Parses raw text details into structured parameters, booking database records automatically.',
+          'Voice Profiler: Integrates Groq Whisper to transcribe and extract physical profiles from voice memo uploads.'
+        ]
+      },
+      {
+        title: 'Topological Diagnostics Suite (diagnostics.py)',
+        details: [
+          'AI Face Matcher: Compares topological dHash signatures of uploaded search photos against registry logs with Hamming confidence scoring.',
+          'Fidelity Auditor: Validates image contrast, brightness, and sharpness metrics using Pillow standard deviations to prevent blur or under-exposure.'
+        ]
+      },
+      {
+        title: 'Ground Mobilization Hub (mobilization.py)',
+        details: [
+          'Geofenced Alerts: Matches local missing reports with volunteers, transitioning responder statuses to Active and broadcasting SMTP alert maps.',
+          'Radar Telemetry: Simulates geographic scattering offsets of search squads and active subject boundaries.'
+        ]
+      }
+    ]
+  },
+  {
+    id: 3,
     title: 'VentureTwist',
     description: 'Welcome to VentureTwist, a state-of-the-art, fully responsive, multi-page restaurant management and food ordering web application. Built with high-fidelity aesthetics, modern micro-interactions, and a clean client-side state architecture, VentureTwist bridges the gap between premium culinary presentation and transactional efficiency.',
     techStack: ['Vanilla JS', 'Bootstrap 5', 'Aesthetic-Zen', 'HTML5', 'CSS3'],
@@ -279,7 +373,7 @@ export const projects = [
     ]
   },
   {
-    id: 3,
+    id: 4,
     title: 'Sales-Data-Analysis-System',
     description: 'Optimized PySpark big data pipelines, reducing computational overhead by 38% while analyzing 10M+ transaction rows, and implemented predictive modeling using scikit-learn to forecast profits with 94.2% accuracy.',
     techStack: ['Python', 'Streamlit', 'PySpark', 'Scikit-Learn', 'Plotly', 'Pandas'],
@@ -299,7 +393,7 @@ export const projects = [
     outcome: 'Processes over 10M+ transaction rows under 1.5 seconds, delivering actionable profit forecasting.'
   },
   {
-    id: 4,
+    id: 5,
     title: 'AquaSync',
     description: 'Engineered an IoT real-time fluid telemetry dashboard, decreasing database write latency by 42% by compiling optimized C++ Arduino firmware and designing multi-threaded Python Sockets.',
     techStack: ['Python', 'Tkinter', 'C++', 'Arduino', 'IoT', 'Telemetry'],
@@ -319,7 +413,7 @@ export const projects = [
     outcome: 'Maintains 99.9% uptime across active device connections, processing 100k+ telemetry packets daily.'
   },
   {
-    id: 5,
+    id: 6,
     title: 'MediCare / Hospital Management',
     description: 'Developed a high-security patient management portal, reducing check-in bottlenecks by 35% by implementing transactional SQLite buffering and Node.js REST API schema validation.',
     techStack: ['Python', 'PySide6', 'SQLite', 'Node.js', 'Express', 'React'],
@@ -339,7 +433,7 @@ export const projects = [
     outcome: 'Used to streamline patient registration and check-in workflows for over 150 daily admissions.'
   },
   {
-    id: 6,
+    id: 7,
     title: 'Algoviz-pro',
     description: 'Built an algorithmic visualization engine demonstrating pathfinding and custom structures, improving canvas render speed by 50% through virtualized React tuning and D3.js transitions.',
     techStack: ['React', 'Vite', 'D3.js', 'Flask', 'Python', 'JavaScript'],
@@ -359,7 +453,7 @@ export const projects = [
     outcome: 'Provides fluid 60fps renders for complex graph visualisations containing up to 10k nodes.'
   },
   {
-    id: 7,
+    id: 8,
     title: 'Face-Recognition-Attendance-System',
     description: 'Designed an AI facial recognition attendance system, achieving a 98.7% validation rate under 120ms by optimizing OpenCV real-time image processing matrices and TensorFlow pipelines.',
     techStack: ['Python', 'OpenCV', 'TensorFlow', 'Keras', 'HTML5', 'CSS3'],
@@ -379,7 +473,7 @@ export const projects = [
     outcome: 'Automates secure real-time student check-ins under 120ms with near-zero false positive errors.'
   },
   {
-    id: 8,
+    id: 9,
     title: 'TaleemPro',
     description: 'Developed a scalable education management portal handling concurrent requests, securing private routes by 100% using stateless JWT tokens and MongoDB indexing queries.',
     techStack: ['React', 'Node.js', 'Express', 'MongoDB', 'JWT', 'REST API'],
@@ -397,26 +491,6 @@ export const projects = [
       "TODO: Technical challenge 2 and decision made"
     ],
     outcome: 'Successfully handles multi-role administrative workflows for school directories, grades, and fee records.'
-  },
-  {
-    id: 9,
-    title: 'Rescue Project',
-    description: 'Engineered a centralized missing-person portal, boosting search query resolution times by 28% through database indexing optimizations and highly structured schema designs.',
-    techStack: ['HTML5', 'CSS3', 'JavaScript', 'Responsive Design', 'Bootstrap'],
-    category: 'Backend',
-    featured: false,
-    liveUrl: 'https://github.com/rashidkhan4067/Rescue_Project-',
-    githubUrl: 'https://github.com/rashidkhan4067/Rescue_Project-',
-    accentColor: '#EA4335', // Google Red
-    imageUrl: rescueProjectImg,
-    tagline: 'Centralized missing persons registry and portal for rescue coordination.',
-    status: 'Completed',
-    problemStatement: "TODO: 1-2 sentences on the actual problem this solves",
-    challenges: [
-      "TODO: Technical challenge 1 and decision made",
-      "TODO: Technical challenge 2 and decision made"
-    ],
-    outcome: 'Centralized data entry and search systems to speed up coordination efforts for rescue teams.'
   },
   {
     id: 10,

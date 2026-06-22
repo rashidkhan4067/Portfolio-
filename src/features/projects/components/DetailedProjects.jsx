@@ -165,6 +165,20 @@ export default function DetailedProjects() {
   });
 
   const [selectedProject, setSelectedProject] = useState(null);
+  const [activeImg, setActiveImg] = useState(null);
+
+  // Reset activeImg when selectedProject changes
+  useEffect(() => {
+    if (selectedProject) {
+      if (selectedProject.screenshots && selectedProject.screenshots.length > 0) {
+        setActiveImg(selectedProject.screenshots[0].url);
+      } else {
+        setActiveImg(selectedProject.imageUrl);
+      }
+    } else {
+      setActiveImg(null);
+    }
+  }, [selectedProject]);
 
   // Sync state with URL hash
   useEffect(() => {
@@ -354,15 +368,41 @@ export default function DetailedProjects() {
 
             {/* Hero Image Container */}
             <div className={styles.articleHero} style={{ '--projects-accent': selectedProject.accentColor || '#1A73E8' }}>
-              <div className={styles.browserHeader}>
-                <span className={styles.browserDot} />
-                <span className={styles.browserDot} />
-                <span className={styles.browserDot} />
+              <div className={styles.browserHeader} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                  <span className={styles.browserDot} />
+                  <span className={styles.browserDot} />
+                  <span className={styles.browserDot} />
+                </div>
+                {selectedProject.screenshots && selectedProject.screenshots.length > 0 && (
+                  <div style={{ display: 'flex', gap: '8px', height: '100%', alignItems: 'center' }}>
+                    {selectedProject.screenshots.map((s) => (
+                      <button
+                        key={s.label}
+                        onClick={() => setActiveImg(s.url)}
+                        style={{
+                          background: 'none',
+                          border: 'none',
+                          color: activeImg === s.url ? 'var(--text-primary)' : 'var(--text-secondary)',
+                          fontSize: '0.75rem',
+                          fontWeight: activeImg === s.url ? '700' : '500',
+                          padding: '2px 8px',
+                          borderRadius: '4px',
+                          cursor: 'pointer',
+                          backgroundColor: activeImg === s.url ? 'color-mix(in srgb, var(--projects-accent, var(--accent-brand)) 12%, transparent)' : 'transparent',
+                          transition: 'all 0.15s ease'
+                        }}
+                      >
+                        {s.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
               <div className={styles.browserBody}>
                 {hasImage ? (
                   <img
-                    src={selectedProject.imageUrl}
+                    src={activeImg || selectedProject.imageUrl}
                     alt={`${selectedProject.title} Preview`}
                     className={styles.heroImage}
                   />
