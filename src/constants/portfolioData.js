@@ -209,7 +209,7 @@ export const projects = [
     techStack: ['React', 'Vite', 'Flask', 'SQLAlchemy', 'Groq (Whisper / Llama 3)', 'Zustand', 'Pillow', 'SMTP'],
     category: 'Full-Stack',
     featured: true,
-    liveUrl: 'https://github.com/rashidkhan4067/Rescue_Project-',
+    liveUrl: 'https://rescue-project.vercel.app/',
     githubUrl: 'https://github.com/rashidkhan4067/Rescue_Project-',
     accentColor: '#EA4335', // Google Red
     imageUrl: rescueDashboardImg,
