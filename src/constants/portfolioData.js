@@ -14,6 +14,9 @@ import rescueLandingImg from '../assets/rescue_landing.png';
 import rescueMapImg from '../assets/rescue_map.png';
 import foodyAppImg from '../assets/foody_app.webp';
 import aiHmsImg from '../assets/ai_hms.webp';
+import portfolioDarkOrangeImg from '../assets/portfolio_dark_orange.png';
+import portfolioDarkRoseImg from '../assets/portfolio_dark_rose.png';
+import portfolioLightOrangeImg from '../assets/portfolio_light_orange.png';
 
 export const personalInfo = {
   name: 'Muhammad Rashid Shafique',
@@ -296,6 +299,68 @@ export const projects = [
   },
   {
     id: 3,
+    title: 'Rashid Shafique Portfolio',
+    description: 'An interactive, high-fidelity browser workstation simulating an AOSP Mobile OS inside an ultra-thin bezel iPhone 17 Pro Max chassis — complete with a live ADB Logcat console, system-synchronized SQLite persistence engine, and advanced AI-powered sandbox micro-demos.',
+    techStack: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Node.js', 'Express', 'Capacitor', 'Gemini AI'],
+    category: 'Full-Stack',
+    featured: true,
+    liveUrl: 'https://github.com/rashidkhan4067',
+    githubUrl: 'https://github.com/rashidkhan4067',
+    accentColor: '#10B981', // Emerald theme
+    imageUrl: portfolioDarkOrangeImg,
+    screenshots: [
+      { label: 'Modern Dark Theme (Orange Accent)', url: portfolioDarkOrangeImg },
+      { label: 'Modern Dark Theme (Rose Accent)', url: portfolioDarkRoseImg },
+      { label: 'Light Theme (Orange Accent)', url: portfolioLightOrangeImg }
+    ],
+    tagline: 'Interactive Virtual OS Workstation and full-stack engineering portfolio.',
+    status: 'Completed',
+    problemStatement: 'Most portfolios list technologies statically. Designed an interactive operating system environment running entirely in the browser to execute database queries, LLM API calls, spaced-repetition algorithms, and system logs in real-time.',
+    challenges: [
+      'Simulating a full ADB Logcat console inside React state with clean high-throughput updates without causing browser rendering bottlenecks.',
+      'Integrating a local storage SQLite wrapper to persist contact logs and flashcard data across browser reloads.',
+      'Constructing responsive dual-mode CSS layouts to scale the pixel-perfect iPhone 17 Pro Max chassis seamlessly across desktop and mobile screens.'
+    ],
+    outcome: 'Delivered a fully interactive developer workstation and simulated AOSP mobile sandbox in under 300ms initial load time.',
+    milestones: [
+      {
+        title: 'Milestone 1: Virtual OS Emulator & ADB Terminal',
+        status: 'Completed',
+        details: [
+          'Engineered a pixel-perfect iPhone 17 Pro Max CSS chassis supporting volume, vibrate, power rocker keys, and Dynamic Island expanders.',
+          'Built the simulated ADB Logcat console capturing real-time user events, API responses, and database transaction outputs.',
+          'Developed 6-color accent palette repainting all glows, headers, and badge indicators in real-time.'
+        ]
+      },
+      {
+        title: 'Milestone 2: Interactive Sandbox & Database Persistence',
+        status: 'Completed',
+        details: [
+          'Configured simulated database queries using local SQLite wrappers persisted via LocalStorage.',
+          'Implemented Recruiter technical chatbot using Gemini SDK with dynamic proficiency evaluation and grading report cards.',
+          'Coded the SuperMemo-2 (SM-2) Spaced Repetition engine scheduling cards by Ease Factor.'
+        ]
+      }
+    ],
+    features: [
+      {
+        title: 'Virtual OS Chassis & Emulator (PhoneEmulator.tsx)',
+        details: [
+          'Dual-Layout responsiveness switching between desktop desktop-grid and mobile viewports.',
+          'Synced status indicators with active local time, battery gauge, and dynamic island expansions.'
+        ]
+      },
+      {
+        title: 'ADB Logcat Terminal (CompanionPanel.tsx)',
+        details: [
+          'Streams real-time developer activity log tracking routing, local storage query updates, and AI prompts.',
+          'Supports live settings control: theme, layout toggle, haptic toggles, and direct ADB stream clearing.'
+        ]
+      }
+    ]
+  },
+  {
+    id: 4,
     title: 'VentureTwist',
     description: 'Welcome to VentureTwist, a state-of-the-art, fully responsive, multi-page restaurant management and food ordering web application. Built with high-fidelity aesthetics, modern micro-interactions, and a clean client-side state architecture, VentureTwist bridges the gap between premium culinary presentation and transactional efficiency.',
     techStack: ['Vanilla JS', 'Bootstrap 5', 'Aesthetic-Zen', 'HTML5', 'CSS3'],
@@ -373,7 +438,7 @@ export const projects = [
     ]
   },
   {
-    id: 4,
+    id: 5,
     title: 'Sales-Data-Analysis-System',
     description: 'Optimized PySpark big data pipelines, reducing computational overhead by 38% while analyzing 10M+ transaction rows, and implemented predictive modeling using scikit-learn to forecast profits with 94.2% accuracy.',
     techStack: ['Python', 'Streamlit', 'PySpark', 'Scikit-Learn', 'Plotly', 'Pandas'],
@@ -393,7 +458,7 @@ export const projects = [
     outcome: 'Processes over 10M+ transaction rows under 1.5 seconds, delivering actionable profit forecasting.'
   },
   {
-    id: 5,
+    id: 6,
     title: 'AquaSync',
     description: 'Engineered an IoT real-time fluid telemetry dashboard, decreasing database write latency by 42% by compiling optimized C++ Arduino firmware and designing multi-threaded Python Sockets.',
     techStack: ['Python', 'Tkinter', 'C++', 'Arduino', 'IoT', 'Telemetry'],
@@ -413,7 +478,7 @@ export const projects = [
     outcome: 'Maintains 99.9% uptime across active device connections, processing 100k+ telemetry packets daily.'
   },
   {
-    id: 6,
+    id: 7,
     title: 'MediCare / Hospital Management',
     description: 'Developed a high-security patient management portal, reducing check-in bottlenecks by 35% by implementing transactional SQLite buffering and Node.js REST API schema validation.',
     techStack: ['Python', 'PySide6', 'SQLite', 'Node.js', 'Express', 'React'],
@@ -433,7 +498,7 @@ export const projects = [
     outcome: 'Used to streamline patient registration and check-in workflows for over 150 daily admissions.'
   },
   {
-    id: 7,
+    id: 8,
     title: 'Algoviz-pro',
     description: 'Built an algorithmic visualization engine demonstrating pathfinding and custom structures, improving canvas render speed by 50% through virtualized React tuning and D3.js transitions.',
     techStack: ['React', 'Vite', 'D3.js', 'Flask', 'Python', 'JavaScript'],
@@ -453,7 +518,7 @@ export const projects = [
     outcome: 'Provides fluid 60fps renders for complex graph visualisations containing up to 10k nodes.'
   },
   {
-    id: 8,
+    id: 9,
     title: 'Face-Recognition-Attendance-System',
     description: 'Designed an AI facial recognition attendance system, achieving a 98.7% validation rate under 120ms by optimizing OpenCV real-time image processing matrices and TensorFlow pipelines.',
     techStack: ['Python', 'OpenCV', 'TensorFlow', 'Keras', 'HTML5', 'CSS3'],
@@ -473,7 +538,7 @@ export const projects = [
     outcome: 'Automates secure real-time student check-ins under 120ms with near-zero false positive errors.'
   },
   {
-    id: 9,
+    id: 10,
     title: 'TaleemPro',
     description: 'Developed a scalable education management portal handling concurrent requests, securing private routes by 100% using stateless JWT tokens and MongoDB indexing queries.',
     techStack: ['React', 'Node.js', 'Express', 'MongoDB', 'JWT', 'REST API'],
@@ -493,7 +558,7 @@ export const projects = [
     outcome: 'Successfully handles multi-role administrative workflows for school directories, grades, and fee records.'
   },
   {
-    id: 10,
+    id: 11,
     title: 'Foody-App',
     description: 'Designed a responsive mobile-first food delivery application, streamlining food ordering workflows and optimizing menu caching to achieve a 25% faster page render speed.',
     techStack: ['React', 'Vite', 'CSS Modules', 'State Management', 'Mobile-First'],
