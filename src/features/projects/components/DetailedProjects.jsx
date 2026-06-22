@@ -44,7 +44,7 @@ const repoTitleOverrides = {
   'venturetwist': 'VentureTwist',
   'rescue_project-': 'Rescue Project',
   'foody-app': 'Foody App',
-  'ai-hms': 'AI-HMS'
+  'ai-hms': 'Al Shifaa Clinic'
 };
 
 const formatProjectTitle = (name) => {
@@ -153,7 +153,7 @@ export default function DetailedProjects() {
     } catch (e) {
       console.warn('Failed to parse projects cache on init:', e);
     }
-    return projects;
+    return [...projects].sort((a, b) => a.id - b.id);
   });
   const [loading, setLoading] = useState(() => {
     try {
@@ -241,8 +241,13 @@ export default function DetailedProjects() {
             }
             return apiProj;
           });
-          setProjectList(mergedProjects);
-          sessionStorage.setItem(CACHE_KEY, JSON.stringify(mergedProjects));
+          const sortedProjects = [...mergedProjects].sort((a, b) => {
+            const idA = a.id !== undefined ? a.id : 999;
+            const idB = b.id !== undefined ? b.id : 999;
+            return idA - idB;
+          });
+          setProjectList(sortedProjects);
+          sessionStorage.setItem(CACHE_KEY, JSON.stringify(sortedProjects));
           sessionStorage.setItem(CACHE_TIME_KEY, String(Date.now()));
         }
       } catch (error) {
@@ -251,7 +256,7 @@ export default function DetailedProjects() {
         if (expiredCache) {
           setProjectList(JSON.parse(expiredCache));
         } else {
-          setProjectList(projects);
+          setProjectList([...projects].sort((a, b) => a.id - b.id));
         }
       } finally {
         setLoading(false);
@@ -366,7 +371,7 @@ export default function DetailedProjects() {
                         <span className={styles.statusBadge}>
                           <span
                             className={styles.statusDot}
-                            style={{ backgroundColor: statusText === 'In Development' ? '#FBBC05' : '#34A853' }}
+                            style={{ backgroundColor: (statusText === 'In Development' || statusText === 'In Progress') ? '#FBBC05' : '#34A853' }}
                           />
                           {statusText}
                         </span>

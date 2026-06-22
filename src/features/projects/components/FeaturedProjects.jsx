@@ -30,7 +30,7 @@ const repoTitleOverrides = {
   'venturetwist': 'VentureTwist',
   'rescue_project-': 'Rescue Project',
   'foody-app': 'Foody App',
-  'ai-hms': 'AI-HMS'
+  'ai-hms': 'Al Shifaa Clinic'
 };
 
 const formatProjectTitle = (name) => {
@@ -62,11 +62,11 @@ export default function FeaturedProjects() {
     } catch (e) {
       console.warn('Failed to parse projects cache on init:', e);
     }
-    // Fallback: sort static projects with featured first
+    // Fallback: sort static projects with featured first, preserving static ID order
     return [...projects].sort((a, b) => {
       if (a.featured && !b.featured) return -1;
       if (!a.featured && b.featured) return 1;
-      return 0;
+      return a.id - b.id;
     });
   });
 
@@ -160,23 +160,21 @@ export default function FeaturedProjects() {
             if (matchedStatic) {
               return {
                 ...apiProj,
+                ...matchedStatic,
                 title: matchedStatic.title === 'Sales-Data-Analysis-System' ? 'Sales Data Pipeline' : formatProjectTitle(matchedStatic.title),
-                description: matchedStatic.description,
-                category: matchedStatic.category,
-                accentColor: matchedStatic.accentColor,
-                imageUrl: matchedStatic.imageUrl,
-                featured: matchedStatic.featured,
                 techStack: Array.from(new Set([...matchedStatic.techStack, ...apiProj.techStack]))
               };
             }
             return apiProj;
           });
 
-          // Sort so featured projects are prioritized first
+          // Sort so featured projects are prioritized first, and preserve static ID order
           const sortedProjects = [...mergedProjects].sort((a, b) => {
             if (a.featured && !b.featured) return -1;
             if (!a.featured && b.featured) return 1;
-            return 0;
+            const idA = a.id !== undefined ? a.id : 999;
+            const idB = b.id !== undefined ? b.id : 999;
+            return idA - idB;
           });
 
           setProjectList(sortedProjects);
@@ -192,7 +190,7 @@ export default function FeaturedProjects() {
           setProjectList([...projects].sort((a, b) => {
             if (a.featured && !b.featured) return -1;
             if (!a.featured && b.featured) return 1;
-            return 0;
+            return a.id - b.id;
           }));
         }
       } finally {

@@ -50,6 +50,26 @@ export const stats = [
 export const projects = [
   {
     id: 1,
+    title: 'Al Shifaa Clinic',
+    description: 'Engineered an AI-driven hospital management system featuring automated patient check-in queues, staff shift allocation, and predictive diagnostics reporting to reduce check-in overhead by 30%.',
+    techStack: ['React', 'Django REST Framework', 'PostgreSQL', 'JWT', 'LLMs', 'Tailwind CSS'],
+    category: 'AI / ML',
+    featured: true,
+    liveUrl: 'https://github.com/rashidkhan4067/AI-HMS',
+    githubUrl: 'https://github.com/rashidkhan4067/AI-HMS',
+    accentColor: '#10B981', // Google/Material green/emerald
+    imageUrl: aiHmsImg,
+    tagline: 'AI-powered hospital management system with secure multi-role access control.',
+    status: 'In Progress',
+    problemStatement: "TODO: 1-2 sentences on the actual problem this solves",
+    challenges: [
+      "TODO: Technical challenge 1 and decision made",
+      "TODO: Technical challenge 2 and decision made"
+    ],
+    outcome: 'Secures patient self-registration and doctor onboarding application workflows across three primary access tiers.'
+  },
+  {
+    id: 2,
     title: 'Sales-Data-Analysis-System',
     description: 'Optimized PySpark big data pipelines, reducing computational overhead by 38% while analyzing 10M+ transaction rows, and implemented predictive modeling using scikit-learn to forecast profits with 94.2% accuracy.',
     techStack: ['Python', 'Streamlit', 'PySpark', 'Scikit-Learn', 'Plotly', 'Pandas'],
@@ -69,7 +89,7 @@ export const projects = [
     outcome: 'Processes over 10M+ transaction rows under 1.5 seconds, delivering actionable profit forecasting.'
   },
   {
-    id: 2,
+    id: 3,
     title: 'AquaSync',
     description: 'Engineered an IoT real-time fluid telemetry dashboard, decreasing database write latency by 42% by compiling optimized C++ Arduino firmware and designing multi-threaded Python Sockets.',
     techStack: ['Python', 'Tkinter', 'C++', 'Arduino', 'IoT', 'Telemetry'],
@@ -89,7 +109,7 @@ export const projects = [
     outcome: 'Maintains 99.9% uptime across active device connections, processing 100k+ telemetry packets daily.'
   },
   {
-    id: 3,
+    id: 4,
     title: 'MediCare / Hospital Management',
     description: 'Developed a high-security patient management portal, reducing check-in bottlenecks by 35% by implementing transactional SQLite buffering and Node.js REST API schema validation.',
     techStack: ['Python', 'PySide6', 'SQLite', 'Node.js', 'Express', 'React'],
@@ -109,7 +129,7 @@ export const projects = [
     outcome: 'Used to streamline patient registration and check-in workflows for over 150 daily admissions.'
   },
   {
-    id: 4,
+    id: 5,
     title: 'Algoviz-pro',
     description: 'Built an algorithmic visualization engine demonstrating pathfinding and custom structures, improving canvas render speed by 50% through virtualized React tuning and D3.js transitions.',
     techStack: ['React', 'Vite', 'D3.js', 'Flask', 'Python', 'JavaScript'],
@@ -129,7 +149,7 @@ export const projects = [
     outcome: 'Provides fluid 60fps renders for complex graph visualisations containing up to 10k nodes.'
   },
   {
-    id: 5,
+    id: 6,
     title: 'Face-Recognition-Attendance-System',
     description: 'Designed an AI facial recognition attendance system, achieving a 98.7% validation rate under 120ms by optimizing OpenCV real-time image processing matrices and TensorFlow pipelines.',
     techStack: ['Python', 'OpenCV', 'TensorFlow', 'Keras', 'HTML5', 'CSS3'],
@@ -149,7 +169,7 @@ export const projects = [
     outcome: 'Automates secure real-time student check-ins under 120ms with near-zero false positive errors.'
   },
   {
-    id: 6,
+    id: 7,
     title: 'TaleemPro',
     description: 'Developed a scalable education management portal handling concurrent requests, securing private routes by 100% using stateless JWT tokens and MongoDB indexing queries.',
     techStack: ['React', 'Node.js', 'Express', 'MongoDB', 'JWT', 'REST API'],
@@ -169,7 +189,7 @@ export const projects = [
     outcome: 'Successfully handles multi-role administrative workflows for school directories, grades, and fee records.'
   },
   {
-    id: 7,
+    id: 8,
     title: 'VentureTwist',
     description: 'Built an asynchronous restaurant ordering system, reducing page load latency by 32% by engineering a custom Vanilla JS state manager and lightweight Bootstrap rendering templates.',
     techStack: ['Vanilla JS', 'Bootstrap 5', 'HTML5', 'CSS3', 'Responsive'],
@@ -189,7 +209,7 @@ export const projects = [
     outcome: 'Provides a lightweight, zero-dependency client ordering app loading in under 300ms.'
   },
   {
-    id: 8,
+    id: 9,
     title: 'Rescue Project',
     description: 'Engineered a centralized missing-person portal, boosting search query resolution times by 28% through database indexing optimizations and highly structured schema designs.',
     techStack: ['HTML5', 'CSS3', 'JavaScript', 'Responsive Design', 'Bootstrap'],
@@ -209,7 +229,7 @@ export const projects = [
     outcome: 'Centralized data entry and search systems to speed up coordination efforts for rescue teams.'
   },
   {
-    id: 9,
+    id: 10,
     title: 'Foody-App',
     description: 'Designed a responsive mobile-first food delivery application, streamlining food ordering workflows and optimizing menu caching to achieve a 25% faster page render speed.',
     techStack: ['React', 'Vite', 'CSS Modules', 'State Management', 'Mobile-First'],
@@ -227,26 +247,6 @@ export const projects = [
       "TODO: Technical challenge 2 and decision made"
     ],
     outcome: 'Provides a highly responsive food ordering experience optimized for low-bandwidth mobile viewports.'
-  },
-  {
-    id: 10,
-    title: 'Al Shifaa HMS',
-    description: 'Engineered an AI-driven hospital management system featuring automated patient check-in queues, staff shift allocation, and predictive diagnostics reporting to reduce check-in overhead by 30%.',
-    techStack: ['React', 'Django REST Framework', 'PostgreSQL', 'JWT', 'LLMs', 'Tailwind CSS'],
-    category: 'AI / ML',
-    featured: false,
-    liveUrl: 'https://github.com/rashidkhan4067/AI-HMS',
-    githubUrl: 'https://github.com/rashidkhan4067/AI-HMS',
-    accentColor: '#10B981', // Google/Material green/emerald
-    imageUrl: aiHmsImg,
-    tagline: 'AI-powered hospital management system with secure multi-role access control.',
-    status: 'In Development',
-    problemStatement: "TODO: 1-2 sentences on the actual problem this solves",
-    challenges: [
-      "TODO: Technical challenge 1 and decision made",
-      "TODO: Technical challenge 2 and decision made"
-    ],
-    outcome: 'Secures patient self-registration and doctor onboarding application workflows across three primary access tiers.'
   },
 ];
 

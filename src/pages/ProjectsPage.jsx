@@ -17,7 +17,7 @@ const projectsSchema = {
   'hasPart': [
     {
       '@type': 'SoftwareApplication',
-      'name': 'Al Shifaa HMS',
+      'name': 'Al Shifaa Clinic',
       'description': 'AI-powered Hospital Management System with face recognition attendance, billing automation, and real-time ward management. Built with PyQt5, SQLite, and TensorFlow.',
       'applicationCategory': 'Healthcare Software',
       'programmingLanguage': ['Python', 'PyQt5', 'TensorFlow', 'SQLite'],
