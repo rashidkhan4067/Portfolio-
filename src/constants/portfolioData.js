@@ -66,7 +66,139 @@ export const projects = [
       'Securing multi-role access control (Patients, Doctors, Admins) across the application. Implemented stateless JWT-based authentication with token rotation, token blacklisting on logout, and custom Django REST Framework permission classes.',
       'Reducing registration bottlenecks and session friction. Developed a progressive multi-step patient self-registration and doctor onboarding workflow with Google OAuth SSO and custom Axios refresh token interceptors.'
     ],
-    outcome: 'Completed Milestone 1 (Auth & Authorization), securing patient self-registration, doctor onboarding, and role-based access control (RBAC) across three primary access tiers.'
+    outcome: 'Completed Milestone 1 (Auth & Authorization), securing patient self-registration, doctor onboarding, and role-based access control (RBAC) across three primary access tiers.',
+    milestones: [
+      {
+        title: 'Milestone 0: Public Landing Page & Design System',
+        status: 'Completed',
+        details: [
+          'Scaffolded modern React landing page structure with custom components (Navbar, Hero, Features, Testimonials, Footer).',
+          'Established global theme context, Material Design 3 spacing tokens, custom HSL-based teals palette, and custom typography (Outfit).',
+          'Implemented Cookie Consent analytical banner and a global heartbeat loading screen overlay.'
+        ]
+      },
+      {
+        title: 'Milestone 1: Authentication & Authorization',
+        status: 'Completed',
+        details: [
+          'Custom HMSUser model with UUID keys, email indexing, and role checks.',
+          'Stateless JWT-based auth flow with token auto-rotation and blacklisting.',
+          'Axios background refresh token interceptor to handle session continuity.',
+          'Google OAuth SSO & Profile Onboarding workflow.',
+          'Patient self-registration and Doctor onboarding application form with PMDC license uploads.',
+          'OTP verification email flows for password recovery.'
+        ]
+      },
+      {
+        title: 'Milestone 2: Professional Admin Layout & Workspace Routing',
+        status: 'Completed',
+        details: [
+          'Collapsible sidebar (Drawer) and header layout (AdminLayout) containing avatar menus and notification trays.',
+          'Modularized dialog forms for onboarding invites, doctor license auditing, user administration, and security audits.',
+          'Sub-route mapping for admin tools under /admin/ in the routes.jsx file.'
+        ]
+      },
+      {
+        title: 'Milestone 3: Operational Scheduling',
+        status: 'Completed',
+        details: [
+          'Calendar integrations (InteractiveCalendar) on doctor and patient dashboards.',
+          'Doctor scheduling availability slots configurations.',
+          'Patient appointment wizard booking dialog (BookAppointmentDialog).'
+        ]
+      },
+      {
+        title: 'Milestone 4: EHR, Prescriptions, Billing, Pharmacy, & Lab/Radiology Workspaces',
+        status: 'Completed',
+        details: [
+          'Patient vitals logging and critical out-of-range alert triage.',
+          'EHR medical records documentation, doctor advice, and clinical prescriptions (Rx).',
+          'Patient arrivals check-in and transaction processing with official consult receipt generation.',
+          'Pharmacist prescription fulfillment, dispensary inventory alert controls, and billing management.',
+          'Technician workspaces for Blood/Pathology lab orders and Radiology imaging (X-Ray/CT/MRI) observations.'
+        ]
+      },
+      {
+        title: 'Milestone 5: Retrieval-Augmented Generation (RAG) & Clinical AI Features',
+        status: 'In Progress',
+        details: [
+          'Integrate LLM services for clinical chat and RAG.',
+          'Establish secure RAG endpoints for patient history parsing.',
+          'Build EHR clinical summarizers for doctors.',
+          'Introduce an interactive clinical chatbot for internal staff queries.'
+        ]
+      },
+      {
+        title: 'Milestone 6: Quality, Security & Deployment',
+        status: 'Planned',
+        details: [
+          'HIPAA compliance audits and data level verification.',
+          'Comprehensive integration and penetration testing.',
+          'Docker containerization (Django, Postgres, React).',
+          'Production cloud deployment.'
+        ]
+      }
+    ],
+    features: [
+      {
+        title: 'System Admin Dashboard (DashboardOverview.jsx)',
+        details: [
+          'Compliance Alerts: Tracks doctor license PMDC compliance status and triggers warning banners when expiry is near.',
+          'Infrastructure Health: Diagnostic handshakes monitoring PostgreSQL, SMTP services, Google OAuth gateway, and JWT issuance latency.',
+          'Audit Logging: Logs security events (IP, location, actions) in the security activity panel.',
+          'Resource Snapshots: Real-time bed occupancy, clinical staff allocation grids, and total billings tracking.'
+        ]
+      },
+      {
+        title: 'Clinical Console Workspace (DoctorDashboard.jsx)',
+        details: [
+          'Today\'s Consult Queue: Lists daily patient appointments with details on vital signs. If vital metrics fall out-of-range (e.g. SpO2 < 95%, high heart rate), critical triage badges are displayed.',
+          'Shift Scheduler: Allows doctors to configure weekly availability shifts, define start/end intervals, and customize slot durations.',
+          'Patient History Lookup: Search tool (MRN or Name) to review previous encounter logs, vital trends, lab tests, and imaging reports.',
+          'Encounter Documentation: Completes consultations by logging diagnoses, advisory notes, and prescription medications (Rx).'
+        ]
+      },
+      {
+        title: 'Patient Health Portal (PatientDashboard.jsx)',
+        details: [
+          'Consultation Log: Lists upcoming slot reservations and past appointments, allowing patients to cancel or book new sessions.',
+          'Appointment Booking: Dynamic multi-step wizard to search doctors by specialty, view their available calendar dates, and select time slots.',
+          'Medical Files access: View clinical encounter history, advice, and active prescriptions.',
+          'Scans & Lab Reports: View completed diagnostic test sheets and download radiological imaging files.'
+        ]
+      },
+      {
+        title: 'Nurse Triage Station (NurseDashboard.jsx)',
+        details: [
+          'Triage Queue: Filters checked-in patients awaiting vitals logging.',
+          'Vitals Logger: Captures blood pressure, heart rate, temperature, SpO2, respiratory rate, weight, and height, pushing the data instantly to the doctor\'s consult screen.',
+          'Triage History: Audits logged vitals reports.'
+        ]
+      },
+      {
+        title: 'Receptionist Billing Console (ReceptionistDashboard.jsx)',
+        details: [
+          'Arrival Check-In: Registers patient arrivals, collects consult fees, and moves them to the nurse queue.',
+          'Invoicing & Receipts: Computes transaction totals, logs payment methods (Cash, Card, Mobile Pay, Insurance), and prints receipt summaries.',
+          'Patient Directory: Searches files by MRN, Name, or Phone.'
+        ]
+      },
+      {
+        title: 'Dispensary Console (PharmacistDashboard.jsx)',
+        details: [
+          'Prescription Queue: Manages pending physician prescriptions (Rx), detailing dosages and instructions.',
+          'Dispensing Action: Computes costs, saves pharmacist advice, and marks prescriptions as dispensed.',
+          'Inventory Monitor: Real-time tracking of critical stocks (Amoxicillin, Insulin, Metformin, etc.) with restock request alerts.'
+        ]
+      },
+      {
+        title: 'Lab & Radiology Workspaces (LabDashboard.jsx & RadiologyDashboard.jsx)',
+        details: [
+          'Work queues: Lists test and scan orders requested by physicians.',
+          'Report Submissions: Allows technicians to log findings summary, write detailed observation notes, and attach digital documents/scan images (X-Rays, MRIs).'
+        ]
+      }
+    ]
   },
   {
     id: 2,

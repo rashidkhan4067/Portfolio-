@@ -394,6 +394,61 @@ export default function DetailedProjects() {
                   </div>
                 </section>
 
+                {/* Project Milestones */}
+                {selectedProject.milestones && (
+                  <section className={styles.articleSection}>
+                    <h2 className={styles.articleSectionTitle}>Development Milestones</h2>
+                    <div className={styles.milestoneTimeline}>
+                      {selectedProject.milestones.map((milestone, idx) => (
+                        <div key={idx} className={styles.milestoneItem}>
+                          <div className={styles.milestoneHeader}>
+                            <span 
+                              className={styles.milestoneDot} 
+                              style={{ 
+                                backgroundColor: milestone.status === 'Completed' ? '#34A853' : 
+                                                 milestone.status === 'In Progress' ? '#FBBC05' : '#707070' 
+                              }}
+                            />
+                            <h3 className={styles.milestoneTitle}>{milestone.title}</h3>
+                            <span 
+                              className={`${styles.milestoneStatus} ${
+                                milestone.status === 'Completed' ? styles.statusCompleted : 
+                                milestone.status === 'In Progress' ? styles.statusInProgress : styles.statusPlanned
+                              }`}
+                            >
+                              {milestone.status}
+                            </span>
+                          </div>
+                          <ul className={styles.milestoneDetails}>
+                            {milestone.details.map((detail, dIdx) => (
+                              <li key={dIdx} className={styles.milestoneDetailItem}>{detail}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  </section>
+                )}
+
+                {/* Comprehensive Features */}
+                {selectedProject.features && (
+                  <section className={styles.articleSection}>
+                    <h2 className={styles.articleSectionTitle}>Core Modules & Dashboard Features</h2>
+                    <div className={styles.featuresGrid}>
+                      {selectedProject.features.map((feature, idx) => (
+                        <div key={idx} className={styles.featureCard}>
+                          <h3 className={styles.featureCardTitle}>{feature.title}</h3>
+                          <ul className={styles.featureDetails}>
+                            {feature.details.map((detail, dIdx) => (
+                              <li key={dIdx} className={styles.featureDetailItem}>{detail}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  </section>
+                )}
+
               </div>
 
               {/* Right Column: Sidebar Metadata */}

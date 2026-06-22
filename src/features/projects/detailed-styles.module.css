@@ -431,3 +431,168 @@
   flex-direction: column;
   gap: 0.5rem;
 }
+
+/* Timeline and Milestones Styles */
+.milestoneTimeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: relative;
+  padding-left: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.milestoneTimeline::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background-color: var(--border-subtle);
+}
+
+.milestoneItem {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.milestoneHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.milestoneDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  position: absolute;
+  left: -20px;
+  top: 5px;
+  border: 2px solid var(--bg-primary);
+  box-shadow: 0 0 0 1px var(--border-subtle);
+  z-index: 1;
+}
+
+.milestoneTitle {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.milestoneStatus {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+}
+
+.statusCompleted {
+  background-color: rgba(52, 168, 83, 0.08);
+  color: #34A853;
+  border: 1px solid rgba(52, 168, 83, 0.15);
+}
+
+.statusInProgress {
+  background-color: rgba(251, 188, 5, 0.08);
+  color: #B08200;
+  border: 1px solid rgba(251, 188, 5, 0.15);
+}
+
+.statusPlanned {
+  background-color: var(--bg-tertiary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+}
+
+.milestoneDetails {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0 0.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.milestoneDetailItem {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  position: relative;
+  padding-left: 0.75rem;
+}
+
+.milestoneDetailItem::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--text-tertiary);
+}
+
+/* Features Grid Styles */
+.featuresGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.featureCard {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-default);
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+:global([data-theme='dark']) .featureCard {
+  background-color: #171719;
+}
+
+.featureCard:hover {
+  border-color: var(--border-strong);
+}
+
+.featureCardTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.featureDetails {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.featureDetailItem {
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  position: relative;
+  padding-left: 0.75rem;
+}
+
+.featureDetailItem::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--text-tertiary);
+}
