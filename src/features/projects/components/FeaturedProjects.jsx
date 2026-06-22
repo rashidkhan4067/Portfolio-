@@ -45,8 +45,8 @@ const formatProjectTitle = (name) => {
     .trim();
 };
 
-const CACHE_KEY = 'github_repos_cache_v10';
-const CACHE_TIME_KEY = 'github_repos_cache_time_v10';
+const CACHE_KEY = 'github_repos_cache_v11';
+const CACHE_TIME_KEY = 'github_repos_cache_time_v11';
 const ONE_HOUR = 60 * 60 * 1000;
 
 export default function FeaturedProjects() {

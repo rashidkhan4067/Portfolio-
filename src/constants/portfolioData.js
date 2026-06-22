@@ -55,18 +55,18 @@ export const projects = [
     techStack: ['React', 'Django REST Framework', 'PostgreSQL', 'JWT', 'LLMs', 'Tailwind CSS'],
     category: 'AI / ML',
     featured: true,
-    liveUrl: 'https://github.com/rashidkhan4067/AI-HMS',
+    liveUrl: 'https://ai-hms-drab.vercel.app',
     githubUrl: 'https://github.com/rashidkhan4067/AI-HMS',
     accentColor: '#10B981', // Google/Material green/emerald
     imageUrl: aiHmsImg,
     tagline: 'AI-powered hospital management system with secure multi-role access control.',
     status: 'In Progress',
-    problemStatement: "TODO: 1-2 sentences on the actual problem this solves",
+    problemStatement: 'Traditional healthcare systems suffer from inefficient scheduling, slow patient registration, and lack of secure role-based access. Designed a secure full-stack hospital management system (AI-HMS) that integrates Django, React, and JWT to streamline patient registration and doctor onboarding workflows.',
     challenges: [
-      "TODO: Technical challenge 1 and decision made",
-      "TODO: Technical challenge 2 and decision made"
+      'Securing multi-role access control (Patients, Doctors, Admins) across the application. Implemented stateless JWT-based authentication with token rotation, token blacklisting on logout, and custom Django REST Framework permission classes.',
+      'Reducing registration bottlenecks and session friction. Developed a progressive multi-step patient self-registration and doctor onboarding workflow with Google OAuth SSO and custom Axios refresh token interceptors.'
     ],
-    outcome: 'Secures patient self-registration and doctor onboarding application workflows across three primary access tiers.'
+    outcome: 'Completed Milestone 1 (Auth & Authorization), securing patient self-registration, doctor onboarding, and role-based access control (RBAC) across three primary access tiers.'
   },
   {
     id: 2,

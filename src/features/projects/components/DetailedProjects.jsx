@@ -1,18 +1,16 @@
 import { useState, useEffect } from 'react';
 import {
-  Brain,
-  Layers,
-  Globe,
-  Terminal,
   Code2,
   ChevronDown,
   ChevronUp,
-  ExternalLink
+  ExternalLink,
+  ArrowLeft
 } from 'lucide-react';
 import { GithubIcon as Github } from '../../../components/SocialIcons';
 import { projects } from '../../../constants/portfolioData';
 import styles from '../detailed-styles.module.css';
 import SectionHeading from '../../../components/SectionHeading';
+import ProjectCard from './ProjectCard';
 
 const getProjectSlug = (project) => {
   if (project.repoName) return project.repoName.toLowerCase();
@@ -59,8 +57,8 @@ const formatProjectTitle = (name) => {
     .trim();
 };
 
-const CACHE_KEY = 'github_repos_cache_v10';
-const CACHE_TIME_KEY = 'github_repos_cache_time_v10';
+const CACHE_KEY = 'github_repos_cache_v11';
+const CACHE_TIME_KEY = 'github_repos_cache_time_v11';
 const ONE_HOUR = 60 * 60 * 1000;
 
 function ProjectVisualPlaceholder({ project }) {
@@ -140,9 +138,7 @@ function ProjectVisualPlaceholder({ project }) {
 }
 
 export default function DetailedProjects() {
-  const [showAll, setShowAll] = useState(() => {
-    return !!window.location.hash;
-  });
+  const [showAll, setShowAll] = useState(false);
   const [projectList, setProjectList] = useState(() => {
     try {
       const cachedData = sessionStorage.getItem(CACHE_KEY);
@@ -167,6 +163,33 @@ export default function DetailedProjects() {
     }
     return true;
   });
+
+  const [selectedProject, setSelectedProject] = useState(null);
+
+  // Sync state with URL hash
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.substring(1).toLowerCase();
+      if (hash) {
+        const found = projectList.find(p => getProjectSlug(p) === hash);
+        if (found) {
+          setSelectedProject(found);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          setSelectedProject(null);
+        }
+      } else {
+        setSelectedProject(null);
+      }
+    };
+
+    if (!loading) {
+      handleHashChange();
+    }
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, [loading, projectList]);
 
   useEffect(() => {
     async function fetchGithubRepos() {
@@ -265,28 +288,162 @@ export default function DetailedProjects() {
     fetchGithubRepos();
   }, []);
 
-  useEffect(() => {
-    if (!loading && window.location.hash) {
-      const targetId = window.location.hash.substring(1);
-      if (targetId) {
-        const timer = setTimeout(() => {
-          const element = document.getElementById(targetId);
-          if (element) {
-            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            element.classList.add(styles.highlightedCard);
-            const clearTimer = setTimeout(() => {
-              element.classList.remove(styles.highlightedCard);
-            }, 2500);
-            return () => clearTimeout(clearTimer);
-          }
-        }, 300);
-        return () => clearTimeout(timer);
-      }
+  const handleCardClick = (e, project) => {
+    if (e.target.closest('a') || e.target.closest('button')) {
+      return;
     }
-  }, [loading, projectList]);
+    window.location.hash = getProjectSlug(project);
+  };
 
-  const displayedProjects = showAll ? projectList : projectList.slice(0, 3);
-  const skeletonCards = Array.from({ length: 3 });
+  const handleBack = () => {
+    window.location.hash = '';
+    setSelectedProject(null);
+  };
+
+  if (selectedProject) {
+    const hasImage = !!selectedProject.imageUrl;
+    const statusText = selectedProject.status || 'Completed';
+    const problemStatementText = selectedProject.problemStatement || 'Traditional healthcare administration suffers from high check-in overhead, slow patient registration, and insecure role-based operations.';
+    const challengesList = selectedProject.challenges || [
+      'Technical challenge 1 and decision made.',
+      'Technical challenge 2 and decision made.'
+    ];
+    const outcomeText = selectedProject.outcome || 'Fully open-source code repository published on GitHub.';
+
+    return (
+      <section className={styles.section} id="project-article-view">
+        <div className="container">
+          <article className={styles.articleContainer}>
+            {/* Back Button */}
+            <button onClick={handleBack} className={styles.backButton} aria-label="Go back to project grid">
+              <ArrowLeft size={16} />
+              <span>Back to Projects</span>
+            </button>
+
+            {/* Article Header */}
+            <header className={styles.articleHeader}>
+              <div className={styles.articleMeta}>
+                <span 
+                  className={styles.categoryBadge} 
+                  style={{ '--projects-accent': selectedProject.accentColor || 'var(--accent-brand)' }}
+                >
+                  {selectedProject.category}
+                </span>
+                <span className={styles.statusBadge}>
+                  <span
+                    className={styles.statusDot}
+                    style={{ backgroundColor: (statusText === 'In Development' || statusText === 'In Progress') ? '#FBBC05' : '#34A853' }}
+                  />
+                  {statusText}
+                </span>
+              </div>
+              <h1 className={styles.articleTitle}>{selectedProject.title}</h1>
+              <p className={styles.articleTagline}>{selectedProject.tagline || stripEmojis(selectedProject.description)}</p>
+            </header>
+
+            {/* Hero Image Container */}
+            <div className={styles.articleHero} style={{ '--projects-accent': selectedProject.accentColor || '#1A73E8' }}>
+              <div className={styles.browserHeader}>
+                <span className={styles.browserDot} />
+                <span className={styles.browserDot} />
+                <span className={styles.browserDot} />
+              </div>
+              <div className={styles.browserBody}>
+                {hasImage ? (
+                  <img
+                    src={selectedProject.imageUrl}
+                    alt={`${selectedProject.title} Preview`}
+                    className={styles.heroImage}
+                  />
+                ) : (
+                  <ProjectVisualPlaceholder project={selectedProject} />
+                )}
+              </div>
+            </div>
+
+            {/* Article Content Area */}
+            <div className={styles.articleContent}>
+              
+              {/* Left Column: Text Case Study */}
+              <div className={styles.mainContentCol}>
+                
+                {/* Problem Statement */}
+                <section className={styles.articleSection}>
+                  <h2 className={styles.articleSectionTitle}>Problem & Role</h2>
+                  <p className={styles.articleParagraph}>{problemStatementText}</p>
+                </section>
+
+                {/* Challenges & Decisions */}
+                <section className={styles.articleSection}>
+                  <h2 className={styles.articleSectionTitle}>Key Challenges & Decisions</h2>
+                  <ul className={styles.articleChallengesList}>
+                    {challengesList.map((challenge, idx) => (
+                      <li key={idx} className={styles.articleChallengeItem}>
+                        <span className={styles.bulletDot} style={{ backgroundColor: selectedProject.accentColor || 'var(--accent-brand)' }} />
+                        <span className={styles.challengeText}>{challenge}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+
+                {/* Outcome & Impact */}
+                <section className={styles.articleSection}>
+                  <h2 className={styles.articleSectionTitle}>Outcome & Impact</h2>
+                  <div className={styles.articleOutcomeCallout} style={{ borderLeftColor: selectedProject.accentColor || 'var(--accent-brand)' }}>
+                    <p className={styles.articleOutcomeText}>{outcomeText}</p>
+                  </div>
+                </section>
+
+              </div>
+
+              {/* Right Column: Sidebar Metadata */}
+              <aside className={styles.sidebarCol}>
+                <div className={styles.sidebarCard}>
+                  <h3 className={styles.sidebarTitle}>Technologies Used</h3>
+                  <div className={styles.sidebarTechList}>
+                    {selectedProject.techStack.map((tech) => (
+                      <div key={tech} className={styles.sidebarTechItem}>
+                        <span className={styles.sidebarTechBadge}>{tech}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className={styles.sidebarActions}>
+                    <a
+                      href={selectedProject.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.articlePrimaryAction}
+                      style={{ 
+                        backgroundColor: selectedProject.accentColor || 'var(--accent-brand)',
+                        borderColor: selectedProject.accentColor || 'var(--accent-brand)'
+                      }}
+                    >
+                      <ExternalLink size={14} aria-hidden="true" />
+                      <span>Live Demo</span>
+                    </a>
+                    <a
+                      href={selectedProject.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.articleSecondaryAction}
+                    >
+                      <Github size={14} aria-hidden="true" />
+                      <span>View Code</span>
+                    </a>
+                  </div>
+                </div>
+              </aside>
+
+            </div>
+          </article>
+        </div>
+      </section>
+    );
+  }
+
+  const displayedProjects = showAll ? projectList : projectList; // Show all by default on Projects page grid
+  const skeletonCards = Array.from({ length: 6 });
 
   return (
     <section className={styles.section} id="featured-projects">
@@ -309,151 +466,21 @@ export default function DetailedProjects() {
               >
                 <div className={`${styles.visualSide} skeleton`} style={{ height: '220px' }} />
                 <div className={styles.textSide}>
-                  <div className={styles.cardHeader}>
-                    <div className="skeleton" style={{ width: '40%', height: '24px', borderRadius: '4px' }} />
-                  </div>
+                  <div className="skeleton" style={{ width: '40%', height: '24px', borderRadius: '4px' }} />
                   <div className="skeleton" style={{ width: '85%', height: '16px', borderRadius: '4px', marginTop: '0.5rem' }} />
                   <div className="skeleton" style={{ width: '60%', height: '16px', borderRadius: '4px', marginTop: '0.5rem' }} />
-                  <div style={{ display: 'flex', gap: '0.5rem', marginTop: '1rem' }}>
-                    <div className="skeleton" style={{ width: '80px', height: '32px', borderRadius: '6px' }} />
-                    <div className="skeleton" style={{ width: '80px', height: '32px', borderRadius: '6px' }} />
-                  </div>
                 </div>
               </article>
             ))
           ) : (
-            displayedProjects.map((project) => {
-              const hasImage = !!project.imageUrl;
-              const taglineText = project.tagline || stripEmojis(project.description);
-              const statusText = project.status || 'Completed';
-              const problemStatementText = project.problemStatement || 'TODO: 1-2 sentences on the actual problem this solves';
-              const challengesList = project.challenges || [
-                'TODO: Technical challenge 1 and decision made',
-                'TODO: Technical challenge 2 and decision made'
-              ];
-              const outcomeText = project.outcome || 'Fully open-source code repository published on GitHub.';
-
-              return (
-                <article
-                  key={project.id}
-                  id={getProjectSlug(project)}
-                  className={styles.projectCard}
-                  style={{ '--projects-accent': project.accentColor || '#1A73E8' }}
-                >
-                  <div className={styles.visualSide}>
-                    {/* Browser Chrome Header */}
-                    <div className={styles.browserHeader}>
-                      <span className={styles.browserDot} />
-                      <span className={styles.browserDot} />
-                      <span className={styles.browserDot} />
-                    </div>
-                    <div className={styles.browserBody}>
-                      {hasImage ? (
-                        <img
-                          src={project.imageUrl}
-                          alt={`${project.title} Preview`}
-                          className={styles.cardImage}
-                          loading="lazy"
-                          width="420"
-                          height="236"
-                        />
-                      ) : (
-                        <ProjectVisualPlaceholder project={project} />
-                      )}
-                    </div>
-                  </div>
-
-                  <div className={styles.textSide}>
-                    <div className={styles.cardHeader}>
-                      <div className={styles.titleArea}>
-                        <h3 className={styles.projectTitle}>{project.title}</h3>
-                        <span className={styles.categoryBadge}>{project.category}</span>
-                        <span className={styles.statusBadge}>
-                          <span
-                            className={styles.statusDot}
-                            style={{ backgroundColor: (statusText === 'In Development' || statusText === 'In Progress') ? '#FBBC05' : '#34A853' }}
-                          />
-                          {statusText}
-                        </span>
-                      </div>
-                    </div>
-
-                    <p className={styles.tagline}>{taglineText}</p>
-
-                    <div className={styles.subSection}>
-                      <span className={styles.subSectionTitle}>Problem & Role</span>
-                      <p className={styles.problemRole}>{problemStatementText}</p>
-                    </div>
-
-                    <div className={styles.subSection}>
-                      <span className={styles.subSectionTitle}>Tech Stack</span>
-                      <div className={styles.techList}>
-                        {project.techStack.map((tech) => (
-                          <div key={tech} className={styles.techItem}>
-                            <Code2 size={12} className={styles.techIcon} aria-hidden="true" />
-                            <span className={styles.techName}>{tech}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className={styles.subSection}>
-                      <span className={styles.subSectionTitle}>Key Challenges & Decisions</span>
-                      <ul className={styles.challengesList}>
-                        {challengesList.map((challenge, idx) => (
-                          <li key={idx} className={styles.challengeItem}>
-                            <span className={styles.bulletDot} />
-                            <span>{challenge}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div className={styles.outcomeBox}>
-                      <p className={styles.outcomeText}>{outcomeText}</p>
-                    </div>
-
-                    <div className={styles.actionsRow}>
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={styles.primaryAction}
-                      >
-                        <ExternalLink size={14} aria-hidden="true" />
-                        <span>Live Demo</span>
-                      </a>
-                      <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={styles.secondaryAction}
-                      >
-                        <Github size={14} aria-hidden="true" />
-                        <span>GitHub</span>
-                      </a>
-                    </div>
-                  </div>
-                </article>
-              );
-            })
+            displayedProjects.map((project) => (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                onClick={handleCardClick}
+              />
+            ))
           )}
-        </div>
-
-        <div className={styles.toggleWrapper}>
-          <button
-            className={styles.exploreToggle}
-            onClick={() => setShowAll(!showAll)}
-            aria-expanded={showAll}
-            aria-controls="featured-projects"
-          >
-            <span>{showAll ? 'Show Fewer Projects' : 'Explore All Projects'}</span>
-            {showAll ? (
-              <ChevronUp size={16} className={styles.toggleIcon} aria-hidden="true" />
-            ) : (
-              <ChevronDown size={16} className={styles.toggleIcon} aria-hidden="true" />
-            )}
-          </button>
         </div>
 
       </div>
