@@ -168,8 +168,18 @@ export default function FeaturedProjects() {
             return apiProj;
           });
 
+          // Keep static projects that are not found in the GitHub API repositories response
+          const unmatchedStatic = projects.filter(staticProj => 
+            !mappedProjects.some(apiProj => 
+              staticProj.title.toLowerCase() === apiProj.repoName.toLowerCase() ||
+              (staticProj.githubUrl && staticProj.githubUrl.toLowerCase().includes(apiProj.repoName.toLowerCase()))
+            )
+          );
+
+          const allProjects = [...mergedProjects, ...unmatchedStatic];
+
           // Sort so featured projects are prioritized first, and preserve static ID order
-          const sortedProjects = [...mergedProjects].sort((a, b) => {
+          const sortedProjects = [...allProjects].sort((a, b) => {
             if (a.featured && !b.featured) return -1;
             if (!a.featured && b.featured) return 1;
             const idA = a.id !== undefined ? a.id : 999;

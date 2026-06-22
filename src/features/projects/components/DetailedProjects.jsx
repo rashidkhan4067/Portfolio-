@@ -264,7 +264,18 @@ export default function DetailedProjects() {
             }
             return apiProj;
           });
-          const sortedProjects = [...mergedProjects].sort((a, b) => {
+
+          // Keep static projects that are not found in the GitHub API repositories response
+          const unmatchedStatic = projects.filter(staticProj => 
+            !mappedProjects.some(apiProj => 
+              staticProj.title.toLowerCase() === apiProj.repoName.toLowerCase() ||
+              (staticProj.githubUrl && staticProj.githubUrl.toLowerCase().includes(apiProj.repoName.toLowerCase()))
+            )
+          );
+
+          const allProjects = [...mergedProjects, ...unmatchedStatic];
+
+          const sortedProjects = [...allProjects].sort((a, b) => {
             const idA = a.id !== undefined ? a.id : 999;
             const idB = b.id !== undefined ? b.id : 999;
             return idA - idB;

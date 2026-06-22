@@ -8,7 +8,7 @@ import medicareImg from '../assets/medicare.webp';
 import algovizImg from '../assets/algoviz.webp';
 import faceAttendanceImg from '../assets/face_attendance.webp';
 import taleemproImg from '../assets/taleempro.webp';
-import venturetwistImg from '../assets/venturetwist.webp';
+import venturetwistImg from '../assets/venturetwist.png';
 import rescueProjectImg from '../assets/rescue_project.webp';
 import foodyAppImg from '../assets/foody_app.webp';
 import aiHmsImg from '../assets/ai_hms.webp';
@@ -202,6 +202,84 @@ export const projects = [
   },
   {
     id: 2,
+    title: 'VentureTwist',
+    description: 'Welcome to VentureTwist, a state-of-the-art, fully responsive, multi-page restaurant management and food ordering web application. Built with high-fidelity aesthetics, modern micro-interactions, and a clean client-side state architecture, VentureTwist bridges the gap between premium culinary presentation and transactional efficiency.',
+    techStack: ['Vanilla JS', 'Bootstrap 5', 'Aesthetic-Zen', 'HTML5', 'CSS3'],
+    category: 'Open Source',
+    featured: true,
+    liveUrl: 'https://rashidkhang4067.github.io/VentureTwist',
+    githubUrl: 'https://github.com/rashidkhang4067/VentureTwist',
+    accentColor: '#FEA116', // Gold accent
+    imageUrl: venturetwistImg,
+    tagline: 'VentureTwist - Your Premium Modern Restaurant Experience',
+    status: 'Completed',
+    problemStatement: 'Traditional restaurant websites are static and fail to provide interactive features like live cart management, table booking validations, and real-time menu category swapping. VentureTwist bridges this gap by presenting a high-fidelity dining booking website with a persistent client-side checkout system.',
+    challenges: [
+      'Implementing a fully persistent cart with real-time tax/subtotal calculation, slide-in notifications, and state recovery under raw file:// protocol. Built modular vanilla JS modules to manage local storage and state lifecycle without external framework overhead.',
+      'Dynamic asset resolution across different folder depths (e.g. /admin/ portal vs root pages). Engineered a smart path resolver contextually adjusting asset root levels dynamically.'
+    ],
+    outcome: 'Delivered an interactive, zero-dependency culinary checkout application and a secure admin control panel loading under 300ms.',
+    milestones: [
+      {
+        title: 'Design Philosophy & Aesthetics',
+        status: 'Completed',
+        details: [
+          'Curated Harmonies: Bespoke dark-mode interface coupled with golden highlights (#FEA116) to evoke warm hospitality, fine dining, and culinary premiumness.',
+          'Micro-Animations & Transitions: Fluid slide-downs, wow-reveal effects, hovering cards, and dynamic state updates.',
+          'Typography: Clean and premium typography loaded from Google Fonts (Heebo, Nunito, Pacifico) providing readable copy and striking titles.',
+          'Responsive layouts: Perfect structural integrity on Desktop, Tablet, and Mobile interfaces using a customized modern Bootstrap 5 grid system.'
+        ]
+      },
+      {
+        title: 'Key Feature Highlights',
+        status: 'Completed',
+        details: [
+          'Dynamic Shopping Cart: A fully functional, local-storage persistent checkout cart with slide-in notifications, quantity controls, automatic subtotal, tax calculation, and instant updates.',
+          'Real-time Menu System: Categories are split cleanly into Tabs (Breakfast, Lunch, Dinner, Coffee, Drinks). The app dynamically updates menu data from a unified service layer.',
+          'Online Table Reservation: A gorgeous table booking panel equipped with validation, date-time selectors, and guest counters.',
+          'Secure Payment Gateway: Mock payment simulation supporting cash on delivery and card flows, persistent order generation, and immediate receipt generation.',
+          'Order History & Live Tracking: Comprehensive order summaries showing items bought, prices, unique tracking IDs, and custom order tracking status pages.'
+        ]
+      },
+      {
+        title: 'Secure Administrative Suite (/admin/)',
+        status: 'Completed',
+        details: [
+          'Protected Gatehouse: Secure login layout restricting dashboard access to authorized administrators.',
+          'Real-time Analytics Dashboard: Summary cards detailing Total Orders, Accumulated Revenue, Active Reservations, and Live Menu Items.',
+          'Interactive Menu Management (CRUD): Create, Read, Update, and Delete food items inside the global store dynamically with Category reallocation, image uploads, and descriptive text edits.',
+          'Active Booking & Order Pipeline: Central table logs monitoring active customer checkout states and live table reservation lists.'
+        ]
+      }
+    ],
+    features: [
+      {
+        title: 'Fully Advanced Directory Architecture',
+        details: [
+          'VentureTwist root contains multi-page portals for home, about, booking, checkout, contact, menu, order history/tracking, payment, and receipts.',
+          'admin/ contains protected dashboard, booking registries, login gate, menu management, and sales portals.',
+          'assets/ houses CSS grid configurations, compressed menu images, vendor scripts (Wow.js, OwlCarousel), and modular JS page controllers.'
+        ]
+      },
+      {
+        title: 'Dynamic Image Path Resolver (Zero-Break system)',
+        details: [
+          'Automated path parsing inside menu-data-service.js contextually resolves asset directories based on page depth (e.g. root vs /admin/).',
+          'Enables the application to run seamlessly across both web servers and raw local disk launch (file:// protocol).'
+        ]
+      },
+      {
+        title: 'Technical & Execution Stack',
+        details: [
+          'Vanilla JS Modules for zero-dependency modular business logic and state management.',
+          'Wow.js & Animate.css for clean scroll-reveal micro-interactions and animations.',
+          'Licensed under the MIT License for open-source Core distribution.'
+        ]
+      }
+    ]
+  },
+  {
+    id: 3,
     title: 'Sales-Data-Analysis-System',
     description: 'Optimized PySpark big data pipelines, reducing computational overhead by 38% while analyzing 10M+ transaction rows, and implemented predictive modeling using scikit-learn to forecast profits with 94.2% accuracy.',
     techStack: ['Python', 'Streamlit', 'PySpark', 'Scikit-Learn', 'Plotly', 'Pandas'],
@@ -221,7 +299,7 @@ export const projects = [
     outcome: 'Processes over 10M+ transaction rows under 1.5 seconds, delivering actionable profit forecasting.'
   },
   {
-    id: 3,
+    id: 4,
     title: 'AquaSync',
     description: 'Engineered an IoT real-time fluid telemetry dashboard, decreasing database write latency by 42% by compiling optimized C++ Arduino firmware and designing multi-threaded Python Sockets.',
     techStack: ['Python', 'Tkinter', 'C++', 'Arduino', 'IoT', 'Telemetry'],
@@ -241,7 +319,7 @@ export const projects = [
     outcome: 'Maintains 99.9% uptime across active device connections, processing 100k+ telemetry packets daily.'
   },
   {
-    id: 4,
+    id: 5,
     title: 'MediCare / Hospital Management',
     description: 'Developed a high-security patient management portal, reducing check-in bottlenecks by 35% by implementing transactional SQLite buffering and Node.js REST API schema validation.',
     techStack: ['Python', 'PySide6', 'SQLite', 'Node.js', 'Express', 'React'],
@@ -261,7 +339,7 @@ export const projects = [
     outcome: 'Used to streamline patient registration and check-in workflows for over 150 daily admissions.'
   },
   {
-    id: 5,
+    id: 6,
     title: 'Algoviz-pro',
     description: 'Built an algorithmic visualization engine demonstrating pathfinding and custom structures, improving canvas render speed by 50% through virtualized React tuning and D3.js transitions.',
     techStack: ['React', 'Vite', 'D3.js', 'Flask', 'Python', 'JavaScript'],
@@ -281,7 +359,7 @@ export const projects = [
     outcome: 'Provides fluid 60fps renders for complex graph visualisations containing up to 10k nodes.'
   },
   {
-    id: 6,
+    id: 7,
     title: 'Face-Recognition-Attendance-System',
     description: 'Designed an AI facial recognition attendance system, achieving a 98.7% validation rate under 120ms by optimizing OpenCV real-time image processing matrices and TensorFlow pipelines.',
     techStack: ['Python', 'OpenCV', 'TensorFlow', 'Keras', 'HTML5', 'CSS3'],
@@ -301,7 +379,7 @@ export const projects = [
     outcome: 'Automates secure real-time student check-ins under 120ms with near-zero false positive errors.'
   },
   {
-    id: 7,
+    id: 8,
     title: 'TaleemPro',
     description: 'Developed a scalable education management portal handling concurrent requests, securing private routes by 100% using stateless JWT tokens and MongoDB indexing queries.',
     techStack: ['React', 'Node.js', 'Express', 'MongoDB', 'JWT', 'REST API'],
@@ -319,26 +397,6 @@ export const projects = [
       "TODO: Technical challenge 2 and decision made"
     ],
     outcome: 'Successfully handles multi-role administrative workflows for school directories, grades, and fee records.'
-  },
-  {
-    id: 8,
-    title: 'VentureTwist',
-    description: 'Built an asynchronous restaurant ordering system, reducing page load latency by 32% by engineering a custom Vanilla JS state manager and lightweight Bootstrap rendering templates.',
-    techStack: ['Vanilla JS', 'Bootstrap 5', 'HTML5', 'CSS3', 'Responsive'],
-    category: 'Open Source',
-    featured: false,
-    liveUrl: 'https://github.com/rashidkhan4067/VentureTwist',
-    githubUrl: 'https://github.com/rashidkhan4067/VentureTwist',
-    accentColor: '#3F51B5', // Indigo
-    imageUrl: venturetwistImg,
-    tagline: 'Asynchronous restaurant ordering system and lightweight client-side state engine.',
-    status: 'Completed',
-    problemStatement: "TODO: 1-2 sentences on the actual problem this solves",
-    challenges: [
-      "TODO: Technical challenge 1 and decision made",
-      "TODO: Technical challenge 2 and decision made"
-    ],
-    outcome: 'Provides a lightweight, zero-dependency client ordering app loading in under 300ms.'
   },
   {
     id: 9,
