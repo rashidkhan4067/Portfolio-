@@ -12,7 +12,8 @@ import venturetwistImg from '../assets/venturetwist.png';
 import rescueDashboardImg from '../assets/rescue_dashboard.png';
 import rescueLandingImg from '../assets/rescue_landing.png';
 import rescueMapImg from '../assets/rescue_map.png';
-import foodyAppImg from '../assets/foody_app.webp';
+import fooddashLandingImg from '../assets/fooddash_landing.png';
+import fooddashLoginImg from '../assets/fooddash_login.png';
 import aiHmsImg from '../assets/ai_hms.webp';
 import portfolioDarkOrangeImg from '../assets/portfolio_dark_orange.png';
 import portfolioDarkRoseImg from '../assets/portfolio_dark_rose.png';
@@ -58,7 +59,7 @@ export const projects = [
     title: 'Al Shifaa Clinic',
     description: 'Engineered an AI-driven hospital management system featuring automated patient check-in queues, staff shift allocation, and predictive diagnostics reporting to reduce check-in overhead by 30%.',
     techStack: ['React', 'Django REST Framework', 'PostgreSQL', 'JWT', 'LLMs', 'Tailwind CSS'],
-    category: 'AI / ML',
+    category: 'Full-Stack',
     featured: true,
     liveUrl: 'https://al-shifaa-hms.vercel.app/',
     githubUrl: 'https://github.com/rashidkhan4067/AI-HMS',
@@ -305,13 +306,12 @@ export const projects = [
     category: 'Full-Stack',
     featured: true,
     liveUrl: 'https://github.com/rashidkhan4067',
-    githubUrl: 'https://github.com/rashidkhan4067',
+    githubUrl: 'https://github.com/rashidkhan4067/rashid-shafique-portfolio-',
     accentColor: '#10B981', // Emerald theme
     imageUrl: portfolioDarkOrangeImg,
     screenshots: [
       { label: 'Modern Dark Theme (Orange Accent)', url: portfolioDarkOrangeImg },
-      { label: 'Modern Dark Theme (Rose Accent)', url: portfolioDarkRoseImg },
-      { label: 'Light Theme (Orange Accent)', url: portfolioLightOrangeImg }
+      { label: 'Modern Dark Theme (Rose Accent)', url: portfolioDarkRoseImg }
     ],
     tagline: 'Interactive Virtual OS Workstation and full-stack engineering portfolio.',
     status: 'Completed',
@@ -439,6 +439,30 @@ export const projects = [
   },
   {
     id: 5,
+    title: 'FoodDash',
+    description: 'Designed and developed FoodDash, a modern web-based food delivery and order management dashboard featuring responsive menu searches, interactive carts, and secure authentication flow.',
+    techStack: ['React', 'Vite', 'CSS Modules', 'State Management', 'Mobile-First'],
+    category: 'Full-Stack',
+    featured: true,
+    liveUrl: 'https://fooddash-web.vercel.app/',
+    githubUrl: 'https://github.com/rashidkhan4067/FoodDash',
+    accentColor: '#F97316', // Google/Material orange
+    imageUrl: fooddashLandingImg,
+    screenshots: [
+      { label: 'Landing Page', url: fooddashLandingImg },
+      { label: 'Login Page', url: fooddashLoginImg }
+    ],
+    tagline: 'Responsive online food ordering dashboard and verification workflows.',
+    status: 'Completed',
+    problemStatement: 'Traditional online food ordering platforms suffer from layout shift, slow menu updates, and unoptimized login flows. Designed FoodDash to provide a modern, responsive user experience for browsing dining catalogs and managing cart checkouts.',
+    challenges: [
+      'Implementing low-latency client-side menu searches and dynamic cart updates. Configured a lightweight state context to handle subtotal adjustments and item additions without server roundtrips.',
+      'Securing user authentication with form validation. Designed beautiful, outline-styled login panels that integrate seamless input checking and responsive layout scaling.'
+    ],
+    outcome: 'Delivered an aesthetic, fast, and responsive user flow for dish selection, checkout verification, and session entry.'
+  },
+  {
+    id: 6,
     title: 'Sales-Data-Analysis-System',
     description: 'Optimized PySpark big data pipelines, reducing computational overhead by 38% while analyzing 10M+ transaction rows, and implemented predictive modeling using scikit-learn to forecast profits with 94.2% accuracy.',
     techStack: ['Python', 'Streamlit', 'PySpark', 'Scikit-Learn', 'Plotly', 'Pandas'],
@@ -458,7 +482,7 @@ export const projects = [
     outcome: 'Processes over 10M+ transaction rows under 1.5 seconds, delivering actionable profit forecasting.'
   },
   {
-    id: 6,
+    id: 7,
     title: 'AquaSync',
     description: 'Engineered an IoT real-time fluid telemetry dashboard, decreasing database write latency by 42% by compiling optimized C++ Arduino firmware and designing multi-threaded Python Sockets.',
     techStack: ['Python', 'Tkinter', 'C++', 'Arduino', 'IoT', 'Telemetry'],
@@ -478,7 +502,7 @@ export const projects = [
     outcome: 'Maintains 99.9% uptime across active device connections, processing 100k+ telemetry packets daily.'
   },
   {
-    id: 7,
+    id: 8,
     title: 'MediCare / Hospital Management',
     description: 'Developed a high-security patient management portal, reducing check-in bottlenecks by 35% by implementing transactional SQLite buffering and Node.js REST API schema validation.',
     techStack: ['Python', 'PySide6', 'SQLite', 'Node.js', 'Express', 'React'],
@@ -498,7 +522,7 @@ export const projects = [
     outcome: 'Used to streamline patient registration and check-in workflows for over 150 daily admissions.'
   },
   {
-    id: 8,
+    id: 9,
     title: 'Algoviz-pro',
     description: 'Built an algorithmic visualization engine demonstrating pathfinding and custom structures, improving canvas render speed by 50% through virtualized React tuning and D3.js transitions.',
     techStack: ['React', 'Vite', 'D3.js', 'Flask', 'Python', 'JavaScript'],
@@ -518,7 +542,7 @@ export const projects = [
     outcome: 'Provides fluid 60fps renders for complex graph visualisations containing up to 10k nodes.'
   },
   {
-    id: 9,
+    id: 10,
     title: 'Face-Recognition-Attendance-System',
     description: 'Designed an AI facial recognition attendance system, achieving a 98.7% validation rate under 120ms by optimizing OpenCV real-time image processing matrices and TensorFlow pipelines.',
     techStack: ['Python', 'OpenCV', 'TensorFlow', 'Keras', 'HTML5', 'CSS3'],
@@ -538,7 +562,7 @@ export const projects = [
     outcome: 'Automates secure real-time student check-ins under 120ms with near-zero false positive errors.'
   },
   {
-    id: 10,
+    id: 11,
     title: 'TaleemPro',
     description: 'Developed a scalable education management portal handling concurrent requests, securing private routes by 100% using stateless JWT tokens and MongoDB indexing queries.',
     techStack: ['React', 'Node.js', 'Express', 'MongoDB', 'JWT', 'REST API'],
@@ -556,26 +580,6 @@ export const projects = [
       "TODO: Technical challenge 2 and decision made"
     ],
     outcome: 'Successfully handles multi-role administrative workflows for school directories, grades, and fee records.'
-  },
-  {
-    id: 11,
-    title: 'Foody-App',
-    description: 'Designed a responsive mobile-first food delivery application, streamlining food ordering workflows and optimizing menu caching to achieve a 25% faster page render speed.',
-    techStack: ['React', 'Vite', 'CSS Modules', 'State Management', 'Mobile-First'],
-    category: 'Full-Stack',
-    featured: false,
-    liveUrl: 'https://github.com/rashidkhan4067/Foody-App',
-    githubUrl: 'https://github.com/rashidkhan4067/Foody-App',
-    accentColor: '#F97316', // Google/Material orange
-    imageUrl: foodyAppImg,
-    tagline: 'Mobile-first food delivery application and menu caching interface.',
-    status: 'Completed',
-    problemStatement: "TODO: 1-2 sentences on the actual problem this solves",
-    challenges: [
-      "TODO: Technical challenge 1 and decision made",
-      "TODO: Technical challenge 2 and decision made"
-    ],
-    outcome: 'Provides a highly responsive food ordering experience optimized for low-bandwidth mobile viewports.'
   },
 ];
 

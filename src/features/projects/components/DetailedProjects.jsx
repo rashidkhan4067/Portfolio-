@@ -41,7 +41,8 @@ const repoTitleOverrides = {
   'taleempro': 'TaleemPro',
   'venturetwist': 'VentureTwist',
   'rescue_project-': 'Rescue Project',
-  'foody-app': 'Foody App',
+  'foody-app': 'FoodDash',
+  'fooddash': 'FoodDash',
   'ai-hms': 'Al Shifaa Clinic'
 };
 
@@ -57,9 +58,42 @@ const formatProjectTitle = (name) => {
     .trim();
 };
 
-const CACHE_KEY = 'github_repos_cache_v11';
-const CACHE_TIME_KEY = 'github_repos_cache_time_v11';
+const CACHE_KEY = 'github_repos_raw_cache_v12';
+const CACHE_TIME_KEY = 'github_repos_raw_cache_time_v12';
 const ONE_HOUR = 60 * 60 * 1000;
+
+const mergeProjects = (rawGithubRepos) => {
+  const mergedProjects = rawGithubRepos.map(apiProj => {
+    const matchedStatic = projects.find(p =>
+      p.title.toLowerCase() === apiProj.repoName.toLowerCase() ||
+      (p.githubUrl && p.githubUrl.toLowerCase().includes(apiProj.repoName.toLowerCase()))
+    );
+    if (matchedStatic) {
+      return {
+        ...apiProj,
+        ...matchedStatic,
+        title: matchedStatic.title === 'Sales-Data-Analysis-System' ? 'Sales Data Pipeline' : matchedStatic.title,
+        techStack: Array.from(new Set([...matchedStatic.techStack, ...apiProj.techStack]))
+      };
+    }
+    return apiProj;
+  });
+
+  const unmatchedStatic = projects.filter(staticProj => 
+    !rawGithubRepos.some(apiProj => 
+      staticProj.title.toLowerCase() === apiProj.repoName.toLowerCase() ||
+      (staticProj.githubUrl && staticProj.githubUrl.toLowerCase().includes(apiProj.repoName.toLowerCase()))
+    )
+  );
+
+  const allProjects = [...mergedProjects, ...unmatchedStatic];
+
+  return [...allProjects].sort((a, b) => {
+    const idA = a.id !== undefined ? a.id : 999;
+    const idB = b.id !== undefined ? b.id : 999;
+    return idA - idB;
+  });
+};
 
 function ProjectVisualPlaceholder({ project }) {
   const isML = project.category === 'AI / ML';
@@ -144,7 +178,8 @@ export default function DetailedProjects() {
       const cachedData = sessionStorage.getItem(CACHE_KEY);
       const cachedTime = sessionStorage.getItem(CACHE_TIME_KEY);
       if (cachedData && cachedTime && (Date.now() - Number(cachedTime) < ONE_HOUR)) {
-        return JSON.parse(cachedData);
+        const rawRepos = JSON.parse(cachedData);
+        return mergeProjects(rawRepos);
       }
     } catch (e) {
       console.warn('Failed to parse projects cache on init:', e);
@@ -212,6 +247,7 @@ export default function DetailedProjects() {
         const cachedTime = sessionStorage.getItem(CACHE_TIME_KEY);
 
         if (cachedData && cachedTime && (Date.now() - Number(cachedTime) < ONE_HOUR)) {
+          setLoading(false);
           return;
         }
 
@@ -220,7 +256,7 @@ export default function DetailedProjects() {
         const repos = await response.json();
 
         const mappedProjects = repos
-          .filter(repo => !repo.fork && repo.name.toLowerCase() !== 'rashidkhan4067' && repo.name.toLowerCase() !== 'portfolio-')
+          .filter(repo => !repo.fork && repo.name.toLowerCase() !== 'rashidkhan4067' && repo.name.toLowerCase() !== 'portfolio-' && repo.name.toLowerCase() !== 'foody-app')
           .map((repo, index) => {
             let category = 'Open Source';
             let accentColor = '#7C3AED';
@@ -263,46 +299,16 @@ export default function DetailedProjects() {
           });
 
         if (mappedProjects.length > 0) {
-          const mergedProjects = mappedProjects.map(apiProj => {
-            const matchedStatic = projects.find(p =>
-              p.title.toLowerCase() === apiProj.repoName.toLowerCase() ||
-              (p.githubUrl && p.githubUrl.toLowerCase().includes(apiProj.repoName.toLowerCase()))
-            );
-            if (matchedStatic) {
-              return {
-                ...apiProj,
-                ...matchedStatic,
-                title: matchedStatic.title === 'Sales-Data-Analysis-System' ? 'Sales Data Pipeline' : matchedStatic.title,
-                techStack: Array.from(new Set([...matchedStatic.techStack, ...apiProj.techStack]))
-              };
-            }
-            return apiProj;
-          });
-
-          // Keep static projects that are not found in the GitHub API repositories response
-          const unmatchedStatic = projects.filter(staticProj => 
-            !mappedProjects.some(apiProj => 
-              staticProj.title.toLowerCase() === apiProj.repoName.toLowerCase() ||
-              (staticProj.githubUrl && staticProj.githubUrl.toLowerCase().includes(apiProj.repoName.toLowerCase()))
-            )
-          );
-
-          const allProjects = [...mergedProjects, ...unmatchedStatic];
-
-          const sortedProjects = [...allProjects].sort((a, b) => {
-            const idA = a.id !== undefined ? a.id : 999;
-            const idB = b.id !== undefined ? b.id : 999;
-            return idA - idB;
-          });
+          const sortedProjects = mergeProjects(mappedProjects);
           setProjectList(sortedProjects);
-          sessionStorage.setItem(CACHE_KEY, JSON.stringify(sortedProjects));
+          sessionStorage.setItem(CACHE_KEY, JSON.stringify(mappedProjects));
           sessionStorage.setItem(CACHE_TIME_KEY, String(Date.now()));
         }
       } catch (error) {
         console.warn('GitHub API rate limit or error, falling back to cached static data:', error);
         const expiredCache = sessionStorage.getItem(CACHE_KEY);
         if (expiredCache) {
-          setProjectList(JSON.parse(expiredCache));
+          setProjectList(mergeProjects(JSON.parse(expiredCache)));
         } else {
           setProjectList([...projects].sort((a, b) => a.id - b.id));
         }
@@ -548,7 +554,7 @@ export default function DetailedProjects() {
     );
   }
 
-  const displayedProjects = showAll ? projectList : projectList; // Show all by default on Projects page grid
+  const displayedProjects = projectList.filter(p => !!p.imageUrl); // Filter out projects without images
   const skeletonCards = Array.from({ length: 6 });
 
   return (
