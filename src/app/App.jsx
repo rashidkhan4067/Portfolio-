@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useThemeStore } from '../store';
 import AppRouter from '../routes';
-import PWAUpdateToast from '../components/PWAUpdateToast';
 
 export default function App() {
   const { theme } = useThemeStore();
@@ -14,7 +13,6 @@ export default function App() {
   return (
     <>
       <AppRouter />
-      <PWAUpdateToast />
     </>
   );
 }
