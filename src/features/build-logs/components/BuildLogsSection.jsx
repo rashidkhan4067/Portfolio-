@@ -1,14 +1,24 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { BookOpen, Code2, ArrowRight } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { ArrowRight, Tag } from 'lucide-react';
 import { buildLogs } from '../../../constants/portfolioData';
 import styles from '../styles.module.css';
-import SectionHeading from '../../../components/SectionHeading';
 import Modal from '../../../components/Modal';
 
 export default function BuildLogsSection() {
   const [selectedLog, setSelectedLog] = useState(null);
   const [activeCategory, setActiveCategory] = useState('All');
+  const location = useLocation();
+
+  useEffect(() => {
+    const hash = window.location.hash.substring(1);
+    if (hash) {
+      const found = buildLogs.find(log => log.title.toLowerCase().replace(/[^a-z0-9]+/g, '-') === hash);
+      if (found) {
+        setSelectedLog(found);
+      }
+    }
+  }, [location]);
 
   const openLog = (log) => {
     setSelectedLog(log);
@@ -16,6 +26,9 @@ export default function BuildLogsSection() {
 
   const closeLog = () => {
     setSelectedLog(null);
+    if (window.location.hash) {
+      window.location.hash = '';
+    }
   };
 
   const categories = ['All', 'Data Engineering', 'Backend', 'IoT'];
@@ -28,55 +41,60 @@ export default function BuildLogsSection() {
     <section className={styles.section} id="build-logs-section">
       <div className="container">
         
-        {/* Section Heading */}
-        <SectionHeading
-          eyebrow="Development Journal"
-          title="Build Logs"
-          subtitle="A structured collection of low-latency optimization logs, system telemetry, and pipeline architectural write-ups."
-          centered={true}
-        />
+        {/* Section Header */}
+        <div className={styles.headerContainer}>
+          <span className={styles.eyebrow}>HIGHLIGHTED INSIGHTS</span>
+          <h2 className={styles.title}>Build Logs</h2>
+          <p className={styles.subtitle}>
+            A structured collection of low-latency optimization logs, system telemetry, and pipeline architectural write-ups.
+          </p>
+        </div>
 
         {/* Category Filter Selector pills */}
-        <div className={styles.filterContainer} role="tablist" aria-label="Filter build logs by technology">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`${styles.filterBtn} ${activeCategory === cat ? styles.filterBtnActive : ''}`}
-              role="tab"
-              aria-selected={activeCategory === cat}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
+        <nav className={styles.filterContainer} aria-label="Filter build logs by technology">
+          <div className={styles.filterScroller}>
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`${styles.filterBtn} ${activeCategory === cat ? styles.filterBtnActive : ''} flex-shrink-0`}
+                aria-pressed={activeCategory === cat ? "true" : "false"}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        </nav>
 
         {/* Responsive Grid Layout identical to Projects */}
         <div className={styles.logsGrid}>
           {filteredLogs.map((log) => (
-            <article key={log.id} className={styles.card}>
+            <article 
+              key={log.id} 
+              className={styles.card}
+              onClick={() => openLog(log)}
+            >
               
-              {/* Card Header */}
-              <div className={styles.cardHeader}>
-                <div className={styles.iconContainer}>
-                  <BookOpen size={20} aria-hidden="true" />
+              {/* Top Row: Tags Left, Date Right */}
+              <div className={styles.topRow}>
+                <div className={styles.tagList}>
+                  <span className={styles.cardTag}>{log.type}</span>
+                  <span className={styles.cardTag}>{log.metric}</span>
                 </div>
-                <div className={styles.headerMeta}>
-                  <span className={styles.categoryBadge}>
-                    {log.type}
-                  </span>
-                  <span className={styles.metricBadge}>
-                    {log.metric}
-                  </span>
-                </div>
-                <span className={styles.date}>{log.date}</span>
+                <span className={styles.cardDate}>{log.date}</span>
               </div>
 
-              {/* Card Body */}
+              {/* Divider after top row */}
+              <div className={styles.divider} />
+
+              {/* Card Title & Desc */}
               <div className={styles.cardBody}>
                 <h3 className={styles.cardTitle}>
                   <button
-                    onClick={() => openLog(log)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      openLog(log);
+                    }}
                     className={styles.cardTitleButton}
                   >
                     {log.title}
@@ -85,27 +103,17 @@ export default function BuildLogsSection() {
                 <p className={styles.cardDesc}>{log.excerpt}</p>
               </div>
 
-              {/* Card Footer */}
-              <div className={styles.cardFooter}>
-                <div className={styles.techList}>
-                  {log.tags.slice(0, 3).map((tag) => (
-                    <div key={tag} className={styles.techItem}>
-                      <Code2 size={12} className={styles.techIcon} aria-hidden="true" />
-                      <span className={styles.techName}>{tag}</span>
-                    </div>
-                  ))}
-                </div>
-                
-                {/* Outlined Action Trigger */}
-                <button
-                  onClick={() => openLog(log)}
-                  className={styles.readMoreBtn}
-                  style={{ minHeight: '32px', padding: '0.25rem 0.75rem', fontSize: '0.8rem', gap: '0.25rem' }}
-                  aria-label={`Read full log: ${log.title}`}
-                >
-                  <span>Open Journal</span>
-                  <ArrowRight size={12} className={styles.arrowIcon} aria-hidden="true" />
-                </button>
+              {/* Bottom Divider */}
+              <div className={styles.bottomDivider} />
+
+              {/* Topic chips (bottom) */}
+              <div className={styles.topicList}>
+                {log.tags.slice(0, 3).map((tag) => (
+                  <div key={tag} className={styles.topicChip} onClick={(e) => e.stopPropagation()}>
+                    <Tag size={10} aria-hidden="true" />
+                    <span>{tag}</span>
+                  </div>
+                ))}
               </div>
 
             </article>
@@ -142,3 +150,4 @@ export default function BuildLogsSection() {
     </section>
   );
 }
+

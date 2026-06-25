@@ -107,8 +107,8 @@ export default defineConfig({
         ],
       },
       devOptions: {
-        // Enable PWA in dev so you can inspect the manifest & SW
-        enabled: true,
+        // Disable PWA in dev to prevent service worker caching from blocking live reload
+        enabled: false,
         type: 'module',
       },
     }),

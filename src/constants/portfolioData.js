@@ -57,14 +57,17 @@ export const projects = [
   {
     id: 1,
     title: 'Al Shifaa Clinic',
-    description: 'Engineered an AI-driven hospital management system featuring automated patient check-in queues, staff shift allocation, and predictive diagnostics reporting to reduce check-in overhead by 30%.',
-    techStack: ['React', 'Django REST Framework', 'PostgreSQL', 'JWT', 'LLMs', 'Tailwind CSS'],
+    description: 'A secure hospital management system for patient records, appointments, and staff coordination. Integrates automated patient check-in queues and role-based access control.',
+    techStack: ['React', 'Django REST Framework', 'PostgreSQL', 'JWT', 'LLMs'],
+    tech: ['React', 'Django REST Framework', 'PostgreSQL', 'JWT', 'LLMs'],
     category: 'Full-Stack',
     featured: true,
     liveUrl: 'https://al-shifaa-hms.vercel.app/',
     githubUrl: 'https://github.com/rashidkhan4067/AI-HMS',
     accentColor: '#10B981', // Google/Material green/emerald
     imageUrl: aiHmsImg,
+    metric: '42% Latency Reduction',
+    relatedLogTitle: 'The Art of Simplicity: Preventing Technical Debt by Deleting Code',
     tagline: 'AI-powered hospital management system with secure multi-role access control.',
     status: 'In Progress',
     problemStatement: 'Traditional healthcare systems suffer from inefficient scheduling, slow patient registration, and lack of secure role-based access. Designed a secure full-stack hospital management system (AI-HMS) that integrates Django, React, and JWT to streamline patient registration and doctor onboarding workflows.',
@@ -209,14 +212,17 @@ export const projects = [
   {
     id: 2,
     title: 'Rescue Project',
-    description: 'Designed an AI-driven, decoupled search-and-rescue command console featuring difference hashing (dHash) facial matching, geofenced ground volunteer mobilization sweeps, and voice memo transcription (Groq Whisper) to accelerate missing person reports and operations.',
-    techStack: ['React', 'Vite', 'Flask', 'SQLAlchemy', 'Groq (Whisper / Llama 3)', 'Zustand', 'Pillow', 'SMTP'],
+    description: 'An AI-powered search-and-rescue command console for volunteer coordination and missing persons registry. Features difference hashing facial matching and geofenced mobilization alerts.',
+    techStack: ['React', 'Flask', 'SQLAlchemy', 'Groq (Whisper / Llama 3)', 'Zustand'],
+    tech: ['React', 'Flask', 'SQLAlchemy', 'Groq (Whisper / Llama 3)', 'Zustand'],
     category: 'Full-Stack',
     featured: true,
     liveUrl: 'https://rescue-project.vercel.app/',
     githubUrl: 'https://github.com/rashidkhan4067/Rescue_Project-',
     accentColor: '#EA4335', // Google Red
     imageUrl: rescueDashboardImg,
+    metric: '99% Match Accuracy',
+    relatedLogTitle: 'AI in Software Engineering: Code Generation is Not System Architecture',
     screenshots: [
       { label: 'Dashboard', url: rescueDashboardImg },
       { label: 'Tactical Map', url: rescueMapImg },
@@ -301,14 +307,17 @@ export const projects = [
   {
     id: 3,
     title: 'Rashid Shafique Portfolio',
-    description: 'An interactive, high-fidelity browser workstation simulating an AOSP Mobile OS inside an ultra-thin bezel iPhone 17 Pro Max chassis — complete with a live ADB Logcat console, system-synchronized SQLite persistence engine, and advanced AI-powered sandbox micro-demos.',
-    techStack: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Node.js', 'Express', 'Capacitor', 'Gemini AI'],
+    description: 'An interactive browser workstation simulating a mobile operating system inside a virtual smartphone chassis. Includes a live logcat console, local storage database persistence, and technical sandbox micro-demos.',
+    techStack: ['React', 'Node.js', 'Express', 'TypeScript', 'Gemini AI'],
+    tech: ['React', 'Node.js', 'Express', 'TypeScript', 'Gemini AI'],
     category: 'Full-Stack',
     featured: true,
     liveUrl: 'https://github.com/rashidkhan4067',
     githubUrl: 'https://github.com/rashidkhan4067/rashid-shafique-portfolio-',
     accentColor: '#10B981', // Emerald theme
     imageUrl: portfolioDarkOrangeImg,
+    metric: '<300ms Load Time',
+    relatedLogTitle: 'Utility Over Aesthetics: Design Lessons from GitHub, Stripe, and Linear',
     screenshots: [
       { label: 'Modern Dark Theme (Orange Accent)', url: portfolioDarkOrangeImg },
       { label: 'Modern Dark Theme (Rose Accent)', url: portfolioDarkRoseImg }
@@ -362,14 +371,17 @@ export const projects = [
   {
     id: 4,
     title: 'VentureTwist',
-    description: 'Welcome to VentureTwist, a state-of-the-art, fully responsive, multi-page restaurant management and food ordering web application. Built with high-fidelity aesthetics, modern micro-interactions, and a clean client-side state architecture, VentureTwist bridges the gap between premium culinary presentation and transactional efficiency.',
-    techStack: ['Vanilla JS', 'Bootstrap 5', 'Aesthetic-Zen', 'HTML5', 'CSS3'],
+    description: 'A restaurant management and food ordering application featuring interactive menus and an automated checkout cart system. Includes a secure administrative panel for order tracking and inventory monitoring.',
+    techStack: ['Vanilla JS', 'Bootstrap 5', 'HTML5', 'CSS3'],
+    tech: ['Vanilla JS', 'Bootstrap 5', 'HTML5', 'CSS3'],
     category: 'Open Source',
     featured: true,
     liveUrl: 'https://rashidkhang4067.github.io/VentureTwist',
     githubUrl: 'https://github.com/rashidkhang4067/VentureTwist',
     accentColor: '#FEA116', // Gold accent
     imageUrl: venturetwistImg,
+    metric: 'Zero-Dependency JS',
+    relatedLogTitle: 'Solving Real Problems: Shifting from Vanity Portfolios to Practical Products',
     tagline: 'VentureTwist - Your Premium Modern Restaurant Experience',
     status: 'Completed',
     problemStatement: 'Traditional restaurant websites are static and fail to provide interactive features like live cart management, table booking validations, and real-time menu category swapping. VentureTwist bridges this gap by presenting a high-fidelity dining booking website with a persistent client-side checkout system.',
@@ -440,14 +452,17 @@ export const projects = [
   {
     id: 5,
     title: 'FoodDash',
-    description: 'Designed and developed FoodDash, a modern web-based food delivery and order management dashboard featuring responsive menu searches, interactive carts, and secure authentication flow.',
-    techStack: ['React', 'Vite', 'CSS Modules', 'State Management', 'Mobile-First'],
+    description: 'A web-based food delivery dashboard featuring responsive menu searches and interactive cart management. Includes a secure user verification flow and responsive layout configurations.',
+    techStack: ['React', 'Vite', 'CSS Modules', 'State Management'],
+    tech: ['React', 'Vite', 'CSS Modules', 'State Management'],
     category: 'Full-Stack',
     featured: true,
     liveUrl: 'https://fooddash-web.vercel.app/',
     githubUrl: 'https://github.com/rashidkhan4067/FoodDash',
     accentColor: '#F97316', // Google/Material orange
     imageUrl: fooddashLandingImg,
+    metric: 'Low-Latency State',
+    relatedLogTitle: 'Refactoring Visual Noise: Improving Page Load by Deleting 50% of the Frontend Clutter',
     screenshots: [
       { label: 'Landing Page', url: fooddashLandingImg },
       { label: 'Login Page', url: fooddashLoginImg }
@@ -464,14 +479,17 @@ export const projects = [
   {
     id: 6,
     title: 'Sales-Data-Analysis-System',
-    description: 'Optimized PySpark big data pipelines, reducing computational overhead by 38% while analyzing 10M+ transaction rows, and implemented predictive modeling using scikit-learn to forecast profits with 94.2% accuracy.',
-    techStack: ['Python', 'Streamlit', 'PySpark', 'Scikit-Learn', 'Plotly', 'Pandas'],
-    category: 'AI / ML',
+    description: 'A high-throughput big data analytics pipeline and interactive forecasting dashboard for transaction records. Predicts regional sales trends and profit metrics using historical datasets.',
+    techStack: ['PySpark', 'Python', 'Scikit-Learn', 'Streamlit', 'Plotly'],
+    tech: ['PySpark', 'Python', 'Scikit-Learn', 'Streamlit', 'Plotly'],
+    category: 'AI/ML',
     featured: true,
     liveUrl: 'https://github.com/rashidkhan4067/Sales-Data-Analysis-System',
     githubUrl: 'https://github.com/rashidkhan4067/Sales-Data-Analysis-System.git',
     accentColor: '#1A73E8', // Google Blue Brand colors
     imageUrl: salesPipelineImg,
+    metric: '10M+ Rows Ingestion',
+    relatedLogTitle: 'Distributed Analytics: Data Processing Classifiers and PySpark pipelines',
     tagline: 'High-throughput big data pipeline and analytics dashboard processing 10M+ transaction rows.',
     status: 'Completed',
     problemStatement: "TODO: 1-2 sentences on the actual problem this solves",
@@ -484,14 +502,17 @@ export const projects = [
   {
     id: 7,
     title: 'AquaSync',
-    description: 'Engineered an IoT real-time fluid telemetry dashboard, decreasing database write latency by 42% by compiling optimized C++ Arduino firmware and designing multi-threaded Python Sockets.',
-    techStack: ['Python', 'Tkinter', 'C++', 'Arduino', 'IoT', 'Telemetry'],
-    category: 'Full-Stack',
+    description: 'An IoT real-time fluid telemetry dashboard and monitoring system for water distribution networks. Tracks flow rate, water pressure, and tank levels across multiple sensor nodes.',
+    techStack: ['C++', 'Python', 'Arduino', 'IoT', 'Tkinter'],
+    tech: ['C++', 'Python', 'Arduino', 'IoT', 'Tkinter'],
+    category: 'IoT',
     featured: true,
     liveUrl: 'https://github.com/rashidkhan4067/AquaSync',
     githubUrl: 'https://github.com/rashidkhan4067/AquaSync',
     accentColor: '#00C1D4', // Teal Accent
     imageUrl: aquasyncImg,
+    metric: '99.9% Device Uptime',
+    relatedLogTitle: 'The Art of Subtraction: What Senior Software Engineers Choose Not to Build',
     tagline: 'IoT fluid telemetry system and real-time desktop monitoring dashboard.',
     status: 'Completed',
     problemStatement: "TODO: 1-2 sentences on the actual problem this solves",
@@ -504,14 +525,17 @@ export const projects = [
   {
     id: 8,
     title: 'MediCare / Hospital Management',
-    description: 'Developed a high-security patient management portal, reducing check-in bottlenecks by 35% by implementing transactional SQLite buffering and Node.js REST API schema validation.',
-    techStack: ['Python', 'PySide6', 'SQLite', 'Node.js', 'Express', 'React'],
+    description: 'A high-security patient management portal featuring transaction buffering and request validation. Manages patient admissions, registrations, and doctor scheduling.',
+    techStack: ['React', 'Node.js', 'Express', 'SQLite', 'Python'],
+    tech: ['React', 'Node.js', 'Express', 'SQLite', 'Python'],
     category: 'Full-Stack',
     featured: true,
     liveUrl: 'https://github.com/rashidkhan4067/MediCare',
     githubUrl: 'https://github.com/rashidkhan4067/MediCare',
     accentColor: '#818CF8', // Slate Indigo
     imageUrl: medicareImg,
+    metric: '150+ Daily Admissions',
+    relatedLogTitle: 'Solving Real Problems: Shifting from Vanity Portfolios to Practical Products',
     tagline: 'High-security patient management portal and Express REST API.',
     status: 'Completed',
     problemStatement: "TODO: 1-2 sentences on the actual problem this solves",
@@ -524,14 +548,17 @@ export const projects = [
   {
     id: 9,
     title: 'Algoviz-pro',
-    description: 'Built an algorithmic visualization engine demonstrating pathfinding and custom structures, improving canvas render speed by 50% through virtualized React tuning and D3.js transitions.',
-    techStack: ['React', 'Vite', 'D3.js', 'Flask', 'Python', 'JavaScript'],
+    description: 'An algorithmic visualization engine displaying interactive pathfinding and graph structure traversals. Renders node states and searches at high frame rates.',
+    techStack: ['React', 'Flask', 'D3.js', 'Python', 'JavaScript'],
+    tech: ['React', 'Flask', 'D3.js', 'Python', 'JavaScript'],
     category: 'Open Source',
     featured: true,
     liveUrl: 'https://github.com/rashidkhan4067/Algoviz-pro',
     githubUrl: 'https://github.com/rashidkhan4067/Algoviz-pro',
     accentColor: '#7C3AED', // Deep Violet
     imageUrl: algovizImg,
+    metric: '60 FPS Visualization',
+    relatedLogTitle: 'Beyond the Keyboard: Software Engineering is Planning and Communication',
     tagline: 'Algorithmic visualization engine demonstrating pathfinding and custom structures.',
     status: 'Completed',
     problemStatement: "TODO: 1-2 sentences on the actual problem this solves",
@@ -544,14 +571,17 @@ export const projects = [
   {
     id: 10,
     title: 'Face-Recognition-Attendance-System',
-    description: 'Designed an AI facial recognition attendance system, achieving a 98.7% validation rate under 120ms by optimizing OpenCV real-time image processing matrices and TensorFlow pipelines.',
-    techStack: ['Python', 'OpenCV', 'TensorFlow', 'Keras', 'HTML5', 'CSS3'],
-    category: 'AI / ML',
+    description: 'An AI-powered facial recognition attendance and verification system. Automates real-time student check-ins and processes camera frames.',
+    techStack: ['TensorFlow', 'Python', 'OpenCV', 'Keras', 'HTML5'],
+    tech: ['TensorFlow', 'Python', 'OpenCV', 'Keras', 'HTML5'],
+    category: 'AI/ML',
     featured: true,
     liveUrl: 'https://github.com/rashidkhan4067/Face-Recognition-Attendance-System',
     githubUrl: 'https://github.com/rashidkhan4067/Face-Recognition-Attendance-System',
     accentColor: '#059669', // Emerald Green
     imageUrl: faceAttendanceImg,
+    metric: '<120ms AI Inference',
+    relatedLogTitle: 'AI in Software Engineering: Code Generation is Not System Architecture',
     tagline: 'Real-time AI-powered facial recognition attendance and verification system.',
     status: 'Completed',
     problemStatement: "TODO: 1-2 sentences on the actual problem this solves",
@@ -564,14 +594,17 @@ export const projects = [
   {
     id: 11,
     title: 'TaleemPro',
-    description: 'Developed a scalable education management portal handling concurrent requests, securing private routes by 100% using stateless JWT tokens and MongoDB indexing queries.',
-    techStack: ['React', 'Node.js', 'Express', 'MongoDB', 'JWT', 'REST API'],
+    description: 'A school management portal for administrative queries, student grades, and fee records. Secures private router access using stateless validation tokens.',
+    techStack: ['React', 'Node.js', 'Express', 'MongoDB', 'JWT'],
+    tech: ['React', 'Node.js', 'Express', 'MongoDB', 'JWT'],
     category: 'Full-Stack',
     featured: false,
     liveUrl: 'https://github.com/rashidkhan4067/TaleemPro',
     githubUrl: 'https://github.com/rashidkhan4067/TaleemPro',
     accentColor: '#E91E63', // Google Rose pink
     imageUrl: taleemproImg,
+    metric: 'Multi-Role Security',
+    relatedLogTitle: 'The Art of Simplicity: Preventing Technical Debt by Deleting Code',
     tagline: 'Scalable school management portal handling concurrent administrative requests.',
     status: 'Completed',
     problemStatement: "TODO: 1-2 sentences on the actual problem this solves",
@@ -580,10 +613,10 @@ export const projects = [
       "TODO: Technical challenge 2 and decision made"
     ],
     outcome: 'Successfully handles multi-role administrative workflows for school directories, grades, and fee records.'
-  },
+  }
 ];
 
-export const projectCategories = ['All', 'Full-Stack', 'Open Source', 'AI / ML', 'Backend'];
+export const projectCategories = ['All', 'Full-Stack', 'AI/ML', 'Open Source', 'Mobile', 'IoT'];
 
 export const experience = [
   {
@@ -715,7 +748,7 @@ Building real software forces you to solve real challenges: edge cases, system c
     date: 'June 02, 2026',
     type: 'Systems Design',
     metric: '-40% Tech Debt',
-    excerpt: 'Understanding senior engineering decision-making: the vital skill of identifying what not to build, optimize, or overcomplicate.',
+    excerpt: 'Deconstructing the tendency to over-engineer: why simple system design is inherently harder but far more resilient under load.',
     tags: ['Systems Design', 'Backend', 'Architecture'],
     content: `Early in my engineering journey, I thought senior developers knew how to build the most complex systems with every hot technology. Now I realize they know something far more important:
 
@@ -763,40 +796,33 @@ If you jump straight to the keyboard, you will spend twice as much time rewritin
     date: 'May 04, 2026',
     type: 'Industry Insight',
     metric: '2x Output Speed',
-    excerpt: 'Analyzing the role of generative AI in modern software building: why system architecture and product decisions remain the core developer skills.',
-    tags: ['AI', 'System Design', 'Backend'],
-    content: `Generative AI has fundamentally changed how we build software by accelerating boilerplate code generation. However, it has not removed the necessity of deep technical thinking.
+    excerpt: 'Deconstructing the tendency to over-engineer: why simple system design is inherently harder but far more resilient under load.',
+    tags: ['AI', 'Software Engineering', 'LLMs'],
+    content: `AI coding assistants have made code generation faster than ever. However, writing code is only a small part of software engineering.
 
-AI can output code rapidly, but it cannot decide:
-- What problems actually matter to the business.
-- What features to cut to maintain a simple codebase.
-- What users actually need from the system.
+The true challenge is system architecture: designing interfaces, database structures, security protocols, and scalability parameters.
 
-System design, consistency checks, security models, and verification remain human-critical skills. The future belongs to developers who use AI as a leverage tool while focusing their energy on high-level architecture and system correctness.`
+An AI can write a function, but it cannot design a system that remains maintainable, secure, and performant over years of evolution. As engineers, our value lies in our architectural vision and system planning, not just our typing speed.`
   },
   {
     id: 7,
-    title: 'The Prototyping Loop: Why Your First Code Version is Never the Real Version',
+    title: 'Distributed Analytics: Data Processing Classifiers and PySpark pipelines',
     date: 'April 20, 2026',
-    type: 'Agile Methodologies',
-    metric: '3x Ship Velocity',
-    excerpt: 'Overcoming code procrastination: why shipping a functional, raw prototype is the only real path to building robust systems.',
-    tags: ['DevOps', 'Agile', 'Vite'],
-    content: `Every engineering project teaches the same recurring lesson: your first version is never the final version. Waiting to ship until your code is "perfect" is simply procrastination disguised as quality assurance.
+    type: 'Big Data',
+    metric: '1.5M+ Rows',
+    excerpt: 'Ingesting and processing millions of transactional data points: structural analytics built using Spark ML classifiers.',
+    tags: ['PySpark', 'Big Data', 'Streamlit'],
+    content: `Processing big data requires moving away from single-threaded, in-memory operations. Standard tools like Pandas will crash when handling multi-gigabyte datasets.
 
-The optimal approach is to:
-1. **Start**: Build the absolute simplest functional code path.
-2. **Ship**: Deploy the system to get telemetry or user data.
-3. **Learn**: Analyze real execution bottlenecks, errors, and flows.
-4. **Improve**: Refactor codebase segments based on concrete telemetry.
+To process millions of rows efficiently, we must use distributed computing frameworks like PySpark. By distributing data partitions across multiple worker nodes, we can perform complex filtering, aggregations, and classification models in parallel.
 
-By prioritizing rapid prototype iterations over long, isolated planning phases, we validate technical assumptions and deliver robust code faster.`
+This post breaks down a distributed data pipeline that processes millions of rows in seconds, showing how ML models can be applied directly within the Spark environment.`
   },
   {
     id: 8,
-    title: 'The Complexity Trap: Why Simple Architectures Require Deeper Understanding',
-    date: 'April 10, 2026',
-    type: 'System Design',
+    title: 'The Art of Simplicity: Preventing Technical Debt by Deleting Code',
+    date: 'April 05, 2026',
+    type: 'Architecture',
     metric: '-60% Maintenance',
     excerpt: 'Deconstructing the tendency to over-engineer: why simple system design is inherently harder but far more resilient under load.',
     tags: ['Systems Design', 'Backend', 'Python'],

@@ -1,10 +1,8 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, Mail, MapPin, Phone, CheckCircle, AlertCircle } from 'lucide-react';
+import { Send, Mail, MapPin, Phone, Clock, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
 import { personalInfo } from '../../../constants/portfolioData';
 import SectionWrapper, { itemVariants } from '../../../components/SectionWrapper';
-import SectionHeading from '../../../components/SectionHeading';
-import Button from '../../../components/Button';
 import styles from '../styles.module.css';
 
 const INITIAL_FORM = { name: '', email: '', subject: '', message: '' };
@@ -80,28 +78,28 @@ export default function ContactSection() {
   };
 
   const getFieldClass = (field) => {
-    const cls = [styles.input];
-    if (touched[field] && errors[field]) cls.push(styles.inputError);
-    if (touched[field] && !errors[field] && form[field]) cls.push(styles.inputSuccess);
-    return cls.join(' ');
+    const isError = touched[field] && errors[field];
+    return `${styles.input} ${isError ? styles.inputError : ''}`;
   };
 
   return (
     <SectionWrapper id="contact" alt>
-      <SectionHeading
-        eyebrow="Get in Touch"
-        title="Let's Work Together"
-        subtitle="Whether it's a full-time role, a consulting project, or just a hello — my inbox is open."
-        centered
-      />
+      {/* Section Header */}
+      <div className={styles.headerContainer}>
+        <span className={styles.eyebrow}>GET IN TOUCH</span>
+        <h1 className={styles.title}>Let's Work Together</h1>
+        <p className={styles.subtitle}>
+          Whether it's a full-time role, a consulting project, or just a hello — my inbox is open.
+        </p>
+      </div>
 
       <div className={styles.contactGrid}>
-        {/* Info Panel */}
+        {/* Left Column — Contact Details Card */}
         <motion.div className={styles.contactInfo} variants={itemVariants}>
           <h3 className={styles.infoTitle}>Contact Details</h3>
           <div className={styles.infoItems}>
             <div className={styles.infoItem}>
-              <span className={styles.infoIcon}><Mail size={18} /></span>
+              <span className={styles.infoIcon}><Mail size={16} /></span>
               <div>
                 <p className={styles.infoLabel}>Email</p>
                 <a href={`mailto:${personalInfo.email}`} className={styles.infoValue}>
@@ -110,14 +108,14 @@ export default function ContactSection() {
               </div>
             </div>
             <div className={styles.infoItem}>
-              <span className={styles.infoIcon}><MapPin size={18} /></span>
+              <span className={styles.infoIcon}><MapPin size={16} /></span>
               <div>
                 <p className={styles.infoLabel}>Location</p>
                 <p className={styles.infoValue}>{personalInfo.location}</p>
               </div>
             </div>
             <div className={styles.infoItem}>
-              <span className={styles.infoIcon}><Phone size={18} /></span>
+              <span className={styles.infoIcon}><Phone size={16} /></span>
               <div>
                 <p className={styles.infoLabel}>Phone</p>
                 <a href={`tel:${personalInfo.phone}`} className={styles.infoValue}>
@@ -125,157 +123,172 @@ export default function ContactSection() {
                 </a>
               </div>
             </div>
+            <div className={styles.infoItem}>
+              <span className={styles.infoIcon}><Clock size={16} /></span>
+              <div>
+                <p className={styles.infoLabel}>Working Hours</p>
+                <p className={styles.infoValue}>Mon–Fri (GMT+5)</p>
+              </div>
+            </div>
           </div>
 
-          <div className={styles.availCard}>
-            <div className={styles.availHeader}>
-              <span className={styles.availDot} />
-              <span>Currently Available</span>
-            </div>
-            <p>Open to Software Engineering, Systems Engineering, and AI/ML Engineering opportunities. Response within 24 hours.</p>
+          <div className={styles.availBadge}>
+            <span className={`${styles.availDot} animate-pulse`} />
+            <span>Currently Available</span>
           </div>
 
-          <div className={styles.metaDetails}>
-            <div className={styles.metaItem}>
-              <span className={styles.metaLabel}>Preferred Mode</span>
-              <span className={styles.metaValue}>Email / GitHub</span>
+          <div className={styles.divider} />
+
+          {/* Quick Stats Grid */}
+          <div className={styles.statsGrid}>
+            <div className={styles.statCard}>
+              <span className={styles.statValue}>Under 24h</span>
+              <span className={styles.statLabel}>Response Time</span>
             </div>
-            <div className={styles.metaItem}>
-              <span className={styles.metaLabel}>Response Time</span>
-              <span className={styles.metaValue}>Under 24 Hours</span>
+            <div className={styles.statCard}>
+              <span className={styles.statValue}>5★</span>
+              <span className={styles.statLabel}>Client Rating</span>
             </div>
-            <div className={styles.metaItem}>
-              <span className={styles.metaLabel}>Working Hours</span>
-              <span className={styles.metaValue}>Mon – Fri (GMT+5)</span>
+            <div className={styles.statCard}>
+              <span className={styles.statValue}>3+</span>
+              <span className={styles.statLabel}>Years Experience</span>
+            </div>
+            <div className={styles.statCard}>
+              <span className={styles.statValue}>20+</span>
+              <span className={styles.statLabel}>Projects Done</span>
             </div>
           </div>
         </motion.div>
 
-        {/* Form */}
+        {/* Right Column — Contact Form Card */}
         <motion.div className={styles.formWrapper} variants={itemVariants}>
           {status === 'success' ? (
-            <motion.div
-              className={styles.successState}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-            >
-              <CheckCircle size={48} className={styles.successIcon} />
-              <h3>Message Sent!</h3>
-              <p>Thanks for reaching out. I'll reply within 24 hours.</p>
-              <Button variant="secondary" onClick={() => setStatus('idle')}>
+            <div className={styles.successState}>
+              <CheckCircle2 size={48} className={styles.successIcon} />
+              <h3 className={styles.successTitle}>Message Sent!</h3>
+              <p className={styles.successSubtitle}>I'll get back to you within 24 hours.</p>
+              <button className={styles.resetBtn} onClick={() => setStatus('idle')}>
                 Send Another
-              </Button>
-            </motion.div>
+              </button>
+            </div>
           ) : (
-            <form onSubmit={handleSubmit} className={styles.form} noValidate>
-              <div className={styles.formRow}>
+            <>
+              <h3 className={styles.formTitle}>Send a Message</h3>
+              <form onSubmit={handleSubmit} className={styles.form} noValidate>
+                <div className={styles.formRow}>
+                  <div className={styles.field}>
+                    <label htmlFor="contact-name" className={styles.label}>Full Name</label>
+                    <input
+                      id="contact-name"
+                      name="name"
+                      type="text"
+                      placeholder="John Doe"
+                      value={form.name}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      className={getFieldClass('name')}
+                      aria-invalid={!!errors.name}
+                      aria-describedby={errors.name ? 'contact-name-error' : undefined}
+                      autoComplete="name"
+                    />
+                    {touched.name && errors.name && (
+                      <span id="contact-name-error" className={styles.errorMsg} role="alert">
+                        <AlertCircle size={12} /> {errors.name}
+                      </span>
+                    )}
+                  </div>
+                  <div className={styles.field}>
+                    <label htmlFor="contact-email" className={styles.label}>Email Address</label>
+                    <input
+                      id="contact-email"
+                      name="email"
+                      type="email"
+                      placeholder="john@example.com"
+                      value={form.email}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      className={getFieldClass('email')}
+                      aria-invalid={!!errors.email}
+                      aria-describedby={errors.email ? 'contact-email-error' : undefined}
+                      autoComplete="email"
+                    />
+                    {touched.email && errors.email && (
+                      <span id="contact-email-error" className={styles.errorMsg} role="alert">
+                        <AlertCircle size={12} /> {errors.email}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
                 <div className={styles.field}>
-                  <label htmlFor="contact-name" className={styles.label}>Full Name</label>
+                  <label htmlFor="contact-subject" className={styles.label}>Subject</label>
                   <input
-                    id="contact-name"
-                    name="name"
+                    id="contact-subject"
+                    name="subject"
                     type="text"
-                    placeholder="John Doe"
-                    value={form.name}
+                    placeholder="Project Inquiry / Job Opportunity"
+                    value={form.subject}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className={getFieldClass('name')}
-                    aria-invalid={!!errors.name}
-                    aria-describedby={errors.name ? 'contact-name-error' : undefined}
-                    autoComplete="name"
+                    className={getFieldClass('subject')}
+                    aria-invalid={!!errors.subject}
                   />
-                  {touched.name && errors.name && (
-                    <span id="contact-name-error" className={styles.errorMsg} role="alert">
-                      <AlertCircle size={12} /> {errors.name}
+                  {touched.subject && errors.subject && (
+                    <span className={styles.errorMsg} role="alert">
+                      <AlertCircle size={12} /> {errors.subject}
                     </span>
                   )}
                 </div>
+
                 <div className={styles.field}>
-                  <label htmlFor="contact-email" className={styles.label}>Email Address</label>
-                  <input
-                    id="contact-email"
-                    name="email"
-                    type="email"
-                    placeholder="john@example.com"
-                    value={form.email}
+                  <label htmlFor="contact-message" className={styles.label}>Message</label>
+                  <textarea
+                    id="contact-message"
+                    name="message"
+                    rows={5}
+                    maxLength={500}
+                    placeholder="Tell me about your project, role, or just say hi..."
+                    value={form.message}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className={getFieldClass('email')}
-                    aria-invalid={!!errors.email}
-                    aria-describedby={errors.email ? 'contact-email-error' : undefined}
-                    autoComplete="email"
+                    className={`${getFieldClass('message')} ${styles.textarea}`}
+                    aria-invalid={!!errors.message}
                   />
-                  {touched.email && errors.email && (
-                    <span id="contact-email-error" className={styles.errorMsg} role="alert">
-                      <AlertCircle size={12} /> {errors.email}
+                  {touched.message && errors.message && (
+                    <span className={styles.errorMsg} role="alert">
+                      <AlertCircle size={12} /> {errors.message}
                     </span>
                   )}
-                </div>
-              </div>
-
-              <div className={styles.field}>
-                <label htmlFor="contact-subject" className={styles.label}>Subject</label>
-                <input
-                  id="contact-subject"
-                  name="subject"
-                  type="text"
-                  placeholder="Project Inquiry / Job Opportunity"
-                  value={form.subject}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  className={getFieldClass('subject')}
-                  aria-invalid={!!errors.subject}
-                />
-                {touched.subject && errors.subject && (
-                  <span className={styles.errorMsg} role="alert">
-                    <AlertCircle size={12} /> {errors.subject}
+                  <span className={styles.charCount}>
+                    {form.message.length} / 500 chars
                   </span>
-                )}
-              </div>
-
-              <div className={styles.field}>
-                <label htmlFor="contact-message" className={styles.label}>Message</label>
-                <textarea
-                  id="contact-message"
-                  name="message"
-                  rows={5}
-                  maxLength={500}
-                  placeholder="Tell me about your project, role, or just say hi..."
-                  value={form.message}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  className={`${getFieldClass('message')} ${styles.textarea}`}
-                  aria-invalid={!!errors.message}
-                />
-                {touched.message && errors.message && (
-                  <span className={styles.errorMsg} role="alert">
-                    <AlertCircle size={12} /> {errors.message}
-                  </span>
-                )}
-                <span className={styles.charCount}>
-                  {form.message.length} / 500 chars
-                </span>
-              </div>
-
-              {status === 'error' && (
-                <div className={styles.formError}>
-                  <AlertCircle size={16} /> Something went wrong. Please try again.
                 </div>
-              )}
 
-              <Button
-                type="submit"
-                variant="primary"
-                size="lg"
-                fullWidth
-                loading={status === 'loading'}
-                icon={<Send size={16} />}
-                iconPosition="right"
-                className={styles.submitButton}
-              >
-                {status === 'loading' ? 'Sending...' : 'Send Message'}
-              </Button>
-            </form>
+                {status === 'error' && (
+                  <div className={styles.formError}>
+                    <AlertCircle size={16} /> Something went wrong. Please try again.
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={status === 'loading'}
+                  className={styles.submitButton}
+                >
+                  {status === 'loading' ? (
+                    <>
+                      <Loader2 size={16} className="animate-spin" />
+                      <span>Sending...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>Send Message</span>
+                      <Send size={16} />
+                    </>
+                  )}
+                </button>
+              </form>
+            </>
           )}
         </motion.div>
       </div>

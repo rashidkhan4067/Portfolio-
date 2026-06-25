@@ -60,7 +60,7 @@ const mergeProjects = (rawGithubRepos) => {
         ...apiProj,
         ...matchedStatic,
         title: matchedStatic.title === 'Sales-Data-Analysis-System' ? 'Sales Data Pipeline' : formatProjectTitle(matchedStatic.title),
-        techStack: Array.from(new Set([...matchedStatic.techStack, ...apiProj.techStack]))
+        techStack: Array.from(new Set([...(matchedStatic.tech || matchedStatic.techStack || []), ...apiProj.techStack]))
       };
     }
     return apiProj;
@@ -87,6 +87,7 @@ const mergeProjects = (rawGithubRepos) => {
 export default function ProjectsSection() {
   const navigate = useNavigate();
   const [showAll, setShowAll] = useState(false);
+  const [activeFilter, setActiveFilter] = useState('all');
   const [projectList, setProjectList] = useState(() => {
     try {
       const cachedData = sessionStorage.getItem(CACHE_KEY);
@@ -98,7 +99,6 @@ export default function ProjectsSection() {
     } catch (e) {
       console.warn('Failed to parse projects cache on init:', e);
     }
-    // Fallback: sort static projects with featured first, preserving static ID order
     return [...projects].sort((a, b) => {
       if (a.featured && !b.featured) return -1;
       if (!a.featured && b.featured) return 1;
@@ -120,7 +120,6 @@ export default function ProjectsSection() {
   });
 
   const handleCardClick = (e, project) => {
-    // Prevent navigating if clicking an interactive element like buttons or links
     if (e.target.closest('a') || e.target.closest('button')) {
       return;
     }
@@ -142,7 +141,6 @@ export default function ProjectsSection() {
         if (!response.ok) throw new Error('API fetch failed');
         const repos = await response.json();
 
-        // Map GitHub repositories to our detailed Material 3 schema
         const mappedProjects = repos
           .filter(repo => !repo.fork && repo.name.toLowerCase() !== 'rashidkhan4067' && repo.name.toLowerCase() !== 'portfolio-' && repo.name.toLowerCase() !== 'foody-app')
           .map((repo, index) => {
@@ -153,13 +151,19 @@ export default function ProjectsSection() {
             const topics = repo.topics || [];
 
             if (topics.includes('machine-learning') || topics.includes('ai') || desc.includes('face') || desc.includes('opencv') || desc.includes('pyspark') || desc.includes('predictive') || desc.includes('ml')) {
-              category = 'Full Stack';
+              category = 'AI/ML';
               accentColor = '#1A73E8';
+            } else if (topics.includes('mobile') || topics.includes('android') || topics.includes('ios') || desc.includes('mobile') || desc.includes('capacitor')) {
+              category = 'Mobile';
+              accentColor = '#FEA116';
+            } else if (topics.includes('iot') || desc.includes('iot') || desc.includes('arduino') || desc.includes('telemetry')) {
+              category = 'IoT';
+              accentColor = '#00C1D4';
             } else if (topics.includes('fullstack') || topics.includes('frontend') || desc.includes('react') || desc.includes('next') || desc.includes('dashboard')) {
               category = 'Full-Stack';
               accentColor = '#34A853';
             } else if (topics.includes('backend') || desc.includes('api') || desc.includes('backend') || desc.includes('django') || desc.includes('fastapi')) {
-              category = 'Backend';
+              category = 'Full-Stack';
               accentColor = '#EA4335';
             }
 
@@ -179,6 +183,7 @@ export default function ProjectsSection() {
               title: formatProjectTitle(repo.name),
               description: repo.description || 'A highly performant, automated software repository deployed with modern engineering workflows.',
               techStack: techStack,
+              tech: techStack,
               category: category,
               liveUrl: repo.homepage || repo.html_url,
               githubUrl: repo.html_url,
@@ -215,16 +220,25 @@ export default function ProjectsSection() {
   // Filter out projects without images
   const projectsWithImages = projectList.filter(project => !!project.imageUrl);
 
-  // Display only featured projects by default. If none are found (e.g. cache mismatch), fallback to top 3.
-  const featuredOnly = projectsWithImages.filter(project => project.featured);
-  const displayedProjects = showAll
+  // Filter logic based on activeFilter state matching project.category
+  const filteredProjects = activeFilter.toLowerCase() === 'all'
     ? projectsWithImages
-    : (featuredOnly.length > 0 ? featuredOnly : projectsWithImages.slice(0, 3));
+    : projectsWithImages.filter(p => p.category && p.category.toLowerCase() === activeFilter.toLowerCase());
+
+  // Reset showAll when filter changes to prevent empty views
+  useEffect(() => {
+    setShowAll(false);
+  }, [activeFilter]);
+
+  const displayedProjects = showAll
+    ? filteredProjects
+    : filteredProjects.slice(0, 3);
 
   const skeletonCards = Array.from({ length: 3 });
+  const FILTER_CHIPS = ['All', 'Full-Stack', 'AI/ML', 'Open Source', 'Mobile', 'IoT'];
 
   return (
-    <section className={styles.section} id="featured-projects">
+    <section className={styles.section} id="featured-projects" aria-label="Featured Projects">
       <div className="container">
 
         {/* Section Header */}
@@ -236,13 +250,27 @@ export default function ProjectsSection() {
           </p>
         </div>
 
+        {/* Filter Chips Row */}
+        <div className={styles.filterChipsRow} role="navigation" aria-label="Project category filtering">
+          {FILTER_CHIPS.map((chip) => (
+            <button
+              key={chip}
+              onClick={() => setActiveFilter(chip)}
+              className={`${styles.filterChip} ${activeFilter.toLowerCase() === chip.toLowerCase() ? styles.activeChip : ''}`}
+              aria-pressed={activeFilter.toLowerCase() === chip.toLowerCase() ? 'true' : 'false'}
+            >
+              {chip}
+            </button>
+          ))}
+        </div>
+
         {/* Responsive Grid / Flex list layout */}
         <div className={styles.projectsGrid}>
           {loading ? (
             skeletonCards.map((_, index) => (
               <div
                 key={`project-skeleton-${index}`}
-                className={`${styles.projectCard} ${styles.skeletonCard}`}
+                className={`${styles.projectCard} ${styles.skeletonCard} rounded-[28px] bg-[var(--md-surface-container-low)]`}
               >
                 <div className={`${styles.skeletonImage} skeleton`} />
                 <div className={styles.cardContent}>
@@ -275,21 +303,23 @@ export default function ProjectsSection() {
         </div>
 
         {/* View Toggle */}
-        <div className={styles.toggleWrapper}>
-          <button
-            className={styles.exploreToggle}
-            onClick={() => setShowAll(!showAll)}
-            aria-expanded={showAll}
-            aria-controls="featured-projects"
-          >
-            <span>{showAll ? 'Show Featured Projects' : 'View All Projects'}</span>
-            {showAll ? (
-              <ChevronUp size={16} className={styles.toggleIcon} aria-hidden="true" />
-            ) : (
-              <ChevronDown size={16} className={styles.toggleIcon} aria-hidden="true" />
-            )}
-          </button>
-        </div>
+        {filteredProjects.length > 3 && (
+          <div className={styles.toggleWrapper}>
+            <button
+              className={styles.exploreToggle}
+              onClick={() => setShowAll(!showAll)}
+              aria-expanded={showAll}
+              aria-controls="featured-projects"
+            >
+              <span>{showAll ? 'Show Featured Projects' : 'View All Projects'}</span>
+              {showAll ? (
+                <ChevronUp size={16} className={styles.toggleIcon} aria-hidden="true" />
+              ) : (
+                <ChevronDown size={16} className={styles.toggleIcon} aria-hidden="true" />
+              )}
+            </button>
+          </div>
+        )}
 
       </div>
     </section>

@@ -1,69 +1,70 @@
-import { useState, useRef, useEffect } from 'react';
-import { Star, Quote, ChevronLeft, ChevronRight, PenTool, Trash2 } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { Star, PenTool, Trash2, ChevronLeft, ChevronRight } from 'lucide-react';
 import { testimonials } from '../../../constants/portfolioData';
 import styles from '../styles.module.css';
-import SectionHeading from '../../../components/SectionHeading';
-
 
 function TestimonialCard({ testimonial, isAdmin, onDelete }) {
+  // Initials from author name (first + last initial)
+  const getInitials = (name) => {
+    if (!name) return '';
+    const parts = name.trim().split(/\s+/);
+    if (parts.length === 1) return parts[0].substring(0, 1).toUpperCase();
+    return (parts[0].substring(0, 1) + parts[parts.length - 1].substring(0, 1)).toUpperCase();
+  };
+
   return (
     <article className={styles.card}>
-      {/* Decorative Large Background Quote Watermark */}
-      <div className={styles.cardWatermark} aria-hidden="true">
-        <Quote size={120} />
-      </div>
+      {/* Admin Delete Action Button */}
+      {isAdmin && testimonial.isCustom && (
+        <button
+          onClick={() => onDelete(testimonial.id)}
+          className={styles.deleteReviewBtn}
+          title="Delete this recommendation (Admin Only)"
+          aria-label={`Delete recommendation from ${testimonial.name}`}
+        >
+          <Trash2 size={13} />
+        </button>
+      )}
 
-      {/* Header: Icon & Stars */}
-      <header className={styles.cardHeader}>
-        <div className={styles.quoteIconContainer}>
-          <Quote size={20} aria-hidden="true" />
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <div className={styles.stars} aria-label={`${testimonial.rating} out of 5 stars`}>
-            {Array.from({ length: testimonial.rating }).map((_, i) => (
-              <Star key={i} size={14} fill="currentColor" className={styles.star} />
-            ))}
-          </div>
-          
-          {/* Admin Delete Action Button */}
-          {isAdmin && testimonial.isCustom && (
-            <button
-              onClick={() => onDelete(testimonial.id)}
-              className={styles.deleteReviewBtn}
-              title="Delete this recommendation (Admin Only)"
-              aria-label={`Delete recommendation from ${testimonial.name}`}
-            >
-              <Trash2 size={13} />
-            </button>
-          )}
-        </div>
-      </header>
+      {/* Quote mark (top) */}
+      <span className={styles.quoteMark} aria-hidden="true">“</span>
 
-      {/* Content */}
-      <blockquote className={styles.content}>
+      {/* Quote text */}
+      <blockquote className={styles.quoteText}>
         "{testimonial.content}"
       </blockquote>
 
-      {/* Author Footer Block */}
-      <footer className={styles.author}>
-        <div
-          className={styles.authorAvatar}
-          aria-hidden="true"
-        >
-          {testimonial.name.charAt(0)}
+      {/* Divider */}
+      <div className={styles.cardDivider} />
+
+      {/* Author row (bottom) */}
+      <footer className={styles.authorRow}>
+        <div className={styles.avatar}>
+          {getInitials(testimonial.name)}
         </div>
         <div className={styles.authorInfo}>
           <h4 className={styles.authorName}>{testimonial.name}</h4>
-          <p className={styles.authorRole}>
-            {testimonial.role} · <span className={styles.authorCompany}>{testimonial.company}</span>
-          </p>
+          <span className={styles.authorRole}>
+            {testimonial.role} · <span style={{ color: 'var(--md-primary)', fontWeight: 600 }}>{testimonial.company}</span>
+          </span>
         </div>
+        {testimonial.rating > 0 && (
+          <div className={styles.starRating} aria-label={`${testimonial.rating} out of 5 stars`}>
+            {Array.from({ length: testimonial.rating }).map((_, i) => (
+              <Star key={i} size={12} fill="#f59e0b" stroke="#f59e0b" className={styles.starIcon} />
+            ))}
+          </div>
+        )}
       </footer>
     </article>
   );
 }
 
 export default function TestimonialsSection() {
+  const carouselRef = useRef(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
   const [testimonialList, setTestimonialList] = useState(() => {
     const saved = localStorage.getItem('user_testimonials');
     if (saved) {
@@ -78,79 +79,17 @@ export default function TestimonialsSection() {
     return testimonials;
   });
 
-  const [activeIndex, setActiveIndex] = useState(0);
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [newReview, setNewReview] = useState({ name: '', role: '', company: '', content: '', rating: 0 });
   const [formErrors, setFormErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
-  
-  // Viewport tracking for responsive carousel sizing & index clamping
-  const [viewportWidth, setViewportWidth] = useState(() => typeof window !== 'undefined' ? window.innerWidth : 1200);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setViewportWidth(window.innerWidth);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  const isMobile = viewportWidth < 768;
-  const isTablet = viewportWidth >= 768 && viewportWidth <= 1024;
-  const isDesktop = viewportWidth > 1024;
-
-  const maxIndex = isMobile 
-    ? testimonialList.length - 1 
-    : (isTablet ? Math.max(0, testimonialList.length - 2) : 0);
-
-  useEffect(() => {
-    setActiveIndex(prev => Math.min(prev, maxIndex));
-  }, [viewportWidth, testimonialList, maxIndex]);
-
-  // Touch Swipe Handlers for mobile & tablet gesture support
-  const touchStart = useRef(0);
-  const touchDiff = useRef(0);
-
-  const handleTouchStart = (e) => {
-    if (isDesktop) return;
-    touchStart.current = e.targetTouches[0].clientX;
-    touchDiff.current = 0;
-  };
-
-  const handleTouchMove = (e) => {
-    if (isDesktop) return;
-    const currentX = e.targetTouches[0].clientX;
-    touchDiff.current = touchStart.current - currentX;
-  };
-
-  const handleTouchEnd = () => {
-    if (isDesktop) return;
-    const swipeThreshold = 50; // swipe threshold in px
-    if (touchDiff.current > swipeThreshold) {
-      handleNext();
-    } else if (touchDiff.current < -swipeThreshold) {
-      handlePrev();
-    }
-  };
 
   // Simple, secure admin checking (URL param: ?admin=true or localStorage flag)
   const isAdmin = typeof window !== 'undefined' && (
     window.location.search.includes('admin=true') || 
     localStorage.getItem('admin_moderator') === 'true'
   );
-
-  const handlePrev = () => {
-    setActiveIndex(prev => Math.max(0, prev - 1));
-  };
-
-  const handleNext = () => {
-    setActiveIndex(prev => Math.min(maxIndex, prev + 1));
-  };
-
-  const goToSlide = (index) => {
-    setActiveIndex(Math.min(maxIndex, Math.max(0, index)));
-  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -163,7 +102,7 @@ export default function TestimonialsSection() {
   const handleRatingChange = (ratingVal) => {
     setNewReview(prev => ({ ...prev, rating: ratingVal }));
     if (formErrors.rating) {
-      setFormErrors(prev => ({ ...prev, rating: '' }));
+      setFormErrors(prev => ({ ...prev, [ratingVal]: '' }));
     }
   };
 
@@ -174,6 +113,45 @@ export default function TestimonialsSection() {
     if (!newReview.content.trim()) errors.content = 'Recommendation Content is required';
     else if (newReview.content.trim().length < 15) errors.content = 'Review must be at least 15 characters';
     return errors;
+  };
+
+  const updateScrollButtons = () => {
+    if (carouselRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
+      setCanScrollLeft(scrollLeft > 2);
+      setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 2);
+    }
+  };
+
+  useEffect(() => {
+    const el = carouselRef.current;
+    if (el) {
+      el.addEventListener('scroll', updateScrollButtons);
+      updateScrollButtons();
+      window.addEventListener('resize', updateScrollButtons);
+    }
+    return () => {
+      if (el) {
+        el.removeEventListener('scroll', updateScrollButtons);
+      }
+      window.removeEventListener('resize', updateScrollButtons);
+    };
+  }, [testimonialList]);
+
+  const scrollLeft = () => {
+    if (carouselRef.current) {
+      const cardWidth = carouselRef.current.firstChild.offsetWidth;
+      const gap = 20; // 1.25rem = 20px
+      carouselRef.current.scrollBy({ left: -(cardWidth + gap), behavior: 'smooth' });
+    }
+  };
+
+  const scrollRight = () => {
+    if (carouselRef.current) {
+      const cardWidth = carouselRef.current.firstChild.offsetWidth;
+      const gap = 20; // 1.25rem = 20px
+      carouselRef.current.scrollBy({ left: cardWidth + gap, behavior: 'smooth' });
+    }
   };
 
   const handleReviewSubmit = (e) => {
@@ -214,11 +192,6 @@ export default function TestimonialsSection() {
         setSubmitSuccess(false);
         setShowReviewForm(false);
       }, 2500);
-
-      // Automatically slide track to display the new review card
-      setTimeout(() => {
-        setActiveIndex(updatedList.length - 1);
-      }, 300);
     }, 800);
   };
 
@@ -233,24 +206,20 @@ export default function TestimonialsSection() {
       const updatedCustom = parsed.filter(t => t.id !== reviewId);
       localStorage.setItem('user_testimonials', JSON.stringify(updatedCustom));
     }
-
-    // Adjust horizontal slide position
-    if (activeIndex >= updatedList.length) {
-      setActiveIndex(Math.max(0, updatedList.length - 1));
-    }
   };
 
   return (
     <section className={styles.section} id="testimonials">
       <div className="container">
         
-        {/* Center-aligned Section Header */}
-        <SectionHeading
-          eyebrow="Social Proof"
-          title="What People Say"
-          subtitle="Feedback from engineering leaders, product managers, and founders I've had the privilege of working with."
-          centered={true}
-        />
+        {/* Section Header */}
+        <div className={styles.headerContainer}>
+          <span className={styles.eyebrow}>SOCIAL PROOF</span>
+          <h2 className={styles.title}>What People Say</h2>
+          <p className={styles.subtitle}>
+            Feedback from engineering leaders, product managers, and founders I've had the privilege of working with.
+          </p>
+        </div>
 
         {/* Dynamic Admin Moderator Banner */}
         {isAdmin && (
@@ -259,7 +228,7 @@ export default function TestimonialsSection() {
             border: '1px solid rgba(234, 67, 53, 0.2)',
             color: '#EA4335',
             padding: '0.75rem 1.25rem',
-            borderRadius: '8px',
+            borderRadius: '28px',
             fontSize: '0.85rem',
             fontWeight: '600',
             textAlign: 'center',
@@ -269,67 +238,39 @@ export default function TestimonialsSection() {
           </div>
         )}
 
-        {/* Swipe-friendly Testimonial Grid Track with CSS variables translation */}
-        <div 
-          className={styles.carouselWrapper}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
-        >
-          <div 
-            className={styles.grid}
-            style={{ '--active-index': activeIndex }}
-            aria-live="polite"
-            aria-atomic="false"
-            aria-label="Testimonials carousel"
-          >
-          {testimonialList.map((t, i) => (
-            <TestimonialCard 
-              key={t.id} 
-              testimonial={t} 
-              index={i} 
-              isAdmin={isAdmin}
-              onDelete={handleDeleteReview}
-            />
-          ))}
-          </div>
-        </div>
- 
-        {/* ── ULTIMATE M3 CAROUSEL PAGINATION & CONTROLS ── */}
-        <div className={styles.carouselPagination} role="group" aria-label="Testimonial slider navigation">
-          
-          {/* Previous Button */}
-          <button 
-            onClick={handlePrev} 
-            className={styles.paginationArrow}
-            disabled={activeIndex === 0}
-            aria-label="Scroll left to previous testimonial"
-          >
-            <ChevronLeft size={18} aria-hidden="true" />
-          </button>
-          
-          {/* Interactive Slide Dots */}
-          <div className={styles.paginationDots} aria-label="Slides active status">
-            {Array.from({ length: maxIndex + 1 }).map((_, index) => (
-              <button 
-                key={index} 
-                className={`${styles.paginationDot} ${activeIndex === index ? styles.activeDot : ''}`}
-                onClick={() => goToSlide(index)}
-                aria-label={`Go to slide ${index + 1}`}
-                aria-current={activeIndex === index ? 'true' : 'false'}
-              />
+        {/* Testimonials Horizontal Carousel */}
+        <div className={styles.carouselWrapper}>
+          <div ref={carouselRef} className={styles.carouselContainer}>
+            {testimonialList.map((t) => (
+              <div key={t.id} className={styles.carouselCardWrapper}>
+                <TestimonialCard 
+                  testimonial={t} 
+                  isAdmin={isAdmin}
+                  onDelete={handleDeleteReview}
+                />
+              </div>
             ))}
           </div>
 
-          {/* Next Button */}
-          <button 
-            onClick={handleNext} 
-            className={styles.paginationArrow}
-            disabled={activeIndex >= maxIndex}
-            aria-label="Scroll right to next testimonial"
-          >
-            <ChevronRight size={18} aria-hidden="true" />
-          </button>
+          {/* Navigation Actions */}
+          <div className={styles.carouselActions}>
+            <button 
+              onClick={scrollLeft} 
+              className={styles.navBtn}
+              disabled={!canScrollLeft}
+              aria-label="Previous testimonials"
+            >
+              <ChevronLeft size={20} />
+            </button>
+            <button 
+              onClick={scrollRight} 
+              className={styles.navBtn}
+              disabled={!canScrollRight}
+              aria-label="Next testimonials"
+            >
+              <ChevronRight size={20} />
+            </button>
+          </div>
         </div>
 
         {/* ── STATEFUL WRITE REVIEW SECTION ── */}
@@ -346,11 +287,11 @@ export default function TestimonialsSection() {
           ) : (
             <div className={styles.reviewFormCard}>
               <h3>Leave a Professional Recommendation</h3>
-              <p>Share your experience working with me. Your feedback will be instantly integrated into the showcase carousel.</p>
+              <p>Share your experience working with me. Your feedback will be instantly integrated into the showcase gallery.</p>
               
               {submitSuccess && (
                 <div className={styles.successNotice} role="status">
-                  Thank you! Your recommendation has been compiled and added to the slider successfully.
+                  Thank you! Your recommendation has been compiled and added to the gallery successfully.
                 </div>
               )}
 
@@ -413,7 +354,7 @@ export default function TestimonialsSection() {
                           className={`${styles.selectorStar} ${starVal <= newReview.rating ? styles.selectorStarActive : ''}`}
                           aria-label={`Rate ${starVal} out of 5 stars`}
                         >
-                          <Star size={18} fill={starVal <= newReview.rating ? 'currentColor' : 'none'} />
+                          <Star size={18} fill={starVal <= newReview.rating ? '#f59e0b' : 'none'} stroke={starVal <= newReview.rating ? '#f59e0b' : 'currentColor'} />
                         </button>
                       ))}
                     </div>
@@ -455,7 +396,7 @@ export default function TestimonialsSection() {
                     className={styles.submitBtn}
                     disabled={isSubmitting || submitSuccess}
                   >
-                    {isSubmitting ? 'Submitting...' : 'Submit Recommendation'}
+                    Submit Recommendation
                   </button>
                 </div>
               </form>
@@ -467,3 +408,4 @@ export default function TestimonialsSection() {
     </section>
   );
 }
+

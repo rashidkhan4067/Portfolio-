@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Sun, Moon, Menu, X, Code2,
-  Home, User2, FolderGit2, Sparkles, Briefcase, Mail 
+  Home, User2, FolderGit2, Sparkles, Briefcase, Mail, FileText 
 } from 'lucide-react';
 import { useThemeStore, useUIStore } from '../../store';
 import { navLinks, personalInfo } from '../../constants/portfolioData';
@@ -23,18 +23,61 @@ export default function Navbar() {
   const { theme, toggleTheme } = useThemeStore();
   const { isMobileMenuOpen, toggleMobileMenu, setMobileMenuOpen } = useUIStore();
   const [scrolled, setScrolled] = useState(false);
+  const [stdoutLog, setStdoutLog] = useState('');
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const triggerStdout = (message) => {
+    setStdoutLog(message);
+  };
 
   useEffect(() => {
+    if (stdoutLog) {
+      const timer = setTimeout(() => setStdoutLog(''), 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [stdoutLog]);
+
+  // Handle scrolled navbar consistency on scroll and route changes
+  useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
+    handleScroll(); // Re-evaluate immediately on mount/navigation
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [location]);
 
   // Close menu on route change
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [location, setMobileMenuOpen]);
+
+  // Global keyboard shortcut listeners
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      const activeEl = document.activeElement;
+      if (
+        activeEl &&
+        (activeEl.tagName === 'INPUT' ||
+          activeEl.tagName === 'TEXTAREA' ||
+          activeEl.isContentEditable)
+      ) {
+        return;
+      }
+
+      if (e.key === 'c' || e.key === 'C') {
+        e.preventDefault();
+        triggerStdout('shortcut [C] -> navigating to contact');
+        navigate('/contact');
+      } else if (e.key === 'r' || e.key === 'R') {
+        e.preventDefault();
+        triggerStdout('shortcut [R] -> opening resume');
+        window.open(personalInfo.resumeUrl, '_blank', 'noopener,noreferrer');
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [navigate]);
 
   return (
     <motion.nav
@@ -92,12 +135,25 @@ export default function Navbar() {
             </AnimatePresence>
           </button>
 
+          {/* Exposed Resume button on mobile viewports */}
+          <a
+            href={personalInfo.resumeUrl}
+            className={styles.mobileResumeIconBtn}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Download Resume"
+            onClick={() => triggerStdout('opening resume')}
+          >
+            <FileText size={18} />
+          </a>
+
           <a
             href={personalInfo.resumeUrl}
             className={styles.resumeBtn}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Download Resume"
+            onClick={() => triggerStdout('opening resume')}
           >
             Resume
           </a>
@@ -191,6 +247,21 @@ export default function Navbar() {
                 Resume
               </a>
             </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Terminal stdout diagnostic toast */}
+      <AnimatePresence>
+        {stdoutLog && (
+          <motion.div
+            className={styles.stdoutToast}
+            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 5, scale: 0.98 }}
+            transition={{ duration: 0.15 }}
+          >
+            <code>stdout: {stdoutLog}</code>
           </motion.div>
         )}
       </AnimatePresence>

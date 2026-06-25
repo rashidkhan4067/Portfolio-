@@ -1,20 +1,102 @@
 /* ============================================
-   GLOBAL DESIGN SYSTEM — Portfolio 2026
+   GLOBAL DESIGN SYSTEM — MD3 Portfolio 2026
    ============================================ */
 
-/* Google Fonts already loaded in index.html */
+/* ── Google Sans + Roboto (MD3 Typography) ── */
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap');
 
-/* ── CSS Custom Properties (Design Tokens) ── */
+/* ── CSS Custom Properties — MD3 Tonal Palette (Light) ── */
 :root {
-  /* Font System */
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  /* MD3 Primary — Blue */
+  --md-primary: #1a73e8;
+  --md-on-primary: #ffffff;
+  --md-primary-container: #d3e3fd;
+  --md-on-primary-container: #041e49;
+
+  /* MD3 Secondary — Teal */
+  --md-secondary: #0d9488;
+  --md-on-secondary: #ffffff;
+  --md-secondary-container: #ccfbf1;
+  --md-on-secondary-container: #003731;
+
+  /* MD3 Surface Tones — Light */
+  --md-surface: #eef1f8;
+  --md-surface-container-low: #ffffff;
+  --md-surface-container: #eceef8;
+  --md-surface-container-high: #e6e8f5;
+  --md-on-surface: #1a1c22;
+  --md-on-surface-variant: #44474f;
+  --md-outline: #74777f;
+  --md-outline-variant: #c4c6d0;
+
+  /* MD3 Shape Scale */
+  --md-shape-none: 0px;
+  --md-shape-xs: 4px;
+  --md-shape-sm: 8px;
+  --md-shape-md: 12px;
+  --md-shape-lg: 16px;
+  --md-shape-xl: 28px;
+  --md-shape-full: 9999px;
+
+  /* MD3 Type Scale — font-size / line-height / letter-spacing */
+  --md-display-large-size: 57px;
+  --md-display-large-lh: 64px;
+  --md-display-large-ls: -0.25px;
+
+  --md-display-medium-size: 45px;
+  --md-display-medium-lh: 52px;
+  --md-display-medium-ls: 0px;
+
+  --md-headline-large-size: 32px;
+  --md-headline-large-lh: 40px;
+  --md-headline-large-ls: 0px;
+
+  --md-headline-medium-size: 28px;
+  --md-headline-medium-lh: 36px;
+  --md-headline-medium-ls: 0px;
+
+  --md-title-large-size: 22px;
+  --md-title-large-lh: 28px;
+  --md-title-large-ls: 0px;
+
+  --md-title-medium-size: 16px;
+  --md-title-medium-lh: 24px;
+  --md-title-medium-ls: 0.15px;
+
+  --md-title-small-size: 14px;
+  --md-title-small-lh: 20px;
+  --md-title-small-ls: 0.1px;
+
+  --md-body-large-size: 16px;
+  --md-body-large-lh: 24px;
+  --md-body-large-ls: 0.5px;
+
+  --md-body-medium-size: 14px;
+  --md-body-medium-lh: 20px;
+  --md-body-medium-ls: 0.25px;
+
+  --md-label-large-size: 14px;
+  --md-label-large-lh: 20px;
+  --md-label-large-ls: 0.1px;
+
+  --md-label-medium-size: 12px;
+  --md-label-medium-lh: 16px;
+  --md-label-medium-ls: 0.5px;
+
+  --md-label-small-size: 11px;
+  --md-label-small-lh: 16px;
+  --md-label-small-ls: 0.5px;
+
+  /* ── Legacy tokens (wired to MD3 tokens) ── */
+  --font-sans: 'Google Sans', 'Roboto', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 
-  /* 8px Grid Spacing */
+  /* Spacing (8px grid) */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
   --space-4: 1rem;
+  --space-5: 1.25rem;
   --space-6: 1.5rem;
   --space-8: 2rem;
   --space-10: 2.5rem;
@@ -24,25 +106,17 @@
   --space-24: 6rem;
   --space-32: 8rem;
 
-  /* Border Radius */
-  --radius-sm: 6px;
-  --radius-md: 12px;
-  --radius-lg: 20px;
-  --radius-xl: 28px;
-  --radius-full: 9999px;
+  /* Border Radius (legacy — maps to MD3 shape) */
+  --radius-sm: var(--md-shape-sm);
+  --radius-md: var(--md-shape-md);
+  --radius-lg: var(--md-shape-lg);
+  --radius-xl: var(--md-shape-xl);
+  --radius-full: var(--md-shape-full);
 
   /* Transitions */
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-spring: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
-
-  /* Shadows */
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
-  --shadow-md: 0 4px 16px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.08);
-  --shadow-lg: 0 10px 40px rgba(0,0,0,0.12), 0 4px 16px rgba(0,0,0,0.08);
-  --shadow-xl: 0 20px 60px rgba(0,0,0,0.16), 0 8px 24px rgba(0,0,0,0.10);
-  --shadow-glow: 0 0 40px rgba(99, 102, 241, 0.25);
 
   /* Z-index Stack */
   --z-base: 0;
@@ -52,82 +126,107 @@
   --z-toast: 400;
 }
 
-/* ── LIGHT THEME ── */
+/* ── LIGHT THEME (MD3-wired tokens) ── */
 [data-theme='light'] {
-  --bg-primary: #fafafa;
-  --bg-secondary: #f4f4f5;
-  --bg-tertiary: #ffffff;
-  --bg-card: #ffffff;
-  --bg-glass: rgba(255, 255, 255, 0.72);
+  /* MD3 surface tones */
+  --bg-primary: var(--md-surface);
+  --bg-secondary: var(--md-surface-container);
+  --bg-tertiary: var(--md-surface-container-low);
+  --bg-card: var(--md-surface-container-low);
+  --bg-glass: rgba(248, 249, 255, 0.80);
   --bg-glass-border: rgba(255, 255, 255, 0.9);
 
-  --text-primary: #09090b;
-  --text-secondary: #52525b;
-  --text-tertiary: #a1a1aa;
-  --text-inverse: #ffffff;
+  /* MD3 text */
+  --text-primary: var(--md-on-surface);
+  --text-secondary: var(--md-on-surface-variant);
+  --text-tertiary: var(--md-outline);
+  --text-inverse: var(--md-on-primary);
 
-  --accent-primary: #6366f1;
-  --accent-secondary: #8b5cf6;
+  /* Accent */
+  --accent-primary: var(--md-primary);
+  --accent-secondary: var(--md-secondary);
   --accent-tertiary: #06b6d4;
   --accent-success: #10b981;
   --accent-warning: #f59e0b;
   --accent-danger: #ef4444;
-  
-  /* Unified Brand Accent Color (Hue 214, Sat 82, Light 51) */
-  --accent-brand: #1A73E8;
+  --accent-brand: var(--md-primary);
 
-  --gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #06b6d4 100%);
-  --gradient-card: linear-gradient(145deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.6) 100%);
+  /* Borders → MD3 outline tokens */
+  --border-subtle: var(--md-outline-variant);
+  --border-default: var(--md-outline-variant);
+  --border-strong: var(--md-outline);
 
-  --border-subtle: rgba(0, 0, 0, 0.06);
-  --border-default: rgba(0, 0, 0, 0.10);
-  --border-strong: rgba(0, 0, 0, 0.16);
+  --nav-bg: var(--md-surface-container);
+  --scrollbar-track: var(--md-surface-container-low);
+  --scrollbar-thumb: var(--md-outline-variant);
 
-  --nav-bg: rgba(250, 250, 250, 0.85);
-  --scrollbar-track: #f4f4f5;
-  --scrollbar-thumb: #d4d4d8;
+  /* No shadows — MD3 uses tonal elevation */
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+  --shadow-xl: none;
+  --shadow-glow: none;
 }
 
-/* ── DARK THEME ── */
+/* ── DARK THEME (MD3 dark tonal palette) ── */
 [data-theme='dark'] {
-  /* Softened dark mode background (Stripe/Vercel/Linear style) */
-  --bg-primary: #0d0d0f;
-  --bg-secondary: #151517;
-  --bg-tertiary: #1b1b1f;
-  --bg-card: #1c1c20;
-  --bg-glass: rgba(21, 21, 23, 0.80);
+  /* MD3 Primary — Dark */
+  --md-primary: #a8c7fa;
+  --md-on-primary: #0a305f;
+  --md-primary-container: #2860a8;
+  --md-on-primary-container: #d3e3fd;
+
+  /* MD3 Secondary — Dark */
+  --md-secondary: #6dd4c8;
+  --md-on-secondary: #00504a;
+  --md-secondary-container: #004b46;
+  --md-on-secondary-container: #8df2e5;
+
+  /* MD3 Surface Tones — Dark */
+  --md-surface: #111318;
+  --md-surface-container-low: #1d2024;
+  --md-surface-container: #21252c;
+  --md-surface-container-high: #2b2f36;
+  --md-on-surface: #e2e2e9;
+  --md-on-surface-variant: #c4c6d0;
+  --md-outline: #8e9099;
+  --md-outline-variant: #44474f;
+
+  /* Legacy bg vars → MD3 dark surface tones */
+  --bg-primary: var(--md-surface);
+  --bg-secondary: var(--md-surface-container);
+  --bg-tertiary: var(--md-surface-container-low);
+  --bg-card: var(--md-surface-container-low);
+  --bg-glass: rgba(17, 19, 24, 0.85);
   --bg-glass-border: rgba(255, 255, 255, 0.06);
 
-  --text-primary: #fafafa;
-  --text-secondary: #a1a1aa;
-  --text-tertiary: #52525b;
-  --text-inverse: #0d0d0f;
+  --text-primary: var(--md-on-surface);
+  --text-secondary: var(--md-on-surface-variant);
+  --text-tertiary: var(--md-outline);
+  --text-inverse: var(--md-on-primary);
 
-  --accent-primary: #818cf8;
-  --accent-secondary: #a78bfa;
+  --accent-primary: var(--md-primary);
+  --accent-secondary: var(--md-secondary);
   --accent-tertiary: #22d3ee;
   --accent-success: #34d399;
   --accent-warning: #fbbf24;
   --accent-danger: #f87171;
+  --accent-brand: var(--md-primary);
 
-  /* Unified Brand Accent Color (Hue 214, Sat 82, Light 68) */
-  --accent-brand: #6aa1f1;
+  --border-subtle: var(--md-outline-variant);
+  --border-default: var(--md-outline-variant);
+  --border-strong: var(--md-outline);
 
-  --gradient-primary: linear-gradient(135deg, #818cf8 0%, #a78bfa 50%, #22d3ee 100%);
-  --gradient-card: linear-gradient(145deg, rgba(28,28,31,0.9) 0%, rgba(24,24,27,0.7) 100%);
+  --nav-bg: var(--md-surface-container);
+  --scrollbar-track: var(--md-surface-container-low);
+  --scrollbar-thumb: var(--md-outline-variant);
 
-  --border-subtle: rgba(255, 255, 255, 0.04);
-  --border-default: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.14);
-
-  --nav-bg: rgba(13, 13, 15, 0.85);
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
-  --shadow-md: 0 4px 16px rgba(0,0,0,0.4), 0 2px 8px rgba(0,0,0,0.3);
-  --shadow-lg: 0 10px 40px rgba(0,0,0,0.5), 0 4px 16px rgba(0,0,0,0.3);
-  --shadow-xl: 0 20px 60px rgba(0,0,0,0.6), 0 8px 24px rgba(0,0,0,0.4);
-  --shadow-glow: 0 0 40px rgba(106, 161, 241, 0.20);
-  --scrollbar-track: #1b1b1f;
-  --scrollbar-thumb: #3f3f46;
+  /* No shadows in dark mode either */
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+  --shadow-xl: none;
+  --shadow-glow: none;
 }
 
 /* ── RESET & BASE ── */
@@ -160,40 +259,71 @@ body {
 ::-webkit-scrollbar-track { background: var(--scrollbar-track); }
 ::-webkit-scrollbar-thumb {
   background: var(--scrollbar-thumb);
-  border-radius: var(--radius-full);
+  border-radius: var(--md-shape-full);
 }
-::-webkit-scrollbar-thumb:hover { background: var(--accent-primary); }
+::-webkit-scrollbar-thumb:hover { background: var(--md-primary); }
 
 /* ── SELECTION ── */
 ::selection {
-  background: rgba(99, 102, 241, 0.2);
-  color: var(--accent-primary);
+  background: rgba(26, 115, 232, 0.2);
+  color: var(--md-primary);
 }
 
-/* ── TYPOGRAPHY SCALE ── */
+/* ── TYPOGRAPHY — MD3 Scale ── */
+/* Display and Headline are weight 400 per MD3 spec */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-sans);
-  font-weight: 700;
   line-height: 1.2;
-  letter-spacing: -0.02em;
-  color: var(--text-primary);
+  color: var(--md-on-surface);
 }
 
-h1 { font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 900; letter-spacing: -0.04em; }
-h2 { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 800; }
-h3 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; }
-h4 { font-size: clamp(1.125rem, 2vw, 1.5rem); font-weight: 600; }
-h5 { font-size: 1.125rem; font-weight: 600; }
-h6 { font-size: 1rem; font-weight: 600; }
+/* MD3 headline tokens */
+h1 {
+  font-size: var(--md-display-medium-size);
+  font-weight: 400;
+  line-height: var(--md-display-medium-lh);
+  letter-spacing: var(--md-display-medium-ls);
+}
+h2 {
+  font-size: var(--md-headline-medium-size);
+  font-weight: 400;
+  line-height: var(--md-headline-medium-lh);
+  letter-spacing: var(--md-headline-medium-ls);
+}
+h3 {
+  font-size: var(--md-title-large-size);
+  font-weight: 400;
+  line-height: var(--md-title-large-lh);
+}
+h4 {
+  font-size: var(--md-title-medium-size);
+  font-weight: 500;
+  line-height: var(--md-title-medium-lh);
+  letter-spacing: var(--md-title-medium-ls);
+}
+h5 {
+  font-size: var(--md-title-small-size);
+  font-weight: 500;
+  line-height: var(--md-title-small-lh);
+}
+h6 {
+  font-size: var(--md-label-large-size);
+  font-weight: 500;
+}
 
-p { color: var(--text-secondary); line-height: 1.75; }
+p {
+  color: var(--md-on-surface-variant);
+  line-height: 1.6;
+  font-size: var(--md-body-medium-size);
+  letter-spacing: var(--md-body-medium-ls);
+}
 
 a {
-  color: var(--accent-primary);
+  color: var(--md-primary);
   text-decoration: none;
   transition: color var(--transition-fast);
 }
-a:hover { color: var(--accent-secondary); }
+a:hover { opacity: 0.85; }
 
 img { max-width: 100%; display: block; }
 
@@ -228,57 +358,22 @@ input, textarea, select {
   border-width: 0;
 }
 
-.text-gradient {
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.glass {
-  background: var(--bg-glass);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--bg-glass-border);
-}
-
-/* ── ANIMATIONS ── */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(99,102,241,0.3); }
-  50% { box-shadow: 0 0 40px rgba(99,102,241,0.6); }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+/* ── MD3 SKELETON LOADER ── */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--md-surface-container) 25%,
+    var(--md-surface-container-high) 50%,
+    var(--md-surface-container) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--md-shape-sm);
 }
 
 @keyframes shimmer {
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
-}
-
-/* ── SKELETON LOADER ── */
-.skeleton {
-  background: linear-gradient(
-    90deg,
-    var(--bg-secondary) 25%,
-    var(--bg-tertiary) 50%,
-    var(--bg-secondary) 75%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
-  border-radius: var(--radius-md);
 }
 
 /* ── SECTION BASE ── */
@@ -287,12 +382,67 @@ input, textarea, select {
   position: relative;
 }
 
-/* ── FOCUS STYLES (Accessibility) ── */
+/* ── FOCUS STYLES ── */
 :focus-visible {
-  outline: 2px solid var(--accent-primary);
+  outline: 2px solid var(--md-primary);
   outline-offset: 3px;
-  border-radius: var(--radius-sm);
+  border-radius: var(--md-shape-xs);
 }
 
-/* ── RESPONSIVE BREAKPOINTS (as CSS reference) ── */
-/* xs: 0px | sm: 640px | md: 768px | lg: 1024px | xl: 1280px | 2xl: 1536px */
+/* ── MD3 STATE LAYER MIXIN (via ::after pseudo) ── */
+/* Buttons and interactive elements use this pattern */
+.md3-state-layer {
+  position: relative;
+  isolation: isolate;
+}
+.md3-state-layer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: currentColor;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  pointer-events: none;
+}
+.md3-state-layer:hover::after { opacity: 0.08; }
+.md3-state-layer:active::after { opacity: 0.12; }
+
+/* ── KEYBOARD SHORTCUT HINT ── */
+.shortcutHint {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  padding: 1px 4px;
+  font-size: 9px;
+  font-family: var(--font-mono);
+  line-height: 1;
+  margin-left: 8px;
+  font-weight: 700;
+  text-transform: uppercase;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* filled button context (e.g. primary buttons) */
+[class*="primaryButton"] .shortcutHint,
+[class*="resumeBtn"] .shortcutHint {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+/* secondary/tonal button context */
+[class*="tonalButton"] .shortcutHint {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: var(--md-on-secondary-container);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+/* outline / theme variant context */
+[class*="secondaryButton"] .shortcutHint {
+  background-color: var(--md-surface-container-high);
+  color: var(--md-on-surface-variant);
+  border: 1px solid var(--md-outline-variant);
+}

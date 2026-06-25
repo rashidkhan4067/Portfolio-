@@ -1,4 +1,4 @@
-import { ExternalLink, Folder } from 'lucide-react';
+import { ExternalLink, Folder, BookOpen } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { GithubIcon as Github } from '../../../components/SocialIcons';
 import styles from '../styles.module.css';
@@ -24,14 +24,15 @@ const stripEmojis = (text) => {
 export default function ProjectCard({ project, onClick }) {
   const slug = getProjectSlug(project);
   
-  // Enforce maximum of 6 tech stack chips per card
-  const slicedTechStack = project.techStack ? project.techStack.slice(0, 6) : [];
+  // Enforce maximum of 5 tech stack chips per card
+  const slicedTechStack = project.tech || project.techStack ? (project.tech || project.techStack).slice(0, 5) : [];
 
   return (
     <article 
-      className={styles.projectCard}
+      role="article"
+      className={`${styles.projectCard} rounded-[28px] bg-[var(--md-surface-container-low)]`}
       onClick={(e) => onClick && onClick(e, project)}
-      style={{ cursor: 'pointer' }}
+      style={{ cursor: 'pointer', position: 'relative' }}
     >
       {/* 16:9 Image or Fallback */}
       <div className={styles.cardImageContainer}>
@@ -43,6 +44,7 @@ export default function ProjectCard({ project, onClick }) {
             loading="lazy"
             width="380"
             height="214"
+            style={{ objectPosition: 'top' }}
           />
         ) : (
           <div className={styles.cardImageFallback}>
@@ -58,6 +60,14 @@ export default function ProjectCard({ project, onClick }) {
           <span className={styles.categoryBadge}>
             {project.category || 'Software'}
           </span>
+          {project.metric && (
+            <span 
+              className={styles.metricBadge} 
+              style={{ '--projects-accent': project.accentColor || 'var(--accent-brand)' }}
+            >
+              {project.metric}
+            </span>
+          )}
         </div>
 
         {/* Row 2 — project title */}
@@ -71,18 +81,33 @@ export default function ProjectCard({ project, onClick }) {
         </h3>
         
         {/* Row 3 — description */}
-        <p className={styles.projectDesc}>
+        <p className={`${styles.projectDesc} line-clamp-3 overflow-hidden [-webkit-line-clamp:3]`}>
           {stripEmojis(project.description)}
         </p>
 
         {/* Row 4 — tech stack chips */}
         <div className={styles.techList}>
           {slicedTechStack.map((tech) => (
-            <div key={tech} className={styles.techItem}>
+            <div key={tech} className={`${styles.techItem} bg-[var(--md-surface-container-high)] text-[11px] px-2.5 py-0.5 rounded-full font-medium`}>
               <span className={styles.techName}>{tech}</span>
             </div>
           ))}
         </div>
+
+        {/* Row 4.5 — Build Log Context Link */}
+        {project.relatedLogTitle && (
+          <div className={styles.logLinkRow}>
+            <Link 
+              to={`/build-logs#${project.relatedLogTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
+              className={styles.logLink}
+              style={{ '--projects-accent': project.accentColor || 'var(--accent-brand)' }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <BookOpen size={12} aria-hidden="true" style={{ marginRight: '6px', flexShrink: 0 }} />
+              <span>Read the Build Log</span>
+            </Link>
+          </div>
+        )}
 
         {/* Row 5 — action buttons */}
         <div className={styles.cardActions}>
@@ -91,8 +116,9 @@ export default function ProjectCard({ project, onClick }) {
             target="_blank" 
             rel="noopener noreferrer"
             className={styles.liveButton}
+            aria-label={`View live demo of ${project.title}`}
           >
-            <ExternalLink size={14} aria-hidden="true" />
+            <ExternalLink size={13} aria-hidden="true" style={{ marginRight: '6px' }} />
             <span>Live Demo</span>
           </a>
           <a 
@@ -100,8 +126,9 @@ export default function ProjectCard({ project, onClick }) {
             target="_blank" 
             rel="noopener noreferrer"
             className={styles.githubButton}
+            aria-label={`View GitHub repo for ${project.title}`}
           >
-            <Github size={14} aria-hidden="true" />
+            <Github size={13} aria-hidden="true" style={{ marginRight: '6px' }} />
             <span>GitHub</span>
           </a>
         </div>

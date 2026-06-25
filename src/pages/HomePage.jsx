@@ -4,6 +4,7 @@ import SkillsSection from '../features/skills';
 import ProjectsSection from '../features/projects';
 import BuildLogsTeaser from '../features/build-logs/components/BuildLogsTeaser';
 import TestimonialsSection from '../features/testimonials';
+import HireMeCTA from '../features/cta';
 
 const BASE_URL = 'https://rashid-shafique-portfolio.vercel.app';
 
@@ -40,6 +41,7 @@ export default function HomePage() {
       <ProjectsSection />
       <BuildLogsTeaser />
       <TestimonialsSection />
+      <HireMeCTA />
     </>
   );
 }

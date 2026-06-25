@@ -4,8 +4,10 @@ import {
   ChevronDown,
   ChevronUp,
   ExternalLink,
-  ArrowLeft
+  ArrowLeft,
+  BookOpen
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { GithubIcon as Github } from '../../../components/SocialIcons';
 import { projects } from '../../../constants/portfolioData';
 import styles from '../detailed-styles.module.css';
@@ -543,6 +545,21 @@ export default function DetailedProjects() {
                       <Github size={14} aria-hidden="true" />
                       <span>View Code</span>
                     </a>
+                    {selectedProject.relatedLogTitle && (
+                      <Link
+                        to={`/build-logs#${selectedProject.relatedLogTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
+                        className={styles.articleSecondaryAction}
+                        style={{
+                          '--projects-accent': selectedProject.accentColor || 'var(--accent-brand)',
+                          borderColor: 'var(--projects-accent)',
+                          color: 'var(--projects-accent)',
+                          backgroundColor: 'color-mix(in srgb, var(--projects-accent) 4%, transparent)'
+                        }}
+                      >
+                        <BookOpen size={14} aria-hidden="true" />
+                        <span>Read the Build Log</span>
+                      </Link>
+                    )}
                   </div>
                 </div>
               </aside>

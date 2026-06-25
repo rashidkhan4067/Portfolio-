@@ -1,10 +1,10 @@
-import { Link } from 'react-router-dom';
-import { ArrowRight, Terminal, Code2 } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { ArrowRight, Tag } from 'lucide-react';
 import { buildLogs } from '../../../constants/portfolioData';
 import styles from '../styles.module.css';
-import SectionHeading from '../../../components/SectionHeading';
 
 export default function BuildLogsTeaser() {
+  const navigate = useNavigate();
   // Extract the latest 2 build logs
   const latestLogs = buildLogs && buildLogs.length > 0 ? buildLogs.slice(0, 2) : [];
 
@@ -14,54 +14,57 @@ export default function BuildLogsTeaser() {
     <section className={styles.section} id="build-logs-teaser">
       <div className="container">
         
-        {/* Section Heading */}
-        <SectionHeading
-          eyebrow="Highlighted Insights"
-          title="Build Logs"
-          subtitle="Engineering logs, experiments, and architectural insights from active builds."
-          centered={true}
-        />
+        {/* Section Header */}
+        <div className={styles.headerContainer}>
+          <span className={styles.eyebrow}>HIGHLIGHTED INSIGHTS</span>
+          <h2 className={styles.title}>Build Logs</h2>
+          <p className={styles.subtitle}>
+            Engineering logs, experiments, and architectural insights from active builds.
+          </p>
+        </div>
 
-        <div className={styles.teaserGrid}>
+        {/* CSS Grid layout following spec */}
+        <div className={styles.logsGrid}>
           {latestLogs.map((log) => (
-            <article key={log.id} className={styles.card}>
+            <article 
+              key={log.id} 
+              className={styles.card}
+              onClick={() => navigate('/build-logs')}
+            >
               
-              {/* Card Header matching Projects card layout */}
-              <div className={styles.cardHeader}>
-                <div className={styles.iconContainer}>
-                  <Terminal size={20} aria-hidden="true" />
+              {/* Top Row: Tags Left, Date Right */}
+              <div className={styles.topRow}>
+                <div className={styles.tagList}>
+                  <span className={styles.cardTag}>{log.type}</span>
+                  <span className={styles.cardTag}>{log.metric}</span>
                 </div>
-                <div className={styles.headerMeta}>
-                  <span className={styles.categoryBadge}>
-                    {log.type}
-                  </span>
-                  <span className={styles.metricBadge}>
-                    {log.metric}
-                  </span>
-                </div>
-                <span className={styles.date}>{log.date}</span>
+                <span className={styles.cardDate}>{log.date}</span>
               </div>
 
-              {/* Card Body */}
+              {/* Divider after top row */}
+              <div className={styles.divider} />
+
+              {/* Card Title */}
               <div className={styles.cardBody}>
                 <h3 className={styles.cardTitle}>
-                  <Link to="/build-logs" className={styles.cardTitleLink}>
+                  <span className={styles.cardTitleLink}>
                     {log.title}
-                  </Link>
+                  </span>
                 </h3>
                 <p className={styles.cardDesc}>{log.excerpt}</p>
               </div>
 
-              {/* Card Footer */}
-              <div className={styles.cardFooter}>
-                <div className={styles.techList}>
-                  {log.tags.map((tag) => (
-                    <div key={tag} className={styles.techItem}>
-                      <Code2 size={12} className={styles.techIcon} aria-hidden="true" />
-                      <span className={styles.techName}>{tag}</span>
-                    </div>
-                  ))}
-                </div>
+              {/* Bottom Divider */}
+              <div className={styles.bottomDivider} />
+
+              {/* Topic chips (bottom) */}
+              <div className={styles.topicList}>
+                {log.tags.map((tag) => (
+                  <div key={tag} className={styles.topicChip} onClick={(e) => e.stopPropagation()}>
+                    <Tag size={10} aria-hidden="true" />
+                    <span>{tag}</span>
+                  </div>
+                ))}
               </div>
 
             </article>
@@ -70,9 +73,9 @@ export default function BuildLogsTeaser() {
 
         {/* Premium Section CTA Button */}
         <div className={styles.ctaWrapper}>
-          <Link to="/build-logs" className={styles.readMoreBtn}>
+          <Link to="/build-logs" className={styles.teaserCtaBtn}>
             <span>Open Journal</span>
-            <ArrowRight size={16} className={styles.arrowIcon} aria-hidden="true" />
+            <ArrowRight size={14} className="ml-[6px]" aria-hidden="true" />
           </Link>
         </div>
 
@@ -80,3 +83,4 @@ export default function BuildLogsTeaser() {
     </section>
   );
 }
+

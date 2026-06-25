@@ -1,12 +1,12 @@
 /* ==========================================================================
-   MINIMAL, SAAS-GRADE HERO SECTION (ANTI-VIBE DESIGN SYSTEM)
+   MD3 HERO SECTION — Tonal surfaces, pill buttons, weight 400 headlines
    ========================================================================== */
 
 .hero {
   position: relative;
   overflow: hidden;
   padding: 4.5rem 0 3.5rem;
-  background-color: var(--bg-primary);
+  background-color: var(--md-surface); /* MD3 surface — no gradients */
   display: flex;
   align-items: center;
   width: 100%;
@@ -18,7 +18,7 @@
   }
 }
 
-/* Strict 12-column grid system */
+/* Strict 12-column grid */
 .gridContainer {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -31,7 +31,6 @@
   width: 100%;
 }
 
-/* ── Group A: Header Block ── */
 .headerBlock {
   grid-column: 1 / span 7;
   grid-row: 1;
@@ -41,7 +40,6 @@
   text-align: left;
 }
 
-/* ── Group B: Right Column (Large Profile Image) ── */
 .rightColumn {
   grid-column: 8 / span 5;
   grid-row: 1 / span 2;
@@ -52,24 +50,18 @@
   width: 100%;
 }
 
+/* MD3 filled card — no border, no shadow, tonal bg */
 .profileCard {
   position: relative;
   width: 100%;
-  max-width: 380px; /* target roughly 380-420px */
-  border-radius: 12px;
-  border: 1px solid var(--border-default);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Match projectCard */
+  max-width: 380px;
+  border-radius: var(--md-shape-lg); /* 16px */
+  border: none;
   overflow: hidden;
-  background-color: var(--bg-secondary);
+  background-color: var(--md-surface-container-low);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
-}
-
-.profileCard:hover {
-  border-color: var(--border-strong); /* Neutral light gray border on hover, no accent-blue */
-  box-shadow: var(--shadow-md);
 }
 
 .profileImageLarge {
@@ -78,9 +70,9 @@
   aspect-ratio: 4/5;
   object-fit: cover;
   display: block;
+  border-radius: 1rem; /* rounded-2xl at ALL breakpoints */
 }
 
-/* ── Group C: Details Block ── */
 .detailsBlock {
   grid-column: 1 / span 7;
   grid-row: 2;
@@ -88,7 +80,7 @@
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
-  margin-top: 0; /* Snug vertical spacing controlled by row-gap */
+  margin-top: 0;
 }
 
 .avatarStatusRow {
@@ -98,73 +90,166 @@
   margin-bottom: 1.25rem;
 }
 
+/* MD3 assist chip style status badge */
 .statusBadge {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 0.25rem 0.75rem;
-  background-color: var(--bg-secondary);
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-full);
+  padding: 0 16px;
+  height: 32px;
+  background-color: var(--md-surface-container-high);
+  border: 1px solid var(--md-outline-variant);
+  border-radius: var(--md-shape-full); /* pill */
+  position: relative;
+  cursor: pointer;
+}
+
+/* Micro-interaction terminal stats diagnostic */
+.statusDiagnostic {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  background-color: var(--md-on-surface);
+  color: var(--md-surface);
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 10px;
+  line-height: 12px;
+  font-family: var(--font-mono);
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity var(--transition-fast) ease, transform var(--transition-fast) ease, visibility var(--transition-fast) ease;
+  z-index: 20;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+  border: 1px solid var(--md-outline-variant);
+}
+
+.statusDiagnostic::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 20px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent var(--md-on-surface) transparent;
+}
+
+.statusBadge:hover .statusDiagnostic,
+.statusBadge:focus-within .statusDiagnostic {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
 .statusDot {
   width: 6px;
   height: 6px;
-  background-color: #10B981; /* Flat green */
+  background-color: #10B981;
   border-radius: 50%;
 }
 
-:global([data-theme='dark']) .statusDot {
-  background-color: #34D399;
-}
-
 .statusText {
-  font-size: 0.725rem;
+  font-size: var(--md-label-medium-size); /* 12px */
   font-weight: 500;
-  color: var(--text-secondary);
-  letter-spacing: 0.02em;
+  color: var(--md-on-surface-variant);
+  letter-spacing: var(--md-label-medium-ls);
 }
 
-.positioningLine {
+.eyebrow {
   font-family: var(--font-mono);
   font-size: 0.725rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--accent-brand);
+  color: var(--md-primary);
   margin-bottom: 0.375rem;
   display: inline-block;
   line-height: 1.2;
 }
 
+.socialRow {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.socialLink {
+  color: var(--md-on-surface-variant);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 150ms ease;
+  border: none;
+  background: none;
+  padding: 0;
+}
+
+.socialLink:hover {
+  color: var(--md-on-surface);
+}
+
+.ctaIcon {
+  width: 18px;
+  height: 18px;
+  margin-left: 4px;
+}
+
+/* H1 Headline — Promoted to boldest/largest */
 .headline {
-  font-size: clamp(2.15rem, 4.2vw, 3.25rem);
+  font-size: 32px; /* Mobile (base): text-4xl */
   font-weight: 700;
   line-height: 1.15;
   letter-spacing: -0.02em;
-  color: var(--text-primary);
-  margin: 0 0 0.375rem 0;
+  color: var(--md-on-surface);
+  margin: 0 0 0.5rem 0;
 }
 
+@media (min-width: 768px) {
+  .headline {
+    font-size: 42px; /* Desktop H1: large and bold, fits on one line */
+  }
+}
+
+/* H2 Sub-headline — Regular weight to enforce max two weights (700 and 400) */
+.subHeadline {
+  font-size: 1.125rem; /* 18px */
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--md-on-surface-variant);
+  margin: 0 0 1.25rem 0;
+}
+
+@media (min-width: 768px) {
+  .subHeadline {
+    font-size: 1.5rem; /* 24px */
+  }
+}
+
+/* MD3 Body Large tagline */
 .tagline {
-  font-size: clamp(1.05rem, 1.8vw, 1.25rem);
-  font-weight: 500;
-  line-height: 1.35;
-  color: var(--text-secondary);
+  font-size: var(--md-body-large-size); /* 16px */
+  font-weight: 400;
+  line-height: var(--md-body-large-lh); /* 24px */
+  letter-spacing: var(--md-body-large-ls);
+  color: var(--md-on-surface-variant);
   margin: 0 0 0.625rem 0;
-  letter-spacing: -0.01em;
 }
 
+/* MD3 Body Large description */
 .description {
-  font-size: 0.925rem;
-  line-height: 1.5;
-  color: var(--text-secondary);
+  font-size: var(--md-body-large-size); /* 16px */
+  line-height: var(--md-body-large-lh);
+  letter-spacing: var(--md-body-large-ls);
+  color: var(--md-on-surface-variant);
   max-width: 580px;
   margin-bottom: 1.25rem;
 }
 
-/* Structured Tech Stack Panel Grid - Single Row on Desktop */
+/* Tech Stack Grid */
 .techGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -174,31 +259,16 @@
   margin-bottom: 1.5rem;
 }
 
+/* MD3 Level 1 filled card — surface-container-low, no border, no shadow */
 .techCard {
-  background-color: var(--bg-tertiary);
-  border: 1px solid var(--border-default);
-  border-radius: 12px; /* Match standard 12px skills rounding */
-  padding: 0.625rem 0.875rem; /* Consistent scaled-down padding rhythm */
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04); /* Match skillGroup shadow */
+  background-color: var(--md-surface-container-low);
+  border: none;
+  border-radius: var(--md-shape-md); /* 12px */
+  padding: 0.625rem 0.875rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
-}
-
-:global([data-theme='dark']) .techCard {
-  background-color: var(--bg-card); /* Match dark mode skillGroup card fill */
-  box-shadow: none;
-}
-
-.techCard:hover {
-  border-color: #1A73E8;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
-}
-
-:global([data-theme='dark']) .techCard:hover {
-  border-color: #8AB4F8;
 }
 
 .techLabel {
@@ -206,26 +276,26 @@
   font-size: 0.65rem;
   font-weight: 700;
   text-transform: uppercase;
-  color: var(--accent-brand);
+  color: var(--md-primary);
   letter-spacing: 0.05em;
   margin-bottom: 0.15rem;
 }
 
 .techValue {
-  font-size: 0.775rem;
-  color: var(--text-primary);
+  font-size: var(--md-title-small-size); /* 14px */
   font-weight: 500;
-  line-height: 1.35;
+  color: var(--md-on-surface);
+  line-height: var(--md-title-small-lh);
 }
 
 .techSubValue {
-  font-size: 0.7rem;
-  color: var(--text-tertiary);
+  font-size: var(--md-label-small-size); /* 11px */
+  color: var(--md-on-surface-variant);
   margin-top: 0.15rem;
   font-weight: 400;
 }
 
-/* Actions Row */
+/* CTA Buttons row */
 .ctaRow {
   display: flex;
   align-items: center;
@@ -233,67 +303,122 @@
   width: 100%;
 }
 
+/* MD3 Filled button — pill shape */
 .primaryButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.6875rem 1.5rem;
-  background-color: var(--accent-brand);
-  color: #FFFFFF !important;
-  font-size: 0.85rem;
-  font-weight: 600;
-  border-radius: var(--radius-sm);
+  padding: 0 24px;
+  height: 40px;
+  background-color: var(--md-primary);
+  color: var(--md-on-primary);
+  font-size: var(--md-label-large-size); /* 14px */
+  font-weight: 400; /* Reverted to regular to maintain two weights */
+  letter-spacing: var(--md-label-large-ls);
+  border-radius: var(--md-shape-full); /* pill */
   text-decoration: none;
   border: none;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   transition: background-color var(--transition-fast);
-  min-height: 40px;
 }
 
-:global([data-theme='dark']) .primaryButton {
-  color: #0d0d0f !important;
+.primaryButton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: var(--md-on-primary);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  pointer-events: none;
 }
 
-.primaryButton:hover {
-  background-color: #1557B0;
-}
+.primaryButton:hover::after { opacity: 0.08; }
+.primaryButton:active::after { opacity: 0.12; }
 
-:global([data-theme='dark']) .primaryButton:hover {
-  background-color: #538fe6;
-}
-
+/* MD3 Outlined button — pill shape */
 .secondaryButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.6875rem 1.5rem;
+  padding: 0 24px;
+  height: 40px;
   background-color: transparent;
-  color: var(--text-primary);
-  font-size: 0.85rem;
-  font-weight: 600;
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-sm);
+  color: var(--md-primary);
+  font-size: var(--md-label-large-size);
+  font-weight: 400; /* Reverted to regular to maintain two weights */
+  letter-spacing: var(--md-label-large-ls);
+  border: 1px solid var(--md-outline);
+  border-radius: var(--md-shape-full); /* pill */
   text-decoration: none;
-  transition: background-color var(--transition-fast), border-color var(--transition-fast);
-  min-height: 40px;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transition: border-color var(--transition-fast);
 }
 
-.secondaryButton:hover {
-  background-color: var(--bg-secondary);
-  border-color: var(--border-strong);
+.secondaryButton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: var(--md-primary);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  pointer-events: none;
 }
 
+.secondaryButton:hover::after { opacity: 0.08; }
+.secondaryButton:active::after { opacity: 0.12; }
 
+/* MD3 Tonal button — pill shape (UX layout elevation) */
+.tonalButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0 24px;
+  height: 40px;
+  background-color: var(--md-secondary-container);
+  color: var(--md-on-secondary-container);
+  font-size: var(--md-label-large-size);
+  font-weight: 500;
+  letter-spacing: var(--md-label-large-ls);
+  border-radius: var(--md-shape-full); /* pill */
+  text-decoration: none;
+  border: none;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transition: background-color var(--transition-fast);
+}
 
-/* ── RESPONSIVE STATES ── */
+.tonalButton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: var(--md-on-secondary-container);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  pointer-events: none;
+}
+
+.tonalButton:hover::after { opacity: 0.08; }
+.tonalButton:active::after { opacity: 0.12; }
+
+/* ── RESPONSIVE ── */
 @media (max-width: 1024px) {
   .gridContainer {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
   }
-  
+
   .headerBlock,
   .detailsBlock {
     width: 100%;
@@ -301,122 +426,211 @@
     text-align: left;
   }
 
-  .detailsBlock {
-    margin-top: 0;
-  }
+  .detailsBlock { margin-top: 0; }
 
-  .avatarStatusRow {
-    justify-content: flex-start;
-  }
-
-  .techGrid {
-    max-width: 100%;
-  }
-
-  .ctaRow {
-    justify-content: flex-start;
-  }
+  .techGrid { max-width: 100%; }
 
   .rightColumn {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    margin-bottom: 0; /* Let grid gap handle the spacing */
   }
 
-  .profileCard {
-    max-width: 210px; /* Constrain width to 210px on tablet */
-  }
+  .profileCard { max-width: 210px; }
 }
 
 @media (max-width: 640px) {
   .hero {
-    padding: 1.25rem 0 1rem;
+    padding: 1.5rem 1.25rem 2.5rem; /* px-5 pt-6 pb-10 */
+    background-color: var(--md-surface);
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .hero :global(.container) {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
 
-  .gridContainer {
-    gap: 0.75rem;
-  }
-
-  .avatarStatusRow {
-    margin-bottom: 0.5rem;
-    gap: 8px;
-  }
+  .gridContainer { gap: 0; }
 
   .rightColumn {
-    margin-bottom: 0; /* Let grid gap handle the spacing */
+    justify-content: flex-start;
+    margin-bottom: 16px; /* mb-4 gap: photo -> badge */
   }
 
   .profileCard {
-    max-width: 180px; /* Snugger 180px size on mobile */
+    width: 96px;
+    height: 96px;
+    max-width: 96px;
+    border-radius: 20px; /* rounded-[20px] */
+    border: none;
+    background: transparent;
+    box-shadow: none;
   }
 
+  .profileImageLarge {
+    width: 96px;
+    height: 96px;
+    aspect-ratio: 1/1;
+    border-radius: 20px;
+    object-fit: cover;
+  }
 
+  .avatarStatusRow {
+    margin-bottom: 12px; /* mb-3 gap: badge -> eyebrow */
+  }
 
-  .positioningLine {
-    font-size: 0.65rem;
-    margin-bottom: 0.1rem;
+  .statusBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px; /* gap-2 */
+    width: fit-content;
+    background-color: transparent !important;
+    border: 1px solid var(--md-outline-variant);
+    border-radius: 9999px;
+    padding: 6px 12px; /* px-3 py-1.5 */
+    height: auto;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--md-on-surface-variant);
+  }
+
+  .statusDot {
+    width: 6px; /* w-1.5 */
+    height: 6px; /* h-1.5 */
+    background-color: #10B981 !important; /* bg-emerald-500 */
+    border-radius: 50%;
+  }
+
+  .eyebrow {
+    font-family: 'Google Sans', 'Roboto', system-ui, sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--md-primary);
+    margin-bottom: 8px; /* mb-2 gap: eyebrow -> name */
+    display: block;
   }
 
   .headline {
-    font-size: 1.75rem;
-    margin-bottom: 0.1rem;
+    font-size: 26px; /* text-[26px] */
+    font-weight: 700;
+    color: var(--md-on-surface);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 4px; /* mb-1 gap: name -> subtitle */
+    white-space: nowrap;
   }
 
   .tagline {
-    font-size: 0.95rem;
-    margin-bottom: 0.2rem;
+    font-size: 14px;
+    color: var(--md-on-surface-variant);
+    font-weight: 400;
+    line-height: 1.5;
+    margin-bottom: 16px; /* mb-4 gap: subtitle -> description */
   }
 
   .description {
-    font-size: 0.825rem;
-    line-height: 1.4;
-    margin-bottom: 0.75rem;
+    font-size: 14px;
+    color: var(--md-on-surface-variant);
+    line-height: 1.7;
+    margin-bottom: 24px; /* mb-6 gap: description -> buttons */
     max-width: 100%;
   }
 
-  /* 2x2 grid on mobile viewports */
-  .techGrid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.375rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .techCard {
-    padding: 0.5rem 0.625rem;
-  }
-
-  /* Span the third card across both columns */
-  .techCard:last-child {
-    grid-column: span 2;
-  }
-
-  .techLabel {
-    font-size: 0.55rem;
-    margin-bottom: 0.05rem;
-  }
-
-  .techValue {
-    font-size: 0.725rem;
-  }
-
-  .techSubValue {
-    font-size: 0.65rem;
-    margin-top: 0.05rem;
-  }
-
   .ctaRow {
-    flex-direction: column;
-    align-items: stretch;
+    flex-direction: row;
+    align-items: center;
     width: 100%;
-    gap: 0.375rem;
+    gap: 12px; /* gap-3 */
   }
 
   .primaryButton,
+  .secondaryButton,
+  .tonalButton {
+    flex: 1;
+    height: 40px;
+    border-radius: 9999px;
+    font-size: 13px;
+    font-weight: 400; /* Reverted to regular to maintain two weights */
+    padding: 0 1rem;
+    width: auto;
+    position: relative;
+  }
+
+  .primaryButton {
+    background-color: var(--md-primary);
+    color: var(--md-on-primary);
+    border: none;
+  }
+
   .secondaryButton {
-    width: 100%;
-    min-height: 40px; /* Snug touch target for mobile */
-    padding: 0.5rem 1rem;
+    background-color: transparent;
+    border: 1px solid var(--md-outline-variant);
+    color: var(--md-primary);
+  }
+
+  .tonalButton {
+    background-color: var(--md-secondary-container) !important;
+    color: var(--md-on-secondary-container) !important;
+    border: none !important;
+  }
+
+  .ctaIcon {
+    width: 14px;
+    height: 14px;
+    margin-left: 4px;
+  }
+
+  .socialRow {
+    margin-top: 20px; /* mt-5 gap: buttons -> social */
+    display: flex;
+    gap: 20px; /* gap-5 */
+    align-items: center;
+  }
+
+  .socialLink {
+    color: var(--md-on-surface-variant);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 150ms ease;
+    border: none;
+    background: none;
+    padding: 0;
+  }
+
+  .socialLink:hover {
+    color: var(--md-on-surface);
+  }
+
+  /* ── MD3 state layer on buttons ── */
+  .primaryButton::after,
+  .secondaryButton::after,
+  .tonalButton::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    background-color: currentColor;
+    opacity: 0;
+    transition: opacity 150ms ease;
+    pointer-events: none;
+  }
+
+  .primaryButton:hover::after,
+  .secondaryButton:hover::after,
+  .tonalButton:hover::after {
+    opacity: 0.08;
+  }
+
+  .primaryButton:active::after,
+  .secondaryButton:active::after,
+  .tonalButton:active::after {
+    opacity: 0.12;
   }
 }

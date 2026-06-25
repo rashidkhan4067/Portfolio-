@@ -1,65 +1,58 @@
 import { motion } from 'framer-motion';
-import { ExternalLink, MapPin, Clock } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import { experience } from '../../../constants/portfolioData';
 import SectionWrapper, { itemVariants } from '../../../components/SectionWrapper';
-import SectionHeading from '../../../components/SectionHeading';
 import styles from '../styles.module.css';
 
 function ExperienceCard({ job }) {
   return (
-    <motion.div
-      className={styles.expCard}
-      variants={itemVariants}
-    >
-      {/* Timeline node */}
-      <div className={styles.expNode}>
-        <div className={styles.expDot} />
-      </div>
-
-      {/* Card */}
-      <div className={styles.expContent}>
-        <div className={styles.expHeader}>
-          <div>
-            <h3 className={styles.expRole}>{job.role}</h3>
+    <motion.div variants={itemVariants}>
+      <article className={styles.card}>
+        {/* Top Row: Role + Company Left, Date + Badges Right */}
+        <div className={styles.topRow}>
+          <div className={styles.leftCol}>
+            <h3 className={styles.roleTitle}>{job.role}</h3>
             <a
               href={job.companyUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className={styles.expCompany}
+              className={styles.companyLink}
             >
-              {job.company} <ExternalLink size={12} />
+              {job.company} <ExternalLink size={11} />
             </a>
           </div>
-          <div className={styles.expMeta}>
-            <span className={styles.expPeriod}>
-              <Clock size={12} /> {job.period}
-            </span>
-            <span className={styles.expLocation}>
-              <MapPin size={12} /> {job.location}
-            </span>
-            <span className={styles.expTypeBadge}>{job.type}</span>
+          <div className={styles.rightCol}>
+            <span className={styles.dateRange}>{job.period}</span>
+            {job.location && <span className={styles.location}>{job.location}</span>}
+            <span className={styles.categoryBadge}>{job.type}</span>
           </div>
         </div>
 
-        <p className={styles.expDesc}>{job.description}</p>
+        {/* Divider */}
+        <div className={styles.divider} />
 
-        <ul className={styles.highlights}>
+        {/* Description */}
+        <p className={styles.description}>{job.description}</p>
+
+        {/* Bullet Highlights */}
+        <ul className={styles.bulletList}>
           {job.highlights.map((h, i) => (
-            <li key={i} className={styles.highlightItem}>
-              <span className={styles.bulletDot} />
-              {h}
+            <li key={i} className={styles.bulletItem}>
+              <span className={styles.bulletIndicator} />
+              <span className={styles.bulletText}>{h}</span>
             </li>
           ))}
         </ul>
 
-        <div className={styles.expTech}>
+        {/* Tech Chips */}
+        <div className={styles.techChips}>
           {job.techStack.map((tech) => (
-            <span key={tech} className={styles.expTechTag}>
+            <span key={tech} className={styles.techChip}>
               {tech}
             </span>
           ))}
         </div>
-      </div>
+      </article>
     </motion.div>
   );
 }
@@ -67,15 +60,17 @@ function ExperienceCard({ job }) {
 export default function ExperienceSection() {
   return (
     <SectionWrapper id="experience">
-      <SectionHeading
-        eyebrow="Work History"
-        title="Professional Experience"
-        subtitle="3+ years engineering scalable systems, database optimization, and high-throughput data pipelines."
-        centered
-        level={1}
-      />
+      {/* Section Header */}
+      <div className={styles.headerContainer}>
+        <span className={styles.eyebrow}>WORK HISTORY</span>
+        <h1 className={styles.title}>Professional Experience</h1>
+        <p className={styles.subtitle}>
+          3+ years engineering scalable systems, database optimization, and high-throughput data pipelines.
+        </p>
+      </div>
+
+      {/* Timeline Cards Container */}
       <div className={styles.timeline}>
-        <div className={styles.timelineAxis} />
         {experience.map((job) => (
           <ExperienceCard key={job.id} job={job} />
         ))}

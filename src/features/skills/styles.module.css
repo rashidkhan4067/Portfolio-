@@ -1,219 +1,377 @@
 /* ==========================================================================
-   GOOGLE CLOUD CONSOLE SKILLS STYLE SHEET (CSS MODULE)
+   MD3 SKILLS & TECHNOLOGIES — Filter chips, icon containers, filled cards
    ========================================================================== */
 
+/* Alternate surface tone for visual section separation */
 .section {
   padding: var(--space-20) 0;
-  background-color: var(--bg-primary);
+  background-color: var(--md-surface-container-low);
   position: relative;
   width: 100%;
 }
 
-/* Header styling */
+/* Header */
 .headerContainer {
   margin-bottom: 2rem;
   text-align: center;
 }
 
+/* MD3 Label Medium eyebrow */
 .eyebrow {
-  font-size: 0.75rem; /* text-xs */
+  font-size: var(--md-label-medium-size); /* 12px */
+  line-height: var(--md-label-medium-lh);
+  letter-spacing: 0.1em;
   font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.1em; /* tracking-widest */
-  color: #3b82f6; /* text-blue-500 */
+  color: var(--md-primary);
   display: block;
   margin-bottom: 0.5rem;
 }
 
-:global([data-theme='dark']) .eyebrow {
-  color: #60a5fa; /* Adjusted for dark mode contrast */
-}
-
+/* MD3 Headline Medium — weight 400 */
 .title {
-  font-size: 1.5rem; /* text-2xl */
-  font-weight: 600; /* font-semibold, not bold (700+) */
-  color: var(--text-primary);
+  font-size: var(--md-headline-medium-size); /* 28px */
+  font-weight: 400;
+  line-height: var(--md-headline-medium-lh);
+  letter-spacing: var(--md-headline-medium-ls);
+  color: var(--md-on-surface);
   margin: 0;
 }
 
+/* MD3 Body Medium subtitle */
 .subtitle {
-  font-size: 0.875rem; /* text-sm */
-  color: var(--text-secondary); /* text-muted-foreground */
-  max-width: 24rem; /* max-w-sm */
+  font-size: var(--md-body-medium-size); /* 14px */
+  line-height: var(--md-body-medium-lh);
+  letter-spacing: var(--md-body-medium-ls);
+  color: var(--md-on-surface-variant);
+  max-width: 24rem;
   margin: 0.5rem auto 0;
-  line-height: 1.5;
 }
 
-/* Filter chips styling */
+.summaryLine {
+  font-size: 15px;
+  line-height: 1.55;
+  font-weight: 500;
+  color: var(--md-on-surface);
+  max-width: 38rem;
+  margin: 1rem auto 0;
+  text-align: center;
+}
+
+/* Filter chip area */
 .filterTabsContainer {
   display: flex;
   justify-content: center;
   margin-bottom: 2rem;
   width: 100%;
-  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .filterTabsScroller {
   display: flex;
-  flex-wrap: wrap; /* chips wrap, no horizontal scroll */
-  justify-content: center;
+  overflow-x: auto;
   gap: 0.5rem; /* gap-2 */
-  width: 100%;
+  padding-bottom: 0.25rem; /* pb-1 */
+  margin-left: -1.25rem; /* -mx-5 */
+  margin-right: -1.25rem; /* -mx-5 */
+  padding-left: 1.25rem; /* px-5 */
+  padding-right: 1.25rem; /* px-5 */
+  scrollbar-width: none; /* scrollbar-none */
+  -ms-overflow-style: none; /* scrollbar-none */
+  width: auto;
 }
 
+.filterTabsScroller::-webkit-scrollbar {
+  display: none; /* scrollbar-none */
+}
+
+@media (min-width: 768px) {
+  .filterTabsScroller {
+    flex-wrap: wrap;
+    overflow-x: visible;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+/* MD3 Filter Chip — inactive */
 .filterChip {
-  font-size: 0.75rem; /* text-xs */
-  padding: 0.375rem 0.875rem; /* px-3.5 py-1.5 */
-  border-radius: 9999px; /* rounded-full */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  padding: 0 16px;
+  font-size: var(--md-label-large-size); /* 14px */
+  font-weight: 500;
+  letter-spacing: var(--md-label-large-ls); /* 0.1px */
+  border-radius: var(--md-shape-sm); /* 8px per MD3 spec */
   cursor: pointer;
-  border: 1px solid var(--border-default); /* border-border */
-  background-color: var(--bg-tertiary); /* bg-background */
-  color: var(--text-secondary); /* text-muted-foreground */
-  font-weight: 400;
-  transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+  border: 1px solid var(--md-outline-variant);
+  background-color: transparent;
+  color: var(--md-on-surface-variant);
+  transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
   user-select: none;
+  flex-shrink: 0; /* Add flex-shrink-0 so chips never wrap on mobile */
 }
 
-/* Inactive states can change slightly on hover, but no hover shadow */
 .filterChip:hover {
-  border-color: var(--border-strong);
-  color: var(--text-primary);
+  background-color: var(--md-surface-container);
+  color: var(--md-on-surface);
 }
 
-/* Active State: bg-blue-50 border-blue-400 text-blue-600 font-medium */
+/* MD3 Filter Chip — active (primary-container tonal) */
 .activeChip {
-  background-color: #eff6ff !important; /* bg-blue-50 */
-  border-color: #60a5fa !important; /* border-blue-400 */
-  color: #2563eb !important; /* text-blue-600 */
-  font-weight: 500 !important; /* font-medium */
+  background-color: var(--md-primary-container) !important;
+  color: var(--md-on-primary-container) !important;
+  border: none !important;
+  padding: 0 17px; /* compensate for removed border */
+  font-weight: 500 !important;
 }
 
-:global([data-theme='dark']) .activeChip {
-  background-color: rgba(59, 130, 246, 0.15) !important;
-  border-color: #3b82f6 !important;
-  color: #93c5fd !important;
-}
-
-/* Category Sections */
+/* Category sections */
 .categorySection {
   width: 100%;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2.5rem; /* mt-10 equivalent spacing after each group */
 }
 
 .categorySection:last-child {
   margin-bottom: 0;
 }
 
+/* Fix 5 — Category label: mt-10 mb-3 (first gets mt-6 via :first-child) */
 .categoryLabel {
-  font-size: 10px; /* text-[10px] */
+  font-size: 12px;       /* MD3 Label Medium */
+  line-height: 16px;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  letter-spacing: 0.1em; /* tracking-widest */
-  color: var(--text-secondary); /* text-muted-foreground */
-  font-weight: 500; /* font-medium */
-  margin-bottom: 0.5rem; /* mb-2 */
-  margin-top: 1.25rem; /* mt-5 */
+  color: var(--md-on-surface-variant);
+  font-weight: 500;
+  margin-top: 2.5rem;    /* mt-10 */
+  margin-bottom: 0.75rem;/* mb-3 */
   display: block;
 }
 
-/* 2-col card grid on mobile, 3 on md, 4 on lg */
+.categorySection:first-child .categoryLabel {
+  margin-top: 1.5rem;    /* mt-6 — first category less cramped */
+}
+
+/* Fix 6 — Grid: gap-3 mobile, gap-4 lg, items-stretch for equal-height rows */
 .grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2-column mobile */
-  gap: 0.5rem; /* gap-2 */
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;        /* gap-3 */
+  align-items: stretch; /* equal-height cards per row */
   width: 100%;
 }
 
 @media (min-width: 768px) {
-  .grid {
-    grid-template-columns: repeat(3, 1fr); /* md */
-  }
+  .grid { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
 }
 
 @media (min-width: 1024px) {
-  .grid {
-    grid-template-columns: repeat(4, 1fr); /* lg */
-  }
+  .grid { grid-template-columns: repeat(4, 1fr); gap: 1rem; } /* gap-4 */
 }
 
-/* Skill card: border border-border rounded-lg p-3.5 */
+/* Fix 1 — MD3 Filled Card: radius 28px, h-full for equal row height */
 .skillCard {
-  border: 1px solid var(--border-default); /* border border-border */
-  border-radius: 0.5rem; /* rounded-lg */
-  padding: 0.875rem; /* p-3.5 */
+  background-color: var(--md-surface-container);
+  border: 1px solid transparent;
+  border-radius: 28px;  /* MD3 --md-shape-xl */
+  padding: 1rem;        /* p-4 */
   display: flex;
   flex-direction: column;
-  gap: 0.5rem; /* gap-2 */
-  background-color: var(--bg-tertiary);
-  box-shadow: none; /* No shadow. Clean flat surface. */
-  min-width: 0; /* Cards must never overflow on 320px viewport */
-  position: relative;
+  gap: 0.75rem;         /* gap-3 between rows */
+  min-width: 0;
+  height: 100%;         /* fill grid cell for equal height */
   box-sizing: border-box;
+  position: relative;
+  transition: transform var(--transition-fast) ease, background-color var(--transition-fast) ease, border-color var(--transition-fast) ease, box-shadow var(--transition-fast) ease;
 }
 
-:global([data-theme='dark']) .skillCard {
-  background-color: var(--bg-card);
+.skillCard:hover {
+  transform: translateY(-4px) scale(1.02);
+  background-color: var(--md-surface-container-high);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05); /* very soft subtle shadow */
 }
 
-/* Row 1: icon wrapper + skill name */
+/* Row 1: icon container + skill name */
 .cardRow1 {
   display: flex;
   align-items: center;
-  gap: 0.5rem; /* gap-2 */
+  gap: 0.75rem;   /* gap-3 */
   min-width: 0;
 }
 
-/* icon wrapper (w-7 h-7 rounded-md bg-muted flex items-center justify-center) */
+/* Fix 2 — MD3 Icon Container: w-10 h-10 rounded-xl surface-container-high, icon blue */
 .iconWrapper {
-  width: 1.75rem; /* w-7 */
-  height: 1.75rem; /* h-7 */
-  border-radius: 0.375rem; /* rounded-md */
-  background-color: var(--bg-secondary); /* bg-muted */
+  width: 40px;          /* w-10 */
+  height: 40px;         /* h-10 */
+  border-radius: 12px;  /* rounded-xl equivalent in MD3 */
+  background-color: var(--md-surface-container-high);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  color: var(--text-secondary);
+  color: #2563eb;       /* text-blue-600 */
 }
 
-/* skill name (text-sm font-medium) */
+/* MD3 Title Small */
 .skillName {
-  font-size: 0.875rem; /* text-sm */
-  font-weight: 500; /* font-medium */
-  color: var(--text-primary);
+  font-size: var(--md-title-small-size); /* 14px */
+  font-weight: 500;
+  line-height: var(--md-title-small-lh);
+  letter-spacing: var(--md-title-small-ls);
+  color: var(--md-on-surface);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  min-w: 0; /* min-w-0 on text nodes */
+  min-width: 0;
 }
 
-/* Row 2: short description (text-[11px] text-muted-foreground leading-relaxed) */
+/* Fix 4 — MD3 Body Medium description, flex-1 equalises card height */
 .skillDesc {
-  font-size: 11px; /* text-[11px] */
-  color: var(--text-secondary); /* text-muted-foreground */
-  line-height: 1.625; /* leading-relaxed */
+  font-size: 13px;      /* slightly tighter than 14px for card density */
+  line-height: 1.5;     /* leading-relaxed */
+  color: var(--md-on-surface-variant);
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* Description text truncates to 2 lines max */
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis;
-  min-w: 0; /* min-w-0 on text nodes */
   margin: 0;
+  min-width: 0;
 }
 
-/* Row 3: tag badge (text-[10px] font-medium px-2 py-0.5 rounded-full bg-blue-50 text-blue-600 w-fit) */
+/* flex-1 class applied alongside skillDesc to push badge to bottom */
+.skillDescFlex {
+  flex: 1;
+}
+
+/* Fix 3 — Tag badge: px-3 py-0.5 text-[11px] w-fit rounded-full */
 .tagBadge {
-  font-size: 10px; /* text-[10px] */
-  font-weight: 500; /* font-medium */
-  padding: 0.125rem 0.5rem; /* px-2 py-0.5 */
-  border-radius: 9999px; /* rounded-full */
-  background-color: #eff6ff; /* bg-blue-50 */
-  color: #2563eb; /* text-blue-600 */
-  width: fit-content; /* w-fit */
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.75rem;  /* py-0.5 px-3 */
+  font-size: 11px;            /* text-[11px] */
+  font-weight: 500;
+  border-radius: 9999px;      /* rounded-full */
+  background-color: var(--md-secondary-container);
+  color: var(--md-on-secondary-container);
+  border: none;
+  width: fit-content;         /* w-fit — never stretches */
   flex-shrink: 0;
+  user-select: none;
+  align-self: flex-start;     /* left-align badge within flex column */
+}
+
+/* ==========================================================================
+   Primary Stack Highlight & Interactive Tooltips
+   ========================================================================== */
+
+/* Highlighting primary stack focus cards */
+.focusCard {
+  background-color: color-mix(in srgb, var(--md-primary-container) 12%, var(--md-surface-container));
+  border: 1px solid var(--md-primary);
+}
+
+.focusCard .skillName {
+  font-weight: 700;
+  color: var(--md-primary);
+}
+
+/* Vertical stack for skill name and focus badge */
+.nameContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  gap: 4px;
+}
+
+.nameRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.levelBadge {
+  font-size: 9px;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   user-select: none;
 }
 
-:global([data-theme='dark']) .tagBadge {
-  background-color: rgba(59, 130, 246, 0.15);
-  color: #93c5fd;
+.expertBadge {
+  background-color: color-mix(in srgb, var(--md-primary) 10%, transparent);
+  color: var(--md-primary);
+  border: 1px solid color-mix(in srgb, var(--md-primary) 15%, transparent);
+}
+
+.proficientBadge {
+  background-color: var(--md-surface-container-high);
+  color: var(--md-on-surface-variant);
+  border: 1px solid var(--md-outline-variant);
+}
+
+/* Clean MD3 Focus Badge */
+.focusBadge {
+  font-size: 9px;
+  line-height: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--md-primary);
+  background-color: var(--md-primary-container);
+  padding: 1px 6px;
+  border-radius: 4px;
+  width: fit-content;
+  user-select: none;
+}
+
+/* Interactive Hover Tooltip */
+.tooltipText {
+  position: absolute;
+  bottom: 105%;
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  background-color: var(--md-on-surface); /* Dark background */
+  color: var(--md-surface); /* Light text */
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 11px;
+  line-height: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-fast) ease, transform var(--transition-fast) ease, visibility var(--transition-fast) ease;
+  pointer-events: none; /* Prevents blocking hover or click */
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Tooltip Downward arrow */
+.tooltipText::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: var(--md-on-surface) transparent transparent transparent;
+}
+
+/* Display tooltip on skill card hover */
+.skillCard:hover .tooltipText {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
 }
