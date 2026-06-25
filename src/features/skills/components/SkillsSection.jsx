@@ -1,192 +1,193 @@
 import { useState } from 'react';
-import { 
-  Terminal, 
-  Monitor, 
-  Cloud, 
-  Brain, 
-  Code2, 
-  Cpu, 
-  Globe, 
-  Layout, 
-  Layers, 
-  Palette, 
-  Database, 
-  Server, 
-  GitBranch, 
-  BarChart2,
+import {
+  FileCode2,
+  Cpu,
+  Coffee,
+  Globe,
+  Server,
+  Zap,
+  Box,
+  Layers,
+  Atom,
+  Paintbrush,
+  Flame,
+  Component,
+  Database,
+  KeyRound,
+  ShieldCheck,
+  MemoryStick,
+  Triangle,
+  Train,
+  GitBranch,
+  Container,
   Sparkles
 } from 'lucide-react';
 import styles from '../styles.module.css';
-import SectionHeading from '../../../components/SectionHeading';
 
-// Cohesive categories styled with official Google branding parameters
-const skillCategories = [
+const SKILLS = [
   {
-    id: "languages",
     category: "Languages & Systems",
-    icon: Code2,
-    skills: [
-      { name: "Python", subLabel: "Object-oriented scripting & high-performance core", icon: Code2 },
-      { name: "C++", subLabel: "High-performance systems & compiled algorithms", icon: Cpu },
-      { name: "Java Development", subLabel: "Enterprise app design & robust architectures", icon: Server },
-      { name: "HTML5", subLabel: "Modern semantic markup & structure foundation", icon: Globe }
+    filter: "languages",
+    items: [
+      { name: "Python", desc: "Object-oriented scripting & high-performance core", tag: "Core", icon: "FileCode2" },
+      { name: "C++", desc: "High-performance systems & compiled algorithms", tag: "Systems", icon: "Cpu" },
+      { name: "Java", desc: "Enterprise app design & robust architectures", tag: "Enterprise", icon: "Coffee" },
+      { name: "HTML5", desc: "Semantic markup & structure foundation", tag: "Web", icon: "Globe" },
     ]
   },
   {
-    id: "backend",
     category: "Backend & APIs",
-    icon: Terminal,
-    skills: [
-      { name: "Django", subLabel: "Secure, rapid full-stack Python framework", icon: Terminal },
-      { name: "FastAPI", subLabel: "High-performance async APIs with automatic docs", icon: Cpu },
-      { name: "Node JS", subLabel: "Event-driven asynchronous backend execution", icon: Server },
-      { name: "PHP", subLabel: "Server-side web development & scalable scripts", icon: Code2 }
+    filter: "backend",
+    items: [
+      { name: "Django", desc: "Secure, rapid full-stack Python framework", tag: "Primary", icon: "Server" },
+      { name: "FastAPI", desc: "High-performance async APIs with auto docs", tag: "API", icon: "Zap" },
+      { name: "Node JS", desc: "Event-driven asynchronous backend execution", tag: "Runtime", icon: "Box" },
+      { name: "DRF", desc: "Powerful REST API toolkit for Django", tag: "API", icon: "Layers" },
     ]
   },
   {
-    id: "frontend",
     category: "Frontend & Web UI",
-    icon: Layout,
-    skills: [
-      { name: "React JS", subLabel: "Component-based rich single page applications", icon: Layout },
-      { name: "Tailwind CSS", subLabel: "Utility-first modern responsive interfaces", icon: Palette },
-      { name: "Web Development", subLabel: "Semantic, standards-compliant user experiences", icon: Globe },
-      { name: "Web Applications", subLabel: "Highly interactive state-driven browser apps", icon: Layers }
+    filter: "frontend",
+    items: [
+      { name: "React JS", desc: "Component-based single page applications", tag: "Primary", icon: "Atom" },
+      { name: "Tailwind CSS", desc: "Utility-first modern responsive interfaces", tag: "Styling", icon: "Paintbrush" },
+      { name: "Vite", desc: "Lightning-fast frontend build tooling", tag: "Tooling", icon: "Flame" },
+      { name: "shadcn/ui", desc: "Accessible, composable UI components", tag: "UI Lib", icon: "Component" },
     ]
   },
   {
-    id: "desktop",
-    category: "Desktop & GUI Apps",
-    icon: Monitor,
-    skills: [
-      { name: "Tkinter", subLabel: "Lightweight native desktop Python GUIs", icon: Monitor },
-      { name: "PySide Web UI", subLabel: "Cross-platform enterprise native desktop apps", icon: Palette },
-      { name: "Desktop Application", subLabel: "Compiled client-side software architectures", icon: Layout },
-      { name: "Python Applications", subLabel: "Standard automation scripts & compiled units", icon: Terminal }
+    category: "Database & Auth",
+    filter: "database",
+    items: [
+      { name: "PostgreSQL", desc: "Advanced open-source relational database", tag: "Primary", icon: "Database" },
+      { name: "JWT Auth", desc: "Stateless token-based authentication", tag: "Auth", icon: "KeyRound" },
+      { name: "Google OAuth", desc: "Secure third-party authentication flow", tag: "Auth", icon: "ShieldCheck" },
+      { name: "Redis", desc: "In-memory caching and session store", tag: "Cache", icon: "MemoryStick" },
     ]
   },
   {
-    id: "cloud",
-    category: "Cloud & Databases",
-    icon: Cloud,
-    skills: [
-      { name: "Firebase & Supabase", subLabel: "Relating database & serverless backend auth", icon: Cloud },
-      { name: "SQL & SQLite", subLabel: "Relational schemas, indexing & query tuning", icon: Database },
-      { name: "Git", subLabel: "Distributed code versioning & history tracking", icon: GitBranch },
-      { name: "GitHub", subLabel: "Collaborative source control & CI/CD workflows", icon: Globe }
-    ]
-  },
-  {
-    id: "data",
-    category: "Data Science & Big Data",
-    icon: Brain,
-    skills: [
-      { name: "PySpark", subLabel: "Distributed large-scale big data cluster analysis", icon: Cpu },
-      { name: "Streamlit", subLabel: "Rapid AI, ML & data dashboards prototyping", icon: BarChart2 }
+    category: "DevOps & Deployment",
+    filter: "devops",
+    items: [
+      { name: "Vercel", desc: "Zero-config frontend deployment platform", tag: "Deploy", icon: "Triangle" },
+      { name: "Railway", desc: "Backend and database cloud hosting", tag: "Deploy", icon: "Train" },
+      { name: "Git & GitHub", desc: "Version control and collaborative workflows", tag: "VCS", icon: "GitBranch" },
+      { name: "Docker", desc: "Containerized application environments", tag: "Infra", icon: "Container" },
     ]
   }
 ];
 
-export default function SkillsSection({ headingLevel = 2 }) {
-  const [activeTab, setActiveTab] = useState("all");
+const ICON_MAP = {
+  FileCode2,
+  Cpu,
+  Coffee,
+  Globe,
+  Server,
+  Zap,
+  Box,
+  Layers,
+  Atom,
+  Paintbrush,
+  Flame,
+  Component,
+  Database,
+  KeyRound,
+  ShieldCheck,
+  MemoryStick,
+  Triangle,
+  Train,
+  GitBranch,
+  Container,
+  Sparkles
+};
 
-  // Filter skills array based on active Tab ID
-  const filteredCategories = activeTab === "all" 
-    ? skillCategories 
-    : skillCategories.filter(cat => cat.id === activeTab);
+export default function SkillsSection() {
+  const [activeFilter, setActiveFilter] = useState("all");
+
+  const FILTER_CHIPS = [
+    { label: "All", value: "all" },
+    { label: "Languages", value: "languages" },
+    { label: "Backend", value: "backend" },
+    { label: "Frontend", value: "frontend" },
+    { label: "Database", value: "database" },
+    { label: "DevOps", value: "devops" }
+  ];
+
+  // Filter skills based on active filter
+  const filteredCategories = activeFilter === "all"
+    ? SKILLS
+    : SKILLS.filter(cat => cat.filter === activeFilter);
 
   return (
     <section className={styles.section} id="skills">
       <div className="container">
         
         {/* Section Header */}
-        <SectionHeading
-          eyebrow="Technical Stack"
-          title="Skills & Technologies"
-          subtitle="A cohesive engineering toolkit built to design, deploy, and scale robust applications across the modern tech landscape."
-          centered={true}
-          level={headingLevel}
-        />
+        <div className={styles.headerContainer}>
+          <span className={styles.eyebrow}>TECHNICAL STACK</span>
+          <h2 className={styles.title}>Skills & Technologies</h2>
+          <p className={styles.subtitle}>
+            A cohesive engineering toolkit built to design, deploy, and scale robust applications.
+          </p>
+        </div>
 
-        {/* ── HIGH-END MATERIAL 3 HORIZONTAL FILTER CHIPS ── */}
+        {/* Filter Chips */}
         <nav className={styles.filterTabsContainer} aria-label="Skills category filtering">
           <div className={styles.filterTabsScroller}>
-            {/* "All" Toggle Pill */}
-            <button
-              onClick={() => setActiveTab("all")}
-              className={`${styles.filterChip} ${activeTab === "all" ? styles.activeChip : ''}`}
-              aria-pressed={activeTab === "all" ? "true" : "false"}
-            >
-              <Sparkles size={14} className={styles.chipIcon} />
-              <span>Show All</span>
-            </button>
-
-            {/* Category Custom Tabs */}
-            {skillCategories.map((cat) => {
-              const TabIcon = cat.icon;
-              return (
-                <button
-                  key={cat.id}
-                  onClick={() => setActiveTab(cat.id)}
-                  className={`${styles.filterChip} ${activeTab === cat.id ? styles.activeChip : ''}`}
-                  aria-pressed={activeTab === cat.id ? "true" : "false"}
-                >
-                  <TabIcon size={14} className={styles.chipIcon} />
-                  <span>{cat.category}</span>
-                </button>
-              );
-            })}
+            {FILTER_CHIPS.map((chip) => (
+              <button
+                key={chip.value}
+                onClick={() => setActiveFilter(chip.value)}
+                className={`${styles.filterChip} ${activeFilter === chip.value ? styles.activeChip : ''}`}
+                aria-pressed={activeFilter === chip.value ? "true" : "false"}
+              >
+                {chip.label}
+              </button>
+            ))}
           </div>
         </nav>
 
-        {/* Categories Grid (Animates layout dynamically on tab shift) */}
-        <div className={styles.skillsGrid}>
-          {filteredCategories.map((categoryGroup) => {
-            const CategoryIcon = categoryGroup.icon;
-
-            return (
-              <article 
-                key={categoryGroup.id} 
-                className={styles.skillGroup}
-              >
-                {/* M3 Card Header */}
-                <header className={styles.groupHeader}>
-                  <div className={styles.groupIcon}>
-                    <CategoryIcon size={20} aria-hidden="true" />
-                  </div>
-                  <h3 className={styles.groupTitle}>
-                    {categoryGroup.category}
-                  </h3>
-                </header>
-
-                {/* Structured Vertical Skill List with active hover container rows */}
-                <div className={styles.skillList}>
-                  {categoryGroup.skills.map((skill, skillIndex) => {
-                    const SkillIcon = skill.icon;
-
-                    return (
-                      <div key={skillIndex} className={styles.skillItem}>
-                        {/* Monochromatic Tech Icon */}
-                        <div className={styles.skillIconContainer}>
-                          <SkillIcon size={16} aria-hidden="true" />
+        {/* Categories / Grid */}
+        <div>
+          {filteredCategories.map((categoryGroup) => (
+            <div key={categoryGroup.filter} className={styles.categorySection}>
+              {/* Show category label ONLY when activeFilter is "all" */}
+              {activeFilter === "all" && (
+                <span className={styles.categoryLabel}>
+                  {categoryGroup.category}
+                </span>
+              )}
+              
+              <div className={styles.grid}>
+                {categoryGroup.items.map((skill, skillIndex) => {
+                  const IconComponent = ICON_MAP[skill.icon] || Globe;
+                  return (
+                    <div key={skillIndex} className={styles.skillCard}>
+                      {/* Row 1: icon wrapper + skill name */}
+                      <div className={styles.cardRow1}>
+                        <div className={styles.iconWrapper}>
+                          <IconComponent size={14} aria-hidden="true" />
                         </div>
-                        
-                        {/* Skill Meta Detail */}
-                        <div className={styles.skillMeta}>
-                          <span className={styles.skillName}>
-                            {skill.name}
-                          </span>
-                          <span className={styles.skillSubLabel}>
-                            {skill.subLabel}
-                          </span>
-                        </div>
+                        <span className={styles.skillName}>
+                          {skill.name}
+                        </span>
                       </div>
-                    );
-                  })}
-                </div>
-              </article>
-            );
-          })}
+                      
+                      {/* Row 2: description text */}
+                      <p className={styles.skillDesc}>
+                        {skill.desc}
+                      </p>
+                      
+                      {/* Row 3: tag badge */}
+                      <span className={styles.tagBadge}>
+                        {skill.tag}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
         </div>
 
       </div>

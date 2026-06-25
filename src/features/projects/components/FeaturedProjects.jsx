@@ -5,7 +5,6 @@ import {
 } from 'lucide-react';
 import { projects } from '../../../constants/portfolioData';
 import styles from '../styles.module.css';
-import SectionHeading from '../../../components/SectionHeading';
 import { useNavigate } from 'react-router-dom';
 import ProjectCard from './ProjectCard';
 
@@ -85,7 +84,7 @@ const mergeProjects = (rawGithubRepos) => {
   });
 };
 
-export default function FeaturedProjects() {
+export default function ProjectsSection() {
   const navigate = useNavigate();
   const [showAll, setShowAll] = useState(false);
   const [projectList, setProjectList] = useState(() => {
@@ -229,15 +228,16 @@ export default function FeaturedProjects() {
       <div className="container">
 
         {/* Section Header */}
-        <SectionHeading
-          eyebrow="Technical Portfolio"
-          title="Featured Projects"
-          subtitle="A structured repository of systems, custom automations, and predictive algorithms."
-          centered={true}
-        />
+        <div className={styles.headerContainer}>
+          <span className={styles.eyebrow}>TECHNICAL PORTFOLIO</span>
+          <h2 className={styles.title}>Featured Projects</h2>
+          <p className={styles.subtitle}>
+            A structured repository of systems, custom automations, and predictive algorithms.
+          </p>
+        </div>
 
-        {/* Responsive CSS Grid Layout */}
-        <div className={`${styles.projectsGrid} ${!showAll ? styles.collapsedGrid : ''}`}>
+        {/* Responsive Grid / Flex list layout */}
+        <div className={styles.projectsGrid}>
           {loading ? (
             skeletonCards.map((_, index) => (
               <div
