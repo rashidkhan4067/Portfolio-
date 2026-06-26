@@ -14,13 +14,12 @@
   transition: all var(--transition-fast);
 }
 
-/* MD3 glass surface and border on scroll */
+/* MD3 elevated surface and border on scroll */
 .scrolled {
   padding: 0.625rem 0;
-  background-color: var(--bg-glass);
+  background-color: var(--md-surface-container);
   border-bottom: 1px solid var(--border-subtle);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
 }
 
 .inner {
