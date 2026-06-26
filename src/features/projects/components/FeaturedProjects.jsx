@@ -270,7 +270,7 @@ export default function ProjectsSection() {
             skeletonCards.map((_, index) => (
               <div
                 key={`project-skeleton-${index}`}
-                className={`${styles.projectCard} ${styles.skeletonCard} rounded-[28px] bg-[var(--md-surface-container-low)]`}
+                className={`${styles.projectCard} ${styles.skeletonCard}`}
               >
                 <div className={`${styles.skeletonImage} skeleton`} />
                 <div className={styles.cardContent}>

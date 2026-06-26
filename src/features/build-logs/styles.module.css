@@ -85,8 +85,8 @@
 /* Google Material 3 Surface Card - Aligned with Projects card */
 .card {
   background-color: var(--md-surface-container-low);
-  border-radius: 28px;
-  border: none;
+  border-radius: 24px;
+  border: 1px solid color-mix(in srgb, var(--md-outline-variant) 30%, transparent);
   overflow: hidden;
   padding: 24px;
   display: flex;
@@ -95,15 +95,28 @@
   height: 100%;
   position: relative;
   cursor: pointer;
-  box-shadow: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
   animation: fadeInUp 400ms cubic-bezier(0.4, 0, 0.2, 1) both;
+  transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 200ms cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--md-primary);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+}
+
+.card:active {
+  transform: translateY(0);
 }
 
 .card::after {
   content: '';
   position: absolute;
   inset: 0;
-  border-radius: 28px;
+  border-radius: 24px;
   background-color: var(--md-on-surface);
   opacity: 0;
   transition: opacity 150ms ease;
@@ -145,9 +158,9 @@
   background-color: var(--md-secondary-container);
   color: var(--md-on-secondary-container);
   border: none;
-  border-radius: 9999px;
-  padding: 3px 10px;
-  font-size: 11px;
+  border-radius: 6px;
+  padding: 3px 8px;
+  font-size: 9px;
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -230,12 +243,12 @@
   display: inline-flex;
   align-items: center;
   gap: 0.25rem; /* gap-1 */
-  background-color: var(--md-surface-container-high);
+  background-color: color-mix(in srgb, var(--md-surface-container) 60%, transparent);
   color: var(--md-on-surface-variant);
-  border: none;
+  border: 1px solid color-mix(in srgb, var(--md-outline-variant) 40%, transparent);
   border-radius: 9999px;
-  padding: 3px 10px;
-  font-size: 11px;
+  padding: 4px 10px;
+  font-size: 10px;
   font-weight: 500;
   transition: background-color var(--transition-fast);
 }
@@ -497,5 +510,55 @@
   display: flex;
   justify-content: center;
   margin-top: 2rem; /* mt-8 */
+}
+
+@media (max-width: 767px) {
+  .section {
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-8);
+  }
+
+  .card {
+    border-radius: 20px;
+    padding: 16px;
+    gap: 12px; /* reduced internal vertical gap */
+    border: 1px solid color-mix(in srgb, var(--md-outline-variant) 10%, transparent);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.01);
+  }
+  
+  .card::after {
+    border-radius: 20px;
+  }
+  
+  .divider,
+  .bottomDivider {
+    margin: 2px 0; /* reduced divider empty space */
+  }
+
+  .cardTitle {
+    font-size: 15px;
+    line-height: 1.35;
+  }
+  
+  .cardDesc {
+    font-size: 12.5px;
+    line-height: 1.6;
+  }
+  
+  .cardTag {
+    font-size: 8.5px;
+    padding: 2px 6px;
+  }
+  
+  .topicChip {
+    font-size: 9px;
+    padding: 3px 8px;
+  }
+
+  .teaserCtaBtn {
+    height: 38px;
+    padding: 0 20px;
+    font-size: 13px;
+  }
 }
 

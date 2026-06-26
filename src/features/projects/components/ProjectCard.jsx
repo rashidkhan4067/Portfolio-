@@ -30,7 +30,7 @@ export default function ProjectCard({ project, onClick }) {
   return (
     <article 
       role="article"
-      className={`${styles.projectCard} rounded-[28px] bg-[var(--md-surface-container-low)]`}
+      className={styles.projectCard}
       onClick={(e) => onClick && onClick(e, project)}
       style={{ cursor: 'pointer', position: 'relative' }}
     >
@@ -52,7 +52,7 @@ export default function ProjectCard({ project, onClick }) {
           </div>
         )}
       </div>
-
+ 
       {/* Card Info and Meta */}
       <div className={styles.cardContent}>
         {/* Row 1 — badge */}
@@ -69,7 +69,7 @@ export default function ProjectCard({ project, onClick }) {
             </span>
           )}
         </div>
-
+ 
         {/* Row 2 — project title */}
         <h3 className={styles.projectTitle}>
           <Link 
@@ -84,11 +84,11 @@ export default function ProjectCard({ project, onClick }) {
         <p className={`${styles.projectDesc} line-clamp-3 overflow-hidden [-webkit-line-clamp:3]`}>
           {stripEmojis(project.description)}
         </p>
-
+ 
         {/* Row 4 — tech stack chips */}
         <div className={styles.techList}>
           {slicedTechStack.map((tech) => (
-            <div key={tech} className={`${styles.techItem} bg-[var(--md-surface-container-high)] text-[11px] px-2.5 py-0.5 rounded-full font-medium`}>
+            <div key={tech} className={styles.techItem}>
               <span className={styles.techName}>{tech}</span>
             </div>
           ))}
