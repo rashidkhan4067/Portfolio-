@@ -109,12 +109,21 @@
 .projectCard {
   background: var(--md-surface-container-low);
   border-radius: 28px; /* MD3 shape-xl */
-  border: none;
+  border: 1px solid var(--md-outline-variant);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   height: 100%;
   position: relative;
+  transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 200ms cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.projectCard:hover {
+  transform: translateY(-4px);
+  border-color: var(--md-primary);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
 }
 
 /* MD3 state layers */
@@ -143,6 +152,7 @@
   aspect-ratio: 16 / 9;
   overflow: hidden;
   position: relative;
+  border-bottom: 1px solid var(--md-outline-variant);
 }
 
 .cardImage {
