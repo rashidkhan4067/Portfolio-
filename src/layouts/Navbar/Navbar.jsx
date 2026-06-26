@@ -3,8 +3,9 @@ import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Sun, Moon, Menu, X, Code2,
-  Home, User2, FolderGit2, Sparkles, Briefcase, Mail, FileText 
+  Home, User2, FolderGit2, Sparkles, Briefcase, Mail, FileText
 } from 'lucide-react';
+import { GithubIcon as Github, LinkedinIcon as Linkedin } from '../../components/SocialIcons';
 import { useThemeStore, useUIStore } from '../../store';
 import { navLinks, personalInfo } from '../../constants/portfolioData';
 import styles from './Navbar.module.css';
@@ -135,18 +136,6 @@ export default function Navbar() {
             </AnimatePresence>
           </button>
 
-          {/* Exposed Resume button on mobile viewports */}
-          <a
-            href={personalInfo.resumeUrl}
-            className={styles.mobileResumeIconBtn}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Download Resume"
-            onClick={() => triggerStdout('opening resume')}
-          >
-            <FileText size={18} />
-          </a>
-
           <a
             href={personalInfo.resumeUrl}
             className={styles.resumeBtn}
@@ -205,12 +194,21 @@ export default function Navbar() {
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className={styles.mobileMenuHeader}>
+              <div className={styles.mobileBrand}>
+                <span className={styles.mobileBrandIcon}>
+                  <Code2 size={20} aria-hidden="true" />
+                </span>
+                <div className={styles.mobileBrandText}>
+                  <span className={styles.mobileBrandName}>Rashid<span className={styles.logoDot}>.dev</span></span>
+                  <span className={styles.mobileBrandSub}>Systems Engineer</span>
+                </div>
+              </div>
               <button
                 className={styles.menuCloseBtn}
                 onClick={toggleMobileMenu}
                 aria-label="Close menu"
               >
-                <X size={24} />
+                <X size={20} />
               </button>
             </div>
             <ul role="list" className={styles.mobileNavList}>
@@ -243,9 +241,36 @@ export default function Navbar() {
                 className={styles.mobileResume}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => triggerStdout('opening resume')}
               >
-                Resume
+                <FileText size={18} className={styles.mobileResumeBtnIcon} />
+                <span>Resume</span>
               </a>
+              
+              <div className={styles.mobileSocials}>
+                <a 
+                  href={personalInfo.socials.github} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  aria-label="GitHub"
+                  onClick={() => triggerStdout('opening github')}
+                >
+                  <Github size={18} />
+                </a>
+                <a 
+                  href={personalInfo.socials.linkedin} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  aria-label="LinkedIn"
+                  onClick={() => triggerStdout('opening linkedin')}
+                >
+                  <Linkedin size={18} />
+                </a>
+              </div>
+              
+              <div className={styles.mobileFooterText}>
+                <span>{personalInfo.location}</span>
+              </div>
             </div>
           </motion.div>
         )}

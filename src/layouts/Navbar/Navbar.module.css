@@ -160,26 +160,7 @@
 .resumeBtn:hover::after { opacity: 0.08; }
 .resumeBtn:active::after { opacity: 0.12; }
 
-/* Mobile Resume Button — Exposes icon directly on mobile */
-.mobileResumeIconBtn {
-  display: none;
-  width: 40px;
-  height: 40px;
-  align-items: center;
-  justify-content: center;
-  color: var(--md-on-surface-variant);
-  background: var(--md-surface-container-high);
-  border: none;
-  border-radius: var(--md-shape-full);
-  cursor: pointer;
-  text-decoration: none;
-  transition: background-color var(--transition-fast), color var(--transition-fast);
-}
 
-.mobileResumeIconBtn:hover {
-  background-color: var(--md-surface-container);
-  color: var(--md-on-surface);
-}
 
 .menuBtn {
   display: none;
@@ -207,23 +188,66 @@
   top: 0;
   right: 0;
   bottom: 0;
-  width: 280px;
+  width: 290px;
   max-width: 85vw;
   height: 100vh;
   z-index: calc(var(--z-sticky) + 1);
   background-color: var(--md-surface-container-low);
   border-left: 1px solid var(--md-outline-variant);
+  border-radius: 20px 0 0 20px;
   display: flex;
   flex-direction: column;
   padding: 0;
   overflow-y: auto;
+  box-shadow: -8px 0 24px rgba(0, 0, 0, 0.08);
 }
 
 .mobileMenuHeader {
   display: flex;
-  justify-content: flex-end;
-  padding: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1rem 1.25rem 1.5rem;
   border-bottom: 1px solid var(--md-outline-variant);
+}
+
+.mobileBrand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.mobileBrandIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background-color: var(--md-surface-container-high);
+  color: var(--md-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid var(--md-outline-variant);
+}
+
+.mobileBrandText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.mobileBrandName {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--md-on-surface);
+  line-height: 1.2;
+}
+
+.mobileBrandSub {
+  font-size: 9.5px;
+  font-weight: 500;
+  color: var(--md-on-surface-variant);
+  margin-top: 1px;
 }
 
 .menuCloseBtn {
@@ -287,14 +311,19 @@
 .mobileActions {
   padding: 1.5rem;
   border-top: 1px solid var(--md-outline-variant);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  background-color: var(--md-surface-container-low);
 }
 
 .mobileResume {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  height: 40px;
+  gap: 8px;
+  height: 44px;
+  width: 100%;
   padding: 0 24px;
   font-size: var(--md-label-large-size);
   font-weight: 500;
@@ -302,10 +331,11 @@
   background-color: var(--md-primary);
   border-radius: var(--md-shape-full); /* pill */
   text-decoration: none;
-  transition: background-color var(--transition-fast);
+  transition: all var(--transition-fast) cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   isolation: isolate;
   overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .mobileResume::after {
@@ -321,12 +351,55 @@
 
 .mobileResume:hover::after { opacity: 0.08; }
 .mobileResume:active::after { opacity: 0.12; }
+.mobileResume:hover {
+  transform: translateY(-1.5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+}
+
+.mobileResumeBtnIcon {
+  color: inherit;
+  flex-shrink: 0;
+}
+
+.mobileSocials {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 0.25rem;
+}
+
+.mobileSocials a {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--md-surface-container-high);
+  color: var(--md-on-surface-variant);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--md-outline-variant);
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.mobileSocials a:hover {
+  background-color: var(--md-surface-container);
+  color: var(--md-primary);
+  border-color: var(--md-primary);
+  transform: translateY(-1px);
+}
+
+.mobileFooterText {
+  text-align: center;
+  font-size: 11px;
+  color: var(--md-on-surface-variant);
+  opacity: 0.7;
+}
 
 /* Responsive */
 @media (max-width: 1024px) {
   .links     { display: none !important; }
   .resumeBtn { display: none !important; }
-  .mobileResumeIconBtn { display: flex !important; }
   .menuBtn   { display: flex !important; }
 }
 
