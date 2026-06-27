@@ -172,13 +172,15 @@
 
 .timelineItem {
   display: grid;
-  grid-template-columns: 64px 24px 1fr;
+  grid-template-columns: 80px 24px 1fr;
   gap: 0.75rem;
   align-items: start;
 }
 
 .timelineYearCol {
   padding-top: 2px;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .timelineYear {
@@ -191,6 +193,7 @@
   border-radius: 9999px;
   padding: 2px 8px;
   display: inline-block;
+  white-space: nowrap;
 }
 
 :global([data-theme='dark']) .timelineYear {
@@ -257,5 +260,29 @@
     position: static;
     max-width: 400px;
     margin: 0 auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .timelineItem {
+    grid-template-columns: 24px 1fr;
+    gap: 0.5rem;
+  }
+
+  .timelineYearCol {
+    grid-column: 2;
+    grid-row: 1;
+    justify-content: flex-start;
+  }
+
+  .timelineLine {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+
+  .timelineContent {
+    grid-column: 2;
+    grid-row: 2;
+    padding-bottom: 1.25rem;
   }
 }

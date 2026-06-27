@@ -523,7 +523,6 @@
     line-height: 1.15;
     letter-spacing: -0.02em;
     margin-bottom: 4px; /* mb-1 gap: name -> subtitle */
-    white-space: nowrap;
   }
 
   .tagline {
@@ -543,7 +542,8 @@
   }
 
   .ctaRow {
-    flex-direction: row;
+    display: flex;
+    flex-flow: row wrap;
     align-items: center;
     width: 100%;
     gap: 12px; /* gap-3 */
@@ -552,14 +552,18 @@
   .primaryButton,
   .secondaryButton,
   .tonalButton {
-    flex: 1;
+    flex: 1 1 140px;
+    min-width: 130px;
+    white-space: nowrap;
     height: 40px;
     border-radius: 9999px;
     font-size: 13px;
     font-weight: 400; /* Reverted to regular to maintain two weights */
     padding: 0 1rem;
-    width: auto;
     position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .primaryButton {
