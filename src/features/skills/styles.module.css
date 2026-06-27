@@ -375,3 +375,62 @@
   visibility: visible;
   transform: translateX(-50%) translateY(0);
 }
+
+/* ==========================================================================
+   Mobile-Specific Compact Skill Cards (Mini-Grid Chips)
+   ========================================================================== */
+@media (max-width: 767px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem; /* gap-2 (8px) */
+    align-items: center;
+  }
+
+  .skillCard {
+    padding: 0.5rem 0.75rem; /* 8px 12px */
+    border-radius: var(--md-shape-md); /* 12px */
+    gap: 0;
+    min-height: unset;
+    height: auto;
+  }
+
+  .cardRow1 {
+    gap: 0.5rem; /* 8px */
+    width: 100%;
+  }
+
+  .iconWrapper {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+  }
+
+  .iconWrapper svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  .nameContainer {
+    gap: 0;
+  }
+
+  .skillName {
+    font-size: 13px;
+  }
+
+  /* Hide verbose details on mobile to achieve the ultra-compact chip layout */
+  .skillDesc,
+  .tagBadge,
+  .levelBadge,
+  .focusBadge {
+    display: none !important;
+  }
+
+  /* Compact tooltips for mobile tap interaction */
+  .tooltipText {
+    padding: 4px 8px;
+    font-size: 10px;
+    line-height: 12px;
+    border-radius: 6px;
+  }
+}
