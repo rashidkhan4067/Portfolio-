@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ArrowRight } from 'lucide-react';
+import { X, Sparkles, ArrowRight } from 'lucide-react';
 import styles from './LatestProjectToast.module.css';
-import bhuttaImageImg from '../../assets/image.png';
 
 export default function LatestProjectToast() {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,7 +15,7 @@ export default function LatestProjectToast() {
     // Show toast after a short delay
     const timer = setTimeout(() => {
       setIsOpen(true);
-    }, 2000);
+    }, 2500);
 
     return () => clearTimeout(timer);
   }, []);
@@ -31,40 +30,31 @@ export default function LatestProjectToast() {
       {isOpen && (
         <motion.div
           className={styles.toastContainer}
-          initial={{ opacity: 0, y: 50, scale: 0.95 }}
+          initial={{ opacity: 0, y: 40, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 20, scale: 0.95 }}
-          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          whileHover={{ y: -2, transition: { duration: 0.2 } }}
+          transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
         >
-          {/* Thumbnail */}
-          <div className={styles.thumbnailContainer}>
-            <img 
-              src={bhuttaImageImg} 
-              alt="Bhutta Scents Preview" 
-              className={styles.thumbnail}
-            />
+          {/* Icon Badge */}
+          <div className={styles.iconContainer}>
+            <Sparkles size={14} aria-hidden="true" />
           </div>
 
           {/* Content */}
           <div className={styles.content}>
-            <div className={styles.titleMeta}>
-              <span className={styles.pill}>Latest Project</span>
-            </div>
-            <h4 className={styles.title}>Bhutta Scents</h4>
-            <p className={styles.desc}>
-              Real client luxury fragrance storefront is now live!
-            </p>
-            <div className={styles.actions}>
-              <Link 
-                to="/projects#bhuttascents" 
-                className={styles.viewBtn}
-                onClick={handleDismiss}
-              >
-                <span>View Details</span>
-                <ArrowRight size={14} aria-hidden="true" />
-              </Link>
-            </div>
+            <span className={styles.title}>Bhutta Scents is now live!</span>
           </div>
+
+          {/* Action Link */}
+          <Link 
+            to="/projects#bhuttascents" 
+            className={styles.viewBtn}
+            onClick={handleDismiss}
+          >
+            <span>View</span>
+            <ArrowRight size={13} aria-hidden="true" style={{ marginLeft: '2px' }} />
+          </Link>
 
           {/* Dismiss Button */}
           <button 
@@ -72,7 +62,7 @@ export default function LatestProjectToast() {
             className={styles.dismissBtn}
             aria-label="Dismiss notification"
           >
-            <X size={16} aria-hidden="true" />
+            <X size={14} aria-hidden="true" />
           </button>
         </motion.div>
       )}
