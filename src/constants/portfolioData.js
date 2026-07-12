@@ -693,6 +693,15 @@ export const experience = [
 export const testimonials = [
   {
     id: 1,
+    name: 'Amir Bhutta',
+    role: 'Founder & CEO',
+    company: 'Bhutta Scents',
+    avatar: '',
+    content: "Rashid engineered an exceptional, high-aesthetic e-commerce storefront for our luxury fragrance line. The site is incredibly fast, responsive, and captures the premium feel of our brand. Alhamdullilah, we are extremely satisfied with the product and his professional execution.",
+    rating: 5,
+  },
+  {
+    id: 2,
     name: 'Saeed Anwar',
     role: 'Lead Academic Coordinator',
     company: 'UAF Computer Science Department',
@@ -701,7 +710,7 @@ export const testimonials = [
     rating: 5,
   },
   {
-    id: 2,
+    id: 3,
     name: 'Sarah Mitchell',
     role: 'Technical Project Lead',
     company: 'Upwork Client Partner',
@@ -710,7 +719,7 @@ export const testimonials = [
     rating: 5,
   },
   {
-    id: 3,
+    id: 4,
     name: 'Hamza Ali',
     role: 'Senior Backend Architect',
     company: 'ByteForge Solutions',
@@ -719,7 +728,7 @@ export const testimonials = [
     rating: 5,
   },
   {
-    id: 4,
+    id: 5,
     name: 'Emily Watson',
     role: 'Product Owner',
     company: 'NexTech Platforms',
@@ -728,7 +737,7 @@ export const testimonials = [
     rating: 5,
   },
   {
-    id: 5,
+    id: 6,
     name: 'Dr. Tariq Mahmood',
     role: 'Professor of Software Engineering',
     company: 'UAF',
