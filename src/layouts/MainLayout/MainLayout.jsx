@@ -5,6 +5,7 @@ import Navbar from '../Navbar/Navbar';
 import Footer from '../Footer/Footer';
 
 import PageLoader from '../../components/PageLoader';
+import LatestProjectToast from '../../components/LatestProjectToast/LatestProjectToast';
 import styles from './MainLayout.module.css';
 
 const pageVariants = {
@@ -48,6 +49,7 @@ export default function MainLayout({ children }) {
         </Suspense>
       </main>
       <Footer />
+      <LatestProjectToast />
     </div>
   );
 }
