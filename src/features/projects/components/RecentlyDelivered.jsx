@@ -33,7 +33,7 @@ export default function RecentlyDelivered() {
             </div>
             <div className={styles.editorStatus}>
               <span className={styles.statusDot} />
-              <span>Real Client (Alhamdullilah Satisfied)</span>
+              <span className={styles.statusLabel}>Real Client (Alhamdullilah Satisfied)</span>
             </div>
           </div>
 

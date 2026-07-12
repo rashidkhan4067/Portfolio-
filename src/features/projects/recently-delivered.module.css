@@ -48,11 +48,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 36px;
+  height: 38px;
   background-color: var(--md-surface-container);
   border-bottom: 1px solid var(--border-subtle);
   padding: 0 16px 0 0;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 .tab {
@@ -68,6 +69,9 @@
   font-weight: 500;
   color: var(--md-on-surface);
   user-select: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .tabIcon {
@@ -75,6 +79,7 @@
   height: 6px;
   background-color: #61dafb; /* React Cyan */
   border-radius: 50%;
+  flex-shrink: 0;
 }
 
 .editorStatus {
@@ -84,6 +89,12 @@
   display: flex;
   align-items: center;
   gap: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.statusLabel {
+  display: inline;
 }
 
 .statusDot {
@@ -91,6 +102,7 @@
   height: 6px;
   background-color: #D4AF37; /* Gold */
   border-radius: 50%;
+  flex-shrink: 0;
   animation: pulse 2s infinite ease-in-out;
 }
 
@@ -174,6 +186,7 @@
   border-radius: 8px;
   font-family: var(--font-mono);
   font-size: 11px;
+  overflow-x: auto;
 }
 
 .specRow {
@@ -181,6 +194,7 @@
   align-items: center;
   gap: 8px;
   color: var(--md-on-surface-variant);
+  white-space: nowrap;
 }
 
 .specKey {
@@ -293,6 +307,20 @@
 }
 
 @media (max-width: 640px) {
+  .statusLabel {
+    display: none; /* Hide the long status label text on mobile to avoid header tab line wraps */
+  }
+  
+  .specsBlock {
+    font-size: 10px;
+    padding: 8px 10px;
+    gap: 4px;
+  }
+  
+  .specKey {
+    min-width: 50px;
+  }
+  
   .ctaRow {
     flex-direction: column;
     gap: 8px;
