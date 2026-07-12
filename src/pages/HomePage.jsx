@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import HeroSection from '../features/hero';
+import RecentlyDelivered from '../features/projects/components/RecentlyDelivered';
 import SkillsSection from '../features/skills';
 import ProjectsSection from '../features/projects';
 import BuildLogsTeaser from '../features/build-logs/components/BuildLogsTeaser';
@@ -37,6 +38,7 @@ export default function HomePage() {
         <meta name="twitter:image" content={`${BASE_URL}/og-preview.png`} />
       </Helmet>
       <HeroSection />
+      <RecentlyDelivered />
       <SkillsSection />
       <ProjectsSection />
       <BuildLogsTeaser />
