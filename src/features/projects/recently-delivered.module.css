@@ -9,11 +9,10 @@
 
 .eyebrow {
   display: block;
-  font-family: var(--font-sans);
+  font-family: var(--font-mono);
   font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 0.04em;
   color: var(--md-primary);
   margin-bottom: 4px;
 }
@@ -26,10 +25,10 @@
   margin: 0;
 }
 
-/* Widescreen Showcase Card */
+/* Widescreen Showcase Card with Editor Header */
 .showcaseCard {
   background: var(--md-surface-container-low);
-  border-radius: 24px;
+  border-radius: 16px; /* Slightly tighter dev-editor radius */
   border: 1px solid color-mix(in srgb, var(--md-outline-variant) 30%, transparent);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
   overflow: hidden;
@@ -44,8 +43,71 @@
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.06);
 }
 
+/* Editor Header Bar */
+.editorHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 36px;
+  background-color: var(--md-surface-container);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0 16px 0 0;
+  box-sizing: border-box;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 100%;
+  padding: 0 16px;
+  background-color: var(--md-surface-container-low);
+  border-right: 1px solid var(--border-subtle);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--md-on-surface);
+  user-select: none;
+}
+
+.tabIcon {
+  width: 6px;
+  height: 6px;
+  background-color: #61dafb; /* React Cyan */
+  border-radius: 50%;
+}
+
+.editorStatus {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--md-on-surface-variant);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.statusDot {
+  width: 6px;
+  height: 6px;
+  background-color: #D4AF37; /* Gold */
+  border-radius: 50%;
+  animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.95); opacity: 0.5; }
+  50% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.5; }
+}
+
+/* Rest of the layout */
+.cardBody {
+  display: flex;
+  flex-direction: column;
+}
+
 @media (min-width: 768px) {
-  .showcaseCard {
+  .cardBody {
     flex-direction: row;
     align-items: stretch;
   }
@@ -74,7 +136,7 @@
   aspect-ratio: 16 / 10;
   object-fit: cover;
   object-position: top center;
-  border-radius: 16px;
+  border-radius: 12px;
   border: 1px solid color-mix(in srgb, var(--md-outline-variant) 30%, transparent);
   transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
@@ -97,60 +159,58 @@
 @media (max-width: 768px) {
   .contentSide {
     padding: 16px;
-    gap: 8px;
+    gap: 10px;
   }
 }
 
-.metaRow {
+/* Code-style Specs block */
+.specsBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 14px;
+  background-color: var(--md-surface-container);
+  border: 1px dashed var(--md-outline-variant);
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.specRow {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
   gap: 8px;
+  color: var(--md-on-surface-variant);
 }
 
-.categoryBadge {
-  font-family: var(--font-sans);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  padding: 3px 8px;
-  border-radius: 6px;
-  background: var(--md-secondary-container);
-  color: var(--md-on-secondary-container);
-  user-select: none;
+.specKey {
+  color: var(--md-primary);
+  font-weight: 600;
+  min-width: 60px;
 }
 
-.metricBadge {
-  font-family: var(--font-sans);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  padding: 3px 8px;
-  border-radius: 6px;
-  background: rgba(212, 175, 55, 0.1);
-  color: #D4AF37;
-  border: 1px solid rgba(212, 175, 55, 0.2);
-  user-select: none;
+.specVal {
+  color: var(--md-on-surface);
 }
 
 .projectTitle {
   font-family: var(--font-sans);
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--md-on-surface);
   margin: 0;
   line-height: 1.2;
 }
 
 .tagline {
-  font-family: var(--font-sans);
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--md-primary);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--md-secondary);
   margin: 0;
   line-height: 1.25;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .description {
@@ -169,11 +229,11 @@
 }
 
 .techItem {
-  font-family: var(--font-sans);
+  font-family: var(--font-mono);
   font-size: 10px;
   font-weight: 500;
   padding: 3px 8px;
-  border-radius: 9999px;
+  border-radius: 6px;
   background: var(--md-surface-container-high);
   color: var(--md-on-surface-variant);
   border: 1px solid color-mix(in srgb, var(--md-outline-variant) 20%, transparent);

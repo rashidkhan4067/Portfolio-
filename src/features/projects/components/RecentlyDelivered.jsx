@@ -19,62 +19,91 @@ export default function RecentlyDelivered() {
       <div className="container">
         {/* Section Header */}
         <div className={styles.sectionHeader}>
-          <span className={styles.eyebrow}>LATEST CLIENT DELIVERY</span>
+          <span className={styles.eyebrow}>// LATEST CLIENT DELIVERY</span>
           <h2 className={styles.sectionTitle}>Recently Shipped Product</h2>
         </div>
 
         {/* Widescreen Showcase Card */}
         <div className={styles.showcaseCard}>
-          {/* Image Side */}
-          <div className={styles.imageSide} onClick={handleCaseStudyClick}>
-            <img 
-              src={bhuttaScientsImg} 
-              alt="Bhutta Scents Storefront" 
-              className={styles.cardImage}
-              loading="lazy"
-            />
+          {/* Editor Header Bar */}
+          <div className={styles.editorHeader}>
+            <div className={styles.tab}>
+              <span className={styles.tabIcon} />
+              <span>bhutta-scents.tsx</span>
+            </div>
+            <div className={styles.editorStatus}>
+              <span className={styles.statusDot} />
+              <span>Real Client (Alhamdullilah Satisfied)</span>
+            </div>
           </div>
 
-          {/* Content Side */}
-          <div className={styles.contentSide}>
-            <div className={styles.metaRow}>
-              <span className={styles.categoryBadge}>E-Commerce</span>
-              <span className={styles.metricBadge}>Real Client (Alhamdullilah Satisfied)</span>
+          <div className={styles.cardBody}>
+            {/* Image Side */}
+            <div className={styles.imageSide} onClick={handleCaseStudyClick}>
+              <img 
+                src={bhuttaScientsImg} 
+                alt="Bhutta Scents Storefront" 
+                className={styles.cardImage}
+                loading="lazy"
+              />
             </div>
 
-            <h3 className={styles.projectTitle}>Bhutta Scents</h3>
-            <p className={styles.tagline}>Luxury Fragrance & Scent Storefront</p>
-            <p className={styles.description}>
-              Engineered a customized, highly performant React storefront for a premium fragrance brand. Focused on high-fidelity visual aesthetics (luxury typography, clean grids, and micro-animations) and optimized state management for a responsive shopping experience.
-            </p>
+            {/* Content Side */}
+            <div className={styles.contentSide}>
+              <h3 className={styles.projectTitle}>Bhutta Scents</h3>
+              <p className={styles.tagline}>Luxury Fragrance & Scent Storefront</p>
 
-            {/* Technical Stack Tags */}
-            <div className={styles.techList}>
-              <span className={styles.techItem}>React</span>
-              <span className={styles.techItem}>Vite</span>
-              <span className={styles.techItem}>Vanilla CSS</span>
-              <span className={styles.techItem}>State Management</span>
-            </div>
+              {/* Monospace Specs Block (Developer Coded Vibe) */}
+              <div className={styles.specsBlock}>
+                <div className={styles.specRow}>
+                  <span className={styles.specKey}>client</span>
+                  <span>=</span>
+                  <span className={styles.specVal}>"Luxury Fragrance Brand"</span>
+                </div>
+                <div className={styles.specRow}>
+                  <span className={styles.specKey}>status</span>
+                  <span>=</span>
+                  <span className={styles.specVal}>"Shipped (Jul 2026)"</span>
+                </div>
+                <div className={styles.specRow}>
+                  <span className={styles.specKey}>service</span>
+                  <span>=</span>
+                  <span className={styles.specVal}>"Full Storefront & React Frontend"</span>
+                </div>
+              </div>
 
-            {/* CTA Buttons */}
-            <div className={styles.ctaRow}>
-              <a 
-                href="https://bhuttascents.com" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className={styles.primaryBtn}
-              >
-                <span>Live Storefront</span>
-                <ExternalLink size={13} style={{ marginLeft: '4px' }} />
-              </a>
+              <p className={styles.description}>
+                Engineered a customized, highly performant React storefront for a premium fragrance brand. Focused on high-fidelity visual aesthetics (luxury typography, clean grids, and micro-animations) and optimized state management for a responsive shopping experience.
+              </p>
 
-              <button 
-                onClick={handleCaseStudyClick}
-                className={styles.secondaryBtn}
-              >
-                <span>View Case Study</span>
-                <ArrowRight size={13} style={{ marginLeft: '4px' }} />
-              </button>
+              {/* Technical Stack Tags */}
+              <div className={styles.techList}>
+                <span className={styles.techItem}>react</span>
+                <span className={styles.techItem}>vite</span>
+                <span className={styles.techItem}>vanilla-css</span>
+                <span className={styles.techItem}>state-management</span>
+              </div>
+
+              {/* CTA Buttons */}
+              <div className={styles.ctaRow}>
+                <a 
+                  href="https://bhuttascents.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className={styles.primaryBtn}
+                >
+                  <span>Live Storefront</span>
+                  <ExternalLink size={13} style={{ marginLeft: '4px' }} />
+                </a>
+
+                <button 
+                  onClick={handleCaseStudyClick}
+                  className={styles.secondaryBtn}
+                >
+                  <span>View Case Study</span>
+                  <ArrowRight size={13} style={{ marginLeft: '4px' }} />
+                </button>
+              </div>
             </div>
           </div>
         </div>
