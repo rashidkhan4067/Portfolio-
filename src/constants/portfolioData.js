@@ -18,6 +18,11 @@ import aiHmsImg from '../assets/ai_hms.webp';
 import portfolioDarkOrangeImg from '../assets/portfolio_dark_orange.png';
 import portfolioDarkRoseImg from '../assets/portfolio_dark_rose.png';
 import portfolioLightOrangeImg from '../assets/portfolio_light_orange.png';
+import bhuttaScientsImg from '../assets/bhuttaScients.png';
+import bhuttaCollectionImg from '../assets/collection.png';
+import bhuttaHomepageImg from '../assets/homepage.jpg';
+import bhuttaProductdetailsImg from '../assets/productdetails.png';
+import bhuttaImageImg from '../assets/image.png';
 
 export const personalInfo = {
   name: 'Muhammad Rashid Shafique',
@@ -56,6 +61,35 @@ export const stats = [
 export const projects = [
   {
     id: 1,
+    title: 'Bhutta Scents',
+    description: 'A premium fragrance e-commerce storefront showcasing luxury perfumes, custom collections, and detailed product profiles. Features smooth CSS animations and responsive grid layouts.',
+    techStack: ['React', 'Vite', 'Vanilla CSS', 'State Management'],
+    tech: ['React', 'Vite', 'Vanilla CSS', 'State Management'],
+    category: 'Full-Stack',
+    featured: true,
+    liveUrl: 'https://bhuttascents.com',
+    githubUrl: 'https://github.com/rashidkhan4067/BhuttaScents',
+    accentColor: '#D4AF37', // Gold metallic accent for luxury brand
+    imageUrl: bhuttaScientsImg,
+    metric: 'Real Client (Alhamdullilah Satisfied)',
+    relatedLogTitle: 'Solving Real Problems: Shifting from Vanity Portfolios to Practical Products',
+    screenshots: [
+      { label: 'Product Banner', url: bhuttaImageImg },
+      { label: 'Product Details', url: bhuttaProductdetailsImg },
+      { label: 'Collection Grid', url: bhuttaCollectionImg },
+      { label: 'Storefront Catalog', url: bhuttaScientsImg }
+    ],
+    tagline: 'Premium e-commerce experience for luxury fragrances and curated scents.',
+    status: 'Completed',
+    problemStatement: 'Luxury perfume brands need a digital storefront that conveys visual elegance, showcases scent profiles, and handles shopping cart behaviors. Developed a customized React storefront with premium custom accents and zero framework clutter.',
+    challenges: [
+      'Creating a visually immersive fragrance discovery layout with detailed product detail views and high-aesthetic styling. Built optimized, modular Vanilla CSS layouts and dynamic image carousel components.',
+      'Implementing seamless state handling for product filters and local cart persistence. Structured a lightweight context state controller, ensuring smooth page loads and near-instant user interactions.'
+    ],
+    outcome: 'Delivered an interactive, high-aesthetic e-commerce experience that client is extremely satisfied with.'
+  },
+  {
+    id: 2,
     title: 'Al Shifaa Clinic',
     description: 'A secure hospital management system for patient records, appointments, and staff coordination. Integrates automated patient check-in queues and role-based access control.',
     techStack: ['React', 'Django REST Framework', 'PostgreSQL', 'JWT', 'LLMs'],
@@ -210,7 +244,7 @@ export const projects = [
     ]
   },
   {
-    id: 2,
+    id: 3,
     title: 'Rescue Project',
     description: 'An AI-powered search-and-rescue command console for volunteer coordination and missing persons registry. Features difference hashing facial matching and geofenced mobilization alerts.',
     techStack: ['React', 'Flask', 'SQLAlchemy', 'Groq (Whisper / Llama 3)', 'Zustand'],
@@ -305,7 +339,7 @@ export const projects = [
     ]
   },
   {
-    id: 3,
+    id: 4,
     title: 'Rashid Shafique Portfolio',
     description: 'An interactive browser workstation simulating a mobile operating system inside a virtual smartphone chassis. Includes a live logcat console, local storage database persistence, and technical sandbox micro-demos.',
     techStack: ['React', 'Node.js', 'Express', 'TypeScript', 'Gemini AI'],
@@ -369,7 +403,7 @@ export const projects = [
     ]
   },
   {
-    id: 4,
+    id: 5,
     title: 'VentureTwist',
     description: 'A restaurant management and food ordering application featuring interactive menus and an automated checkout cart system. Includes a secure administrative panel for order tracking and inventory monitoring.',
     techStack: ['Vanilla JS', 'Bootstrap 5', 'HTML5', 'CSS3'],
@@ -450,7 +484,7 @@ export const projects = [
     ]
   },
   {
-    id: 5,
+    id: 6,
     title: 'FoodDash',
     description: 'A web-based food delivery dashboard featuring responsive menu searches and interactive cart management. Includes a secure user verification flow and responsive layout configurations.',
     techStack: ['React', 'Vite', 'CSS Modules', 'State Management'],
@@ -477,7 +511,7 @@ export const projects = [
     outcome: 'Delivered an aesthetic, fast, and responsive user flow for dish selection, checkout verification, and session entry.'
   },
   {
-    id: 6,
+    id: 7,
     title: 'Sales-Data-Analysis-System',
     description: 'A high-throughput big data analytics pipeline and interactive forecasting dashboard for transaction records. Predicts regional sales trends and profit metrics using historical datasets.',
     techStack: ['PySpark', 'Python', 'Scikit-Learn', 'Streamlit', 'Plotly'],
@@ -500,7 +534,7 @@ export const projects = [
     outcome: 'Processes over 10M+ transaction rows under 1.5 seconds, delivering actionable profit forecasting.'
   },
   {
-    id: 7,
+    id: 8,
     title: 'AquaSync',
     description: 'An IoT real-time fluid telemetry dashboard and monitoring system for water distribution networks. Tracks flow rate, water pressure, and tank levels across multiple sensor nodes.',
     techStack: ['C++', 'Python', 'Arduino', 'IoT', 'Tkinter'],
@@ -523,7 +557,7 @@ export const projects = [
     outcome: 'Maintains 99.9% uptime across active device connections, processing 100k+ telemetry packets daily.'
   },
   {
-    id: 8,
+    id: 9,
     title: 'MediCare / Hospital Management',
     description: 'A high-security patient management portal featuring transaction buffering and request validation. Manages patient admissions, registrations, and doctor scheduling.',
     techStack: ['React', 'Node.js', 'Express', 'SQLite', 'Python'],
@@ -546,7 +580,7 @@ export const projects = [
     outcome: 'Used to streamline patient registration and check-in workflows for over 150 daily admissions.'
   },
   {
-    id: 9,
+    id: 10,
     title: 'Algoviz-pro',
     description: 'An algorithmic visualization engine displaying interactive pathfinding and graph structure traversals. Renders node states and searches at high frame rates.',
     techStack: ['React', 'Flask', 'D3.js', 'Python', 'JavaScript'],
@@ -569,7 +603,7 @@ export const projects = [
     outcome: 'Provides fluid 60fps renders for complex graph visualisations containing up to 10k nodes.'
   },
   {
-    id: 10,
+    id: 11,
     title: 'Face-Recognition-Attendance-System',
     description: 'An AI-powered facial recognition attendance and verification system. Automates real-time student check-ins and processes camera frames.',
     techStack: ['TensorFlow', 'Python', 'OpenCV', 'Keras', 'HTML5'],
@@ -592,7 +626,7 @@ export const projects = [
     outcome: 'Automates secure real-time student check-ins under 120ms with near-zero false positive errors.'
   },
   {
-    id: 11,
+    id: 12,
     title: 'TaleemPro',
     description: 'A school management portal for administrative queries, student grades, and fee records. Secures private router access using stateless validation tokens.',
     techStack: ['React', 'Node.js', 'Express', 'MongoDB', 'JWT'],
