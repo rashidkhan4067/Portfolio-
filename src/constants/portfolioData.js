@@ -26,9 +26,9 @@ import bhuttaImageImg from '../assets/image.png';
 
 export const personalInfo = {
   name: 'Muhammad Rashid Shafique',
-  title: 'Systems Engineer & Full-Stack Developer',
-  tagline: 'Designing high-throughput backend architectures, distributed data pipelines, and responsive human-centric interfaces with Google Material 3 precision.',
-  bio: `I am a Software Engineer specializing in low-latency systems development, distributed big data pipelines, and high-concurrency automated scripts. Currently pursuing my BS in Computer Science (6th Semester) at the University of Agriculture Faisalabad (UAF), I apply core academic fundamentals—including advanced Data Structures, Algorithmic Analysis, and Database Optimization—to engineer production-grade enterprise software. I thrive on translating abstract computational complexities into highly scalable, performant systems.`,
+  title: 'Full-Stack Software Engineer & AI Systems Developer',
+  tagline: 'Full-stack software engineer specializing in AI-integrated web and mobile applications — architecting production-grade systems end-to-end, from database design and secure REST APIs to responsive frontends and cross-platform apps.',
+  bio: `I am a Full-Stack Software Engineer specializing in AI-integrated web and mobile applications. Currently pursuing my BS in Computer Science (6th Semester) at the University of Agriculture Faisalabad (UAF), I apply core academic fundamentals—including Data Structures & Algorithms, Object-Oriented Programming (OOP), and Relational Database Optimization—to architect production-grade systems end-to-end.`,
   location: 'Faisalabad, Pakistan',
   email: 'rashidshafique.dev@gmail.com',
   phone: '+92 319 8696623',

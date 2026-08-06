@@ -35,8 +35,10 @@ export default function SkillsPage() {
         <meta property="og:type" content="website" />
         <meta property="og:url" content={`${BASE_URL}/skills`} />
         <meta property="og:title" content="Skills & Technologies | Muhammad Rashid Shafique" />
-        <meta property="og:description" content="25+ technologies: Python, Django, FastAPI, React, Node.js, PySpark, TensorFlow, SQL, C++, Supabase, Firebase." />
-        <meta property="og:image" content={`${BASE_URL}/og-preview.png`} />
+        <meta property="og:description" content="Core technologies: Python, Django, DRF, FastAPI, React.js, Vite, Tailwind CSS, SQL, Supabase, Firebase, JWT & Google OAuth." />
+        <meta property="og:image" content={`${BASE_URL}/og-preview.jpg`} />
+        <meta property="og:image:secure_url" content={`${BASE_URL}/og-preview.jpg`} />
+        <meta property="og:image:type" content="image/jpeg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Muhammad Rashid Shafique Technical Skills" />
@@ -45,8 +47,8 @@ export default function SkillsPage() {
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Skills | Muhammad Rashid Shafique" />
-        <meta name="twitter:description" content="25+ technical skills across backend, frontend, data science, and cloud." />
-        <meta name="twitter:image" content={`${BASE_URL}/og-preview.png`} />
+        <meta name="twitter:description" content="Technical skills across backend, frontend, database, security, and cloud deployment." />
+        <meta name="twitter:image" content={`${BASE_URL}/og-preview.jpg`} />
 
         {/* Structured Data */}
         <script type="application/ld+json">{JSON.stringify(skillsSchema)}</script>

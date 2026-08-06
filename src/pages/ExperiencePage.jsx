@@ -48,8 +48,10 @@ export default function ExperiencePage() {
         <meta property="og:type" content="website" />
         <meta property="og:url" content={`${BASE_URL}/experience`} />
         <meta property="og:title" content="Experience | Muhammad Rashid Shafique — Engineer & BS CS Candidate" />
-        <meta property="og:description" content="Systems Engineer with experience in Selenium automation, Node.js APIs, hospital management systems, and PySpark data pipelines." />
-        <meta property="og:image" content={`${BASE_URL}/og-preview.png`} />
+        <meta property="og:description" content="Systems Engineer with experience in Python automation, REST APIs, hospital management systems, and modern web applications." />
+        <meta property="og:image" content={`${BASE_URL}/og-preview.jpg`} />
+        <meta property="og:image:secure_url" content={`${BASE_URL}/og-preview.jpg`} />
+        <meta property="og:image:type" content="image/jpeg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Muhammad Rashid Shafique Experience" />
@@ -58,8 +60,8 @@ export default function ExperiencePage() {
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Experience | Muhammad Rashid Shafique" />
-        <meta name="twitter:description" content="Open Source Engineer & BS CS Candidate. Delivering scalable systems with Python, React, and Node.js." />
-        <meta name="twitter:image" content={`${BASE_URL}/og-preview.png`} />
+        <meta name="twitter:description" content="Open Source Engineer & BS CS Candidate. Delivering scalable systems with Python, React, and Django." />
+        <meta name="twitter:image" content={`${BASE_URL}/og-preview.jpg`} />
 
         {/* Structured Data */}
         <script type="application/ld+json">{JSON.stringify(experienceSchema)}</script>

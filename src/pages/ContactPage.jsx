@@ -41,7 +41,9 @@ export default function ContactPage() {
         <meta property="og:url" content={`${BASE_URL}/contact`} />
         <meta property="og:title" content="Contact Muhammad Rashid Shafique | Hire Systems Engineer" />
         <meta property="og:description" content="Available for full-time, freelance, and contract opportunities. Reach out to discuss systems engineering, backend APIs, or full-stack projects." />
-        <meta property="og:image" content={`${BASE_URL}/og-preview.png`} />
+        <meta property="og:image" content={`${BASE_URL}/og-preview.jpg`} />
+        <meta property="og:image:secure_url" content={`${BASE_URL}/og-preview.jpg`} />
+        <meta property="og:image:type" content="image/jpeg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Contact Muhammad Rashid Shafique" />
@@ -51,7 +53,7 @@ export default function ContactPage() {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Contact | Muhammad Rashid Shafique" />
         <meta name="twitter:description" content="Hire Muhammad Rashid Shafique for your next engineering project. Full-time, freelance, or contract." />
-        <meta name="twitter:image" content={`${BASE_URL}/og-preview.png`} />
+        <meta name="twitter:image" content={`${BASE_URL}/og-preview.jpg`} />
 
         {/* Structured Data */}
         <script type="application/ld+json">{JSON.stringify(contactSchema)}</script>

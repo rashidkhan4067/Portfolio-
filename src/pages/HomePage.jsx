@@ -21,8 +21,10 @@ export default function HomePage() {
         <meta property="og:type" content="profile" />
         <meta property="og:url" content={`${BASE_URL}/`} />
         <meta property="og:title" content="Muhammad Rashid Shafique | Systems Engineer & Full-Stack Developer" />
-        <meta property="og:description" content="Systems Engineer & Full-Stack Developer from Pakistan. Python · Django · FastAPI · React · PySpark. Building scalable APIs, data pipelines, and modern web apps." />
-        <meta property="og:image" content={`${BASE_URL}/og-preview.png`} />
+        <meta property="og:description" content="Systems Engineer & Full-Stack Developer from Pakistan. Python · Django · FastAPI · React. Building scalable APIs and modern web apps." />
+        <meta property="og:image" content={`${BASE_URL}/og-preview.jpg`} />
+        <meta property="og:image:secure_url" content={`${BASE_URL}/og-preview.jpg`} />
+        <meta property="og:image:type" content="image/jpeg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Muhammad Rashid Shafique Portfolio" />
@@ -33,8 +35,8 @@ export default function HomePage() {
         <meta name="twitter:site" content="@rashidkhan4067" />
         <meta name="twitter:creator" content="@rashidkhan4067" />
         <meta name="twitter:title" content="Muhammad Rashid Shafique | Systems Engineer & Full-Stack Developer" />
-        <meta name="twitter:description" content="Systems Engineer & Full-Stack Developer from Pakistan. Python · Django · FastAPI · React · PySpark." />
-        <meta name="twitter:image" content={`${BASE_URL}/og-preview.png`} />
+        <meta name="twitter:description" content="Systems Engineer & Full-Stack Developer from Pakistan. Python · Django · FastAPI · React." />
+        <meta name="twitter:image" content={`${BASE_URL}/og-preview.jpg`} />
       </Helmet>
       <HeroSection />
       <SkillsSection />

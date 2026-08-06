@@ -43,8 +43,10 @@ export default function AboutPage() {
         <meta property="og:type" content="profile" />
         <meta property="og:url" content={`${BASE_URL}/about`} />
         <meta property="og:title" content="About Muhammad Rashid Shafique | Systems Engineer from Pakistan" />
-        <meta property="og:description" content="Systems Engineer & Full-Stack Developer pursuing BS Computer Science at UAF. Building scalable backends, React apps, and big data pipelines." />
-        <meta property="og:image" content={`${BASE_URL}/og-preview.png`} />
+        <meta property="og:description" content="Systems Engineer & Full-Stack Developer pursuing BS Computer Science at UAF. Building scalable backends and modern React apps." />
+        <meta property="og:image" content={`${BASE_URL}/og-preview.jpg`} />
+        <meta property="og:image:secure_url" content={`${BASE_URL}/og-preview.jpg`} />
+        <meta property="og:image:type" content="image/jpeg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="About Muhammad Rashid Shafique" />
@@ -54,7 +56,7 @@ export default function AboutPage() {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="About Muhammad Rashid Shafique | Systems Engineer" />
         <meta name="twitter:description" content="BS Computer Science student at UAF specialising in systems engineering, Python, and full-stack development." />
-        <meta name="twitter:image" content={`${BASE_URL}/og-preview.png`} />
+        <meta name="twitter:image" content={`${BASE_URL}/og-preview.jpg`} />
 
         {/* Structured Data */}
         <script type="application/ld+json">{JSON.stringify(aboutSchema)}</script>

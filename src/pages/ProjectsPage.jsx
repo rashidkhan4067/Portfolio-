@@ -51,9 +51,11 @@ export default function ProjectsPage() {
         {/* Open Graph */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content={`${BASE_URL}/projects`} />
-        <meta property="og:title" content="Projects | Muhammad Rashid Shafique — AI, Full-Stack & Big Data" />
-        <meta property="og:description" content="10+ technical projects: AI/ML systems, full-stack web apps, IoT dashboards, and big data pipelines. Explore case studies and code." />
-        <meta property="og:image" content={`${BASE_URL}/og-preview.png`} />
+        <meta property="og:title" content="Projects | Muhammad Rashid Shafique — Full-Stack & Systems Developer" />
+        <meta property="og:description" content="Technical projects: AI/ML systems, full-stack web apps, IoT dashboards, and REST APIs. Explore case studies and code." />
+        <meta property="og:image" content={`${BASE_URL}/og-preview.jpg`} />
+        <meta property="og:image:secure_url" content={`${BASE_URL}/og-preview.jpg`} />
+        <meta property="og:image:type" content="image/jpeg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Muhammad Rashid Shafique Projects Portfolio" />
@@ -62,8 +64,8 @@ export default function ProjectsPage() {
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Projects | Muhammad Rashid Shafique" />
-        <meta name="twitter:description" content="10+ engineering projects: AI/ML, Full-Stack, IoT, Big Data. Deep case-study breakdowns." />
-        <meta name="twitter:image" content={`${BASE_URL}/og-preview.png`} />
+        <meta name="twitter:description" content="Engineering projects: AI/ML, Full-Stack, IoT. Deep case-study breakdowns." />
+        <meta name="twitter:image" content={`${BASE_URL}/og-preview.jpg`} />
 
         {/* Structured Data */}
         <script type="application/ld+json">{JSON.stringify(projectsSchema)}</script>
