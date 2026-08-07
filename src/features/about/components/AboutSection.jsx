@@ -33,6 +33,7 @@ export default function AboutSection() {
                 size="sm"
                 href={personalInfo.resumeUrl}
                 target="_blank"
+                download="Muhammad_Rashid_Resume.pdf"
                 icon={<Download size={14} />}
                 className={styles.resumeButton}
               >

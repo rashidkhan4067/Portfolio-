@@ -60,8 +60,10 @@ export default defineConfig({
         ],
       },
       workbox: {
+        // Exclude PDF files from SPA navigateFallback to prevent React Router 404 intercept
+        navigateFallbackDenylist: [/^\/resume\.pdf$/, /\.pdf$/],
         // Cache all pages and assets for offline-first experience
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,webp,woff,woff2}'],
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,webp,woff,woff2,pdf}'],
         // Skip the huge profile image from precache to keep service worker small
         globIgnores: ['**/profile1*.webp'],
         runtimeCaching: [

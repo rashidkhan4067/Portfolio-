@@ -141,6 +141,7 @@ export default function Navbar() {
             className={styles.resumeBtn}
             target="_blank"
             rel="noopener noreferrer"
+            download="Muhammad_Rashid_Resume.pdf"
             aria-label="Download Resume"
             onClick={() => triggerStdout('opening resume')}
           >
@@ -241,6 +242,7 @@ export default function Navbar() {
                 className={styles.mobileResume}
                 target="_blank"
                 rel="noopener noreferrer"
+                download="Muhammad_Rashid_Resume.pdf"
                 onClick={() => triggerStdout('opening resume')}
               >
                 <FileText size={18} className={styles.mobileResumeBtnIcon} />
