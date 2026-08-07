@@ -2,10 +2,44 @@
    MD3 HERO SECTION — Tonal surfaces, pill buttons, weight 400 headlines
    ========================================================================== */
 
+/* ── Google-style staggered entrance animation ── */
+@keyframes heroSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animItem {
+  opacity: 0;
+  animation: heroSlideUp 380ms cubic-bezier(0.2, 0, 0, 1) forwards;
+}
+
+.delay1 { animation-delay: 0ms; }
+.delay2 { animation-delay: 90ms; }
+.delay3 { animation-delay: 175ms; }
+.delay4 { animation-delay: 255ms; }
+.delay5 { animation-delay: 330ms; }
+.delay6 { animation-delay: 400ms; }
+
+/* Role subtitle — sits between H1 name and body bio */
+.roleSubtitle {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--md-primary);
+  letter-spacing: 0.01em;
+  margin: 0 0 0.75rem 0;
+  line-height: 1.4;
+}
+
 .hero {
   position: relative;
   overflow: hidden;
-  padding: 4.5rem 0 3.5rem;
+  padding: 2.5rem 0 2.5rem;
   background-color: var(--md-surface); /* MD3 surface — no gradients */
   display: flex;
   align-items: center;
@@ -171,7 +205,7 @@
 }
 
 .socialRow {
-  margin-top: 20px;
+  margin-top: 0;
   display: flex;
   gap: 20px;
   align-items: center;
@@ -181,11 +215,15 @@
   color: var(--md-on-surface-variant);
   display: inline-flex;
   align-items: center;
+  gap: 6px;
   justify-content: center;
   transition: color 150ms ease;
   border: none;
   background: none;
   padding: 0;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  text-decoration: none;
 }
 
 .socialLink:hover {
@@ -301,6 +339,7 @@
   align-items: center;
   gap: 0.625rem;
   width: 100%;
+  margin-bottom: 1.25rem;
 }
 
 /* MD3 Filled button — pill shape */

@@ -66,53 +66,21 @@ export default function HeroSection() {
         .object-top {
           object-position: top center !important;
         }
-        .pt-8 {
-          padding-top: 2rem !important;
-        }
-        .pb-8 {
-          padding-bottom: 2rem !important;
-        }
         .items-center {
           align-items: center !important;
         }
-        @media (max-width: 640px) {
-          .pt-8 {
-            padding-top: 1.5rem !important;
-          }
-        }
-        /* ── MD3 Micro-animations ── */
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(12px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        [class*="headerBlock"] {
-          animation: fadeIn 400ms cubic-bezier(0.2, 0, 0, 1) forwards;
-        }
-        @keyframes pulse {
-          0% {
-            transform: scale(0.9);
-            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6);
-          }
-          70% {
-            transform: scale(1.1);
-            box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
-          }
-          100% {
-            transform: scale(0.9);
-            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
-          }
+        /* dot pulse */
+        @keyframes dotPulse {
+          0% { transform: scale(0.85); opacity: 0.6; }
+          50% { transform: scale(1.2); opacity: 1; }
+          100% { transform: scale(0.85); opacity: 0.6; }
         }
         [class*="statusDot"] {
           display: inline-block;
-          animation: pulse 2s infinite ease-in-out;
+          animation: dotPulse 2s ease-in-out infinite;
           border-radius: 50%;
         }
+        /* arrow nudge on hover */
         [class*="primaryButton"] svg {
           transition: transform 200ms cubic-bezier(0.2, 0, 0, 1);
         }
@@ -121,7 +89,9 @@ export default function HeroSection() {
         }
         [class*="primaryButton"],
         [class*="secondaryButton"] {
-          transition: transform 150ms cubic-bezier(0.2, 0, 0, 1), background-color var(--transition-fast), border-color var(--transition-fast);
+          transition: transform 150ms cubic-bezier(0.2, 0, 0, 1),
+                      background-color var(--transition-fast),
+                      border-color var(--transition-fast);
         }
         [class*="primaryButton"]:active,
         [class*="secondaryButton"]:active {
@@ -142,38 +112,38 @@ export default function HeroSection() {
                 width="380"
                 height="475"
                 fetchpriority="high"
-                style={{ objectPosition: 'top center' }}
+                style={{ objectPosition: 'center 25%' }}
               />
             </div>
           </div>
 
           {/* ── Group A & C: Header & Details (Pill, Positioning Line, Name, Tagline, Bio, CTAs) ── */}
           <div className={styles.headerBlock} style={{ gridRow: '1 / span 2' }}>
-            {/* Status Row */}
-            <div className={styles.avatarStatusRow}>
+            {/* ── delay1: Status badge ── */}
+            <div className={`${styles.avatarStatusRow} ${styles.animItem} ${styles.delay1}`}>
               <div className={styles.statusBadge}>
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                <span className={styles.statusDot} />
                 <span className={styles.statusText}>Available for Opportunities</span>
               </div>
             </div>
 
-            {/* Name as H1 */}
-            <h1 className={`${styles.headline} text-[26px] md:text-[42px]`}>
+            {/* ── delay2: H1 Name ── */}
+            <h1 className={`${styles.headline} ${styles.animItem} ${styles.delay2}`}>
               Muhammad Rashid Shafique
             </h1>
 
-            {/* Title styled as H2 */}
-            <p className="text-sm font-semibold tracking-wide text-blue-600 uppercase mb-3">
-              Backend-Focused Full-Stack Engineer
+            {/* ── delay3: Role subtitle (hierarchy bridge between name and bio) ── */}
+            <p className={`${styles.roleSubtitle} ${styles.animItem} ${styles.delay3}`}>
+              Full-Stack Developer &middot; Python &middot; Django &middot; React
             </p>
 
-            {/* Bio (concise outcome-driven description, 19 words) */}
-            <p className={styles.description}>
-              I engineer high-availability backend systems and performant web interfaces. Specializing in Python, Django, React, and SQL database design.
+            {/* ── delay4: Bio ── */}
+            <p className={`${styles.description} ${styles.animItem} ${styles.delay4}`}>
+              Building modern web applications with Python, Django, React, and SQL. Currently strengthening my computer science foundation through hands-on projects while learning software engineering best practices.
             </p>
 
-            {/* Call-to-Actions (CTA) Row */}
-            <div className={styles.ctaRow}>
+            {/* ── delay5: CTA Buttons ── */}
+            <div className={`${styles.ctaRow} ${styles.animItem} ${styles.delay5}`}>
               <Link
                 to="/projects"
                 className={styles.primaryButton}
@@ -192,8 +162,8 @@ export default function HeroSection() {
               </Link>
             </div>
 
-            {/* Social Links Row */}
-            <div className={styles.socialRow}>
+            {/* ── delay6: Social Links ── */}
+            <div className={`${styles.socialRow} ${styles.animItem} ${styles.delay6}`}>
               <a
                 href={personalInfo.socials.github}
                 target="_blank"
@@ -201,7 +171,8 @@ export default function HeroSection() {
                 className={styles.socialLink}
                 aria-label="GitHub Profile"
               >
-                <GithubIcon size={18} />
+                <GithubIcon size={16} />
+                <span>GitHub</span>
               </a>
               <a
                 href={personalInfo.socials.linkedin}
@@ -210,7 +181,8 @@ export default function HeroSection() {
                 className={styles.socialLink}
                 aria-label="LinkedIn Profile"
               >
-                <LinkedinIcon size={18} />
+                <LinkedinIcon size={16} />
+                <span>LinkedIn</span>
               </a>
               <a
                 href={personalInfo.socials.twitter || 'https://twitter.com'}
@@ -219,7 +191,8 @@ export default function HeroSection() {
                 className={styles.socialLink}
                 aria-label="Twitter Profile"
               >
-                <TwitterIcon size={18} />
+                <TwitterIcon size={16} />
+                <span>Twitter</span>
               </a>
             </div>
 
